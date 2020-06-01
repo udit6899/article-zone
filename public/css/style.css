@@ -1856,3 +1856,9 @@ input[type='number'] {
         margin-bottom: 10px; } }
 
 /*# sourceMappingURL=style.css.map */
+
+/* Edit profile page css start */
+
+#profile-container {
+    padding: 30px 20px 30px 20px;
+}
