@@ -1,17 +1,21 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head >
+    <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>{{ $title }}</title>
+        <!-- CSRF Token -->
+        <meta name="csrf-token" content="{{ csrf_token() }}">
+
+        <title>@yield('title')</title>
 
         <!--========================== Bootstrap css ==========================-->
         <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
         <!--========================== font-awesome css ==========================-->
         <link href="{{ asset('css/font-awesome.min.css') }}" rel="stylesheet">
         <!--========================== google-font css ==========================-->
+        <link href="{{ asset('/fonts/material-icon/css/material-design-iconic-font.min.css') }}" rel='stylesheet'>
         <link href='https://fonts.googleapis.com/css?family=Droid+Sans:400,700' rel='stylesheet' type='text/css'>
         <link href='https://fonts.googleapis.com/css?family=Roboto:400,100,300' rel='stylesheet' type='text/css'>
         <link href='https://fonts.googleapis.com/css?family=PT+Sans:400,700' rel='stylesheet' type='text/css'>
@@ -50,15 +54,3 @@
         <script src="{{ asset('js/active.js') }}"></script>
     </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-

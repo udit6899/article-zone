@@ -32,39 +32,39 @@
                     <h4 class="footer-title">recent post</h4>
                     <div class="recent-post-single">
                         <div class="recent-post-img">
-                            <a href="{{ route('article.singleArticle', [ 'title' => $title ]) }}">
+                            <a href="{{ route('article.singleArticle', [ 'slug' => $article['slug'] ]) }}">
                                 <img src="{{ asset('images/recent-1.jpg') }}" alt="">
                             </a>
                         </div>
                         <div class="recent-post-text">
                             <span>01 jan, 2016</span>
-                            <a href="{{ route('article.singleArticle', [ 'title' => $title ]) }}">
+                            <a href="{{ route('article.singleArticle', [ 'slug' => $article['slug'] ]) }}">
                                 <p>celebration of new year</p>
                             </a>
                         </div>
                     </div>
                     <div class="recent-post-single">
                         <div class="recent-post-img">
-                            <a href="{{ route('article.singleArticle', [ 'title' => $title ]) }}">
+                            <a href="{{ route('article.singleArticle', [ 'slug' => $article['slug'] ]) }}">
                                 <img src="{{ asset('images/recent-2.jpg') }}" alt="">
                             </a>
                         </div>
                         <div class="recent-post-text">
                             <span>01 jan, 2016</span>
-                            <a href="{{ route('article.singleArticle', [ 'title' => $title ]) }}">
+                            <a href="{{ route('article.singleArticle', [ 'slug' => $article['slug'] ]) }}">
                                 <p>color in nature</p>
                             </a>
                         </div>
                     </div>
                     <div class="recent-post-single">
                         <div class="recent-post-img">
-                            <a href="{{ route('article.singleArticle', [ 'title' => $title ]) }}">
+                            <a href="{{ route('article.singleArticle', [ 'slug' => $article['slug'] ]) }}">
                                 <img src="{{ asset('images/recent-3.jpg') }}" alt="">
                             </a>
                         </div>
                         <div class="recent-post-text">
                             <span>01 jan, 2016</span>
-                            <a href="{{ route('article.singleArticle', [ 'title' => $title ]) }}">
+                            <a href="{{ route('article.singleArticle', [ 'slug' => $article['slug'] ]) }}">
                                 <p>yummy burgers</p>
                             </a>
                         </div>

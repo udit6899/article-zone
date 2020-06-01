@@ -1,6 +1,8 @@
 
 <!--========================== extend-master-blade ==========================-->
-@extends('layout.master')
+@extends('layouts.app')
+
+@section('title', 'Categories')
 
 <!--========================== include content ==========================-->
 @section('content')
@@ -26,7 +28,7 @@
                             </div>
                             <div class="category-text">
                                 <a href="" class="art">Art / lifestyle</a>
-                                <h4><a href="{{ route('article.singleArticle', [ 'title' => $title ]) }}">Todays Celebration</a></h4>
+                                <h4><a href="{{ route('article.singleArticle', [ 'slug' => $article['slug'] ]) }}">Todays Celebration</a></h4>
                                 <span class="art">12 jan, 2016</span>
                                 <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry...</p>
                                 <div class="category-link"><a href="{{ route('home') }}">read more</a></div>
@@ -57,7 +59,7 @@
                             </div>
                             <div class="category-text">
                                 <a href="" class="art">Art / lifestyle</a>
-                                <h4><a href="{{ route('article.singleArticle', [ 'title' => $title ]) }}">Family comes first</a></h4>
+                                <h4><a href="{{ route('article.singleArticle', [ 'slug' => $article['slug'] ]) }}">Family comes first</a></h4>
                                 <span class="art">12 jan, 2016</span>
                                 <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry...</p>
                                 <div class="category-link"><a href="{{ route('home') }}">read more</a></div>
@@ -126,7 +128,7 @@
                             </div>
                             <div class="category-text">
                                 <a href="" class="art">food</a>
-                                <h4><a href="{{ route('article.singleArticle', [ 'title' => $title ]) }}">yummy yummy cake</a></h4>
+                                <h4><a href="{{ route('article.singleArticle', [ 'slug' => $article['slug'] ]) }}">yummy yummy cake</a></h4>
                                 <span class="art">12 jan, 2016</span>
                                 <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry...</p>
                                 <div class="category-link"><a href="{{ route('home') }}">read more</a></div>
@@ -157,7 +159,7 @@
                             </div>
                             <div class="category-text">
                                 <a href="" class="art">travel</a>
-                                <h4><a href="{{ route('article.singleArticle', [ 'title' => $title ]) }}">touch with nature</a></h4>
+                                <h4><a href="{{ route('article.singleArticle', [ 'slug' => $article['slug'] ]) }}">touch with nature</a></h4>
                                 <span class="art">12 jan, 2016</span>
                                 <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry...</p>
                                 <div class="category-link"><a href="{{ route('home') }}">read more</a></div>
@@ -221,7 +223,7 @@
                             </div>
                             <div class="category-text">
                                 <a href="" class="art">food</a>
-                                <h4><a href="{{ route('article.singleArticle', [ 'title' => $title ]) }}">yummy chocolate muffin</a></h4>
+                                <h4><a href="{{ route('article.singleArticle', [ 'slug' => $article['slug'] ]) }}">yummy chocolate muffin</a></h4>
                                 <span class="art">12 jan, 2016</span>
                                 <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry...</p>
                                 <div class="category-link"><a href="{{ route('home') }}">read more</a></div>
@@ -252,7 +254,7 @@
                             </div>
                             <div class="category-text">
                                 <a href="" class="art">travel/journey</a>
-                                <h4><a href="{{ route('article.singleArticle', [ 'title' => $title ]) }}">close to mountain</a></h4>
+                                <h4><a href="{{ route('article.singleArticle', [ 'slug' => $article['slug'] ]) }}">close to mountain</a></h4>
                                 <span class="art">12 jan, 2016</span>
                                 <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry...</p>
                                 <div class="category-link"><a href="{{ route('home') }}">read more</a></div>
@@ -286,15 +288,15 @@
                             <div class="row">
                                 <div class="col-md-12 col-sm-12">
                                     <div class="popular-post-single top">
-                                        <div class="popular-post-single-img"><a href="{{ route('article.singleArticle', [ 'title' => $title ]) }}"><img src="{{ asset('images/popular-1.jpg') }}" alt=""></a></div>
+                                        <div class="popular-post-single-img"><a href="{{ route('article.singleArticle', [ 'slug' => $article['slug'] ]) }}"><img src="{{ asset('images/popular-1.jpg') }}" alt=""></a></div>
                                         <div class="popular-post-single-text"><span>12 Jan, 2016</span><p>Yummy chocolate Muffin</p></div>
                                     </div>
                                     <div class="popular-post-single">
-                                        <div class="popular-post-single-img"><a href="{{ route('article.singleArticle', [ 'title' => $title ]) }}"><img src="{{ asset('images/popular-2.jpg') }}" alt=""></a></div>
+                                        <div class="popular-post-single-img"><a href="{{ route('article.singleArticle', [ 'slug' => $article['slug'] ]) }}"><img src="{{ asset('images/popular-2.jpg') }}" alt=""></a></div>
                                         <div class="popular-post-single-text"><span>12 Jan, 2016</span><p>Music concert</p></div>
                                     </div>
                                     <div class="popular-post-single bottom">
-                                        <div class="popular-post-single-img"><a href="{{ route('article.singleArticle', [ 'title' => $title ]) }}"><img src="{{ asset('images/popular-3.jpg') }}" alt=""></a></div>
+                                        <div class="popular-post-single-img"><a href="{{ route('article.singleArticle', [ 'slug' => $article['slug'] ]) }}"><img src="{{ asset('images/popular-3.jpg') }}" alt=""></a></div>
                                         <div class="popular-post-single-text"><span>12 Jan, 2016</span><p>new year celebration</p></div>
                                     </div>
                                 </div>
@@ -330,7 +332,7 @@
                             </div>
                             <div class="category-text">
                                 <a href="" class="art">photography</a>
-                                <h4><a href="{{ route('article.singleArticle', [ 'title' => $title ]) }}">photography is my passion</a></h4>
+                                <h4><a href="{{ route('article.singleArticle', [ 'slug' => $article['slug'] ]) }}">photography is my passion</a></h4>
                                 <span class="art">12 jan, 2016</span>
                                 <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry...</p>
                                 <div class="category-link"><a href="{{ route('home') }}">read more</a></div>
@@ -361,7 +363,7 @@
                             </div>
                             <div class="category-text">
                                 <a href="" class="art">movie</a>
-                                <h4><a href="{{ route('article.singleArticle', [ 'title' => $title ]) }}">best movie</a></h4>
+                                <h4><a href="{{ route('article.singleArticle', [ 'slug' => $article['slug'] ]) }}">best movie</a></h4>
                                 <span class="art">12 jan, 2016</span>
                                 <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry...</p>
                                 <div class="category-link"><a href="{{ route('home') }}">read more</a></div>

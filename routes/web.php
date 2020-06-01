@@ -14,32 +14,40 @@ use Illuminate\Support\Facades\Route;
 */
 
 
+// Rotes for user auth
+Auth::routes();
+
 // GET: routes for index page
-Route::get('/', function () {
-    return view('index', [ 'title' => 'Article Zone' ]);
-})->name('home');
+Route::get('/', 'HomeController@index')->name('home');
 
 // GET: routes for about page
-Route::get('/about', function () {
-    return view('pages.about', [ 'title' => 'About me' ]);
-})->name('about');
+Route::get('/about', 'HomeController@about')->name('about');
 
 // GET: routes for contact page
-Route::get('/contact', function () {
-    return view('pages.contact', [ 'title' => 'Contact' ]);
-})->name('contact');
-
+Route::get('/contact', 'HomeController@contact')->name('contact');
 
 // Routes group for articles
 Route::prefix('article')->name('article.')->group(function () {
 
     // GET: routes for category page
     Route::get('/category', function () {
-        return view('articles.category', [ 'title' => 'Categories' ]);
+        return view('articles.category');
     })->name('category');
 
     // GET: routes for single-article page
-    Route::get('/{title}', function () {
-            return view('articles.single-article', [ 'title' => 'Single Article' ]);
+    Route::get('/{slug}', function () {
+            return view('articles.single-article');
     })->name('singleArticle');
 });
+
+// Routes group for users
+Route::prefix('user')->name('user.')->group(function () {
+    Route::get('account', function () {
+       return view('users.profile');
+    })->name('account');
+
+    Route::post('account', function () {
+        return 'userProfile';
+    })->name('account');
+});
+

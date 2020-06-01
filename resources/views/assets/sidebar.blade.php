@@ -87,7 +87,7 @@
                         </div>
                         <div class="popular-post-single top">
                             <div class="popular-post-single-img">
-                                <a href="{{ route('article.singleArticle', [ 'title' => $title ]) }}">
+                                <a href="{{ route('article.singleArticle', [ 'slug' => $article['slug'] ]) }}">
                                     <img src="{{ asset('images/popular-1.jpg') }}" alt="">
                                 </a>
                             </div>
@@ -98,7 +98,7 @@
                         </div>
                         <div class="popular-post-single">
                             <div class="popular-post-single-img">
-                                <a href="{{ route('article.singleArticle', [ 'title' => $title ]) }}">
+                                <a href="{{ route('article.singleArticle', [ 'slug' => $article['slug'] ]) }}">
                                     <img src="{{ asset('images/popular-2.jpg') }}" alt="">
                                 </a>
                             </div>
@@ -109,7 +109,7 @@
                         </div>
                         <div class="popular-post-single bottom">
                             <div class="popular-post-single-img">
-                                <a href="{{ route('article.singleArticle', [ 'title' => $title ]) }}">
+                                <a href="{{ route('article.singleArticle', [ 'slug' => $article['slug'] ]) }}">
                                     <img src="{{ asset('images/popular-3.jpg') }}" alt="">
                                 </a>
                             </div>

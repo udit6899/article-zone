@@ -1,9 +1,18 @@
 
 <!--========================== extend-master-blade ==========================-->
-@extends('layout.master')
+@extends('layouts.app')
+
+@section('title', 'Article Zone')
 
 <!--========================== include content ==========================-->
 @section('content')
+    <!--========================== show status message ==========================-->
+    @if (session('status'))
+        <div class="alert alert-success text-center alert-dismissible show" role="alert">
+            <strong>{{ session('status') }}</strong> You are registerd in successfully.
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+        </div>
+    @endif
     <!--========================== slider-area-start ==========================-->
     <section class="slider-area">
         <div id="carousel-example-generic" class="carousel slide carousel-fade" data-ride="carousel">
@@ -29,7 +38,7 @@
                                 <div class="slide-text">
                                     <h2>Welcome To My Blog!</h2>
                                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incidi dunt ut labore et dolore magna aliqua  ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incidi dunt ut labore et dolore magna aliqua</p>
-                                    <a href="{{ route('article.singleArticle', [ 'title' => $title ]) }}">read more</a>
+                                    <a href="{{ route('article.singleArticle', [ 'slug' => $article['slug'] ]) }}">read more</a>
                                 </div>
                             </div>
                         </div>
@@ -89,10 +98,10 @@
                             <div class="col-md-6 fix col-sm-6">
                                 <div class="video-content-text">
                                     <a href="" class="art">Art / lifestyle</a>
-                                    <h4><a href="{{ route('article.singleArticle', [ 'title' => $title ]) }}">Todays Celebration</a></h4>
+                                    <h4><a href="{{ route('article.singleArticle', [ 'slug' => $article['slug'] ]) }}">Todays Celebration</a></h4>
                                     <span class="art">12 jan, 2016</span>
                                     <p>Lorem Ipsum is simply dummy text of the printing and typ setting industry. Lorem Ipsum is simply dummy text of the printing and typesetting industry....</p>
-                                    <div class="category-link"><a href="{{ route('article.singleArticle', [ 'title' => $title ]) }}">read more</a></div>
+                                    <div class="category-link"><a href="{{ route('article.singleArticle', [ 'slug' => $article['slug'] ]) }}">read more</a></div>
                                     <div class="share-comment-section">
                                         <div class="comment">
                                             <i class="fa fa-heart-o"><span>25</span></i>
@@ -124,10 +133,10 @@
                             <div class="col-md-6 fix col-sm-6">
                                 <div class="video-content-text">
                                     <a href="" class="art">Art / lifestyle</a>
-                                    <h4><a href="{{ route('article.singleArticle', [ 'title' => $title ]) }}">Family comes first</a></h4>
+                                    <h4><a href="{{ route('article.singleArticle', [ 'slug' => $article['slug'] ]) }}">Family comes first</a></h4>
                                     <span class="art">12 jan, 2016</span>
                                     <p>Lorem Ipsum is simply dummy text of the printing and typ setting industry. Lorem Ipsum is simply dummy text of the printing and typesetting industry....</p>
-                                    <div class="category-link"><a href="{{ route('article.singleArticle', [ 'title' => $title ]) }}">read more</a></div>
+                                    <div class="category-link"><a href="{{ route('article.singleArticle', [ 'slug' => $article['slug'] ]) }}">read more</a></div>
                                     <div class="share-comment-section">
                                         <div class="comment">
                                             <i class="fa fa-heart-o"><span>25</span></i>
@@ -155,10 +164,10 @@
                             <div class="col-md-6 fix col-sm-6">
                                 <div class="video-content-text">
                                     <a href="" class="art">video</a>
-                                    <h4><a href="{{ route('article.singleArticle', [ 'title' => $title ]) }}">Awesome video</a></h4>
+                                    <h4><a href="{{ route('article.singleArticle', [ 'slug' => $article['slug'] ]) }}">Awesome video</a></h4>
                                     <span class="art">12 jan, 2016</span>
                                     <p>Lorem Ipsum is simply dummy text of the printing and typ setting industry. Lorem Ipsum is simply dummy text of the printing and typesetting industry....</p>
-                                    <div class="category-link"><a href="{{ route('article.singleArticle', [ 'title' => $title ]) }}">read more</a></div>
+                                    <div class="category-link"><a href="{{ route('article.singleArticle', [ 'slug' => $article['slug'] ]) }}">read more</a></div>
                                     <div class="share-comment-section">
                                         <div class="comment">
                                             <i class="fa fa-heart-o"><span>25</span></i>
@@ -186,10 +195,10 @@
                             <div class="col-md-6 fix col-sm-6">
                                 <div class="video-content-text">
                                     <a href="" class="art">music</a>
-                                    <h4><a href="{{ route('article.singleArticle', [ 'title' => $title ]) }}">top 10 music of this</a></h4>
+                                    <h4><a href="{{ route('article.singleArticle', [ 'slug' => $article['slug'] ]) }}">top 10 music of this</a></h4>
                                     <span class="art">12 jan, 2016</span>
                                     <p>Lorem Ipsum is simply dummy text of the printing and typ setting industry. Lorem Ipsum is simply dummy text of the printing and typesetting industry....</p>
-                                    <div class="category-link"><a href="{{ route('article.singleArticle', [ 'title' => $title ]) }}">read more</a></div>
+                                    <div class="category-link"><a href="{{ route('article.singleArticle', [ 'slug' => $article['slug'] ]) }}">read more</a></div>
                                     <div class="share-comment-section">
                                         <div class="comment">
                                             <i class="fa fa-heart-o"><span>25</span></i>
@@ -221,10 +230,10 @@
                             <div class="col-md-6 fix col-sm-6">
                                 <div class="video-content-text">
                                     <a href="" class="art">food</a>
-                                    <h4><a href="{{ route('article.singleArticle', [ 'title' => $title ]) }}">yummy chocolate muffin</a></h4>
+                                    <h4><a href="{{ route('article.singleArticle', [ 'slug' => $article['slug'] ]) }}">yummy chocolate muffin</a></h4>
                                     <span class="art">12 jan, 2016</span>
                                     <p>Lorem Ipsum is simply dummy text of the printing and typ setting industry. Lorem Ipsum is simply dummy text of the printing and typesetting industry....</p>
-                                    <div class="category-link"><a href="{{ route('article.singleArticle', [ 'title' => $title ]) }}">read more</a></div>
+                                    <div class="category-link"><a href="{{ route('article.singleArticle', [ 'slug' => $article['slug'] ]) }}">read more</a></div>
                                     <div class="share-comment-section">
                                         <div class="comment">
                                             <i class="fa fa-heart-o"><span>25</span></i>
@@ -256,10 +265,10 @@
                             <div class="col-md-6 fix col-sm-6">
                                 <div class="video-content-text">
                                     <a href="" class="art">travel/journey</a>
-                                    <h4><a href="{{ route('article.singleArticle', [ 'title' => $title ]) }}">close to mountain</a></h4>
+                                    <h4><a href="{{ route('article.singleArticle', [ 'slug' => $article['slug'] ]) }}">close to mountain</a></h4>
                                     <span class="art">12 jan, 2016</span>
                                     <p>Lorem Ipsum is simply dummy text of the printing and typ setting industry. Lorem Ipsum is simply dummy text of the printing and typesetting industry....</p>
-                                    <div class="category-link"><a href="{{ route('article.singleArticle', [ 'title' => $title ]) }}">read more</a></div>
+                                    <div class="category-link"><a href="{{ route('article.singleArticle', [ 'slug' => $article['slug'] ]) }}">read more</a></div>
                                     <div class="share-comment-section">
                                         <div class="comment">
                                             <i class="fa fa-heart-o"><span>25</span></i>
@@ -291,10 +300,10 @@
                             <div class="col-md-6 fix col-sm-6">
                                 <div class="video-content-text">
                                     <a href="" class="art">photography</a>
-                                    <h4><a href="{{ route('article.singleArticle', [ 'title' => $title ]) }}">photography is my passion</a></h4>
+                                    <h4><a href="{{ route('article.singleArticle', [ 'slug' => $article['slug'] ]) }}">photography is my passion</a></h4>
                                     <span class="art">12 jan, 2016</span>
                                     <p>Lorem Ipsum is simply dummy text of the printing and typ setting industry. Lorem Ipsum is simply dummy text of the printing and typesetting industry....</p>
-                                    <div class="category-link"><a href="{{ route('article.singleArticle', [ 'title' => $title ]) }}">read more</a></div>
+                                    <div class="category-link"><a href="{{ route('article.singleArticle', [ 'slug' => $article['slug'] ]) }}">read more</a></div>
                                     <div class="share-comment-section">
                                         <div class="comment">
                                             <i class="fa fa-heart-o"><span>25</span></i>

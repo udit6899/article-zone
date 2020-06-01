@@ -1,6 +1,8 @@
 
 <!--========================== extend-master-blade ==========================-->
-@extends('layout.master')
+@extends('layouts.app')
+
+@section('title', 'Contact')
 
 <!--========================== include content ==========================-->
 @section('content')
