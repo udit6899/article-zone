@@ -1,6 +1,6 @@
 
 <!--========================== extend-master-blade ==========================-->
-@extends('layouts.app')
+@extends('layouts.frontend.app')
 
 @section('title', $post['title'])
 
@@ -15,7 +15,7 @@
                     <div class="category-border-content">
                         <div class="category-detail category">
                             <div class="category-img">
-                                <img src="{{ asset('images/category-img-2.jpg') }}" alt="">
+                                <img src="{{ asset('assets/frontend/images/category-img-2.jpg') }}" alt="">
                                 <div class="category-overlay">
                                 </div>
                             </div>
@@ -47,7 +47,7 @@
                                     <h4>You May Also Like</h4>
                                     <div class="recent-post-single single-page">
                                         <div class="recent-post-img single-page">
-                                            <a href="{{ route('article.singleArticle', [ 'slug' => $article['slug'] ]) }}"><img src="{{ asset('images/recent-1.jpg') }}" alt=""></a>
+                                            <a href="{{ route('article.singleArticle', [ 'slug' => $article['slug'] ]) }}"><img src="{{ asset('assets/frontend/images/recent-1.jpg') }}" alt=""></a>
                                         </div>
                                         <div class="recent-post-text single-page">
                                             <span>01 jan, 2016</span>
@@ -56,7 +56,7 @@
                                     </div>
                                     <div class="recent-post-single single-page">
                                         <div class="recent-post-img single-page">
-                                            <a href="{{ route('article.singleArticle', [ 'slug' => $article['slug'] ]) }}"><img src="{{ asset('images/recent-2.jpg') }}" alt=""></a>
+                                            <a href="{{ route('article.singleArticle', [ 'slug' => $article['slug'] ]) }}"><img src="{{ asset('assets/frontend/images/recent-2.jpg') }}" alt=""></a>
                                         </div>
                                         <div class="recent-post-text single-page">
                                             <span>01 jan, 2016</span>
@@ -65,7 +65,7 @@
                                     </div>
                                     <div class="recent-post-single single-page">
                                         <div class="recent-post-img single-page">
-                                            <a href="{{ route('article.singleArticle', [ 'slug' => $article['slug'] ]) }}"><img src="{{ asset('images/recent-3.jpg') }}" alt=""></a>
+                                            <a href="{{ route('article.singleArticle', [ 'slug' => $article['slug'] ]) }}"><img src="{{ asset('assets/frontend/images/recent-3.jpg') }}" alt=""></a>
                                         </div>
                                         <div class="recent-post-text single-page">
                                             <span>01 jan, 2016</span>
@@ -77,7 +77,7 @@
                                     <p><i class="fa fa-comments-o"></i><span>comments</span></p>
                                     <div class="single-user-comment clearfix">
                                         <div class="single-user-img">
-                                            <a><img src="{{ asset('images/single-user-1.jpg') }}" alt=""></a>
+                                            <a><img src="{{ asset('assets/frontend/images/single-user-1.jpg') }}" alt=""></a>
                                         </div>
                                         <div class="single-user-comment-text">
                                             <h4><a>Jolie Anne Curtiz</a><span>01 jan, 2016</span></h4>
@@ -86,7 +86,7 @@
                                     </div>
                                     <div class="single-user-comment clearfix">
                                         <div class="single-user-img">
-                                            <a><img src="{{ asset('images/single-user-2.jpg') }}" alt=""></a>
+                                            <a><img src="{{ asset('assets/frontend/images/single-user-2.jpg') }}" alt=""></a>
                                         </div>
                                         <div class="single-user-comment-text">
                                             <h4><a>Robert Smith</a><span>01 jan, 2016</span></h4>
@@ -95,7 +95,7 @@
                                     </div>
                                     <div class="single-user-comment clearfix">
                                         <div class="single-user-img">
-                                            <a><img src="{{ asset('images/single-user-3.jpg') }}" alt=""></a>
+                                            <a><img src="{{ asset('assets/frontend/images/single-user-3.jpg') }}" alt=""></a>
                                         </div>
                                         <div class="single-user-comment-text">
                                             <h4><a>Sara Jordan</a><span>01 jan, 2016</span></h4>
@@ -104,7 +104,7 @@
                                     </div>
                                     <div class="single-user-comment clearfix">
                                         <div class="single-user-img">
-                                            <a><img src="{{ asset('images/single-user-4.jpg') }}" alt=""></a>
+                                            <a><img src="{{ asset('assets/frontend/images/single-user-4.jpg') }}" alt=""></a>
                                         </div>
                                         <div class="single-user-comment-text">
                                             <h4><a>Paul Pablo</a><span>01 jan, 2016</span></h4>
@@ -127,7 +127,7 @@
                     </div>
                 </div>
                 <!-- include sidebar -->
-                @include('assets.sidebar')
+                @include('layouts.frontend.partial.sidebar')
             </div>
         </div>
     </section>

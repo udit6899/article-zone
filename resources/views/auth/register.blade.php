@@ -1,8 +1,12 @@
 
 <!--========================== extend-master-blade ==========================-->
-@extends('layouts.app')
+@extends('layouts.frontend.app')
 
 @section('title', 'Signup')
+
+@push('css')
+    <link href="{{ asset('assets/frontend/css/auth/style.css') }}" rel="stylesheet">
+@endpush
 
 <!--========================== include content ==========================-->
 @section('content')
@@ -69,7 +73,7 @@
                     </form>
                 </div>
                 <div class="signup-image">
-                    <figure><img src="{{ asset('images/signup-image.jpg') }}" alt="sing up image"></figure>
+                    <figure><img src="{{ asset('assets/frontend/images/signup-image.jpg') }}" alt="sing up image"></figure>
                     <a href="{{ route('login') }}" class="signup-image-link">I am already member</a>
                 </div>
             </div>

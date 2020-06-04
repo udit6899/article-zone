@@ -1,6 +1,6 @@
 
 <!--========================== extend-master-blade ==========================-->
-@extends('layouts.app')
+@extends('layouts.frontend.app')
 
 @section('title', 'Article Zone')
 
@@ -60,7 +60,7 @@
                     <div class="about-area-all-content">
                         <div class="about-area-content">
                             <div class="about-photo-content">
-                                <a><img src="{{ asset('images/fahi.png') }}" alt=""></a>
+                                <a><img src="{{ asset('assets/frontend/images/fahi.png') }}" alt=""></a>
                             </div>
                             <div class="about-text-content">
                                     <h4><a href="{{ route('about') }}">Hello, I’m Fahima!</a></h4>
@@ -89,7 +89,7 @@
                             <div class="col-md-6 col-sm-6">
                                 <div class="video-area-content-detail">
                                     <div class="category-img">
-                                        <img src="{{ asset('images/category-img-1.jpg') }}" alt="">
+                                        <img src="{{ asset('assets/frontend/images/category-img-1.jpg') }}" alt="">
                                         <div class="category-overlay">
                                         </div>
                                     </div>
@@ -124,7 +124,7 @@
                             <div class="col-md-6 col-sm-6">
                                 <div class="video-area-content-detail">
                                     <div class="category-img">
-                                        <img src="{{ asset('images/category-img-2.jpg') }}" alt="">
+                                        <img src="{{ asset('assets/frontend/images/category-img-2.jpg') }}" alt="">
                                         <div class="category-overlay">
                                         </div>
                                     </div>
@@ -221,7 +221,7 @@
                             <div class="col-md-6 col-sm-6">
                                 <div class="video-area-content-detail">
                                     <div class="category-img">
-                                        <img src="{{ asset('images/feature-1.jpg') }}" alt="">
+                                        <img src="{{ asset('assets/frontend/images/feature-1.jpg') }}" alt="">
                                         <div class="category-overlay">
                                         </div>
                                     </div>
@@ -256,7 +256,7 @@
                             <div class="col-md-6 col-sm-6">
                                 <div class="video-area-content-detail">
                                     <div class="category-img">
-                                        <img src="{{ asset('images/feature-2.jpg') }}" alt="">
+                                        <img src="{{ asset('assets/frontend/images/feature-2.jpg') }}" alt="">
                                         <div class="category-overlay">
                                         </div>
                                     </div>
@@ -291,7 +291,7 @@
                             <div class="col-md-6 col-sm-6">
                                 <div class="video-area-content-detail">
                                     <div class="category-img">
-                                        <img src="{{ asset('images/my-passion-1.jpg') }}" alt="">
+                                        <img src="{{ asset('assets/frontend/images/my-passion-1.jpg') }}" alt="">
                                         <div class="category-overlay">
                                         </div>
                                     </div>
@@ -323,7 +323,7 @@
                     </div>
                 </div>
                 <!-- include sidebar -->
-                @include('assets.sidebar')
+                @include('layouts.frontend.partial.sidebar')
             </div>
         </div>
     </section>

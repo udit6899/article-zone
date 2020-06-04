@@ -1,6 +1,6 @@
 
 <!--========================== extend-master-blade ==========================-->
-@extends('layouts.app')
+@extends('layouts.frontend.app')
 
 @section('title', 'Categories')
 
@@ -22,7 +22,7 @@
                     <div class="category-border-content">
                         <div class="category-detail">
                             <div class="category-img">
-                                <img src="{{ asset('images/category-img-1.jpg') }}" alt="">
+                                <img src="{{ asset('assets/frontend/images/category-img-1.jpg') }}" alt="">
                                 <div class="category-overlay">
                                 </div>
                             </div>
@@ -53,7 +53,7 @@
                     <div class="category-border-content">
                         <div class="category-detail">
                             <div class="category-img">
-                                <img src="{{ asset('images/category-img-2.jpg') }}" alt="">
+                                <img src="{{ asset('assets/frontend/images/category-img-2.jpg') }}" alt="">
                                 <div class="category-overlay">
                                 </div>
                             </div>
@@ -106,7 +106,7 @@
                     <div class="row">
                         <div class="category-widget-single">
                             <div class="category-widget-single-ad">
-                                <a href=""><img src="{{ asset('images/category-widget-ad.png') }}" alt=""></a>
+                                <a href=""><img src="{{ asset('assets/frontend/images/category-widget-ad.png') }}" alt=""></a>
                             </div>
                         </div>
                     </div>
@@ -122,7 +122,7 @@
                     <div class="category-border-content">
                         <div class="category-detail">
                             <div class="category-img">
-                                <img src="{{ asset('images/cake.png') }}" alt="">
+                                <img src="{{ asset('assets/frontend/images/cake.png') }}" alt="">
                                 <div class="category-overlay">
                                 </div>
                             </div>
@@ -153,7 +153,7 @@
                     <div class="category-border-content">
                         <div class="category-detail">
                             <div class="category-img">
-                                <img src="{{ asset('images/travel.png') }}" alt="">
+                                <img src="{{ asset('assets/frontend/images/travel.png') }}" alt="">
                                 <div class="category-overlay">
                                 </div>
                             </div>
@@ -193,7 +193,7 @@
                         <div class="row">
                             <div class="follow-me-section">
                                 <div class="about-photo-content category-page-single">
-                                    <img src="{{ asset('images/fahi.png') }}" alt="">
+                                    <img src="{{ asset('assets/frontend/images/fahi.png') }}" alt="">
                                 </div>
                                 <div class="follow-me-title"><h4>follow me on</h4></div>
                                 <div class="follow-me-social-link">
@@ -217,7 +217,7 @@
                     <div class="category-border-content">
                         <div class="category-detail">
                             <div class="category-img">
-                                <img src="{{ asset('images/feature-1.jpg') }}" alt="">
+                                <img src="{{ asset('assets/frontend/images/feature-1.jpg') }}" alt="">
                                 <div class="category-overlay">
                                 </div>
                             </div>
@@ -248,7 +248,7 @@
                     <div class="category-border-content">
                         <div class="category-detail">
                             <div class="category-img">
-                                <img src="{{ asset('images/feature-2.jpg') }}" alt="">
+                                <img src="{{ asset('assets/frontend/images/feature-2.jpg') }}" alt="">
                                 <div class="category-overlay">
                                 </div>
                             </div>
@@ -288,15 +288,15 @@
                             <div class="row">
                                 <div class="col-md-12 col-sm-12">
                                     <div class="popular-post-single top">
-                                        <div class="popular-post-single-img"><a href="{{ route('article.singleArticle', [ 'slug' => $article['slug'] ]) }}"><img src="{{ asset('images/popular-1.jpg') }}" alt=""></a></div>
+                                        <div class="popular-post-single-img"><a href="{{ route('article.singleArticle', [ 'slug' => $article['slug'] ]) }}"><img src="{{ asset('assets/frontend/images/popular-1.jpg') }}" alt=""></a></div>
                                         <div class="popular-post-single-text"><span>12 Jan, 2016</span><p>Yummy chocolate Muffin</p></div>
                                     </div>
                                     <div class="popular-post-single">
-                                        <div class="popular-post-single-img"><a href="{{ route('article.singleArticle', [ 'slug' => $article['slug'] ]) }}"><img src="{{ asset('images/popular-2.jpg') }}" alt=""></a></div>
+                                        <div class="popular-post-single-img"><a href="{{ route('article.singleArticle', [ 'slug' => $article['slug'] ]) }}"><img src="{{ asset('assets/frontend/images/popular-2.jpg') }}" alt=""></a></div>
                                         <div class="popular-post-single-text"><span>12 Jan, 2016</span><p>Music concert</p></div>
                                     </div>
                                     <div class="popular-post-single bottom">
-                                        <div class="popular-post-single-img"><a href="{{ route('article.singleArticle', [ 'slug' => $article['slug'] ]) }}"><img src="{{ asset('images/popular-3.jpg') }}" alt=""></a></div>
+                                        <div class="popular-post-single-img"><a href="{{ route('article.singleArticle', [ 'slug' => $article['slug'] ]) }}"><img src="{{ asset('assets/frontend/images/popular-3.jpg') }}" alt=""></a></div>
                                         <div class="popular-post-single-text"><span>12 Jan, 2016</span><p>new year celebration</p></div>
                                     </div>
                                 </div>
@@ -318,12 +318,12 @@
                                 <div class="carousel-inner" role="listbox">
                                     <div class="item active">
                                         <div class="category-img">
-                                            <img src="{{ asset('images/my-passion-1.jpg')  }}" alt="">
+                                            <img src="{{ asset('assets/frontend/images/my-passion-1.jpg')  }}" alt="">
                                         </div>
                                     </div>
                                     <div class="item">
                                         <div class="category-img">
-                                            <img src="{{ asset('images/category-img-1.jpg') }}" alt="">
+                                            <img src="{{ asset('assets/frontend/images/category-img-1.jpg') }}" alt="">
                                         </div>
                                     </div>
                                 </div>
@@ -357,7 +357,7 @@
                     <div class="category-border-content">
                         <div class="category-detail">
                             <div class="category-img">
-                                <img src="{{ asset('images/my-passion-2.jpg') }}" alt="">
+                                <img src="{{ asset('assets/frontend/images/my-passion-2.jpg') }}" alt="">
                                 <div class="category-overlay">
                                 </div>
                             </div>

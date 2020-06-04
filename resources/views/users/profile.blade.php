@@ -1,6 +1,6 @@
 
 <!--========================== extend-master-blade ==========================-->
-@extends('layouts.app')
+@extends('layouts.frontend.app')
 
 @section('title', 'My Account')
 
@@ -11,14 +11,17 @@
         {{ session('status') }}
         <!--End message -->
             <form role="form" action="{{ route('user.account') }}" method="post" enctype="multipart/form-data">
+                <!-- implement csrf and patch method -->
+                @csrf
+                @method('put')
                 <div class="row my-5">
                     <div class="col-lg-3 order-lg-1 text-center upload-group">
-                        <img src="{{ Auth::user()->avatar_path ? asset(Auth::user()->avatar_path) : asset('images/user-logo.jpg') }}"
+                        <img src="{{ $user->avatar_path ? asset($user->avatar_path) : asset('assets/frontend/images/default.jpg') }}"
                              id="preview" class="img-thumbnail" alt="avatar">
                         <h6 class="font-weight-bold mt-3"><b>Upload your avatar</b></h6>
                         <label class="custom-file">
                             <span class="custom-file-control btn btn-sm btn-outline-success text-white font-weight-bold border-dark">Choose file</span>
-                            <input type="file" accept="image/*" onchange="previewImage(event)"  name="userImage" class="custom-file-input" style="display: none">
+                            <input type="file" id="avatar-input" accept="image/*" onchange="previewImage(event)"  name="userImage" class="custom-file-input">
                         </label>
                     </div>
                     <div class="col-lg-8 order-lg-2">
@@ -32,12 +35,12 @@
                         </ul>
                         <div class="tab-content py-4">
                             <div class="tab-pane active" id="profile">
-                                <h5 class="mb-3 font-weight-bold text-uppercase">{{ Auth::user()->name }}</h5>
+                                <h5 class="font-weight-bold text-uppercase" id="name-head"><strong>{{ $user->name }}</strong></h5>
                                 <div class="row">
                                     <div class="col-md-6">
                                         <h6>About</h6>
                                         <p>
-                                            {{ Auth::user()->about || 'Web Designer, UI/UX Engineer' }}
+                                            {{ $user->about ? $user->about : 'Web Designer, UI/UX Engineer' }}
                                         </p>
                                         <h6>Hobbies</h6>
                                         <p>
@@ -98,62 +101,62 @@
                                 <div class="form-group row">
                                     <label class="col-lg-3 col-form-label form-control-label">Your Name</label>
                                     <div class="col-lg-9">
-                                        <input class="form-control" name="name" type="text" placeholder="Your Name" value="{{ Auth::user()->name }}">
+                                        <input class="form-control" name="name" type="text" placeholder="Your Name" value="{{ $user->name }}">
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-lg-3 col-form-label form-control-label">Email</label>
                                     <div class="col-lg-9">
-                                        <input class="form-control" name="email" type="email" placeholder="Email" disabled value="{{ Auth::user()->email }}">
+                                        <input class="form-control" name="email" type="email" placeholder="Email" disabled value="{{ $user->email }}">
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-lg-3 col-form-label form-control-label">Mobile No.</label>
                                     <div class="col-lg-9">
-                                        <input class="form-control" name="mobile_no" type="number" placeholder="Mobile Number" value="{{ Auth::user()->mobile_no }}">
+                                        <input class="form-control" name="mobile_no" type="number" placeholder="Mobile Number" value="{{ $user->mobile_no }}">
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-lg-3 col-form-label form-control-label">Gender</label>
                                     <div class="col-lg-9">
-                                        <div class="form-check form-check-inline">
+                                        <label class="radio-inline" for="male">
                                             <input type="radio" class="form-check-input" id="male" name="gender"
-                                                   @if(Auth::user()->gender === 'male') {{ 'checked' }} @endif mdbInput value="male">
-                                            <label class="form-check-label" for="male"> Male</label>
-                                        </div>
-                                        <div class="form-check form-check-inline">
+                                                   @if($user->gender === 'male') {{ 'checked' }} @endif value="male">Male
+                                        </label>
+                                        <label class="radio-inline" for="female">
                                             <input type="radio" class="form-check-input" id="female" name="gender"
-                                                   @if(Auth::user()->gender === 'female') {{ 'checked' }} @endif mdbInput value="female">
-                                            <label class="form-check-label" for="female"> Female</label>
-                                        </div>
-                                        <div class="form-check form-check-inline">
+                                                   @if($user->gender === 'female') {{ 'checked' }} @endif value="female">Female
+                                        </label>
+                                        <label class="radio-inline" for="other">
                                             <input type="radio" class="form-check-input" id="other" name="gender"
-                                                   @if(Auth::user()->gender === 'other') {{ 'checked' }} @endif  mdbInput value="other">
-                                            <label class="form-check-label" for="other"> Other</label>
-                                        </div>
+                                                   @if($user->gender === 'other') {{ 'checked' }} @endif value="other">Other
+                                        </label>
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-lg-3 col-form-label form-control-label">Age</label>
                                     <div class="col-lg-9">
-                                        <input class="form-control" name="age" type="number" maxlength="2" placeholder="Age"  value="{{ Auth::user()->age }}">
+                                        <input class="form-control" name="age" type="number" maxlength="2" placeholder="Age"  value="{{ $user->age }}">
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-lg-3 col-form-label form-control-label">About</label>
                                     <div class="col-lg-9">
-                                        <input class="form-control" name="about" type="text" placeholder="About" value="{{ Auth::user()->about }}">
+                                        <input class="form-control" name="about" type="text" placeholder="About" value="{{ $user->about }}">
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-lg-3 col-form-label form-control-label">Address</label>
                                     <div class="col-lg-9">
-                                        <textarea class="form-control" name="address" type="" placeholder="Your Address" rows="3" value="{{ Auth::user()->address }}"></textarea>
+                                        <textarea class="form-control" name="address" type="" placeholder="Your Address" rows="3" value="{{ $user->address }}"></textarea>
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <div class="col-lg-9" style="alignment: right;">
-                                        <input class="text-right" type="checkbox" name="privacy" value="public"> Allow your profile to view by others
+                                    <label class="col-lg-3 col-form-label form-control-label"></label>
+                                    <div class="col-lg-9">
+                                        <label for="privacy" class="checkbox-inline">
+                                            <input type="checkbox" class="form-check-input"  @if($user->privacy === 'public') checked @endif name="privacy" value="public">
+                                            Allow your profile to view by others</label>
                                     </div>
                                 </div>
                                 <div class="form-group row">

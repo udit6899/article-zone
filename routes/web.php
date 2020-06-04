@@ -27,7 +27,7 @@ Route::get('/about', 'HomeController@about')->name('about');
 Route::get('/contact', 'HomeController@contact')->name('contact');
 
 // Routes group for articles
-Route::prefix('article')->name('article.')->group(function () {
+Route::group(['prefix' => 'article', 'as' => 'article.'], function () {
 
     // GET: routes for category page
     Route::get('/category', function () {
@@ -41,13 +41,33 @@ Route::prefix('article')->name('article.')->group(function () {
 });
 
 // Routes group for users
-Route::prefix('user')->name('user.')->group(function () {
-    Route::get('account', function () {
-       return view('users.profile');
-    })->name('account');
-
-    Route::post('account', function () {
-        return 'userProfile';
-    })->name('account');
+Route::group(['prefix' => 'user', 'as' => 'user.'], function () {
+    // GET: routes for account view
+    Route::get('account', 'UserController@account')->name('account');
+    // PATCH: routes for update user account
+    Route::put('account', 'UserController@updateUser')->name('account');
 });
 
+
+// Routes for authors
+Route::group([
+    'prefix' => 'author', 'as' =>'author.',
+    'namespace' => 'Author', 'middleware' => ['auth', 'author']
+], function () {
+
+    // GET: routes for dashboard page
+    Route::get('dashboard', 'DashboardController@index')->name('dashboard');
+});
+
+// Routes for admin
+Route::group([
+    'prefix' => 'admin', 'as' =>'admin.',
+    'namespace' => 'Admin', 'middleware' => ['auth', 'admin']
+], function () {
+
+    // GET: routes for dashboard page
+    Route::get('dashboard', 'DashboardController@index')->name('dashboard');
+
+    // GET: routes for admin profile page
+    Route::get('profile', 'DashboardController@index')->name('profile');
+});

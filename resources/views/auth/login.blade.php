@@ -1,8 +1,12 @@
 
 <!--========================== extend-master-blade ==========================-->
-@extends('layouts.app')
+@extends('layouts.frontend.app')
 
 @section('title', 'Login')
+
+@push('css')
+    <link href="{{ asset('assets/frontend/css/auth/style.css') }}" rel="stylesheet">
+@endpush
 
 <!--========================== include content ==========================-->
 @section('content')
@@ -12,7 +16,7 @@
         <div class="container-login">
             <div class="signin-content">
                 <div class="signin-image">
-                    <figure><img src="{{ asset('images/signin-image.jpg') }}" alt="sing up image"></figure>
+                    <figure><img src="{{ asset('assets/frontend/images/signin-image.jpg') }}" alt="sing up image"></figure>
                     <a href="{{ route('register') }}" class="signup-image-link">Create an account</a>
                 </div>
 
