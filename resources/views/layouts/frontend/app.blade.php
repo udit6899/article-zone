@@ -21,11 +21,14 @@
         <link href='https://fonts.googleapis.com/css?family=PT+Sans:400,700' rel='stylesheet' type='text/css'>
         <!--========================== style css ==========================-->
         <link href="{{ asset('assets/frontend/css/style.css') }}" rel="stylesheet">
-        @stack('css')
         <!--============================ fevicon ===============================-->
         <link rel="shortcut icon" type="image/png" href="{{ asset('assets/frontend/images/fev-icon.ico') }}">
         <!--========================== responsive css ==========================-->
         <link href="{{ asset('assets/frontend/css/responsive.css') }}" rel="stylesheet">
+
+        <link rel="stylesheet" href="https://cdn.bootcss.com/toastr.js/latest/css/toastr.min.css">
+
+        @stack('css')
 
         <!--[if lt IE 9]>
         <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
@@ -51,8 +54,12 @@
         <script src="{{ asset('assets/frontend/js/jquery.sticky.js') }}"></script>
         <script src="{{ asset('assets/frontend/js/instafeed.min.js') }}"></script>
         <script src="{{ asset('assets/frontend/js/custom.js') }}"></script>
-        @stack('js')
         <!--============================== Active js ================================-->
         <script src="{{ asset('assets/frontend/js/active.js') }}"></script>
+
+        <script src="https://cdn.bootcss.com/toastr.js/latest/js/toastr.min.js"></script>
+        {!! Toastr::message() !!}
+
+        @stack('js')
     </body>
 </html>

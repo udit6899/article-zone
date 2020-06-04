@@ -2029,7 +2029,7 @@ $(document).ready(function(){
         }
         else {
           // Insert as text;
-          toast.innerHTML = html; 
+          toast.innerHTML = html;
         }
         // Bind hammer
         var hammerHandler = new Hammer(toast, {prevent_default: false});
@@ -2148,7 +2148,7 @@ $(document).ready(function(){
           });
         }
 
-        // if closeOnClick, then add close event for all a tags in side sideNav
+        // if closeOnClick, then add close event for all a tag in side sideNav
         if (options.closeOnClick === true) {
           menu_id.on("click.itemclick", "a:not(.collapsible-header)", function(){
             removeMenu();

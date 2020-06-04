@@ -225,7 +225,7 @@
     },
 
     /**
-     * Refreshes the tags so they match the text/value of their corresponding
+     * Refreshes the tag so they match the text/value of their corresponding
      * item.
      */
     refresh: function() {
@@ -252,7 +252,7 @@
     },
 
     /**
-     * Returns the items added as tags
+     * Returns the items added as tag
      */
     items: function() {
       return this.itemsArray;
@@ -272,7 +272,7 @@
     },
 
     /**
-     * Initializes the tags input behaviour on the element
+     * Initializes the tag input behaviour on the element
      */
     build: function(options) {
       var self = this;
@@ -477,7 +477,7 @@
         self.remove($(event.target).closest('.tag').data('item'));
       }, self));
 
-      // Only add existing value as tags when using strings as tags
+      // Only add existing value as tag when using strings as tag
       if (self.options.itemValue === defaultOptions.itemValue) {
         if (self.$element[0].tagName === 'INPUT') {
             self.add(self.$element.val());
@@ -540,7 +540,7 @@
 
     this.each(function() {
       var tagsinput = $(this).data('tagsinput');
-      // Initialize a new tags input
+      // Initialize a new tag input
       if (!tagsinput) {
           tagsinput = new TagsInput(this, arg1);
           $(this).data('tagsinput', tagsinput);
@@ -550,14 +550,14 @@
               $('option', $(this)).attr('selected', 'selected');
           }
 
-          // Init tags from $(this).val()
+          // Init tag from $(this).val()
           $(this).val($(this).val());
       } else if (!arg1 && !arg2) {
           // tagsinput already exists
           // no function, trying to init
           results.push(tagsinput);
       } else if(tagsinput[arg1] !== undefined) {
-          // Invoke function on existing tags input
+          // Invoke function on existing tag input
             if(tagsinput[arg1].length === 3 && arg3 !== undefined){
                var retVal = tagsinput[arg1](arg2, null, arg3);
             }else{

@@ -80,7 +80,7 @@
 
 			target[fragments[fragments.length - 1]] = modules[id];
 		}
-		
+
 		// Expose private modules for unit tests
 		if (exports.AMDLC_TESTS) {
 			privateModules = exports.privateModules || {};
@@ -203,7 +203,7 @@ define("tinymce/pasteplugin/Utils", [
 	 */
 	function trimHtml(html) {
 		function trimSpaces(all, s1, s2) {
-			// WebKit &nbsp; meant to preserve multiple spaces but instead inserted around all inline tags,
+			// WebKit &nbsp; meant to preserve multiple spaces but instead inserted around all inline tag,
 			// including the spans with inline styles created on paste
 			if (!s1 && !s2) {
 				return ' ';
@@ -395,7 +395,7 @@ define("tinymce/pasteplugin/Clipboard", [
 			if (!args.isDefaultPrevented()) {
 				// User has bound PastePostProcess events then we need to pass it through a DOM node
 				// This is not ideal but we don't want to let the browser mess up the HTML for example
-				// some browsers add &nbsp; to P tags etc
+				// some browsers add &nbsp; to P tag etc
 				if (editor.hasEventListeners('PastePostProcess') && !args.isDefaultPrevented()) {
 					// We need to attach the element to the DOM so Sizzle selectors work on the contents
 					var tempBody = dom.add(editor.getBody(), 'div', {style: 'display:none'}, html);
@@ -1394,7 +1394,7 @@ define("tinymce/pasteplugin/WordFilter", [
 					/<!--[\s\S]+?-->/gi,
 
 					// Remove comments, scripts (e.g., msoShowComment), XML tag, VML content,
-					// MS Office namespaced tags, and a few other tags
+					// MS Office namespaced tag, and a few other tag
 					/<(!|script[^>]*>.*?<\/script(?=[>\s])|\/?(\?xml(:\w+)?|img|meta|link|style|\w:\w+)(?=[\s\/>]))[^>]*>/gi,
 
 					// Convert <s> into <strike> for line-though

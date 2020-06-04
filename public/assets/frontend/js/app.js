@@ -11266,14 +11266,14 @@ var rscriptType = ( /^$|^module$|\/(?:java|ecma)script/i );
 	support.noCloneChecked = !!div.cloneNode( true ).lastChild.defaultValue;
 
 	// Support: IE <=9 only
-	// IE <=9 replaces <option> tags with their contents when inserted outside of
+	// IE <=9 replaces <option> tag with their contents when inserted outside of
 	// the select element.
 	div.innerHTML = "<option></option>";
 	support.option = !!div.lastChild;
 } )();
 
 
-// We have to close these tags to support XHTML (#13200)
+// We have to close these tag to support XHTML (#13200)
 var wrapMap = {
 
 	// XHTML parsers do not magically insert elements in the
@@ -22897,7 +22897,7 @@ return jQuery;
      * A specialized version of `baseIsEqualDeep` for comparing objects of
      * the same `toStringTag`.
      *
-     * **Note:** This function only supports comparing values with tags of
+     * **Note:** This function only supports comparing values with tag of
      * `Boolean`, `Date`, `Error`, `Number`, `RegExp`, or `String`.
      *
      * @private
@@ -23395,7 +23395,7 @@ return jQuery;
     /**
      * Initializes an object clone based on its `toStringTag`.
      *
-     * **Note:** This function only supports cloning values with tags of
+     * **Note:** This function only supports cloning values with tag of
      * `Boolean`, `Date`, `Error`, `Map`, `Number`, `RegExp`, `Set`, or `String`.
      *
      * @private

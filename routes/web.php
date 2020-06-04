@@ -68,6 +68,6 @@ Route::group([
     // GET: routes for dashboard page
     Route::get('dashboard', 'DashboardController@index')->name('dashboard');
 
-    // GET: routes for admin profile page
-    Route::get('profile', 'DashboardController@index')->name('profile');
+    // Routes for Tag operations
+    Route::resource('tag', 'TagController');
 });

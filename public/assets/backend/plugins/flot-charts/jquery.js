@@ -5693,7 +5693,7 @@ wrapMap.optgroup = wrapMap.option;
 wrapMap.tbody = wrapMap.tfoot = wrapMap.colgroup = wrapMap.caption = wrapMap.thead;
 wrapMap.th = wrapMap.td;
 
-// IE6-8 can't serialize link, script, style, or any html5 (NoScope) tags,
+// IE6-8 can't serialize link, script, style, or any html5 (NoScope) tag,
 // unless wrapped in a div with non-breaking characters in front of it.
 if ( !jQuery.support.htmlSerialize ) {
 	wrapMap._default = [ 1, "X<div>", "</div>" ];
@@ -6315,7 +6315,7 @@ jQuery.extend({
 					div = context.createElement("div");
 					safe.appendChild( div );
 
-					// Fix "XHTML"-style tags in all browsers
+					// Fix "XHTML"-style tag in all browsers
 					elem = elem.replace(rxhtmlTag, "<$1></$2>");
 
 					// Go to html and back, then peel off extra wrappers
