@@ -33,6 +33,7 @@
                                         <th>Name</th>
                                         <th>Created At</th>
                                         <th>Updated At</th>
+                                        <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -42,6 +43,18 @@
                                             <td>{{ $tag->name }}</td>
                                             <td>{{ $tag->created_at }}</td>
                                             <td>{{ $tag->updated_at }}</td>
+                                            <td class="text-center">
+                                                <a class="btn btn-primary waves-effect" href="{{ route('admin.tag.edit', $tag->id) }}">
+                                                    <i class="material-icons">edit</i>
+                                                </a>
+                                                <button type="button" class="btn btn-danger waves-effect" onclick="deleteTag({{ $tag->id }})">
+                                                    <i class="material-icons">delete</i>
+                                                </button>
+                                                <form id="delete-form-{{ $tag->id }}" action="{{ route('admin.tag.destroy', $tag->id) }}" method="POST" style="display: none">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                </form>
+                                            </td>
                                         </tr>
                                     @endforeach
                                 </tbody>
@@ -67,6 +80,10 @@
     <script src="{{ asset('assets/backend/plugins/jquery-datatable/extensions/export/buttons.html5.min.js') }}"></script>
     <script src="{{ asset('assets/backend/plugins/jquery-datatable/extensions/export/buttons.print.min.js') }}"></script>
 
+    <!-- Sweete alert -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+
     <!-- Custom Js -->
     <script src="{{ asset('assets/backend/js/pages/tables/jquery-datatable.js') }}"></script>
+    <script src="{{ asset('assets/backend/js/pages/tag/custom.js') }}"></script>
 @endpush
