@@ -1,6 +1,6 @@
 @extends('layouts.backend.app')
 
-@section('title', 'Article Tag')
+@section('title', 'Edit Tag')
 
 @push('css')
 
@@ -22,7 +22,7 @@
                     @method('PATCH')
                     <div class="form-group form-float">
                         <div class="form-line">
-                            <input type="text" id="tag_name" name='name' class="form-control" value="{{ $tag->name }}">
+                            <input type="text" id="tag_name" name='name' class="form-control" value="{{ old('name') ? old('name') : $tag->name }}">
                             <label class="form-label">Tag Name</label>
                         </div>
                     </div>

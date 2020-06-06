@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
 use App\Models\Tag;
+use App\Http\Controllers\Controller;
 use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
@@ -17,7 +17,10 @@ class TagController extends Controller
      */
     public function index()
     {
+        // Get all latest tags
         $tags = Tag::latest()->get();
+
+        // Return to index view
         return view('admin.tag.index', compact('tags'));
     }
 
@@ -28,6 +31,7 @@ class TagController extends Controller
      */
     public function create()
     {
+        // Return to add tag view
         return view('admin.tag.create');
     }
 
@@ -41,17 +45,18 @@ class TagController extends Controller
     {
         // Validate the request
         $this->validate($request, [
-            'name' => 'required|string|max:255',
+            'name' => 'required|string|max:255|unique:tags',
         ]);
 
         // Store new tag
-        $tag = new Tag();
-        $tag->name = $request->name;
-        $tag->slug = Str::slug($request->name);
+        $tag = new Tag([
+            'name' => $request->name,
+            'slug' => Str::slug($request->name)
+        ]);
         $tag->save();
 
         // Create success message
-        Toastr::success('Tag saved successfully !', 'success');
+        Toastr::success('Tag Successfully Saved !', 'success');
 
         // Return back
         return redirect()->back();
@@ -60,10 +65,10 @@ class TagController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  Tag $tag
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Tag $tag)
     {
         //
     }
@@ -71,14 +76,11 @@ class TagController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  Tag $tag
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Tag $tag)
     {
-        // Get tag details from db
-        $tag = Tag::find($id);
-
         // Return to edit view
         return view('admin.tag.edit', compact('tag'));
     }
@@ -87,24 +89,24 @@ class TagController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  Tag $tag
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Tag $tag)
     {
         // Validate the request
         $this->validate($request, [
-            'name' => 'required|string|max:255',
+            'name' => 'required|string|max:255|unique:tags,name,'.$tag->id,
         ]);
 
         // Update tag details
-        Tag::find($id)->update([
+        $tag->update([
            'name' => $request->name,
            'slug' => Str::slug($request->name)
         ]);
 
         // Make success response
-        Toastr::success('Tag updated successfully !', 'success');
+        Toastr::success('Tag Successfully Updated !', 'success');
 
         // Redirect to index page
         return redirect()->route('admin.tag.index');
@@ -113,16 +115,16 @@ class TagController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  Tag $tag
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Tag $tag)
     {
         // Delete tag from db
-        Tag::find($id)->delete();
+        $tag->delete();
 
         // Make success response
-        Toastr::success('Tag deleted successfully !', 'success');
+        Toastr::success('Tag Successfully Deleted !', 'success');
 
         // Return to index page
         return redirect()->back();

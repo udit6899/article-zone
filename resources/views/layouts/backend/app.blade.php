@@ -104,11 +104,17 @@
         <!-- Waves Effect Plugin Js -->
         <script src="{{ asset('assets/backend/plugins/node-waves/waves.js') }}"></script>
 
+        <!-- Sweete alert -->
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+
         <!-- Custom Js -->
         <script src="{{ asset('assets/backend/js/admin.js') }}"></script>
 
         <!-- Demo Js -->
         <script src="{{ asset('assets/backend/js/demo.js') }}"></script>
+
+        <!-- Helper Js -->
+        <script src="{{ asset('assets/backend/js/helpers.js') }}"></script>
 
         <script src="https://cdn.bootcss.com/toastr.js/latest/js/toastr.min.js"></script>
         {!! Toastr::message() !!}

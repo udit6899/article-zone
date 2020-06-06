@@ -1,6 +1,6 @@
 @extends('layouts.backend.app')
 
-@section('title', 'Article Tag')
+@section('title', 'Add Tag')
 
 @push('css')
 
@@ -21,7 +21,7 @@
                         @csrf
                         <div class="form-group form-float">
                             <div class="form-line">
-                                <input type="text" id="tag_name" name='name' class="form-control" value="{{ old('email') }}">
+                                <input type="text" id="tag_name" name='name' class="form-control" value="{{ old('name') }}">
                                 <label class="form-label">Tag Name</label>
                             </div>
                         </div>

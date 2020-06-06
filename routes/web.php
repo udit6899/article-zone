@@ -70,4 +70,7 @@ Route::group([
 
     // Routes for Tag operations
     Route::resource('tag', 'TagController');
+
+    // Routes for Category operations
+    Route::resource('category', 'CategoryController');
 });
