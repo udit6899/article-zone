@@ -8084,6 +8084,15 @@ fieldset[disabled] .form-control {
     border: none; }
 
 /* Jquery DataTable ============================ */
+.text-color-black {
+    color: black;
+}
+
+.bg-color-black-gray {
+    background-color: #424141;
+    color: white;
+}
+
 .dataTables_wrapper {
   position: relative; }
   .dataTables_wrapper select {
@@ -8200,3 +8209,75 @@ html.ie11 .dropdown-menu ul.menu li a {
 
 html.ie11 .bs-searchbox .form-control {
   width: 90%; }
+
+/* ====== Post area ========== */
+
+.post-area {
+    margin: 70px 0px 10px 0px;
+}
+.post-text {
+    padding: 20px 20px 15px;
+    border-top: none;
+}
+
+.post-text.read-more img {
+    text-align: center;
+    width: 100%;
+}
+
+.post-text.read-more.clearfix > p {
+    color: #606060;
+    font-size: 14px;
+    line-height: 25px;
+    text-align: left;
+    font-family: PTSans Regular;
+}
+
+.post-text.read-more li {
+    font-size: 14px;
+    line-height: 25px;
+    font-family: PTSans Regular;
+}
+
+.post-text.read-more.clearfix > h1 strong,
+.post-text.read-more.clearfix > h2 strong,
+.post-text.read-more.clearfix > h3 strong,
+.post-text.read-more.clearfix > h4 strong,
+.post-text.read-more.clearfix > h5 strong,
+.post-text.read-more.clearfix > h6 strong{
+    font-family: PTSans Regular;
+}
+
+.quote p {
+    font-size: 17px;
+    font-weight: bold;
+    line-height: 25px;
+    text-align: center;
+    font-family: PTSans Regular;
+}
+.quote p i {
+    color: #f6d4a0;
+    font-size: 25px;
+    padding-left: 6px;
+    padding-right: 6px;
+}
+
+#post-header h2 {
+    font-size: 30px;
+    font-weight: bold;
+    font-family: 'tinymce-small', Arial;
+}
+
+#post-header .address {
+    margin-top: 20px;
+}
+
+#post-header .address img {
+    border-radius: 50%;
+    height: 20px;
+    width: 20px;
+}
+
+#post-header .address strong {
+    margin-left: 5px;
+}

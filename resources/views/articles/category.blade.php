@@ -209,7 +209,7 @@
             </div>
         </div>
     </section>
-    <!--============================== feature-post-area-start ================================-->
+    <!--============================== feature-posts-area-start ================================-->
     <section class="feature-post-area">
         <div class="container">
             <div class="row">

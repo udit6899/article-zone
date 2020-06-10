@@ -14,7 +14,7 @@ class UserSeeder extends Seeder
     {
         // Insert admin details
         DB::table('users')->insert([
-           'name' => 'admin',
+           'name' => 'Mr. Admin',
            'email' => 'admin@articlezone.com',
            'mobile_no' => '7609905449',
            'password' => bcrypt('root@admin'),
@@ -23,7 +23,7 @@ class UserSeeder extends Seeder
 
         // Insert author details
         DB::table('users')->insert([
-            'name' => 'author',
+            'name' => 'Mr. Author',
             'email' => 'author@articlezone.com',
             'mobile_no' => '7609905450',
             'password' => bcrypt('root@author'),

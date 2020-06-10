@@ -36,7 +36,7 @@ Route::group(['prefix' => 'article', 'as' => 'article.'], function () {
 
     // GET: routes for single-article page
     Route::get('/{slug}', function () {
-            return view('articles.single-article');
+            return view('articles.single-article', ['post' => ['title' => 'Single Post']]);
     })->name('singleArticle');
 });
 
@@ -73,4 +73,7 @@ Route::group([
 
     // Routes for Category operations
     Route::resource('category', 'CategoryController');
+
+    // Routes for Post operations
+    Route::resource('post', 'PostController');
 });

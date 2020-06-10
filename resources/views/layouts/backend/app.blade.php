@@ -14,6 +14,7 @@
         <link rel="shortcut icon" type="image/png" href="{{ asset('assets/frontend/images/fev-icon.ico') }}">
 
         <!-- Google Fonts -->
+        <link href="{{ asset('assets/backend/plugins/font-awesome/css/font-awesome.css') }}">
         <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&subset=latin,cyrillic-ext" rel="stylesheet" type="text/css">
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" type="text/css">
 
@@ -94,9 +95,6 @@
 
         <!-- Bootstrap Core Js -->
         <script src="{{ asset('assets/backend/plugins/bootstrap/js/bootstrap.js')  }}"></script>
-
-        <!-- Select Plugin Js -->
-        <script src="{{ asset('assets/backend/plugins/bootstrap-select/js/bootstrap-select.js') }}"></script>
 
         <!-- Slimscroll Plugin Js -->
         <script src="{{ asset('assets/backend/plugins/jquery-slimscroll/jquery.slimscroll.js') }}"></script>

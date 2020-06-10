@@ -2,27 +2,16 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Helpers\Helper;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\CategoryRequest;
 use App\Models\Category;
 use Brian2694\Toastr\Facades\Toastr;
-use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Str;
-use Illuminate\Validation\Rule;
-use Intervention\Image\Facades\Image;
 
 class CategoryController extends Controller
 {
-    /**
-     * Apply the middleware to the resource action.
-     *
-     */
-    public function __construct()
-    {
-        // Apply the middlewares
-        $this->middleware('upload')->only(['store', 'update']);
-    }
 
     /**
      * Display a listing of the resource.
@@ -52,16 +41,19 @@ class CategoryController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Foundation\Http\FormRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CategoryRequest $request)
     {
+        // Store uploaded images
+        $imageUrl = Helper::upload($request);
+
         // Prepare category option to store
         $category = new Category([
             'name' => $request->name,
             'slug' => $request->slug,
-            'image' => $request->imageName,
+            'image' => $imageUrl,
             'description' => $request->description
         ]);
         $category->save();
@@ -99,17 +91,20 @@ class CategoryController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Foundation\Http\FormRequest  $request
      * @param  Category $category
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Category $category)
+    public function update(CategoryRequest $request, Category $category)
     {
+        // Store uploaded images
+        $imageUrl = Helper::upload($request);
+
         // Prepare category option to store
         $category->update([
             'name' => $request->name,
             'slug' => $request->slug,
-            'image' => $request->imageName,
+            'image' => $imageUrl,
             'description' => $request->description ? $request->description : $category->description
         ]);
 

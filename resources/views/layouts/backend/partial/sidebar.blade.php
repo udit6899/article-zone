@@ -5,7 +5,7 @@
     <!-- User Info -->
     <div class="user-info text-center">
         <div class="image">
-            <img src="{{ asset('assets/backend/images/users/default.jpg') }}" width="48" height="48" alt="User" />
+            <img src="{{ Storage::disk('public')->url('users/'.Auth::user()->avatar_path) }}" width="48" height="48" alt="User" />
         </div>
         <div class="info-container">
             <div class="name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ Auth::user()->name }}</div>
@@ -35,6 +35,12 @@
                     <a href="{{ route('admin.category.index') }}">
                         <i class="material-icons">apps</i>
                         <span>Category</span>
+                    </a>
+                </li>
+                <li class="{{ Request::is('admin/post*') ? 'active' : '' }}">
+                    <a href="{{ route('admin.post.index') }}">
+                        <i class="material-icons">library_books</i>
+                        <span>Post</span>
                     </a>
                 </li>
             @endif

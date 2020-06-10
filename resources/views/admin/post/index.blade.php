@@ -1,6 +1,6 @@
 @extends('layouts.backend.app')
 
-@section('title', 'Article Category')
+@section('title', 'Article Post')
 
 @push('css')
     <!-- JQuery DataTable Css -->
@@ -10,9 +10,9 @@
 @section('content')
     <div class="container-fluid">
         <div class="block-header">
-            <a class="btn btn-info waves-effect" href="{{ route('admin.category.create') }}">
+            <a class="btn btn-info waves-effect" href="{{ route('admin.post.create') }}">
                 <i class="material-icons">add</i>
-                <span>Add New Category</span>
+                <span>Add New Post</span>
             </a>
         </div>
         <!-- Exportable Table -->
@@ -21,8 +21,8 @@
                 <div class="card">
                     <div class="header">
                         <h2>
-                            ALL CATEGORIES
-                            <span class="badge bg-color-black-gray">{{ $categories->count() }}</span>
+                            ALL POSTS
+                            <span class="badge bg-color-black-gray">{{ $posts->count() }}</span>
                         </h2>
                     </div>
                     <div class="body">
@@ -31,39 +31,58 @@
                                 <thead class="bg-color-black-gray">
                                     <tr>
                                         <th>ID</th>
-                                        <th>Name</th>
+                                        <th>Title</th>
+                                        <th>Author</th>
+                                        <th>Views</th>
+                                        <th>Is_Approved</th>
                                         <th>Image</th>
-                                        <th>Posts</th>
-                                        <th>Description</th>
-                                        <th>Created At</th>
-                                        <th>Updated At</th>
+                                        <th>Is_Published</th>
+                                        <th>Created_At</th>
+                                        <th>Updated_At</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach($categories as $key=>$category)
+                                    @foreach($posts as $key=>$post)
                                         <tr class="text-color-black">
                                             <td>{{ $key + 1 }}</td>
-                                            <td>{{ $category->name }}</td>
                                             <td>
-                                                <img height="50px" width="80px"
-                                                 src="{{ Storage::disk('public')->url('categories/'.$category->image) }}">
+                                                {{ Str::limit($post->title, 10, '...   ') }}
+                                                <a class="badge bg-orange" title="{{ $post->title }}">read more</a>
                                             </td>
-                                            <td>{{ $category->posts->count() }}</td>
+                                            <td>{{ $post->user->name }}</td>
+                                            <td>{{ $post->view_count }}</td>
                                             <td>
-                                                {{ Str::limit($category->description, 20, '...   ') }}
-                                                <a class="badge bg-orange" title="{{ $category->description }}">read more</a>
+                                                @if($post->is_approved == true)
+                                                    <span class="badge bg-light-green ">approved</span>
+                                                @else
+                                                    <span class="badge bg-pink">pending</span>
+                                                @endif
                                             </td>
-                                            <td>{{ $category->created_at }}</td>
-                                            <td>{{ $category->updated_at }}</td>
+                                            <td>
+                                                <img src="{{ Storage::disk('public')->url('posts/'.$post->image) }}"
+                                                     height="50px" width="80px">
+                                            </td>
+                                            <td>
+                                                @if($post->is_published == true)
+                                                    <span class="badge bg-light-green">published</span>
+                                                @else
+                                                    <span class="badge bg-pink">pending</span>
+                                                @endif
+                                            </td>
+                                            <td>{{ $post->created_at }}</td>
+                                            <td>{{ $post->updated_at }}</td>
                                             <td class="text-center">
-                                                <a class="btn btn-info waves-effect" href="{{ route('admin.category.edit', $category->id) }}">
+                                                <a class="btn bg-blue-grey waves-effect" href="{{ route('admin.post.show', $post->id) }}">
+                                                    <i class="material-icons">visibility</i>
+                                                </a>
+                                                <a class="btn btn-info waves-effect" href="{{ route('admin.post.edit', $post->id) }}">
                                                     <i class="material-icons">edit</i>
                                                 </a>
-                                                <button type="button" class="btn bg-deep-orange waves-effect" onclick="deleteItem({{ $category->id }})">
+                                                <button type="button" class="btn bg-deep-orange waves-effect" onclick="deleteItem({{ $post->id }})">
                                                     <i class="material-icons">delete</i>
                                                 </button>
-                                                <form id="delete-form-{{ $category->id }}" action="{{ route('admin.category.destroy', $category->id) }}" method="POST" style="display: none">
+                                                <form id="delete-form-{{ $post->id }}" action="{{ route('admin.post.destroy', $post->id) }}" method="POST" style="display: none">
                                                     @csrf
                                                     @method('DELETE')
                                                 </form>
