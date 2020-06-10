@@ -10,7 +10,6 @@
     <div class="row clearfix">
         <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
             <div class="card">
-
                 <div class="header" id="post-header">
                     <h2>{{ $post->title }}</h2>
                     <div class="address">
@@ -26,7 +25,6 @@
                         </small>
                     </div>
                 </div>
-
                 <div class="body">
                     <div class="text-center">
                         <img  alt="post_image" class="img-responsive" width="100%"
@@ -44,11 +42,9 @@
                         {!! $post->body !!}
                     </div>
                 </div>
-
             </div>
         </div>
         <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
-
             <div class="card">
                 <div class="header bg-cyan">
                     <h2>
@@ -61,7 +57,6 @@
                     @endforeach
                 </div>
             </div>
-
             <div class="card">
                 <div class="header bg-success">
                     <h2>
@@ -74,10 +69,9 @@
                     @endforeach
                 </div>
             </div>
-
             <div class="text-center">
                 <a @if(!is_null($prev))
-                        href="{{ route('admin.post.show', $prev) }}"
+                        href="{{ route('author.post.show', $prev) }}"
                    @else
                         {{ 'disabled' }}
                    @endif class="btn bg-deep-orange">
@@ -90,25 +84,20 @@
                         <span><strong>Approved</strong></span>
                     </button>
                 @else
-                    <button type="button" class="btn bg-cyan" onclick="approvePost()">
+                    <button type="button" class="btn btn-warning" style="cursor: auto;" readonly>
                         <i class="material-icons">donut_large</i>
-                        <span><strong>Approve</strong></span>
+                        <span><strong>Pending</strong></span>
                     </button>
-                    <form id="approval-form" class="form-hide" action="{{ route('admin.post.approve', $post->id) }}" method="POST">
-                        @csrf
-                        @method('PATCH')
-                    </form>
                 @endif
 
                 <a @if(!is_null($next))
-                        href="{{ route('admin.post.show', $next) }}"
+                        href="{{ route('author.post.show', $next) }}"
                    @else
                         {{ 'disabled' }}
                    @endif class="btn bg-deep-orange">
                     <i class="material-icons">keyboard_arrow_right</i>
                 </a>
             </div>
-
         </div>
     </div>
 @endsection

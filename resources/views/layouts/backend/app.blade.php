@@ -36,8 +36,8 @@
         <!-- AdminBSB Themes. You can choose a theme from css/themes instead of get all themes -->
         <link href="{{ asset('assets/backend/css/themes/all-themes.css') }}" rel="stylesheet" />
 
+        <!-- Css for toastr -->
         <link rel="stylesheet" href="https://cdn.bootcss.com/toastr.js/latest/css/toastr.min.css">
-
         @stack('css')
 
     </head>
@@ -114,6 +114,7 @@
         <!-- Helper Js -->
         <script src="{{ asset('assets/backend/js/helpers.js') }}"></script>
 
+        <!-- Toastr Js -->
         <script src="https://cdn.bootcss.com/toastr.js/latest/js/toastr.min.js"></script>
         {!! Toastr::message() !!}
 

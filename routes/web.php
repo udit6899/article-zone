@@ -57,6 +57,9 @@ Route::group([
 
     // GET: routes for dashboard page
     Route::get('dashboard', 'DashboardController@index')->name('dashboard');
+
+    // Routes for Post operations
+    Route::resource('post', 'PostController');
 });
 
 // Routes for admin
@@ -73,6 +76,15 @@ Route::group([
 
     // Routes for Category operations
     Route::resource('category', 'CategoryController');
+
+    // GET: route for pending post
+    Route::get('post/pending', 'PostController@pending')->name('post.pending');
+
+    // GET: route for all post
+    Route::get('post/all', 'PostController@all')->name('post.all');
+
+    // PATCH: route for post approval operation
+    Route::patch('post/{post}/approve', 'PostController@approve')->name('post.approve');
 
     // Routes for Post operations
     Route::resource('post', 'PostController');

@@ -57,13 +57,13 @@
                                             <td>{{ $category->created_at }}</td>
                                             <td>{{ $category->updated_at }}</td>
                                             <td class="text-center">
-                                                <a class="btn btn-info waves-effect" href="{{ route('admin.category.edit', $category->id) }}">
-                                                    <i class="material-icons">edit</i>
+                                                <a class="btn btn-xs btn-info waves-effect" title="Edit" href="{{ route('admin.category.edit', $category->id) }}">
+                                                    <i class="material-icons action-icon">edit</i>
                                                 </a>
-                                                <button type="button" class="btn bg-deep-orange waves-effect" onclick="deleteItem({{ $category->id }})">
-                                                    <i class="material-icons">delete</i>
+                                                <button type="button" class="btn btn-xs bg-deep-orange waves-effect" title="Delete" onclick="deleteItem({{ $category->id }})">
+                                                    <i class="material-icons action-icon">delete</i>
                                                 </button>
-                                                <form id="delete-form-{{ $category->id }}" action="{{ route('admin.category.destroy', $category->id) }}" method="POST" style="display: none">
+                                                <form id="delete-form-{{ $category->id }}" class="form-hide" action="{{ route('admin.category.destroy', $category->id) }}" method="POST">
                                                     @csrf
                                                     @method('DELETE')
                                                 </form>

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Author;
 
 use App\Helpers\Helper;
 use App\Http\Controllers\Controller;
@@ -9,7 +9,6 @@ use App\Models\Category;
 use App\Models\Post;
 use App\Models\Tag;
 use Brian2694\Toastr\Facades\Toastr;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
@@ -17,7 +16,7 @@ class PostController extends Controller
 {
 
     /**
-     * Display a listing of the own resource.
+     * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
@@ -27,36 +26,7 @@ class PostController extends Controller
         $posts = Auth::user()->posts()->latest()->get();
 
         // Return to index view
-        return view('admin.post.index', compact('posts'));
-    }
-
-
-    /**
-     * Display a listing of the pending posts.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function pending()
-    {
-        // Get all pending posts
-        $posts = Post::where('is_approved', false)->latest()->get();
-
-        // Return to index view
-        return view('admin.post.pending', compact('posts'));
-    }
-
-    /**
-     * Display a listing of the all resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function all()
-    {
-        // Get all latest posts
-        $posts = Post::latest()->get();
-
-        // Return to index view
-        return view('admin.post.index', compact('posts'));
+        return view('author.post.index', compact('posts'));
     }
 
     /**
@@ -73,7 +43,7 @@ class PostController extends Controller
         $tags = Tag::all();
 
         // Return to add post view
-        return view('admin.post.create', compact('tags', 'categories'));
+        return view('author.post.create', compact('tags', 'categories'));
     }
 
     /**
@@ -96,7 +66,7 @@ class PostController extends Controller
             'body' => $request->body,
             'image' => $imageUrl,
             'is_published' => $request->is_published ? true : false,
-            'is_approved' => true
+            'is_approved' => false
         ]);
         $post->save();
 
@@ -108,7 +78,7 @@ class PostController extends Controller
         Toastr::success('Your Post Successfully Saved !', 'success');
 
         // Return to index view
-        return redirect()->route('admin.post.index');
+        return redirect()->route('author.post.index');
     }
 
     /**
@@ -120,13 +90,13 @@ class PostController extends Controller
     public function show(Post $post)
     {
         // Get previous post ID
-        $prev = Post::where('id', '<', $post->id)->max('id');
+        $prev = Auth::user()->posts()->where('id', '<', $post->id)->max('id');
 
         // Get next post ID
-        $next = Post::where('id', '>', $post->id)->min('id');
+        $next = Auth::user()->posts()->where('id', '>', $post->id)->min('id');
 
         // Return to show post view
-        return view('admin.post.show', compact('prev', 'post', 'next'));
+        return view('author.post.show', compact('prev', 'post', 'next'));
     }
 
     /**
@@ -144,7 +114,7 @@ class PostController extends Controller
         $tags = Tag::all();
 
         // Return to add post view
-        return view('admin.post.edit', compact('post', 'tags', 'categories'));
+        return view('author.post.edit', compact('post', 'tags', 'categories'));
 
     }
 
@@ -178,33 +148,7 @@ class PostController extends Controller
         Toastr::success('Post Successfully Updated !', 'success');
 
         // Return to index view
-        return redirect()->route('admin.post.index');
-    }
-
-    /**
-     * Approve post operation by admin.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Post  $post
-     * @return \Illuminate\Http\Response
-     */
-    public function approve(Request $request, Post $post)
-    {
-        // Check the post is approved or not
-        if ($post->is_approved == false) {
-
-            // If post is not approved, then approve the post
-            $post->update(['is_approved' => true]);
-
-            // Make success response
-            Toastr::success('Post Successfully Approved !', 'success');
-        } else {
-            // If post is already approved, then make info response
-            Toastr::success('This post is already approved !', 'info');
-        }
-
-        // Return to back page
-        return redirect()->back();
+        return redirect()->route('author.post.index');
     }
 
     /**

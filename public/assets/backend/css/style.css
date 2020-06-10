@@ -8220,7 +8220,7 @@ html.ie11 .bs-searchbox .form-control {
     border-top: none;
 }
 
-.post-text.read-more img {
+.post-text.read-more img, .post-text.read-more iframe {
     text-align: center;
     width: 100%;
 }
@@ -8280,4 +8280,13 @@ html.ie11 .bs-searchbox .form-control {
 
 #post-header .address strong {
     margin-left: 5px;
+}
+
+.action-icon {
+    font-size: 18px;
+    padding-bottom: 5px;
+}
+
+.form-hide {
+    display: none;
 }

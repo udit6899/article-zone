@@ -47,13 +47,13 @@
                                             <td>{{ $tag->created_at }}</td>
                                             <td>{{ $tag->updated_at }}</td>
                                             <td class="text-center">
-                                                <a class="btn btn-info waves-effect" href="{{ route('admin.tag.edit', $tag->id) }}">
-                                                    <i class="material-icons">edit</i>
+                                                <a class="btn btn-xs btn-info waves-effect" title="Edit" href="{{ route('admin.tag.edit', $tag->id) }}">
+                                                    <i class="material-icons action-icon">edit</i>
                                                 </a>
-                                                <button type="button" class="btn bg-deep-orange waves-effect" onclick="deleteItem({{ $tag->id }})">
-                                                    <i class="material-icons">delete</i>
+                                                <button type="button" class="btn btn-xs bg-deep-orange waves-effect" title="Delete" onclick="deleteItem({{ $tag->id }})">
+                                                    <i class="material-icons action-icon">delete</i>
                                                 </button>
-                                                <form id="delete-form-{{ $tag->id }}" action="{{ route('admin.tag.destroy', $tag->id) }}" method="POST" style="display: none">
+                                                <form id="delete-form-{{ $tag->id }}" class="form-hide" action="{{ route('admin.tag.destroy', $tag->id) }}" method="POST">
                                                     @csrf
                                                     @method('DELETE')
                                                 </form>

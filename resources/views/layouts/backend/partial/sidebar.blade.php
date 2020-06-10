@@ -38,7 +38,7 @@
                     </a>
                 </li>
                 <li class="{{ Request::is('admin/post*') ? 'active' : '' }}">
-                    <a href="{{ route('admin.post.index') }}">
+                    <a href="{{ route('admin.post.all') }}">
                         <i class="material-icons">library_books</i>
                         <span>Post</span>
                     </a>
@@ -50,6 +50,12 @@
                     <a href="{{ route('author.dashboard') }}">
                         <i class="material-icons">dashboard</i>
                         <span>Dashboard</span>
+                    </a>
+                </li>
+                <li class="{{ Request::is('author/post*') ? 'active' : '' }}">
+                    <a href="{{ route('author.post.index') }}">
+                        <i class="material-icons">library_books</i>
+                        <span>Post</span>
                     </a>
                 </li>
             @endif

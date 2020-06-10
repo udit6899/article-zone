@@ -48,6 +48,42 @@ function deleteItem(id) {
     })
 }
 
+// Approve post operation
+function approvePost() {
+
+    const swalWithBootstrapButtons = Swal.mixin({
+        customClass: {
+            confirmButton: 'btn btn-success',
+            cancelButton: 'btn btn-danger'
+        },
+        buttonsStyling: false
+    })
+
+    swalWithBootstrapButtons.fire({
+        title: 'Are you sure ?',
+        text: "You want to approve this post !",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Yes, approve it !',
+        cancelButtonText: 'No, cancel !',
+        reverseButtons: true
+    }).then((result) => {
+        if (result.value) {
+            event.preventDefault();
+            document.getElementById('approval-form').submit();
+        } else if (
+            /* Read more about handling dismissals below */
+            result.dismiss === Swal.DismissReason.cancel
+        ) {
+            swalWithBootstrapButtons.fire(
+                'Cancelled',
+                'Your post remain pending :)',
+                'error'
+            )
+        }
+    })
+}
+
 // Preview uploaded image
 function previewImage(event){
     $("#preview").attr("src", URL.createObjectURL(event.target.files[0]));
