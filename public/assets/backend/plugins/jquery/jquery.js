@@ -1277,7 +1277,7 @@ setDocument = Sizzle.setDocument = function( node ) {
 				rbuggyQSA.push( ":enabled", ":disabled" );
 			}
 
-			// Opera 10-11 does not throw on posts-comma invalid pseudos
+			// Opera 10-11 does not throw on post-comma invalid pseudos
 			div.querySelectorAll("*,:x");
 			rbuggyQSA.push(",.*:");
 		});
@@ -4520,7 +4520,7 @@ function createSafeFragment( document ) {
 } )();
 
 
-// We have to close these tag to support XHTML (#13200)
+// We have to close these tags to support XHTML (#13200)
 var wrapMap = {
 	option: [ 1, "<select multiple='multiple'>", "</select>" ],
 	legend: [ 1, "<fieldset>", "</fieldset>" ],
@@ -4533,7 +4533,7 @@ var wrapMap = {
 	col: [ 2, "<table><tbody></tbody><colgroup>", "</colgroup></table>" ],
 	td: [ 3, "<table><tbody><tr>", "</tr></tbody></table>" ],
 
-	// IE6-8 can't serialize link, script, style, or any html5 (NoScope) tag,
+	// IE6-8 can't serialize link, script, style, or any html5 (NoScope) tags,
 	// unless wrapped in a div with non-breaking characters in front of it.
 	_default: support.htmlSerialize ? [ 0, "", "" ] : [ 1, "X<div>", "</div>" ]
 };
@@ -4834,7 +4834,7 @@ function on( elem, types, selector, data, fn, one ) {
 }
 
 /*
- * FileHelper functions for managing events -- not part of the public interface.
+ * Helper functions for managing events -- not part of the public interface.
  * Props to Dean Edwards' addEvent library for many of the ideas.
  */
 jQuery.event = {

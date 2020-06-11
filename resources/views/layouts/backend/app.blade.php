@@ -38,6 +38,10 @@
 
         <!-- Css for toastr -->
         <link rel="stylesheet" href="https://cdn.bootcss.com/toastr.js/latest/css/toastr.min.css">
+
+        <!-- JQuery DataTable Css -->
+        <link href="{{ asset('assets/backend/plugins/jquery-datatable/skin/bootstrap/css/dataTables.bootstrap.css') }}" rel="stylesheet">
+
         @stack('css')
 
     </head>
@@ -102,8 +106,21 @@
         <!-- Waves Effect Plugin Js -->
         <script src="{{ asset('assets/backend/plugins/node-waves/waves.js') }}"></script>
 
-        <!-- Sweete alert -->
-        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+        @stack('js')
+
+        <!-- Jquery DataTable Plugin Js -->
+        <script src="{{ asset('assets/backend/plugins/jquery-datatable/jquery.dataTables.js') }}"></script>
+        <script src="{{ asset('assets/backend/plugins/jquery-datatable/skin/bootstrap/js/dataTables.bootstrap.js') }}"></script>
+        <script src="{{ asset('assets/backend/plugins/jquery-datatable/extensions/export/dataTables.buttons.min.js') }}"></script>
+        <script src="{{ asset('assets/backend/plugins/jquery-datatable/extensions/export/buttons.flash.min.js') }}"></script>
+        <script src="{{ asset('assets/backend/plugins/jquery-datatable/extensions/export/jszip.min.js') }}"></script>
+        <script src="{{ asset('assets/backend/plugins/jquery-datatable/extensions/export/pdfmake.min.js') }}"></script>
+        <script src="{{ asset('assets/backend/plugins/jquery-datatable/extensions/export/vfs_fonts.js') }}"></script>
+        <script src="{{ asset('assets/backend/plugins/jquery-datatable/extensions/export/buttons.html5.min.js') }}"></script>
+        <script src="{{ asset('assets/backend/plugins/jquery-datatable/extensions/export/buttons.print.min.js') }}"></script>
+
+        <!-- Custom Js -->
+        <script src="{{ asset('assets/backend/js/pages/tables/jquery-datatable.js') }}"></script>
 
         <!-- Custom Js -->
         <script src="{{ asset('assets/backend/js/admin.js') }}"></script>
@@ -113,6 +130,9 @@
 
         <!-- FileHelper Js -->
         <script src="{{ asset('assets/backend/js/helpers.js') }}"></script>
+
+        <!-- Sweete alert -->
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 
         <!-- Toastr Js -->
         <script src="https://cdn.bootcss.com/toastr.js/latest/js/toastr.min.js"></script>
@@ -127,6 +147,6 @@
             @endif
         </script>
 
-        @stack('js')
+
     </body>
 </html>

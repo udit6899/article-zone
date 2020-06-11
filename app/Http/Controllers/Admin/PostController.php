@@ -133,6 +133,7 @@ class PostController extends Controller
         return view('admin.post.show', compact('prev', 'post', 'next'));
     }
 
+
     /**
      * Show the form for editing the specified resource.
      *

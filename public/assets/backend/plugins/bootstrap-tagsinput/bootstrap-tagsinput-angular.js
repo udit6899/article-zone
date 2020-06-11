@@ -68,15 +68,15 @@ angular.module('bootstrap-tagsinput', [])
 
           prev = scope.model.slice();
 
-          // Remove tag no longer in binded model
+          // Remove tags no longer in binded model
           for (i = 0; i < removed.length; i++) {
             select.tagsinput('remove', removed[i]);
           }
 
-          // Refresh remaining tag
+          // Refresh remaining tags
           select.tagsinput('refresh');
 
-          // Add new items in model as tag
+          // Add new items in model as tags
           for (i = 0; i < added.length; i++) {
             select.tagsinput('add', added[i]);
           }

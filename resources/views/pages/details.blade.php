@@ -1,8 +1,7 @@
-
 <!--========================== extend-master-blade ==========================-->
 @extends('layouts.frontend.app')
 
-@section('title', $post['title'])
+@section('title', $post->title)
 
 
 <!--========================== include content ==========================-->
@@ -15,17 +14,17 @@
                     <div class="category-border-content">
                         <div class="category-detail category">
                             <div class="category-img">
-                                <img src="{{ asset('assets/frontend/images/category-img-2.jpg') }}" alt="">
+                                <img src="{{ Storage::disk('public')->url('posts/slider/' . $post->image) }}"
+                                     alt="{{ $post->title }}">
                                 <div class="category-overlay">
                                 </div>
                             </div>
                             <div class="category-text read-more clearfix">
-                                <a href="" class="art">Art / lifestyle</a>
-                                <h4><a href="{{ route('article.singleArticle', [ 'slug' => $article['slug'] ]) }}">Family comes first</a></h4>
-                                <span class="art">12 jan, 2016</span>
-                                <p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.</p>
-                                <div class="quote"><p><i class="fa fa-quote-left"></i>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem<i class="fa fa-quote-right"></i></p></div>
-                                <p>The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.</p>
+                                <a href="" class="art"><strong>{{ $post->user->name }}</strong></a>
+                                <h4><a href="{{ route('post.details', $post->slug) }}">{{ $post->title }}</a></h4>
+                                <span class="art">{{ $post->created_at->toFormattedDateString() }}</span>
+                                <div class="quote"><p><i class="fa fa-quote-left"></i>{{ $post->quote }}<i class="fa fa-quote-right"></i></p></div>
+                                <p>{!! $post->body !!}</p>
                                 <div class="read-more-more clearfix">
                                     <div class="share-comment-section floatright">
                                         <div class="share single-page">
@@ -38,40 +37,30 @@
                                     </div>
                                     <div class="tag floatleft">
                                         <span>Tags</span>
-                                        <a href="">lifestyle</a>
-                                        <a href="">art</a>
-                                        <a href="">video</a>
+                                        @foreach($post->tags as $tag)
+                                            <a href="">{{ $tag->name }}</a>
+                                        @endforeach
                                     </div>
                                 </div>
                                 <div class="recent-post-content clearfix">
                                     <h4>You May Also Like</h4>
-                                    <div class="recent-post-single single-page">
-                                        <div class="recent-post-img single-page">
-                                            <a href="{{ route('article.singleArticle', [ 'slug' => $article['slug'] ]) }}"><img src="{{ asset('assets/frontend/images/recent-1.jpg') }}" alt=""></a>
+                                    @foreach($recentPosts as $recentPost)
+                                        <div class="recent-post-single single-page">
+                                            <div class="recent-post-img single-page">
+                                                <a href="{{ route('post.details', $recentPost->slug) }}">
+                                                    <img src="{{ Storage::disk('public')
+                                                        ->url('posts/' . $recentPost->image) }}"  height="54px"
+                                                         alt="{{ $recentPost->title }}" width="54px">
+                                                </a>
+                                            </div>
+                                            <div class="recent-post-text single-page">
+                                                <span>{{ $recentPost->created_at->toFormattedDateString() }}</span>
+                                                <a href="{{ route('post.details', $recentPost->slug) }}">
+                                                    <p>{{ Str::limit($recentPost->title, 15) }}</p>
+                                                </a>
+                                            </div>
                                         </div>
-                                        <div class="recent-post-text single-page">
-                                            <span>01 jan, 2016</span>
-                                            <a href="{{ route('article.singleArticle', [ 'slug' => $article['slug'] ]) }}"><p>celebration of new year</p></a>
-                                        </div>
-                                    </div>
-                                    <div class="recent-post-single single-page">
-                                        <div class="recent-post-img single-page">
-                                            <a href="{{ route('article.singleArticle', [ 'slug' => $article['slug'] ]) }}"><img src="{{ asset('assets/frontend/images/recent-2.jpg') }}" alt=""></a>
-                                        </div>
-                                        <div class="recent-post-text single-page">
-                                            <span>01 jan, 2016</span>
-                                            <a href="{{ route('article.singleArticle', [ 'slug' => $article['slug'] ]) }}"><p>color in nature</p></a>
-                                        </div>
-                                    </div>
-                                    <div class="recent-post-single single-page">
-                                        <div class="recent-post-img single-page">
-                                            <a href="{{ route('article.singleArticle', [ 'slug' => $article['slug'] ]) }}"><img src="{{ asset('assets/frontend/images/recent-3.jpg') }}" alt=""></a>
-                                        </div>
-                                        <div class="recent-post-text single-page">
-                                            <span>01 jan, 2016</span>
-                                            <a href="{{ route('article.singleArticle', [ 'slug' => $article['slug'] ]) }}"><p>yummy burgers</p></a>
-                                        </div>
-                                    </div>
+                                    @endforeach
                                 </div>
                                 <div class="user-comments">
                                     <p><i class="fa fa-comments-o"></i><span>comments</span></p>

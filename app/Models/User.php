@@ -51,6 +51,7 @@ class User extends Authenticatable
      * Scope a query to only include admins.
      *
      * @param \Illuminate\Database\Eloquent\Builder $query
+     * @param string $value
      * @return \Illuminate\Database\Eloquent\Builder
      */
     public function scopeAdmin($query, $value) {

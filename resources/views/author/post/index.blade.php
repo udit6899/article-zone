@@ -3,8 +3,7 @@
 @section('title', 'Article Post')
 
 @push('css')
-    <!-- JQuery DataTable Css -->
-    <link href="{{ asset('assets/backend/plugins/jquery-datatable/skin/bootstrap/css/dataTables.bootstrap.css') }}" rel="stylesheet">
+
 @endpush
 
 @section('content')
@@ -46,10 +45,7 @@
                                     @foreach($posts as $key=>$post)
                                         <tr class="text-color-black">
                                             <td>{{ $key + 1 }}</td>
-                                            <td>
-                                                {{ Str::limit($post->title, 10, '...   ') }}
-                                                <a class="badge bg-orange" title="{{ $post->title }}">read more</a>
-                                            </td>
+                                            <td>{{ Str::limit($post->title, 10, '...   ') }}</td>
                                             <td>{{ $post->user->name }}</td>
                                             <td>{{ $post->view_count }}</td>
                                             <td>
@@ -73,14 +69,14 @@
                                             <td>{{ $post->created_at }}</td>
                                             <td>{{ $post->updated_at }}</td>
                                             <td class="text-center">
-                                                <a class="btn bg-blue-grey waves-effect" title="Show" href="{{ route('author.post.show', $post->id) }}">
-                                                    <i class="material-icons">visibility</i>
+                                                <a class="btn btn-xs bg-blue-grey waves-effect" title="Show" href="{{ route('author.post.show', $post->id) }}">
+                                                    <i class="material-icons action-icon">visibility</i>
                                                 </a>
-                                                <a class="btn btn-info waves-effect" title="Edit" href="{{ route('author.post.edit', $post->id) }}">
-                                                    <i class="material-icons">edit</i>
+                                                <a class="btn btn-xs btn-info waves-effect" title="Edit" href="{{ route('author.post.edit', $post->id) }}">
+                                                    <i class="material-icons action-icon">edit</i>
                                                 </a>
-                                                <button type="button" class="btn bg-deep-orange waves-effect" title="Delete" onclick="deleteItem({{ $post->id }})">
-                                                    <i class="material-icons">delete</i>
+                                                <button type="button" class="btn btn-xs bg-deep-orange waves-effect" title="Delete" onclick="deleteItem({{ $post->id }})">
+                                                    <i class="material-icons action-icon">delete</i>
                                                 </button>
                                                 <form id="delete-form-{{ $post->id }}" class="form-hide" action="{{ route('author.post.destroy', $post->id) }}" method="POST">
                                                     @csrf
@@ -101,17 +97,5 @@
 @endsection
 
 @push('js')
-    <!-- Jquery DataTable Plugin Js -->
-    <script src="{{ asset('assets/backend/plugins/jquery-datatable/jquery.dataTables.js') }}"></script>
-    <script src="{{ asset('assets/backend/plugins/jquery-datatable/skin/bootstrap/js/dataTables.bootstrap.js') }}"></script>
-    <script src="{{ asset('assets/backend/plugins/jquery-datatable/extensions/export/dataTables.buttons.min.js') }}"></script>
-    <script src="{{ asset('assets/backend/plugins/jquery-datatable/extensions/export/buttons.flash.min.js') }}"></script>
-    <script src="{{ asset('assets/backend/plugins/jquery-datatable/extensions/export/jszip.min.js') }}"></script>
-    <script src="{{ asset('assets/backend/plugins/jquery-datatable/extensions/export/pdfmake.min.js') }}"></script>
-    <script src="{{ asset('assets/backend/plugins/jquery-datatable/extensions/export/vfs_fonts.js') }}"></script>
-    <script src="{{ asset('assets/backend/plugins/jquery-datatable/extensions/export/buttons.html5.min.js') }}"></script>
-    <script src="{{ asset('assets/backend/plugins/jquery-datatable/extensions/export/buttons.print.min.js') }}"></script>
 
-    <!-- Custom Js -->
-    <script src="{{ asset('assets/backend/js/pages/tables/jquery-datatable.js') }}"></script>
 @endpush

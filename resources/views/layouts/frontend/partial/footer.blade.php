@@ -31,58 +31,34 @@
             <div class="col-md-3 col-md-offset-1 col-sm-4 col-sm-offset-0">
                 <div class="recent-post-content">
                     <h4 class="footer-title">recent post</h4>
-                    <div class="recent-post-single">
-                        <div class="recent-post-img">
-                            <a href="{{ route('article.singleArticle', [ 'slug' => $article['slug'] ]) }}">
-                                <img src="{{ asset('assets/frontend/images/recent-1.jpg') }}" alt="">
-                            </a>
+                    @foreach($recentPosts as $recentPost)
+                        <div class="recent-post-single">
+                            <div class="recent-post-img">
+                                <a href="{{ route('post.details', $recentPost->slug) }}">
+                                    <img src="{{ Storage::disk('public')->url('posts/' . $recentPost->image) }}"
+                                         alt="{{ $recentPost->title }}" height="54px" width="54px">
+                                </a>
+                            </div>
+                            <div class="recent-post-text">
+                                <span>{{ $recentPost->created_at->toFormattedDateString() }}</span>
+                                <a href="{{ route('post.details', $recentPost->slug) }}">
+                                    <p>{{ Str::limit($recentPost->title, 20, '') }}</p>
+                                </a>
+                            </div>
                         </div>
-                        <div class="recent-post-text">
-                            <span>01 jan, 2016</span>
-                            <a href="{{ route('article.singleArticle', [ 'slug' => $article['slug'] ]) }}">
-                                <p>celebration of new year</p>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="recent-post-single">
-                        <div class="recent-post-img">
-                            <a href="{{ route('article.singleArticle', [ 'slug' => $article['slug'] ]) }}">
-                                <img src="{{ asset('assets/frontend/images/recent-2.jpg') }}" alt="">
-                            </a>
-                        </div>
-                        <div class="recent-post-text">
-                            <span>01 jan, 2016</span>
-                            <a href="{{ route('article.singleArticle', [ 'slug' => $article['slug'] ]) }}">
-                                <p>color in nature</p>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="recent-post-single">
-                        <div class="recent-post-img">
-                            <a href="{{ route('article.singleArticle', [ 'slug' => $article['slug'] ]) }}">
-                                <img src="{{ asset('assets/frontend/images/recent-3.jpg') }}" alt="">
-                            </a>
-                        </div>
-                        <div class="recent-post-text">
-                            <span>01 jan, 2016</span>
-                            <a href="{{ route('article.singleArticle', [ 'slug' => $article['slug'] ]) }}">
-                                <p>yummy burgers</p>
-                            </a>
-                        </div>
-                    </div>
+                    @endforeach
                 </div>
             </div>
             <div class="col-md-2 col-sm-2">
                 <div class="footer-category">
                     <h4 class="footer-title">category</h4>
                     <ul>
-                        <li><a href="">Art/lifestyle</a></li>
-                        <li><a href="">Music</a></li>
-                        <li><a href="">Travel/journey</a></li>
-                        <li><a href="">Food</a></li>
-                        <li><a href="">Photography</a></li>
-                        <li><a href="">video</a></li>
-                        <li><a href="">Movie</a></li>
+                        @foreach($categories as $category)
+                            @if($loop->index < 7 && substr_count($category->name, ' ') < 1)
+                                <li><a href="">{{ $category->name }}</a></li>
+                            @endif
+                        @endforeach
+                        <li><a href="{{ route('post.category') }}">More...</a></li>
                     </ul>
                 </div>
             </div>

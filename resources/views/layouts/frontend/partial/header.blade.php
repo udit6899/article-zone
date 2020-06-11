@@ -19,9 +19,9 @@
                             <a href=""><i class="fa fa-google-plus"></i></a>
                             <a href=""><i class="fa fa-rss"></i></a>
                         @else
-                            <a><img src="{{ asset('assets/backend/images/users/default.jpg') }}">
+                            <a><img src="{{ Storage::disk('public')->url('users/'.Auth::user()->avatar_path) }}">
                             </a>
-                            <label id="avatar-text"> Hello {{ explode(' ', Auth::user()->name )[0] }}</label>
+                            <label id="avatar-text">{{ Auth::user()->name }}</label>
                         @endguest
 
                     </div>
@@ -48,14 +48,14 @@
                     </div>
                     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                         <ul class="nav navbar-nav">
-                            <li class="{{ Request::is('home') ? 'active' : '' }}">
+                            <li>
                                 <a href="{{ route('home') }}">Home</a>
                             </li>
                             <li class="{{ Request::is('about') ? 'active' : '' }}">
                                 <a href="{{ route('about') }}">About me</a>
                             </li>
                             <li class="{{ Request::is('article/category') ? 'active' : '' }}">
-                                <a href="{{ route('article.category') }}">Categories</a>
+                                <a href="{{ route('post.category') }}">Categories</a>
                             </li>
                             <li class="{{ Request::is('contact') ? 'active' : '' }}">
                                 <a href="{{ route('contact') }}">Contact</a>
@@ -75,7 +75,7 @@
                                                 @csrf
                                             </form>
                                         </li>
-                                        <li><a href="{{ route('user.account') }}">My Account</a></li>
+                                        <li><a href="{{ route('admin.dashboard') }}">My Dashboard</a></li>
                                     </ul>
                                 </li>
                             @endguest

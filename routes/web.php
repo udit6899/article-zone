@@ -26,22 +26,19 @@ Route::get('/about', 'HomeController@about')->name('about');
 // GET: routes for contact page
 Route::get('/contact', 'HomeController@contact')->name('contact');
 
+// Routes group for posts
+Route::group(['prefix' => 'post', 'as' => 'post.'], function () {
+
+    // GET: route for post details
+    Route::get('details/{slug}', 'HomeController@details'  )->name('details');
+
+    // GET: route for post category page
+    Route::get('category', 'HomeController@categories'  )->name('category');
+});
+
 // POST: route to store subscriber
 Route::post('subscriber', 'Admin\SubscriberController@store')->name('subscriber.store');
 
-// Routes group for articles
-Route::group(['prefix' => 'article', 'as' => 'article.'], function () {
-
-    // GET: routes for category page
-    Route::get('/category', function () {
-        return view('articles.category');
-    })->name('category');
-
-    // GET: routes for single-article page
-    Route::get('/{slug}', function () {
-            return view('articles.single-article', ['post' => ['title' => 'Single Post']]);
-    })->name('singleArticle');
-});
 
 // Routes group for users
 Route::group(['prefix' => 'user', 'as' => 'user.'], function () {

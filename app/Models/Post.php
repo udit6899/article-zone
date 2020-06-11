@@ -40,4 +40,25 @@ class Post extends Model
         return $this->belongsToMany('App\Models\Tag')->withTimestamps();
     }
 
+    /**
+     * Scope a query to get published posts.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopePublished($query) {
+
+        return $query->where(['is_approved' => true, 'is_published' => true]);
+    }
+
+    /**
+     * Scope a query to get popular posts.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopePopular($query) {
+
+        return $query->published()->orderByDesc('view_count');
+    }
 }

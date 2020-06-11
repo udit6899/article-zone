@@ -10,15 +10,62 @@
                             </div>
                             <div class="category-list">
                                 <ul class="left-portion">
-                                    <li><a href="">Art/Lifestyle (18)</a></li>
-                                    <li><a href="">Music (25)</a></li>
-                                    <li><a href="">Travel/journey (21)</a></li>
-                                    <li><a href="">Food (36)</a></li>
+                                    @foreach($categories as $category)
+                                        @if($loop->odd && $loop->index < 10 && substr_count($category->name, ' ') < 1)
+                                            <li><a href="{{ route('post.category') }}">
+                                                    {{ $category->name. ' (' . $category->posts->count() . ')'}}
+                                                </a>
+                                            </li>
+                                        @endif
+                                    @endforeach
                                 </ul>
                                 <ul class="right-portion">
-                                    <li><a href="">Photography (19)</a></li>
-                                    <li><a href="">Video (12)</a></li>
-                                    <li><a href="">Movie (19)</a></li>
+                                    @foreach($categories as $category)
+                                        @if($loop->even && $loop->index < 7 && substr_count($category->name, ' ') < 1)
+                                            <li><a href="{{ route('post.category') }}">
+                                                    {{ $category->name. ' (' . $category->posts->count() . ')'}}
+                                                </a>
+                                            </li>
+                                        @endif
+                                    @endforeach
+                                        <li><a href="{{ route('post.category') }}">More...</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="sidebar-widget">
+        <div class="row">
+            <div class="col-md-12 col-sm-12">
+                <div class="widget-list">
+                    <div class="category-widget-single">
+                        <div class="category-widget-single-detail">
+                            <div class="category-title">
+                                <h4>Tags</h4>
+                            </div>
+                            <div class="category-list">
+                                <ul class="left-portion">
+                                    @foreach($tags as $tag)
+                                        @if($loop->odd)
+                                            <li><a href="{{ route('post.category') }}">
+                                                    {{ $tag->name. ' (' . $tag->posts->count() . ')'}}
+                                                </a>
+                                            </li>
+                                        @endif
+                                    @endforeach
+                                </ul>
+                                <ul class="right-portion">
+                                    @foreach($tags as $tag)
+                                        @if($loop->even)
+                                            <li><a href="{{ route('post.category') }}">
+                                                    {{ $tag->name. ' (' . $tag->posts->count() . ')'}}
+                                                </a>
+                                            </li>
+                                        @endif
+                                    @endforeach
                                 </ul>
                             </div>
                         </div>
@@ -33,7 +80,9 @@
                 <div class="widget-ad">
                     <div class="category-widget-single">
                         <div class="category-widget-single-ad">
-                            <a href=""><img src="{{ asset('assets/frontend/images/category-widget-ad.png') }}" alt=""></a>
+                            <a href="">
+                                <img src="{{ asset('assets/frontend/images/category-widget-ad.png') }}" alt="">
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -85,39 +134,20 @@
                         <div class="popular-post-title">
                             <h4>Popular posts</h4>
                         </div>
-                        <div class="popular-post-single top">
-                            <div class="popular-post-single-img">
-                                <a href="{{ route('article.singleArticle', [ 'slug' => $article['slug'] ]) }}">
-                                    <img src="{{ asset('assets/frontend/images/popular-1.jpg') }}" alt="">
-                                </a>
+                        @foreach($popularPosts as $popularPost)
+                            <div class="popular-post-single @if($loop->first) top @elseif($loop->last) bottom @endif">
+                                <div class="popular-post-single-img">
+                                    <a href="{{ route('post.details', $popularPost->slug) }}">
+                                        <img src="{{ Storage::disk('public')->url('posts/' . $popularPost->image) }}"
+                                             alt="{{ $popularPost->title }}" width="89px" height="100px">
+                                    </a>
+                                </div>
+                                <div class="popular-post-single-text">
+                                    <span>{{ $popularPost->created_at->toFormattedDateString() }}</span>
+                                    <p>{{ Str::limit($popularPost->title, 18, '') }}</p>
+                                </div>
                             </div>
-                            <div class="popular-post-single-text">
-                                <span>12 Jan, 2016</span>
-                                <p>Yummy chocolate Muffin</p>
-                            </div>
-                        </div>
-                        <div class="popular-post-single">
-                            <div class="popular-post-single-img">
-                                <a href="{{ route('article.singleArticle', [ 'slug' => $article['slug'] ]) }}">
-                                    <img src="{{ asset('assets/frontend/images/popular-2.jpg') }}" alt="">
-                                </a>
-                            </div>
-                            <div class="popular-post-single-text">
-                                <span>12 Jan, 2016</span>
-                                <p>Music concert</p>
-                            </div>
-                        </div>
-                        <div class="popular-post-single bottom">
-                            <div class="popular-post-single-img">
-                                <a href="{{ route('article.singleArticle', [ 'slug' => $article['slug'] ]) }}">
-                                    <img src="{{ asset('assets/frontend/images/popular-3.jpg') }}" alt="">
-                                </a>
-                            </div>
-                            <div class="popular-post-single-text">
-                                <span>12 Jan, 2016</span>
-                                <p>new year celebration</p>
-                            </div>
-                        </div>
+                        @endforeach
                     </div>
                 </div>
             </div>

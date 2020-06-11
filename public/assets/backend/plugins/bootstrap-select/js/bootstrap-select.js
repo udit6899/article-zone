@@ -405,7 +405,7 @@
           that.$button
             .addClass('bs-invalid')
             .focus();
-
+          
           that.$element.on({
             'focus.bs.select': function () {
               that.$button.focus();
@@ -422,7 +422,7 @@
               that.$element.off('rendered.bs.select');
             }
           });
-
+          
         });
       }
 
@@ -514,7 +514,7 @@
           titleOption = document.createElement('option'),
           liIndex = -1; // increment liIndex whenever a new <li> element is created to ensure liObj is correct
 
-      // FileHelper functions
+      // Helper functions
       /**
        * @param content
        * @param [index]
@@ -721,7 +721,7 @@
         title = typeof this.options.title !== 'undefined' ? this.options.title : this.options.noneSelectedText;
       }
 
-      //strip all html-tag and trim the result
+      //strip all html-tags and trim the result
       this.$button.attr('title', $.trim(title.replace(/<[^>]*>?/g, '')));
       this.$button.children('.filter-option').html(title);
 
@@ -1059,12 +1059,12 @@
     },
 
     tabIndex: function () {
-      if (this.$element.data('tabindex') !== this.$element.attr('tabindex') &&
+      if (this.$element.data('tabindex') !== this.$element.attr('tabindex') && 
         (this.$element.attr('tabindex') !== -98 && this.$element.attr('tabindex') !== '-98')) {
         this.$element.data('tabindex', this.$element.attr('tabindex'));
         this.$button.attr('tabindex', this.$element.data('tabindex'));
       }
-
+      
       this.$element.attr('tabindex', -98);
     },
 
@@ -1390,7 +1390,7 @@
 
     toggle: function (e) {
       e = e || window.event;
-
+      
       if (e) e.stopPropagation();
 
       this.$button.trigger('click');

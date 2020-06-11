@@ -83,7 +83,7 @@ window.console && console.log('Use tinymce.js instead of tinymce.jquery.js.');
 
 			target[fragments[fragments.length - 1]] = modules[id];
 		}
-
+		
 		// Expose private modules for unit tests
 		if (exports.AMDLC_TESTS) {
 			privateModules = exports.privateModules || {};
@@ -2182,7 +2182,7 @@ setDocument = Sizzle.setDocument = function( node ) {
 				rbuggyQSA.push( ":enabled", ":disabled" );
 			}
 
-			// Opera 10-11 does not throw on posts-comma invalid pseudos
+			// Opera 10-11 does not throw on post-comma invalid pseudos
 			div.querySelectorAll("*,:x");
 			rbuggyQSA.push(",.*:");
 		});
@@ -12318,10 +12318,10 @@ define("tinymce/html/Schema", [
 		};
 
 		/**
-		 * Returns a map with self closing tag such as <li>.
+		 * Returns a map with self closing tags such as <li>.
 		 *
 		 * @method getSelfClosingElements
-		 * @return {Object} Name/value lookup map for self closing tag elements.
+		 * @return {Object} Name/value lookup map for self closing tags elements.
 		 */
 		self.getSelfClosingElements = function() {
 			return selfClosingElementsMap;
@@ -13801,7 +13801,7 @@ define("tinymce/html/DomParser", [
  */
 
 /**
- * This class is used to write HTML tag out it can be used with the Serializer or the SaxParser.
+ * This class is used to write HTML tags out it can be used with the Serializer or the SaxParser.
  *
  * @class tinymce.html.Writer
  * @example
@@ -22136,7 +22136,7 @@ define("tinymce/EnterKey", [
 				}
 			}
 
-			// Don't split PRE tag but insert a BR instead easier when writing code samples etc
+			// Don't split PRE tags but insert a BR instead easier when writing code samples etc
 			if (parentBlockName == 'PRE' && settings.br_in_pre !== false) {
 				if (!shiftKey) {
 					insertBr();
@@ -32886,7 +32886,7 @@ define("tinymce/util/Quirks", [
 		}
 
 		/**
-		 * Old IE versions can't properly render BR elements in PRE tag white in contentEditable mode. So this
+		 * Old IE versions can't properly render BR elements in PRE tags white in contentEditable mode. So this
 		 * logic adds a \n before the BR so that it will get rendered.
 		 */
 		function addNewLinesBeforeBrInPre() {
@@ -38549,7 +38549,7 @@ define("tinymce/Editor", [
 
 				// Check if forcedRootBlock is configured and that the block is a valid child of the body
 				if (forcedRootBlockName && self.schema.isValidChild(body.nodeName.toLowerCase(), forcedRootBlockName.toLowerCase())) {
-					// Padd with bogus BR elements on modern browsers and IE 7 and 8 since they don't render empty P tag properly
+					// Padd with bogus BR elements on modern browsers and IE 7 and 8 since they don't render empty P tags properly
 					content = padd;
 					content = self.dom.createHTML(forcedRootBlockName, self.settings.forced_root_block_attrs, content);
 				} else if (!ie && !content) {
@@ -38574,7 +38574,7 @@ define("tinymce/Editor", [
 				args.content = trim(content);
 				self.dom.setHTML(body, args.content);
 
-				// Do posts processing
+				// Do post processing
 				if (!args.no_events) {
 					self.fire('SetContent', args);
 				}
@@ -38636,7 +38636,7 @@ define("tinymce/Editor", [
 				args.content = content;
 			}
 
-			// Do posts processing
+			// Do post processing
 			if (!args.no_events) {
 				self.fire('GetContent', args);
 			}
