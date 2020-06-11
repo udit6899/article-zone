@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Helpers\Helper;
+use App\Helpers\FileHelper;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CategoryRequest;
 use App\Models\Category;
@@ -47,7 +47,7 @@ class CategoryController extends Controller
     public function store(CategoryRequest $request)
     {
         // Store uploaded images
-        $imageUrl = Helper::upload($request);
+        $imageUrl = FileHelper::upload($request);
 
         // Prepare category option to store
         $category = new Category([
@@ -59,7 +59,7 @@ class CategoryController extends Controller
         $category->save();
 
         // Create success message
-        Toastr::success('Category Successfully Saved !', 'success');
+        Toastr::success('Category Successfully Saved !', 'Success');
 
         // Return back
         return redirect()->back();
@@ -98,7 +98,7 @@ class CategoryController extends Controller
     public function update(CategoryRequest $request, Category $category)
     {
         // Store uploaded images
-        $imageUrl = Helper::upload($request);
+        $imageUrl = FileHelper::upload($request);
 
         // Prepare category option to store
         $category->update([
@@ -109,7 +109,7 @@ class CategoryController extends Controller
         ]);
 
         // Create success message
-        Toastr::success('Category Successfully Updated !', 'success');
+        Toastr::success('Category Successfully Updated !', 'Success');
 
         // Return back
         return redirect()->route('admin.category.index');
@@ -131,7 +131,7 @@ class CategoryController extends Controller
         $category->delete();
 
         // Make success response
-        Toastr::success('Category Successfully Deleted !', 'success');
+        Toastr::success('Category Successfully Deleted !', 'Success');
 
         // Return to index page
         return redirect()->back();

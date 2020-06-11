@@ -11521,7 +11521,7 @@ function on( elem, types, selector, data, fn, one ) {
 }
 
 /*
- * Helper functions for managing events -- not part of the public interface.
+ * FileHelper functions for managing events -- not part of the public interface.
  * Props to Dean Edwards' addEvent library for many of the ideas.
  */
 jQuery.event = {
@@ -34673,7 +34673,7 @@ function includeScroll(rect, element) {
 }
 
 /*
- * Helper to detect borders of a given element
+ * FileHelper to detect borders of a given element
  * @method
  * @memberof Popper.Utils
  * @param {CSSStyleDeclaration} styles
@@ -35298,7 +35298,7 @@ function update() {
 }
 
 /**
- * Helper used to know if the given modifier is enabled.
+ * FileHelper used to know if the given modifier is enabled.
  * @method
  * @memberof Popper.Utils
  * @returns {Boolean}
@@ -35707,7 +35707,7 @@ function computeStyle(data, options) {
 }
 
 /**
- * Helper used to know if the given modifier depends from another one.<br />
+ * FileHelper used to know if the given modifier depends from another one.<br />
  * It checks if the needed modifier is listed and enabled.
  * @method
  * @memberof Popper.Utils

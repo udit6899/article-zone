@@ -111,7 +111,7 @@
         <!-- Demo Js -->
         <script src="{{ asset('assets/backend/js/demo.js') }}"></script>
 
-        <!-- Helper Js -->
+        <!-- FileHelper Js -->
         <script src="{{ asset('assets/backend/js/helpers.js') }}"></script>
 
         <!-- Toastr Js -->

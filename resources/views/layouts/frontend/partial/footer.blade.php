@@ -21,8 +21,9 @@
             <div class="col-md-3 col-md-offset-1 col-sm-4 col-sm-offset-0">
                 <div class="subscription-input">
                     <h4 class="footer-title">subscription</h4>
-                    <form action="#">
-                        <input type="email" placeholder="Email">
+                    <form action="{{ route('subscriber.store') }}" method="POST">
+                        @csrf
+                        <input type="email" name="email" placeholder="Email" required>
                         <input type="submit" value="Subscribe">
                     </form>
                 </div>

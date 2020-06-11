@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Helpers\Helper;
+use App\Helpers\FileHelper;
+use App\Helpers\NotificationHelper;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\PostRequest;
 use App\Models\Category;
@@ -85,7 +86,7 @@ class PostController extends Controller
     public function store(PostRequest $request)
     {
         // Store uploaded images
-        $imageUrl = Helper::upload($request);
+        $imageUrl = FileHelper::upload($request);
 
         // Prepare post option to store
         $post = new Post([
@@ -104,8 +105,11 @@ class PostController extends Controller
         $post->categories()->attach($request->categories);
         $post->tags()->attach($request->tags);
 
+        // Send notification to the all subscribers
+        NotificationHelper::notify('subscriber', $post);
+
         // Create success message
-        Toastr::success('Your Post Successfully Saved !', 'success');
+        Toastr::success('Your Post Successfully Saved !', 'Success');
 
         // Return to index view
         return redirect()->route('admin.post.index');
@@ -158,7 +162,7 @@ class PostController extends Controller
     public function update(PostRequest $request, Post $post)
     {
         // Store uploaded images
-        $imageUrl = Helper::upload($request);
+        $imageUrl = FileHelper::upload($request);
 
         // Prepare post option to update
         $post->update([
@@ -175,7 +179,7 @@ class PostController extends Controller
         $post->tags()->sync($request->tags);
 
         // Create success message
-        Toastr::success('Post Successfully Updated !', 'success');
+        Toastr::success('Post Successfully Updated !', 'Success');
 
         // Return to index view
         return redirect()->route('admin.post.index');
@@ -196,8 +200,14 @@ class PostController extends Controller
             // If post is not approved, then approve the post
             $post->update(['is_approved' => true]);
 
+            // Send notification to the atuhor
+            NotificationHelper::notify('author', $post);
+
+            // Send notification to the all subscribers
+            NotificationHelper::notify('subscriber', $post);
+
             // Make success response
-            Toastr::success('Post Successfully Approved !', 'success');
+            Toastr::success('Post Successfully Approved !', 'Success');
         } else {
             // If post is already approved, then make info response
             Toastr::success('This post is already approved !', 'info');
@@ -227,7 +237,7 @@ class PostController extends Controller
         $post->delete();
 
         // Make success response
-        Toastr::success('Post Successfully Deleted !', 'success');
+        Toastr::success('Post Successfully Deleted !', 'Success');
 
         // Return to index page
         return redirect()->back();

@@ -56,7 +56,7 @@ class TagController extends Controller
         $tag->save();
 
         // Create success message
-        Toastr::success('Tag Successfully Saved !', 'success');
+        Toastr::success('Tag Successfully Saved !', 'Success');
 
         // Return back
         return redirect()->back();
@@ -106,7 +106,7 @@ class TagController extends Controller
         ]);
 
         // Make success response
-        Toastr::success('Tag Successfully Updated !', 'success');
+        Toastr::success('Tag Successfully Updated !', 'Success');
 
         // Redirect to index page
         return redirect()->route('admin.tag.index');
@@ -124,7 +124,7 @@ class TagController extends Controller
         $tag->delete();
 
         // Make success response
-        Toastr::success('Tag Successfully Deleted !', 'success');
+        Toastr::success('Tag Successfully Deleted !', 'Success');
 
         // Return to index page
         return redirect()->back();

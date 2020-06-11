@@ -514,7 +514,7 @@
           titleOption = document.createElement('option'),
           liIndex = -1; // increment liIndex whenever a new <li> element is created to ensure liObj is correct
 
-      // Helper functions
+      // FileHelper functions
       /**
        * @param content
        * @param [index]

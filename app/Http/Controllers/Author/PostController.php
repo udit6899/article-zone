@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers\Author;
 
-use App\Helpers\Helper;
+use App\Helpers\FileHelper;
+use App\Helpers\NotificationHelper;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\PostRequest;
 use App\Models\Category;
@@ -55,7 +56,7 @@ class PostController extends Controller
     public function store(PostRequest $request)
     {
         // Store uploaded images
-        $imageUrl = Helper::upload($request);
+        $imageUrl = FileHelper::upload($request);
 
         // Prepare post option to store
         $post = new Post([
@@ -74,8 +75,11 @@ class PostController extends Controller
         $post->categories()->attach($request->categories);
         $post->tags()->attach($request->tags);
 
+        // Send notification to admin
+        NotificationHelper::notify('admin', $post);
+
         // Create success message
-        Toastr::success('Your Post Successfully Saved !', 'success');
+        Toastr::success('Your Post Successfully Saved !', 'Success');
 
         // Return to index view
         return redirect()->route('author.post.index');
@@ -128,7 +132,7 @@ class PostController extends Controller
     public function update(PostRequest $request, Post $post)
     {
         // Store uploaded images
-        $imageUrl = Helper::upload($request);
+        $imageUrl = FileHelper::upload($request);
 
         // Prepare post option to update
         $post->update([
@@ -145,7 +149,7 @@ class PostController extends Controller
         $post->tags()->sync($request->tags);
 
         // Create success message
-        Toastr::success('Post Successfully Updated !', 'success');
+        Toastr::success('Post Successfully Updated !', 'Success');
 
         // Return to index view
         return redirect()->route('author.post.index');
@@ -171,7 +175,7 @@ class PostController extends Controller
         $post->delete();
 
         // Make success response
-        Toastr::success('Post Successfully Deleted !', 'success');
+        Toastr::success('Post Successfully Deleted !', 'Success');
 
         // Return to index page
         return redirect()->back();

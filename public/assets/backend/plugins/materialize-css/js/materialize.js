@@ -333,7 +333,7 @@ if ($) {
 
 
        /****************
-       Helper Functions
+       FileHelper Functions
        ****************/
 
       // Accordion Open
@@ -403,7 +403,7 @@ if ($) {
         return object.closest('li > .collapsible-header');
       }
 
-      /*****  End Helper Functions  *****/
+      /*****  End FileHelper Functions  *****/
 
 
 
@@ -516,7 +516,7 @@ if ($) {
       origin.after(activates);
 
       /*
-        Helper function to position and resize dropdown.
+        FileHelper function to position and resize dropdown.
         Used in hover and click handler.
       */
       function placeDropdown(eventType) {

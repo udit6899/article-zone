@@ -26,6 +26,9 @@ Route::get('/about', 'HomeController@about')->name('about');
 // GET: routes for contact page
 Route::get('/contact', 'HomeController@contact')->name('contact');
 
+// POST: route to store subscriber
+Route::post('subscriber', 'Admin\SubscriberController@store')->name('subscriber.store');
+
 // Routes group for articles
 Route::group(['prefix' => 'article', 'as' => 'article.'], function () {
 
@@ -88,4 +91,7 @@ Route::group([
 
     // Routes for Post operations
     Route::resource('post', 'PostController');
+
+    // Routes for Subscriber operations
+    Route::resource('subscriber', 'SubscriberController')->except('store');
 });

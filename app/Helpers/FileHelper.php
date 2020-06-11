@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Intervention\Image\Facades\Image;
 
-class Helper {
+class FileHelper {
 
     /**
      * Store uploaded image for slider and header position.
@@ -59,10 +59,10 @@ class Helper {
                 .'-'.uniqid().'.' .$image->getClientOriginalExtension();
 
             // Store uploaded image for header position :destination/
-            Helper::storeFile($request, $imageName);
+            FileHelper::storeFile($request, $imageName);
 
             // Store uploaded image for slider position :destination/slider
-            Helper::storeFile($request, $imageName, '/slider');
+            FileHelper::storeFile($request, $imageName, '/slider');
 
         } else {
             // If image is not exist and method is post then set it to default

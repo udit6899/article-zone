@@ -43,7 +43,18 @@ class User extends Authenticatable
      * @return HasMany posts
      */
     public function posts() {
+
         return $this->hasMany('App\Models\Post');
     }
 
+    /**
+     * Scope a query to only include admins.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeAdmin($query, $value) {
+
+        return $query->where('is_admin', $value);
+    }
 }
