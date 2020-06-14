@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
+use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -86,7 +87,7 @@ class RegisterController extends Controller
     // Modify the response after user registered successfully
     protected function registered(Request $request, $user)
     {
-        $request->session()->flash('status', "Hii $user->name !" );
+        Toastr::success('Wecome, '. $user->name .' ! You Are Successfully Registered.', 'success');
         return redirect('/');
     }
 }

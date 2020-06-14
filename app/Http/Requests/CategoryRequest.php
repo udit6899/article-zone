@@ -18,17 +18,6 @@ class CategoryRequest extends FormRequest
     }
 
     /**
-     * Do some operation before the validation.
-     *
-     */
-    protected function prepareForValidation()
-    {
-        // Add destination and oldData field to the request
-        $this->destination = 'categories';
-        $this->oldData = $this->route('category');
-    }
-
-    /**
      * Get the validation rules that apply to the request.
      *
      * @return array
@@ -45,7 +34,8 @@ class CategoryRequest extends FormRequest
         } else if ($this->isMethod('patch')) {
             // If request for update operation the return validation rules
             return [
-                'name' => ['required', 'string', 'max:255', Rule::unique('categories')->ignore($this->oldData)],
+                'name' => ['required', 'string', 'max:255',
+                          Rule::unique('categories')->ignore($this->route('category'))],
                 'image' => ['nullable', 'image', 'max:1024', 'mimes:jpeg,png,jpg'],
                 'description' => ['nullable', 'string', 'max:255'],
             ];

@@ -55,8 +55,11 @@ class PostController extends Controller
      */
     public function store(PostRequest $request)
     {
-        // Store uploaded images
-        $imageUrl = FileHelper::upload($request);
+        // Store uploaded image : Storage/posts
+        $imageUrl = FileHelper::upload(
+            $request->file('image'), [ 0 => 'posts'],
+            [0 => ['width' => 338, 'height' => 245]]
+        );
 
         // Prepare post option to store
         $post = new Post([
@@ -131,8 +134,11 @@ class PostController extends Controller
      */
     public function update(PostRequest $request, Post $post)
     {
-        // Store uploaded images
-        $imageUrl = FileHelper::upload($request);
+        // Store uploaded image : Storage/posts
+        $imageUrl = FileHelper::upload(
+            $request->file('image'), [ 0 => 'posts'],
+            [0 => ['width' => 338, 'height' => 245]], $post->image
+        );
 
         // Prepare post option to update
         $post->update([

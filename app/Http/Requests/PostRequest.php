@@ -18,18 +18,6 @@ class PostRequest extends FormRequest
     }
 
     /**
-     * Do some operation before the validation.
-     *
-     */
-    protected function prepareForValidation()
-    {
-        // Add destination and oldData field to the request
-        $this->destination = 'posts';
-        $this->oldData = $this->route('post');
-    }
-
-
-    /**
      * Get the validation rules that apply to the request.
      *
      * @return array
@@ -50,7 +38,7 @@ class PostRequest extends FormRequest
         } else if ($this->isMethod('patch')) {
             // If request for update operation the return validation rules
             return [
-                'title' => ['nullable', 'string', Rule::unique('posts')->ignore($this->oldData)],
+                'title' => ['nullable', 'string', Rule::unique('posts')->ignore($this->route('post'))],
                 'quote' => ['nullable', 'string', 'max:255'],
                 'body' => ['nullable', 'string'],
                 'categories' => ['required', 'array', 'min:1'],

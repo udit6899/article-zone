@@ -2,7 +2,7 @@
 namespace App\Helpers;
 
 use Carbon\Carbon;
-use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Intervention\Image\Facades\Image;
@@ -10,67 +10,52 @@ use Intervention\Image\Facades\Image;
 class FileHelper {
 
     /**
-     * Store uploaded image for slider and header position.
+     * Store uploaded images
      *
-     * @param \Illuminate\Foundation\Http\FormRequest $request
-     * @param  string  $imageName
-     * @param  string $tempDest
+     * @param array | UploadedFile | UploadedFile[] | null $image
+     * @param array $paths
+     * @param array[] $sizes
+     * @param string $oldImageName
+     * @return string
      */
-    private static function storeFile(FormRequest $request, $imageName, $tempDest = '') {
+    public static function upload($image, $paths, $sizes, $oldImageName = 'default.jpg') {
 
         $storage = Storage::disk('public');
 
-        // Check if destination dir is exists or not
-        if(!$storage->exists($request->destination.$tempDest)) {
-            // If dir not exists then create new one
-            $storage->makeDirectory($request->destination.$tempDest);
-        } else if (
-            $request->isMethod('patch') &&
-            $storage->exists($request->destination.$tempDest.'/'.$request->oldData->image)
-        ){
-            // Delete old image from file if request for update
-            $storage->delete($request->destination.$tempDest.'/'.$request->oldData->image);
-        }
-
-        // Resize the uploaded image
-        $tempImage = Image::make($request->file('image'))->resize(338, 245)->save();
-
-        // Store resized in destination dir
-        $storage->put($request->destination.$tempDest.'/'.$imageName, $tempImage);
-    }
-
-    /**
-     * Store uploaded images by users
-     *
-     * @param \Illuminate\Foundation\Http\FormRequest $request
-     * @return string
-     */
-    public static function upload(FormRequest $request) {
-
-        // Retrieve image from request
-        $image = $request->file('image');
-        $request->slug = Str::slug($request->name ? $request->name : $request->title);
-
-        // Check if the image is exist or not
+       // Check if the image is valid or not
         if (isset($image)) {
 
-            // Create image file name
-            $imageName = $request->slug.'-'.Carbon::now()->toDateString()
-                .'-'.uniqid().'.' .$image->getClientOriginalExtension();
+            // Create new image file name to store
+            $newImageName = Str::slug($image->getClientOriginalName()) . '-' . uniqid()
+                        . '-' . Carbon::now()->toDateString() . '.' .$image->getClientOriginalExtension();
 
-            // Store uploaded image for header position :destination/
-            FileHelper::storeFile($request, $imageName);
+            foreach ($paths as $key => $path) {
 
-            // Store uploaded image for slider position :destination/slider
-            FileHelper::storeFile($request, $imageName, '/slider');
+                // Check the destination dir is exist or not
+                if (!$storage->exists($path)) {
+                    // If dir is not exists, then create new one
+                    $storage->makeDirectory($path);
+                } elseif (
+                    $oldImageName !== 'default.jpg' &&
+                    $storage->exists($path . '/', $oldImageName)
+                ) {
+                    // Delete old image from file, if it's exists
+                    $storage->delete($path . '/' . $oldImageName);
+                }
+
+                // Resize the uploaded image
+                $resizedImage = Image::make($image)->resize($sizes[$key]['width'], $sizes[$key]['height'])->save();
+
+                // Store resized image in destination dir
+                $storage->put($path . '/' . $newImageName, $resizedImage);
+            }
 
         } else {
-            // If image is not exist and method is post then set it to default
-            // If image is not exist and method is put/patch the set it to old image
-            $imageName = $request->isMethod('post') ? 'default.jpg' : $request->oldData->image;
+            // If the image is invalid, store the old value
+            $newImageName = $oldImageName;
         }
 
-        // After successful upload, return imageName
-        return $imageName;
+        // After successful upload, return new imageName
+        return $newImageName;
     }
 }

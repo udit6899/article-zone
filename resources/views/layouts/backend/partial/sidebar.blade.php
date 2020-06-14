@@ -67,6 +67,14 @@
             @endif
 
             <li class="header">SYSTEM</li>
+
+            <li class="{{ Request::is('admin/settings') ? 'active' : '' }}">
+                <a href="{{ route('admin.settings.index') }}">
+                    <i class="material-icons">settings</i>
+                    <span>Settings</span>
+                </a>
+            </li>
+
             <li>
                 <a href="{{ route('logout') }}"  onclick="event.preventDefault();document.getElementById('logout-form').submit();">
                     <i class="material-icons">logout</i>

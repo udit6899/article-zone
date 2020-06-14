@@ -34,9 +34,6 @@ class RouteServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        // Share common response
-        View::share([ 'article' => [ 'slug' => 'single-article', 'title' => 'Single Article'] ]);
-
         parent::boot();
     }
 

@@ -77,6 +77,10 @@ Route::group([
     // Routes for Category operations
     Route::resource('category', 'CategoryController');
 
+    // Routes for Subscriber operations
+    Route::resource('subscriber', 'SubscriberController')->except('store');
+
+
     // GET: route for pending post
     Route::get('post/pending', 'PostController@pending')->name('post.pending');
 
@@ -89,6 +93,16 @@ Route::group([
     // Routes for Post operations
     Route::resource('post', 'PostController');
 
-    // Routes for Subscriber operations
-    Route::resource('subscriber', 'SubscriberController')->except('store');
+
+    // Route for settings page
+    Route::get('settings', 'SettingController@index')->name('settings.index');
+
+    // Route for update profile
+    Route::patch('settings/profile-update', 'SettingController@updateProfile')
+          ->name('settings.profile.update');
+
+    // Route for update profile
+    Route::patch('settings/password-update', 'SettingController@updatePassword')
+        ->name('settings.password.update');
+
 });

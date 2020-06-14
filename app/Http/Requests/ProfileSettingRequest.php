@@ -3,10 +3,10 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
-use Rees\Sanitizer\Sanitizer;
 
-class UpdateUserDetail extends FormRequest
+class ProfileSettingRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -18,12 +18,6 @@ class UpdateUserDetail extends FormRequest
         return true;
     }
 
-    // Sanitize input data before validation
-    protected function prepareForValidation()
-    {
-        // Sanitization
-    }
-
     /**
      * Get the validation rules that apply to the request.
      *
@@ -33,12 +27,9 @@ class UpdateUserDetail extends FormRequest
     {
         return [
             'name' => ['nullable', 'string', 'max:255'],
-            'mobile_no' => ['nullable', 'digits:10', 'unique:users'],
-            'gender' => ['nullable', 'string', Rule::in(['male', 'female', 'other'])],
-            'age' => ['nullable', 'digits_between:18,99'],
+            'mobile_no' => ['nullable', 'digits:10', Rule::unique('users')->ignore(Auth::user())],
             'about' => ['nullable', 'string', 'max:255'],
-            'address' => ['nullable', 'string'],
-            'privacy' => ['nullable', 'string', 'in:public' ]
+            'image' => ['nullable', 'image', 'max:1024', 'mimes:jpeg,png,jpg'],
         ];
     }
 }

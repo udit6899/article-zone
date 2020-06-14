@@ -46,8 +46,11 @@ class CategoryController extends Controller
      */
     public function store(CategoryRequest $request)
     {
-        // Store uploaded images
-        $imageUrl = FileHelper::upload($request);
+        // Store uploaded image for header and slider  : Storage/categories & Storage/categories/slider
+        $imageUrl = FileHelper::upload(
+            $request->file('image'), [0 => 'categories', 1 => 'categories/slider'],
+            [0 => ['width' => 338, 'height' => 245], 1 => ['width' => 1170, 'height' => 400]]
+        );
 
         // Prepare category option to store
         $category = new Category([
@@ -97,8 +100,11 @@ class CategoryController extends Controller
      */
     public function update(CategoryRequest $request, Category $category)
     {
-        // Store uploaded images
-        $imageUrl = FileHelper::upload($request);
+        // Store uploaded image for header and slider  : Storage/categories & Storage/categories/slider
+        $imageUrl = FileHelper::upload(
+            $request->file('image'), [ 0 => 'categories', 1 => 'categories/slider'],
+            [0 => ['width' => 338, 'height' => 245], 1 => ['width' => 1170, 'height' => 400]], $category->image
+        );
 
         // Prepare category option to store
         $category->update([
