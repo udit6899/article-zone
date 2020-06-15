@@ -40,11 +40,20 @@ class User extends Authenticatable
 
     /**
      * Get the posts of the user.
-     * @return HasMany posts
+     * @return HasMany
      */
     public function posts() {
 
         return $this->hasMany('App\Models\Post');
+    }
+
+    /**
+     * Get the comments of the user.
+     * @return HasMany
+     */
+    public function comments() {
+
+        return $this->hasMany('App\Models\Comment');
     }
 
     /**

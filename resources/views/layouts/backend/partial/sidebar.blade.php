@@ -18,7 +18,7 @@
         <ul class="list">
             <li class="header">MAIN ACTIVITIES</li>
 
-            @if(Request::is('admin*'))
+            @if(Auth::user()->is_admin)
                 <li class="{{ Request::is('admin/dashboard') ? 'active' : '' }}">
                     <a href="{{ route('admin.dashboard') }}">
                         <i class="material-icons">dashboard</i>
@@ -49,9 +49,15 @@
                         <span>Subscriber</span>
                     </a>
                 </li>
+                <li class="{{ Request::is('comment*') ? 'active' : '' }}">
+                    <a href="{{ route('comment.all') }}">
+                        <i class="material-icons">comment</i>
+                        <span>Comment</span>
+                    </a>
+                </li>
             @endif
 
-            @if(Request::is('author*'))
+            @if(!Auth::user()->is_admin)
                 <li class="{{ Request::is('author/dashboard') ? 'active' : '' }}">
                     <a href="{{ route('author.dashboard') }}">
                         <i class="material-icons">dashboard</i>
@@ -62,6 +68,12 @@
                     <a href="{{ route('author.post.index') }}">
                         <i class="material-icons">library_books</i>
                         <span>Post</span>
+                    </a>
+                </li>
+                <li class="{{ Request::is('comment*') ? 'active' : '' }}">
+                    <a href="{{ route('comment.index') }}">
+                        <i class="material-icons">comment</i>
+                        <span>Comment</span>
                     </a>
                 </li>
             @endif

@@ -36,18 +36,27 @@ Route::group(['prefix' => 'post', 'as' => 'post.'], function () {
     Route::get('category', 'HomeController@categories'  )->name('category');
 });
 
-// POST: route to store subscriber
-Route::post('subscriber', 'Admin\SubscriberController@store')->name('subscriber.store');
 
+// Routes group for posts
+Route::group(['namespace' => 'Common'], function () {
 
-// Routes group for users
-Route::group(['prefix' => 'user', 'as' => 'user.'], function () {
-    // GET: routes for account view
-    Route::get('account', 'UserController@account')->name('account');
-    // PATCH: routes for update user account
-    Route::put('account', 'UserController@updateUser')->name('account');
+    // GET: route for all comments
+    Route::get('comment/all', 'CommentController@all')->name('comment.all');
+
+    // GET: route for pending comments
+    Route::get('comment/pending', 'CommentController@pending')->name('comment.pending');
+
+    // PATCH: route for comment approval
+    Route::patch('comment/{comment}/approve', 'CommentController@approve')->name('comment.approve');
+
+    // Routes for the comment operations
+    Route::resource('comment', 'CommentController')->except(['edit', 'show']);
+
 });
 
+
+// POST: route to store subscriber
+Route::post('subscriber', 'Admin\SubscriberController@store')->name('subscriber.store');
 
 // Routes for authors
 Route::group([

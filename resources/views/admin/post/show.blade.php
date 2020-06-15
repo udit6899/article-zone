@@ -30,7 +30,7 @@
                 <div class="body">
                     <div class="text-center">
                         <img  alt="post_image" class="img-responsive" width="100%"
-                              src="{{ Storage::disk('public')->url('posts/slider/'.$post->image) }}">
+                              src="{{ Storage::disk('public')->url('posts/'.$post->image) }}">
                     </div>
                     <div class="post-text read-more clearfix">
                         <div class="quote">
@@ -90,11 +90,11 @@
                         <span><strong>Approved</strong></span>
                     </button>
                 @else
-                    <button type="button" class="btn bg-cyan" onclick="approvePost()">
+                    <button type="button" class="btn bg-cyan" onclick="approveItem({{ $post->id }})">
                         <i class="material-icons">donut_large</i>
                         <span><strong>Approve</strong></span>
                     </button>
-                    <form id="approval-form" class="form-hide" action="{{ route('admin.post.approve', $post->id) }}" method="POST">
+                    <form id="{{ 'approval-form-' . $post->id }}" class="form-hide" action="{{ route('admin.post.approve', $post->id) }}" method="POST">
                         @csrf
                         @method('PATCH')
                     </form>

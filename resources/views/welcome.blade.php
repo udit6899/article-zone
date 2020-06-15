@@ -116,7 +116,10 @@
                                         <div class="share-comment-section">
                                             <div class="comment">
                                                 <i class="fa fa-heart-o"><span>25</span></i>
-                                                <i class="fa fa-comment-o"><span>19</span></i>
+                                                <i class="fa fa-comment-o">
+                                                    <span>{{ $post->approved_comments->count() }}</span>
+                                                </i>
+                                                <i class="fa fa-eye"><span>{{ $post->view_count }}</span></i>
                                             </div>
                                             <div class="share">
                                                 <span>share:</span>

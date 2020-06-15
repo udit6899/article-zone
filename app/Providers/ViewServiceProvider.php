@@ -27,8 +27,8 @@ class ViewServiceProvider extends ServiceProvider
         // Allowing composer to bind data to views
         View::composer(
             [
-                'pages.details', 'pages.category', 'pages.contact',
-                'welcome', 'pages.about', 'auth.login', 'auth.register'
+                'common.details', 'common.category', 'common.contact',
+                'welcome', 'common.about', 'auth.login', 'auth.register'
             ],
             'App\Http\Composers\ViewComposer'
         );

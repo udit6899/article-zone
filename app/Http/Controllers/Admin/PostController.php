@@ -13,6 +13,7 @@ use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class PostController extends Controller
 {
@@ -85,14 +86,17 @@ class PostController extends Controller
      */
     public function store(PostRequest $request)
     {
-        // Store uploaded images
-        $imageUrl = FileHelper::upload($request);
+        // Store uploaded image : Storage/posts
+        $imageUrl = FileHelper::upload(
+            $request->file('image'), [ 0 => 'posts'],
+            [0 => ['width' => 338, 'height' => 245]]
+        );
 
         // Prepare post option to store
         $post = new Post([
             'user_id' => Auth::user()->id,
             'title' => $request->title,
-            'slug' => $request->slug,
+            'slug' => Str::slug($request->title),
             'quote' => $request->quote,
             'body' => $request->body,
             'image' => $imageUrl,
@@ -162,13 +166,19 @@ class PostController extends Controller
      */
     public function update(PostRequest $request, Post $post)
     {
-        // Store uploaded images
-        $imageUrl = FileHelper::upload($request);
+        $slug = Str::slug($request->title);
+
+        // Store uploaded image : Storage/posts
+        $imageUrl = FileHelper::upload(
+            $request->file('image'), [ 0 => 'posts'],
+            [0 => ['width' => 338, 'height' => 245]], $post->image
+        );
+
 
         // Prepare post option to update
         $post->update([
             'title' => $request->title ? $request->title : $post->title,
-            'slug' => $request->slug ? $request->slug : $post->slug,
+            'slug' => $slug ? $slug : $post->slug,
             'quote' => $request->quote ? $request->quote : $post->quote,
             'body' => $request->body ? $request->body : $post->body,
             'image' => $imageUrl,
@@ -211,7 +221,7 @@ class PostController extends Controller
             Toastr::success('Post Successfully Approved !', 'Success');
         } else {
             // If post is already approved, then make info response
-            Toastr::success('This post is already approved !', 'info');
+            Toastr::info('This post is already approved !', 'info');
         }
 
         // Return to back page

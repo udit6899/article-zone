@@ -89,10 +89,10 @@
                                             <a class="btn btn-xs bg-blue-grey waves-effect" title="Show" href="{{ route('admin.post.show', $post->id) }}">
                                                 <i class="material-icons action-icon">visibility</i>
                                             </a>
-                                            <button type="button" class="btn btn-xs bg-orange" title="Approve" onclick="approvePost()">
+                                            <button type="button" class="btn btn-xs bg-orange" title="Approve" onclick="approveItem({{ $post->id }})">
                                                 <i class="material-icons action-icon">done_outline</i>
                                             </button>
-                                            <form id="approval-form" class="form-hide" action="{{ route('admin.post.approve', $post->id) }}" method="POST">
+                                            <form id="{{ 'approval-form-' . $post->id }}" class="form-hide" action="{{ route('admin.post.approve', $post->id) }}" method="POST">
                                                 @csrf
                                                 @method('PATCH')
                                             </form>

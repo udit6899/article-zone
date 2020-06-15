@@ -28,7 +28,7 @@
                 <div class="body">
                     <div class="text-center">
                         <img  alt="post_image" class="img-responsive" width="100%"
-                              src="{{ Storage::disk('public')->url('posts/slider/'.$post->image) }}">
+                              src="{{ Storage::disk('public')->url('posts/'.$post->image) }}">
                     </div>
                     <div class="post-text read-more clearfix">
                         <div class="quote">

@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Post extends Model
 {
@@ -41,6 +42,15 @@ class Post extends Model
     }
 
     /**
+     * Get the comments of the post.
+     * @return HasMany
+     */
+    public function comments() {
+
+        return $this->hasMany('App\Models\Comment');
+    }
+
+    /**
      * Scope a query to get published posts.
      *
      * @param \Illuminate\Database\Eloquent\Builder $query
@@ -52,13 +62,32 @@ class Post extends Model
     }
 
     /**
-     * Scope a query to get popular posts.
+     * Get all the popular posts.
      *
-     * @param \Illuminate\Database\Eloquent\Builder $query
-     * @return \Illuminate\Database\Eloquent\Builder
+     * @return Illuminate\Database\Eloquent\Collection
      */
-    public function scopePopular($query) {
+    public static function popular() {
 
-        return $query->published()->orderByDesc('view_count');
+        return Post::published()->orderByDesc('view_count')->take(3)->get();
+    }
+
+    /**
+     * Get all the recent posts.
+     *
+     * @return Illuminate\Database\Eloquent\Collection
+     */
+    public static function recent() {
+
+        return Post::published()->latest()->take(3)->get();
+    }
+
+    /**
+     * Get all the approved comments of a specific post.
+     *
+     * @return Illuminate\Database\Eloquent\Collection
+     */
+    public function getApprovedCommentsAttribute()
+    {
+        return Comment::where([ 'post_id' => $this->id, 'is_approved' => true ])->latest()->get();
     }
 }

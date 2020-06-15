@@ -49,7 +49,7 @@ function deleteItem(id) {
 }
 
 // Approve post operation
-function approvePost() {
+function approveItem(id) {
 
     const swalWithBootstrapButtons = Swal.mixin({
         customClass: {
@@ -61,7 +61,7 @@ function approvePost() {
 
     swalWithBootstrapButtons.fire({
         title: 'Are you sure ?',
-        text: "You want to approve this post !",
+        text: "You want to approve this !",
         icon: 'warning',
         showCancelButton: true,
         confirmButtonText: 'Yes, approve it !',
@@ -70,24 +70,58 @@ function approvePost() {
     }).then((result) => {
         if (result.value) {
             event.preventDefault();
-            document.getElementById('approval-form').submit();
+            document.getElementById('approval-form-' + id).submit();
         } else if (
             /* Read more about handling dismissals below */
             result.dismiss === Swal.DismissReason.cancel
         ) {
             swalWithBootstrapButtons.fire(
                 'Cancelled',
-                'Your post remain pending :)',
+                'Your item remain pending :)',
                 'error'
             )
         }
     })
 }
 
-// Preview uploaded image
-function previewImage(event){
-    $("#preview").attr("src", URL.createObjectURL(event.target.files[0]));
-};
+function editComment(id, comment) {
+    const swalWithBootstrapButtons = Swal.mixin({
+        customClass: {
+            confirmButton: 'btn btn-info',
+            cancelButton: 'btn btn-danger'
+        },
+        buttonsStyling: false
+    })
+    swalWithBootstrapButtons.fire({
+        title: 'Modify Your Comment',
+        input: 'textarea',
+        inputValue: comment,
+        showCancelButton: true,
+        confirmButtonText: 'Update',
+        inputPlaceholder: "Write something...",
+        reverseButtons: true
+    }).then((result) => {
+        if (result.value) {
+            document.getElementById('comment-' + id).value = result.value;
+            document.getElementById('update-comment-' + id).submit();
+        } else if (result.value === "") {
+            swalWithBootstrapButtons.fire(
+                'Cancelled',
+                'You need to write something !',
+                'error'
+            )
+        } else if (
+            /* Read more about handling dismissals below */
+            result.dismiss === Swal.DismissReason.cancel
+        ) {
+            swalWithBootstrapButtons.fire(
+                'Cancelled',
+                'Your comment remain unchanged :)',
+                'error'
+            )
+        }
+    })
+}
 
 // TinyMCE editor config
 $(function () {

@@ -3,10 +3,20 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\Comment;
 use App\Models\Post;
+use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
+
+    /**
+     * Add post viewcount middleware
+     */
+    public function __construct()
+    {
+        $this->middleware('viewCount')->only('details');
+    }
 
     /**
      * Show the application dashboard.
@@ -31,7 +41,7 @@ class HomeController extends Controller
     public function about()
     {
         // Return to about page
-        return view('pages.about');
+        return view('common.about');
     }
 
     /**
@@ -42,7 +52,7 @@ class HomeController extends Controller
     public function contact()
     {
         // Return to contact page
-        return view('pages.contact');
+        return view('common.contact');
     }
 
     /**
@@ -51,17 +61,16 @@ class HomeController extends Controller
      * @param  string $slug
      * @return \Illuminate\Http\Response
      */
-    public function details($slug)
+    public function details(Request $request, $slug)
     {
         // Get a specific post by slug
-        $post = Post::where([
-            'slug' => $slug,
-            'is_approved' => true,
-            'is_published' => true
-        ])->first();
+        $post = $request->post;
+
+        // Get some random posts
+        $randomPosts = Post::published()->get()->random(3);
 
         // Return to post details view
-        return view('pages.details', compact('post'));
+        return view('common.details', compact('post', 'randomPosts'));
     }
 
     /**
@@ -72,7 +81,7 @@ class HomeController extends Controller
     public function categories()
     {
         // Return to post category view
-        return view('pages.category');
+        return view('common.category');
     }
 
 }

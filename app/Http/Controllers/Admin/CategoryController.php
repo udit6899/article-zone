@@ -9,6 +9,7 @@ use App\Models\Category;
 use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class CategoryController extends Controller
 {
@@ -55,7 +56,7 @@ class CategoryController extends Controller
         // Prepare category option to store
         $category = new Category([
             'name' => $request->name,
-            'slug' => $request->slug,
+            'slug' => Str::slug($request->name),
             'image' => $imageUrl,
             'description' => $request->description
         ]);
@@ -100,6 +101,8 @@ class CategoryController extends Controller
      */
     public function update(CategoryRequest $request, Category $category)
     {
+        $slug = Str::slug($request->name);
+
         // Store uploaded image for header and slider  : Storage/categories & Storage/categories/slider
         $imageUrl = FileHelper::upload(
             $request->file('image'), [ 0 => 'categories', 1 => 'categories/slider'],
@@ -109,7 +112,7 @@ class CategoryController extends Controller
         // Prepare category option to store
         $category->update([
             'name' => $request->name,
-            'slug' => $request->slug,
+            'slug' => $slug ? $slug : $category->slug,
             'image' => $imageUrl,
             'description' => $request->description ? $request->description : $category->description
         ]);

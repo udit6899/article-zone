@@ -28,24 +28,17 @@
          */
         public function compose(View $view)
         {
-            // Get all categories
-            $categories = Category::all();
-            // Bind categories to view
-            $view->with('categories', $categories);
 
-            // Get all categories
-            $tags = Tag::all();
-            // Bind categories to view
-            $view->with('tags', $tags);
+            // Bind all categories to view
+            $view->with('categories', Category::all());
 
-            // Get popular posts
-            $popularPosts = Post::popular()->take(3)->get();
+            // Bind all categories to view
+            $view->with('tags', Tag::all());
+
             // Bind popular posts to view
-            $view->with('popularPosts', $popularPosts);
+            $view->with('popularPosts', Post::popular());
 
-            // Get recent posts
-            $recentPosts = Post::published()->latest()->take(3)->get();
-            // Bind recent post to view
-            $view->with('recentPosts', $recentPosts);
+            // Bind all recent post to view
+            $view->with('recentPosts', Post::recent());
         }
     }
