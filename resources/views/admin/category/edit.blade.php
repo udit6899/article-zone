@@ -17,18 +17,21 @@
                     </h2>
                 </div>
                 <div class="body">
-                    <form action="{{ route('admin.category.update', $category->id) }}" method="POST" enctype="multipart/form-data">
+                    <form method="POST"
+                          action="{{ route('admin.category.update', $category->id) }}"  enctype="multipart/form-data">
                         @csrf
                         @method('PATCH')
                         <div class="form-group form-float">
                             <div class="form-line {{ $errors->has('name') ? 'focused error' : '' }}">
-                                <input type="text" id="category_name" name='name' class="form-control" value="{{ old('name') ? old('name') : $category->name }}">
+                                <input type="text" id="category_name" name='name'
+                                       class="form-control" value="{{ old('name') ? old('name') : $category->name }}">
                                 <label class="form-label">Category Name</label>
                             </div>
                         </div>
                         <div class="form-group form-float">
                             <div class="form-line {{ $errors->has('description') ? 'focused error' : '' }}">
-                                <textarea rows="3" class="form-control" name="description" id="category_description">{{ old('description') ? old('description') : $category->description }}</textarea>
+                                <textarea rows="3" class="form-control" name="description" id="category_description"
+                                >{{ old('description') ? old('description') : $category->description }}</textarea>
                                 <label class="form-label">Category Description</label>
                             </div>
                         </div>
@@ -36,7 +39,9 @@
                             <label for="category_image">Category Image :</label>
                             <input type="file" accept="image/*" id="category_image" name='image' class="form-control">
                         </div>
-                        <a class="btn bg-deep-orange m-t-15 waves-effect" href="{{ route('admin.category.index') }}">BACK</a>
+                        <a class="btn bg-deep-orange m-t-15 waves-effect" href="{{ route('admin.category.index') }}">
+                            BACK
+                        </a>
 
                         <button type="submit" class="btn btn-info m-t-15 waves-effect">UPDATE</button>
                     </form>

@@ -5,20 +5,24 @@
     <!-- User Info -->
     <div class="user-info text-center">
         <div class="image">
-            <img src="{{ Storage::disk('public')->url('users/'.Auth::user()->avatar_path) }}" width="48" height="48" alt="User" />
+            <img width="48" height="48" alt="User"
+                 src="{{ Storage::disk('public')->url('users/'.Auth::user()->avatar_path) }}"/>
         </div>
         <div class="info-container">
-            <div class="name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ Auth::user()->name }}</div>
+            <div class="name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                {{ Auth::user()->name }}
+            </div>
             <div class="email">{{ Auth::user()->email }}</div>
         </div>
     </div>
     <!-- #User Info -->
     <!-- Menu -->
     <div class="menu">
-        <ul class="list">
-            <li class="header">MAIN ACTIVITIES</li>
+        @if(Auth::user()->is_admin)
+            <ul class="list">
 
-            @if(Auth::user()->is_admin)
+                <li class="header">MAIN ACTIVITIES</li>
+
                 <li class="{{ Request::is('admin/dashboard') ? 'active' : '' }}">
                     <a href="{{ route('admin.dashboard') }}">
                         <i class="material-icons">dashboard</i>
@@ -43,6 +47,12 @@
                         <span>Post</span>
                     </a>
                 </li>
+                <li class="{{ Request::is('admin/author*') ? 'active' : '' }}">
+                    <a href="{{ route('admin.author.index') }}">
+                        <i class="material-icons">supervised_user_circle</i>
+                        <span>Author</span>
+                    </a>
+                </li>
                 <li class="{{ Request::is('admin/subscriber*') ? 'active' : '' }}">
                     <a href="{{ route('admin.subscriber.index') }}">
                         <i class="material-icons">subscriptions</i>
@@ -50,14 +60,39 @@
                     </a>
                 </li>
                 <li class="{{ Request::is('comment*') ? 'active' : '' }}">
-                    <a href="{{ route('comment.all') }}">
+                    <a href="{{ route('admin.comment.all') }}">
                         <i class="material-icons">comment</i>
                         <span>Comment</span>
                     </a>
                 </li>
-            @endif
 
-            @if(!Auth::user()->is_admin)
+                <li class="header">SYSTEM</li>
+
+                <li class="{{ Request::is('admin/settings') ? 'active' : '' }}">
+                    <a href="{{ route('admin.settings.index') }}">
+                        <i class="material-icons">settings</i>
+                        <span>Settings</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="{{ route('logout') }}"
+                       onclick="event.preventDefault();document.getElementById('logout-form').submit();">
+                        <i class="material-icons">logout</i>
+                        <span>Logout</span>
+                    </a>
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST">
+                        @csrf
+                    </form>
+                </li>
+            </ul>
+
+        @else
+
+            <ul class="list">
+
+                <li class="header">MAIN ACTIVITIES</li>
+
                 <li class="{{ Request::is('author/dashboard') ? 'active' : '' }}">
                     <a href="{{ route('author.dashboard') }}">
                         <i class="material-icons">dashboard</i>
@@ -71,32 +106,33 @@
                     </a>
                 </li>
                 <li class="{{ Request::is('comment*') ? 'active' : '' }}">
-                    <a href="{{ route('comment.index') }}">
+                    <a href="{{ route('author.comment.index') }}">
                         <i class="material-icons">comment</i>
                         <span>Comment</span>
                     </a>
                 </li>
-            @endif
 
-            <li class="header">SYSTEM</li>
+                <li class="header">SYSTEM</li>
 
-            <li class="{{ Request::is('admin/settings') ? 'active' : '' }}">
-                <a href="{{ route('admin.settings.index') }}">
-                    <i class="material-icons">settings</i>
-                    <span>Settings</span>
-                </a>
-            </li>
+                <li class="{{ Request::is('author/settings') ? 'active' : '' }}">
+                    <a href="{{ route('author.settings.index') }}">
+                        <i class="material-icons">settings</i>
+                        <span>Settings</span>
+                    </a>
+                </li>
 
-            <li>
-                <a href="{{ route('logout') }}"  onclick="event.preventDefault();document.getElementById('logout-form').submit();">
-                    <i class="material-icons">logout</i>
-                    <span>Logout</span>
-                </a>
-                <form id="logout-form" action="{{ route('logout') }}" method="POST">
-                    @csrf
-                </form>
-            </li>
-        </ul>
+                <li>
+                    <a href="{{ route('logout') }}"
+                       onclick="event.preventDefault();document.getElementById('logout-form').submit();">
+                        <i class="material-icons">logout</i>
+                        <span>Logout</span>
+                    </a>
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST">
+                        @csrf
+                    </form>
+                </li>
+            </ul>
+        @endif
     </div>
     <!-- #Menu -->
     <!-- Footer -->

@@ -51,7 +51,7 @@
                                     @foreach($tags as $tag)
                                         @if($loop->odd)
                                             <li><a href="{{ route('post.category') }}">
-                                                    {{ $tag->name. ' (' . $tag->posts->count() . ')'}}
+                                                    {{ '#'. $tag->name. ' (' . $tag->posts->count() . ')'}}
                                                 </a>
                                             </li>
                                         @endif
@@ -61,7 +61,7 @@
                                     @foreach($tags as $tag)
                                         @if($loop->even)
                                             <li><a href="{{ route('post.category') }}">
-                                                    {{ $tag->name. ' (' . $tag->posts->count() . ')'}}
+                                                    {{ '#' . $tag->name. ' (' . $tag->posts->count() . ')'}}
                                                 </a>
                                             </li>
                                         @endif

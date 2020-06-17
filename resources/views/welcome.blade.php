@@ -20,7 +20,12 @@
                                         <div class="slide-text-border-content">
                                             <div class="slide-text">
                                                 <h2>Welcome To My Blog!</h2>
-                                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incidi dunt ut labore et dolore magna aliqua  ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incidi dunt ut labore et dolore magna aliqua</p>
+                                                <p>
+                                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                                                    sed do eiusmod tempor incidi dunt ut labore et dolore magna aliqua
+                                                    ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+                                                    tempor incidi dunt ut labore et dolore magna aliqua
+                                                </p>
                                                 <a href="category.html">read more</a>
                                             </div>
                                         </div>
@@ -33,7 +38,12 @@
                                         <div class="slide-text-border-content">
                                             <div class="slide-text">
                                                 <h2>Welcome To My Blog!</h2>
-                                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incidi dunt ut labore et dolore magna aliqua  ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incidi dunt ut labore et dolore magna aliqua</p>
+                                                <p>
+                                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                                                    sed do eiusmod tempor incidi dunt ut labore et dolore magna aliqua
+                                                    ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+                                                    tempor incidi dunt ut labore et dolore magna aliqua
+                                                </p>
                                                 <a href="single-posts.html">read more</a>
                                             </div>
                                         </div>
@@ -42,9 +52,11 @@
                             </div>
                         </div>
                         <!-- Controls -->
-                        <a class="left slide-control" href="#carousel-example-generic" role="button" data-slide="prev"><i class="fa fa-angle-right"></i>
+                        <a class="left slide-control" href="#carousel-example-generic" role="button" data-slide="prev">
+                            <i class="fa fa-angle-right"></i>
                         </a>
-                        <a class="right slide-control" href="#carousel-example-generic" role="button" data-slide="next"><i class="fa fa-angle-left"></i>
+                        <a class="right slide-control" href="#carousel-example-generic" role="button" data-slide="next">
+                            <i class="fa fa-angle-left"></i>
                         </a>
                     </div>
                 </div>
@@ -104,9 +116,12 @@
                                 </div>
                                 <div class="col-md-6 fix col-sm-6">
                                     <div class="video-content-text">
-                                        <a href="" class="art">{{ $post->user->name }}</a>
+                                        <a href="{{ route('post.author.profile', $post->user->id) }}"
+                                           class="art">{{ $post->user->name }}</a>
                                         <h4>
-                                            <a href="{{ route('post.details', $post->slug) }}">{{ Str::limit($post->title, 50, '') }}</a>
+                                            <a href="{{ route('post.details', $post->slug) }}">
+                                                {{ Str::limit($post->title, 50, '') }}
+                                            </a>
                                         </h4>
                                         <span class="art">{{ $post->created_at->toFormattedDateString() }}</span>
                                         <p>{{ Str::limit($post->quote, 100) }}</p>

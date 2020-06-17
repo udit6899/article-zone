@@ -71,7 +71,7 @@
                                         </td>
 
                                         <td>
-                                            <img src="{{ Storage::disk('public')->url('posts/'.$post->image) }}"
+                                            <img src="{{ Storage::disk('public')->url("posts/$post->image") }}"
                                                  height="50px" width="80px">
                                         </td>
 
@@ -86,23 +86,29 @@
                                         <td>{{ $post->created_at }}</td>
 
                                         <td class="text-center">
-                                            <a class="btn btn-xs bg-blue-grey waves-effect" title="Show" href="{{ route('admin.post.show', $post->id) }}">
+                                            <a class="btn btn-xs bg-blue-grey waves-effect"
+                                               title="Show" href="{{ route('admin.post.show', $post->id) }}">
                                                 <i class="material-icons action-icon">visibility</i>
                                             </a>
-                                            <button type="button" class="btn btn-xs bg-orange" title="Approve" onclick="approveItem({{ $post->id }})">
+                                            <button type="button" class="btn btn-xs bg-orange"
+                                                    title="Approve" onclick="approveItem({{ $post->id }})">
                                                 <i class="material-icons action-icon">done_outline</i>
                                             </button>
-                                            <form id="{{ 'approval-form-' . $post->id }}" class="form-hide" action="{{ route('admin.post.approve', $post->id) }}" method="POST">
+                                            <form id="{{ 'approval-form-' . $post->id }}" class="form-hide"
+                                                  action="{{ route('admin.post.approve', $post->id) }}" method="POST">
                                                 @csrf
                                                 @method('PATCH')
                                             </form>
-                                            <a class="btn btn-xs btn-info waves-effect" title="Edit" href="{{ route('admin.post.edit', $post->id) }}">
+                                            <a class="btn btn-xs btn-info waves-effect"
+                                               title="Edit" href="{{ route('admin.post.edit', $post->id) }}">
                                                 <i class="material-icons action-icon">edit</i>
                                             </a>
-                                            <button type="button" class="btn btn-xs bg-deep-orange waves-effect" title="Delete" onclick="deleteItem({{ $post->id }})">
+                                            <button type="button" class="btn btn-xs bg-deep-orange waves-effect"
+                                                    title="Delete" onclick="deleteItem({{ $post->id }})">
                                                 <i class="material-icons action-icon">delete</i>
                                             </button>
-                                            <form id="delete-form-{{ $post->id }}" class="form-hide" action="{{ route('admin.post.destroy', $post->id) }}" method="POST">
+                                            <form id="delete-form-{{ $post->id }}" class="form-hide"
+                                                  action="{{ route('admin.post.destroy', $post->id) }}" method="POST">
                                                 @csrf
                                                 @method('DELETE')
                                             </form>

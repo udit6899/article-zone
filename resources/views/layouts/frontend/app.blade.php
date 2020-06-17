@@ -15,7 +15,8 @@
         <!--========================== font-awesome css ==========================-->
         <link href="{{ asset('assets/frontend/css/font-awesome.min.css') }}" rel="stylesheet">
         <!--========================== google-font css ==========================-->
-        <link href="{{ asset('assets/frontend/fonts/material-icon/css/material-design-iconic-font.min.css') }}" rel='stylesheet'>
+        <link rel='stylesheet'
+              href="{{ asset('assets/frontend/fonts/material-icon/css/material-design-iconic-font.min.css') }}">
         <link href='https://fonts.googleapis.com/css?family=Droid+Sans:400,700' rel='stylesheet' type='text/css'>
         <link href='https://fonts.googleapis.com/css?family=Roboto:400,100,300' rel='stylesheet' type='text/css'>
         <link href='https://fonts.googleapis.com/css?family=PT+Sans:400,700' rel='stylesheet' type='text/css'>

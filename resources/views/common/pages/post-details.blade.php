@@ -20,10 +20,17 @@
                                 </div>
                             </div>
                             <div class="category-text read-more clearfix">
-                                <a href="" class="art"><strong>{{ $post->user->name }}</strong></a>
+                                <a href="{{ route('post.author.profile', $post->user->id) }}"
+                                   class="art"><strong>{{ $post->user->name }}</strong></a>
                                 <h4><a href="{{ route('post.details', $post->slug) }}">{{ $post->title }}</a></h4>
                                 <span class="art">{{ $post->created_at->toFormattedDateString() }}</span>
-                                <div class="quote"><p><i class="fa fa-quote-left"></i>{{ $post->quote }}<i class="fa fa-quote-right"></i></p></div>
+                                <div class="quote">
+                                    <p>
+                                        <i class="fa fa-quote-left"></i>
+                                            {{ $post->quote }}
+                                        <i class="fa fa-quote-right"></i>
+                                    </p>
+                                </div>
                                 <p>{!! $post->body !!}</p>
                                 <div class="read-more-more clearfix">
                                     <div class="share-comment-section floatright">
@@ -92,7 +99,7 @@
                                 </div>
                                 <div class="reply-section">
                                     <h4>Leave a Comment</h4>
-                                    <form action="{{ route('comment.store') }}" method="post">
+                                    <form action="{{ route('post.comment.store') }}" method="post">
                                         @csrf
                                         @guest
                                             <div class="form-group">
@@ -106,9 +113,8 @@
                                             <input type="hidden" name="post_id" value="{{ $post->id }}">
                                         </div>
                                         <div class="form-group">
-                                            <textarea name="comment" placeholder="Comment">
-                                                {{ old('comment') }}
-                                            </textarea>
+                                            <textarea name="comment" placeholder="Write somethings..."
+                                            >{{ old('comment') }}</textarea>
                                         </div>
                                         <input type="submit" value="submit">
                                     </form>

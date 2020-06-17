@@ -20,45 +20,43 @@ Auth::routes();
 // GET: routes for index page
 Route::get('/', 'HomeController@index')->name('home');
 
-// GET: routes for about page
-Route::get('/about', 'HomeController@about')->name('about');
-
-// GET: routes for contact page
-Route::get('/contact', 'HomeController@contact')->name('contact');
-
-// Routes group for posts
-Route::group(['prefix' => 'post', 'as' => 'post.'], function () {
-
-    // GET: route for post details
-    Route::get('details/{slug}', 'HomeController@details'  )->name('details');
-
-    // GET: route for post category page
-    Route::get('category', 'HomeController@categories'  )->name('category');
-});
-
 
 // Routes group for posts
 Route::group(['namespace' => 'Common'], function () {
 
-    // GET: route for all comments
-    Route::get('comment/all', 'CommentController@all')->name('comment.all');
+    // GET: route for about page
+    Route::get('/about', 'PagesController@about')->name('about');
 
-    // GET: route for pending comments
-    Route::get('comment/pending', 'CommentController@pending')->name('comment.pending');
+    // GET: route for contact page
+    Route::get('/contact', 'PagesController@contact')->name('contact');
 
-    // PATCH: route for comment approval
-    Route::patch('comment/{comment}/approve', 'CommentController@approve')->name('comment.approve');
 
-    // Routes for the comment operations
-    Route::resource('comment', 'CommentController')->except(['edit', 'show']);
+    // Routes group for posts
+    Route::group(['prefix' => 'post', 'as' => 'post.'], function () {
+
+        // GET: route for searched post page
+        Route::get('search', 'PagesController@postSearch'  )->name('search');
+
+        // GET: route for post category page
+        Route::get('category', 'PagesController@postCategories'  )->name('category');
+
+        // Routes for the comment operations
+        Route::post('comment', 'BaseCommentController@store')->name('comment.store');
+
+        // GET: route for post details
+        Route::get('details/{slug}', 'PagesController@postDetails'  )->name('details');
+
+        // Routes for Subscriber operations
+        Route::post('subscriber', 'BaseSubscriberController@store')->name('subscriber.store');
+
+        // GET: route for author-post-profile view
+        Route::get('author/{author}/profile', 'PagesController@authorProfile'  )->name('author.profile');
+    });
 
 });
 
 
-// POST: route to store subscriber
-Route::post('subscriber', 'Admin\SubscriberController@store')->name('subscriber.store');
-
-// Routes for authors
+// Routes for the authors
 Route::group([
     'prefix' => 'author', 'as' =>'author.',
     'namespace' => 'Author', 'middleware' => ['auth', 'author']
@@ -69,9 +67,25 @@ Route::group([
 
     // Routes for Post operations
     Route::resource('post', 'PostController');
+
+    // Routes for the comment operations
+    Route::resource('comment', 'CommentController')->only(['index', 'update', 'destroy']);
+
+
+    // Route for settings page
+    Route::get('settings', 'SettingController@index')->name('settings.index');
+
+    // Route for update profile
+    Route::patch('settings/profile-update', 'SettingController@updateProfile')
+        ->name('settings.profile.update');
+
+    // Route for update profile
+    Route::patch('settings/password-update', 'SettingController@updatePassword')
+        ->name('settings.password.update');
 });
 
-// Routes for admin
+
+// Routes for the admin
 Route::group([
     'prefix' => 'admin', 'as' =>'admin.',
     'namespace' => 'Admin', 'middleware' => ['auth', 'admin']
@@ -80,6 +94,7 @@ Route::group([
     // GET: routes for dashboard page
     Route::get('dashboard', 'DashboardController@index')->name('dashboard');
 
+
     // Routes for Tag operations
     Route::resource('tag', 'TagController');
 
@@ -87,7 +102,10 @@ Route::group([
     Route::resource('category', 'CategoryController');
 
     // Routes for Subscriber operations
-    Route::resource('subscriber', 'SubscriberController')->except('store');
+    Route::resource('subscriber', 'SubscriberController')->only(['index', 'destroy']);
+
+    // Routes for author operations
+    Route::resource('author', 'AuthorController')->only(['index', 'destroy']);
 
 
     // GET: route for pending post
@@ -101,6 +119,19 @@ Route::group([
 
     // Routes for Post operations
     Route::resource('post', 'PostController');
+
+
+    // GET: route for all comments
+    Route::get('comment/all', 'CommentController@all')->name('comment.all');
+
+    // GET: route for pending comments
+    Route::get('comment/pending', 'CommentController@pending')->name('comment.pending');
+
+    // PATCH: route for comment approval
+    Route::patch('comment/{comment}/approve', 'CommentController@approve')->name('comment.approve');
+
+    // Routes for the comment operations
+    Route::resource('comment', 'CommentController')->only(['index', 'update', 'destroy']);
 
 
     // Route for settings page

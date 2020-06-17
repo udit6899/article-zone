@@ -62,23 +62,48 @@ class Post extends Model
     }
 
     /**
-     * Get all the popular posts.
+     * Scope a query to get previous posts.
      *
-     * @return Illuminate\Database\Eloquent\Collection
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @param  \App\Models\Post
+     * @return \Illuminate\Database\Eloquent\Builder
      */
-    public static function popular() {
+    public function scopePrevious($query, $post) {
 
-        return Post::published()->orderByDesc('view_count')->take(3)->get();
+        return $query->where('id', '<', $post->id)->latest();
     }
 
     /**
-     * Get all the recent posts.
+     * Scope a query to get next posts.
      *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @param  \App\Models\Post
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeNext($query, $post) {
+        return $query->Where('id', '>', $post->id);
+    }
+
+    /**
+     * Scope a query to get all the popular posts.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
      * @return Illuminate\Database\Eloquent\Collection
      */
-    public static function recent() {
+    public static function scopePopular($query) {
 
-        return Post::published()->latest()->take(3)->get();
+        return $query->published()->orderByDesc('view_count')->take(3)->get();
+    }
+
+    /**
+     * Scope a query to get all the recent posts.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return Illuminate\Database\Eloquent\Collection
+     */
+    public function scopeRecent($query) {
+
+        return $query->published()->latest()->take(3)->get();
     }
 
     /**

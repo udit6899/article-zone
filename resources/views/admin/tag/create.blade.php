@@ -21,11 +21,14 @@
                         @csrf
                         <div class="form-group form-float">
                             <div class="form-line {{ $errors->has('name') ? 'focused error' : '' }}">
-                                <input type="text" id="tag_name" name='name' class="form-control" value="{{ old('name') }}">
+                                <input type="text"
+                                       id="tag_name" name='name' class="form-control" value="{{ old('name') }}">
                                 <label class="form-label">Tag Name</label>
                             </div>
                         </div>
-                        <a class="btn bg-deep-orange m-t-15 waves-effect" href="{{ route('admin.tag.index') }}">BACK</a>
+                        <a class="btn bg-deep-orange m-t-15 waves-effect" href="{{ route('admin.tag.index') }}">
+                            BACK
+                        </a>
 
                         <button type="submit" class="btn btn-info m-t-15 waves-effect">SAVE</button>
                     </form>

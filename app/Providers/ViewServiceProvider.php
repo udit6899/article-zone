@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Models\Post;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 
@@ -27,10 +28,23 @@ class ViewServiceProvider extends ServiceProvider
         // Allowing composer to bind data to views
         View::composer(
             [
-                'common.details', 'common.category', 'common.contact',
-                'welcome', 'common.about', 'auth.login', 'auth.register'
+                'common.pages.post-search','common.pages.post-details', 'common.pages.post-category',
+                'common.pages.contact', 'welcome', 'common.pages.about', 'auth.login',
+                'auth.register', 'common.pages.author-profile'
             ],
             'App\Http\Composers\ViewComposer'
         );
+
+        // Pass random post to view
+        View::composer(
+            [
+                'common.pages.post-details',
+                'common.pages.post-search',
+                'common.pages.author-profile'
+            ], function ($view) {
+
+            // Bind random posts to view
+            $view->with('randomPosts', Post::published()->get()->random(3));
+        });
     }
 }

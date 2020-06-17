@@ -29,6 +29,7 @@ class PostViewCount
             $request->post->increment('view_count');
             session()->put($blogKey, 1);
         }
+
         return $next($request);
     }
 }

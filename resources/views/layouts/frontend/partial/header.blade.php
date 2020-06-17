@@ -6,7 +6,9 @@
             <div class="top-area-content">
                 <div class="col-md-6 col-sm-6 col-xs-5">
                     <div class="logo text-left">
-                        <a href="{{ route('home') }}"><img src="{{ asset('assets/frontend/images/logo.png') }}" alt=""></a>
+                        <a href="{{ route('home') }}">
+                            <img src="{{ asset('assets/frontend/images/logo.png') }}" alt="">
+                        </a>
                     </div>
                 </div>
                 <div class="col-md-6 col-sm-6 col-xs-7">
@@ -85,8 +87,9 @@
             </div>
             <div class="col-md-5 col-sm-3 col-xs-12">
                 <div class="search-btn text-right">
-                    <form>
-                        <input type="search" placeholder="Type to search here"/>
+                    <form action="{{ route('post.search') }}" method="get">
+                        <input type="search" name="query" value="{{ $query ?? '' }}"
+                               placeholder="Type to search here" required/>
                         <button type="submit"><i class="fa fa-search"></i></button>
                     </form>
                 </div>

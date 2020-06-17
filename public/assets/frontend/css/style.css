@@ -248,12 +248,22 @@ z-index:1;
 }
 .slider-content{
     background: url(../images/slide-bg.png) no-repeat scroll center center;
-    height: 575px;
+    height: 350px;
 }
 .slider-content-2{
-    background: url(../images/slide-2.jpg) no-repeat scroll center center;
-    height: 575px;
+    background: url(../images/search.jpg) no-repeat scroll center center;
+    height: 400px;
 	background-size: cover;
+}
+.slider-content-2 h1 {
+    margin-top: -180px;
+    font-size: 50px;
+    font-weight: bolder;
+}
+.slider-content-2 p {
+    margin-top: 20px;
+    font-size: 20px;
+    font-weight: bold;
 }
 .slide-text-border-content {
   background: #282828 none repeat scroll 0 0;

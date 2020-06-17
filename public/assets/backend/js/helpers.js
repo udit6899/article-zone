@@ -1,14 +1,16 @@
 ﻿function hexToRgb(hexCode) {
     var patt = /^#([\da-fA-F]{2})([\da-fA-F]{2})([\da-fA-F]{2})$/;
     var matches = patt.exec(hexCode);
-    var rgb = "rgb(" + parseInt(matches[1], 16) + "," + parseInt(matches[2], 16) + "," + parseInt(matches[3], 16) + ")";
+    var rgb = "rgb(" + parseInt(matches[1], 16) +
+                "," + parseInt(matches[2], 16) + "," + parseInt(matches[3], 16) + ")";
     return rgb;
 }
 
 function hexToRgba(hexCode, opacity) {
     var patt = /^#([\da-fA-F]{2})([\da-fA-F]{2})([\da-fA-F]{2})$/;
     var matches = patt.exec(hexCode);
-    var rgb = "rgba(" + parseInt(matches[1], 16) + "," + parseInt(matches[2], 16) + "," + parseInt(matches[3], 16) + "," + opacity + ")";
+    var rgb = "rgba(" + parseInt(matches[1], 16) + "," + parseInt(matches[2], 16) +
+                "," + parseInt(matches[3], 16) + "," + opacity + ")";
     return rgb;
 }
 
@@ -84,7 +86,8 @@ function approveItem(id) {
     })
 }
 
-function editComment(id, comment) {
+// Edit comment details
+function editComment(commentObj) {
     const swalWithBootstrapButtons = Swal.mixin({
         customClass: {
             confirmButton: 'btn btn-info',
@@ -95,15 +98,15 @@ function editComment(id, comment) {
     swalWithBootstrapButtons.fire({
         title: 'Modify Your Comment',
         input: 'textarea',
-        inputValue: comment,
+        inputValue: commentObj.comment,
         showCancelButton: true,
         confirmButtonText: 'Update',
         inputPlaceholder: "Write something...",
         reverseButtons: true
     }).then((result) => {
         if (result.value) {
-            document.getElementById('comment-' + id).value = result.value;
-            document.getElementById('update-comment-' + id).submit();
+            document.getElementById('comment-' + commentObj.id).value = result.value;
+            document.getElementById('update-comment-' + commentObj.id).submit();
         } else if (result.value === "") {
             swalWithBootstrapButtons.fire(
                 'Cancelled',
@@ -123,6 +126,41 @@ function editComment(id, comment) {
     })
 }
 
+// Read category details
+function readCategory(category) {
+    Swal.fire({
+        title: category.name,
+        text: category.description,
+        imageUrl: '/storage/categories/' + category.image,
+        imageWidth: 400,
+        imageHeight: 200,
+        imageAlt: 'Custom image',
+    })
+}
+
+// Read author details
+function readAuthor(author) {
+    Swal.fire({
+        title: author.name,
+        html: '<p>Email Address: ' + author.email + '</p>' +
+              '<p> Mobile Number: ' + author.mobile_no + '</p>' +
+              '<br><p class="text-warning">' + (author.about || " ") + '</p><br>' +
+          '<div>' +
+            '<i class="material-icons text-primary">library_books</i>' +
+            '<span> ' + author.posts_count + '</span>' +
+            '<i class="material-icons text-danger">favorite</i>' +
+            '<span> ' + author.posts_count + '</span>' +
+            '<i class="material-icons text-primary">comment</i>' +
+            '<span> ' + author.comments_count + '</span>' +
+        '</div>',
+        imageUrl: '/storage/users/' + author.avatar_path,
+        imageWidth: 200,
+        imageHeight: 200,
+        imageAlt: 'Custom image',
+    })
+}
+
+
 // TinyMCE editor config
 $(function () {
     //TinyMCE
@@ -136,7 +174,8 @@ $(function () {
             'insertdatetime media nonbreaking save table contextmenu directionality',
             'emoticons template paste textcolor colorpicker textpattern imagetools'
         ],
-        toolbar1: 'insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image',
+        toolbar1: 'insertfile undo redo | styleselect | bold italic | alignleft aligncenter ' +
+                    'alignright alignjustify | bullist numlist outdent indent | link image',
         toolbar2: 'print preview media | forecolor backcolor emoticons',
         image_advtab: true
     });

@@ -22,7 +22,8 @@
                     @method('PATCH')
                     <div class="form-group form-float">
                         <div class="form-line {{ $errors->has('name') ? 'focused error' : '' }}">
-                            <input type="text" id="tag_name" name='name' class="form-control" value="{{ old('name') ? old('name') : $tag->name }}">
+                            <input type="text" id="tag_name" name='name'
+                                   class="form-control" value="{{ old('name') ? old('name') : $tag->name }}">
                             <label class="form-label">Tag Name</label>
                         </div>
                     </div>

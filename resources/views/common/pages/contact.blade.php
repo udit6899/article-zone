@@ -17,7 +17,8 @@
                             <form action="mail.php" method="post">
                                 <input type="text" name="username" placeholder="Name">
                                 <input type="email" name="email_address" placeholder="Email">
-                                <div class="web-address"><input type="text" name="web_address" class="web-address" placeholder="Website"></div>
+                                <div class="web-address"><input
+                                     type="text" name="web_address" class="web-address" placeholder="Website"></div>
                                 <textarea placeholder="Comment" name="messages"></textarea>
                                 <div class="submit-btn"><input type="submit" name="submit" value="send"></div>
                             </form>

@@ -9,19 +9,10 @@ use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class CommentController extends Controller
+class BaseCommentController extends Controller
 {
 
-    /**
-     * Apply the middleware for operations
-     */
-    public function __construct()
-    {
-        // Apply auth and admin middleware only for admin
-        $this->middleware(['auth', 'admin'])->only(['all, pending', 'approve']);
-        // Apply auth middleware for both admin and author
-        $this->middleware(['auth'])->only(['index', 'update', 'destroy']);
-    }
+    protected $prefix;
 
     /**
      * Display a listing of the own comments.
@@ -34,43 +25,13 @@ class CommentController extends Controller
         $comments = Auth::user()->comments()->latest()->get();
 
         // Return to index view
-        return view('common.comment.index', compact('comments'));
+        return view("$this->prefix.comment.index", compact('comments'));
     }
-
-
-    /**
-     * Display a listing of the pending comments.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function pending()
-    {
-        // Get all pending comments
-        $comments = Comment::where('is_approved', false)->latest()->get();
-
-        // Return to index view
-        return view('common.comment.index', compact('comments'));
-    }
-
-    /**
-     * Display a listing of the all comments.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function all()
-    {
-        // Get all latest comments
-        $comments = Comment::latest()->get();
-
-        // Return to index view
-        return view('common.comment.index', compact('comments'));
-    }
-
 
     /**
      * Store a newly created comment in storage.
      *
-     * @param  \Illuminate\Foundation\Http\FormRequest  $request
+     * @param  \App\Http\Requests\CommentRequest  $request
      * @return \Illuminate\Http\Response
      */
     public function store(CommentRequest $request)
@@ -95,33 +56,6 @@ class CommentController extends Controller
         // Redirect to back
         return redirect()->back();
     }
-
-    /**
-     * Approve the comment by admin
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Comment  $comment
-     * @return \Illuminate\Http\Response
-     */
-    public function approve(Request $request, Comment $comment)
-    {
-        // Check the comment is approved or not
-        if ($comment->is_approved == false) {
-
-            // If comment is not approved, then approve it
-            $comment->update(['is_approved' => true]);
-
-            // Make success response
-            Toastr::success('Comment Successfully Approved !', 'Success');
-        } else {
-            // If comment is already approved, then make info response
-            Toastr::info('This comment is already approved !', 'info');
-        }
-
-        // Return to back page
-        return redirect()->back();
-    }
-
 
     /**
      * Update the specified resource in storage.

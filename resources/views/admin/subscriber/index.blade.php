@@ -38,10 +38,12 @@
                                         <td>{{ $subscriber->created_at }}</td>
                                         <td>{{ $subscriber->updated_at }}</td>
                                         <td class="text-center">
-                                            <button type="button" class="btn btn-xs bg-deep-orange waves-effect" title="Delete" onclick="deleteItem({{ $subscriber->id }})">
+                                            <button type="button" class="btn btn-xs bg-deep-orange waves-effect"
+                                                    title="Delete" onclick="deleteItem({{ $subscriber->id }})">
                                                 <i class="material-icons action-icon">delete</i>
                                             </button>
-                                            <form id="delete-form-{{ $subscriber->id }}" class="form-hide" action="{{ route('admin.subscriber.destroy', $subscriber->id) }}" method="POST">
+                                            <form action="{{ route('admin.subscriber.destroy', $subscriber->id) }}"
+                                              id="delete-form-{{ $subscriber->id }}" class="form-hide" method="POST">
                                                 @csrf
                                                 @method('DELETE')
                                             </form>
