@@ -4,7 +4,9 @@
         <div class="row">
             <div class="col-md-2 col-sm-2">
                 <div class="footer-logo">
-                    <a href="{{ route('home') }}"><img src="{{ asset('assets/frontend/images/logo.png') }}" alt=""></a>
+                    <a href="{{ route('home') }}">
+                        <img src="{{ asset('assets/frontend/images/logo3.png') }}" alt="ArticleZone-Logo">
+                    </a>
                 </div>
                 <div class="footer-content">
                     <p>get in touch</p>
@@ -35,14 +37,14 @@
                         <div class="recent-post-single">
                             <div class="recent-post-img">
                                 <a href="{{ route('post.details', $recentPost->slug) }}">
-                                    <img src="{{ Storage::disk('public')->url('posts/' . $recentPost->image) }}"
+                                    <img src="{{ Storage::disk('public')->url("posts/$recentPost->image") }}"
                                          alt="{{ $recentPost->title }}" height="54px" width="54px">
                                 </a>
                             </div>
                             <div class="recent-post-text">
-                                <span>{{ $recentPost->created_at->toFormattedDateString() }}</span>
+                                <span>{{ $recentPost->created_date }}</span>
                                 <a href="{{ route('post.details', $recentPost->slug) }}">
-                                    <p>{{ Str::limit($recentPost->title, 20, '') }}</p>
+                                    <p>{{ Str::limit($recentPost->title, 20) }}</p>
                                 </a>
                             </div>
                         </div>
@@ -58,7 +60,7 @@
                                 <li><a href="">{{ $category->name }}</a></li>
                             @endif
                         @endforeach
-                        <li><a href="{{ route('post.category') }}">More...</a></li>
+                        <li><a href="{{ route('post.category.item', $category->slug) }}">More...</a></li>
                     </ul>
                 </div>
             </div>
@@ -71,8 +73,8 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="footer-bottom-text text-center">
-                    <p>Blog Design 2016 &copy;All Rights reserved</p>
-                    <p>Designed by <span><a href="#">BootstrapCafe</a></span></p>
+                    <p>Blog Design 2020 &copy;All Rights reserved</p>
+                    <p>Designed by <span><a href="/">ArticleZone</a></span></p>
                 </div>
             </div>
         </div>

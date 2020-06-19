@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\Common;
 
+use App\Helpers\GuestUserHelper;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\CommentRequest;
 use App\Models\Comment;
 use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Http\Request;
@@ -31,23 +31,32 @@ class BaseCommentController extends Controller
     /**
      * Store a newly created comment in storage.
      *
-     * @param  \App\Http\Requests\CommentRequest  $request
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(CommentRequest $request)
+    public function store(Request $request)
     {
+        // Get the user details
+        $user = GuestUserHelper::getOrcreate($request);
+
+        // Validate the request
+        $this->validate($request, [
+            'post_id' => [ 'required', 'integer'],
+            'comment' => ['required', 'string']
+        ]);
+
         // Store new comment in DB
         $comment = new Comment([
-            'user_id' => $request->user->id,
+            'user_id' => $user->id,
             'post_id' => $request->post_id,
             'comment' => $request->comment,
-            'is_approved' => $request->user->is_admin ? true : false
+            'is_approved' => $user->is_admin ? true : false
         ]);
 
         $comment->save();
 
         // Make success response
-        if ($request->user->is_admin) {
+        if ($user->is_admin) {
             Toastr::success('Your Comment Successfully Added !', 'Success');
         } else {
             Toastr::success('Your Comment Successfully Added ! Wait For Admin Approval.', 'Success');

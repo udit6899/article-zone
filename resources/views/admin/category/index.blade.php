@@ -47,7 +47,12 @@
                                             <img height="50px" width="80px"
                                              src="{{ Storage::disk('public')->url('categories/'.$category->image) }}">
                                         </td>
-                                        <td>{{ $category->posts->count() }}</td>
+                                        <td>
+                                            <a target="_blank"
+                                               href="{{ route('post.category.item', $category->slug) }}">
+                                                {{ $category->posts->count() }}
+                                            </a>
+                                        </td>
                                         <td>{{ Str::limit($category->description, 20, '...   ') }}</td>
                                         <td>{{ $category->created_at }}</td>
                                         <td class="text-center">

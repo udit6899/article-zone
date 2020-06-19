@@ -43,7 +43,7 @@
                             <label for="tag">Select Category</label>
                             <select id="category" name="categories[]"
                                     class="form-control show-tick" data-live-search="true" multiple>
-                                @foreach($categories as $category)
+                                @foreach($allCategories as $category)
                                     <option value="{{ $category->id }}"
                                         @if(
                                             !is_null(old('categories')) &&
@@ -61,7 +61,7 @@
                             <label for="tag">Select Tag</label>
                             <select id="tag" name="tags[]"
                                     class="form-control show-tick" data-live-search="true" multiple>
-                                @foreach($tags as $tag)
+                                @foreach($allTags as $tag)
                                     <option value="{{ $tag->id }}"
                                         @if(
                                             !is_null(old('tags')) &&

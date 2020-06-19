@@ -14,7 +14,7 @@
                         </small>
                     </a>
                     <small style="float: right;">
-                        Posted on: <strong>{{ $post->created_at->toFormattedDateString() }}</strong>
+                        Posted on: <strong>{{ $post->created_date }}</strong>
                     </small>
                 </div>
             </div>

@@ -46,6 +46,7 @@
         ],
         "files": [
             "app/Helpers/FileHelper.php",
+            "app/Helpers/GuestUserHelper.php",
             "app/Helpers/NotificationHelper.php"
         ]
     },

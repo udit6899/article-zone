@@ -17,10 +17,12 @@ class HomeController extends Controller
     public function index()
     {
         // Get all latest post
-        $posts = Post::published()->latest()->get();
+        $posts = Post::published()->latest()->paginate(4);
 
+        // Get the admin details
+        $admin = User::admin(true)->first();
 
         // Return to welcome view
-        return view('welcome', compact('posts'));
+        return view('welcome', compact('admin', 'posts'));
     }
 }

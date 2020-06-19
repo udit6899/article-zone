@@ -10,7 +10,6 @@ use App\Notifications\PostApproved;
 use App\Notifications\PostCreated;
 use App\Notifications\PostPublished;
 use Illuminate\Support\Facades\Notification;
-use Illuminate\Support\Facades\Route;
 
 class NotificationHelper
 {

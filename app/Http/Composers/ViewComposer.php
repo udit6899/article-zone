@@ -30,10 +30,10 @@
         {
 
             // Bind all categories to view
-            $view->with('categories', Category::all());
+            $view->with('categories', Category::has('posts')->get());
 
             // Bind all categories to view
-            $view->with('tags', Tag::all());
+            $view->with('tags', Tag::has('posts')->get());
 
             // Bind popular posts to view
             $view->with('popularPosts', Post::popular());

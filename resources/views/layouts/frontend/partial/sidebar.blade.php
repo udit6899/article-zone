@@ -12,7 +12,8 @@
                                 <ul class="left-portion">
                                     @foreach($categories as $category)
                                         @if($loop->odd && $loop->index < 10 && substr_count($category->name, ' ') < 1)
-                                            <li><a href="{{ route('post.category') }}">
+                                            <li>
+                                                <a href="{{ route('post.category.item', $category->slug) }}">
                                                     {{ $category->name. ' (' . $category->posts->count() . ')'}}
                                                 </a>
                                             </li>
@@ -22,7 +23,8 @@
                                 <ul class="right-portion">
                                     @foreach($categories as $category)
                                         @if($loop->even && $loop->index < 7 && substr_count($category->name, ' ') < 1)
-                                            <li><a href="{{ route('post.category') }}">
+                                            <li>
+                                                <a href="{{ route('post.category.item', $category->slug) }}">
                                                     {{ $category->name. ' (' . $category->posts->count() . ')'}}
                                                 </a>
                                             </li>
@@ -49,8 +51,8 @@
                             <div class="category-list">
                                 <ul class="left-portion">
                                     @foreach($tags as $tag)
-                                        @if($loop->odd)
-                                            <li><a href="{{ route('post.category') }}">
+                                        @if($loop->odd && $loop->index < 10 && substr_count($category->name, ' ') < 1)
+                                            <li><a href="{{ route('post.tag.item', $tag->name) }}">
                                                     {{ '#'. $tag->name. ' (' . $tag->posts->count() . ')'}}
                                                 </a>
                                             </li>
@@ -59,13 +61,14 @@
                                 </ul>
                                 <ul class="right-portion">
                                     @foreach($tags as $tag)
-                                        @if($loop->even)
-                                            <li><a href="{{ route('post.category') }}">
+                                        @if($loop->even && $loop->index < 7 && substr_count($category->name, ' ') < 1)
+                                            <li><a href="{{ route('post.tag.item', $tag->name) }}">
                                                     {{ '#' . $tag->name. ' (' . $tag->posts->count() . ')'}}
                                                 </a>
                                             </li>
                                         @endif
                                     @endforeach
+                                        <li><a href="{{ route('post.tag') }}">More...</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -81,28 +84,8 @@
                     <div class="category-widget-single">
                         <div class="category-widget-single-ad">
                             <a href="">
-                                <img src="{{ asset('assets/frontend/images/category-widget-ad.png') }}" alt="">
+                                <img src="{{ asset('assets/frontend/images/slider-demo1.gif') }}" alt="">
                             </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="sidebar-widget">
-        <div class="row">
-            <div class="col-md-12 col-sm-12">
-                <div class="instagram-widget">
-                    <div class="instagram-content">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="instagram-title"><h4>Instagram</h4></div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12 col-sm-12">
-                                <div id="instafeed"></div>
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -138,13 +121,17 @@
                             <div class="popular-post-single @if($loop->first) top @elseif($loop->last) bottom @endif">
                                 <div class="popular-post-single-img">
                                     <a href="{{ route('post.details', $popularPost->slug) }}">
-                                        <img src="{{ Storage::disk('public')->url('posts/' . $popularPost->image) }}"
+                                        <img src="{{ Storage::disk('public')->url("posts/$popularPost->image") }}"
                                              alt="{{ $popularPost->title }}" width="89px" height="100px">
                                     </a>
                                 </div>
                                 <div class="popular-post-single-text">
-                                    <span>{{ $popularPost->created_at->toFormattedDateString() }}</span>
-                                    <p>{{ Str::limit($popularPost->title, 18, '') }}</p>
+                                    <span>{{ $popularPost->created_date }}</span>
+                                    <p>
+                                        <a href="{{ route('post.details', $popularPost->slug) }}">
+                                            {{ Str::limit($popularPost->title, 18) }}
+                                        </a>
+                                    </p>
                                 </div>
                             </div>
                         @endforeach

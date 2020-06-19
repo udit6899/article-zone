@@ -34,11 +34,26 @@ Route::group(['namespace' => 'Common'], function () {
     // Routes group for posts
     Route::group(['prefix' => 'post', 'as' => 'post.'], function () {
 
+        // GET: route for create post page
+        Route::get('create', 'BasePostController@create'  )->name('create');
+
+        // POST: route to store new post by guest
+        Route::post('store', 'BasePostController@store'  )->name('store');
+
         // GET: route for searched post page
         Route::get('search', 'PagesController@postSearch'  )->name('search');
 
         // GET: route for post category page
         Route::get('category', 'PagesController@postCategories'  )->name('category');
+
+        // GET: route for post tag page
+        Route::get('tag', 'PagesController@postTags'  )->name('tag');
+
+        // GET: route for post tag-item page
+        Route::get('tag/{name}/item', 'PagesController@postTagItems'  )->name('tag.item');
+
+        // GET: route for post category-item page
+        Route::get('category/{slug}/item', 'PagesController@postCategoryItems'  )->name('category.item');
 
         // Routes for the comment operations
         Route::post('comment', 'BaseCommentController@store')->name('comment.store');

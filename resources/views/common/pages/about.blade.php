@@ -16,7 +16,7 @@
                             <div class="about-self-content">
                                 <div class="personal-information">
                                     <div class="about-content">
-                                        <a><img src="{{ asset('assets/frontend/images/fahi.png') }}" alt=""></a>
+                                        <a><img src="{{ asset('assets/frontend/images/user.jpg') }}" alt=""></a>
                                     </div>
                                     <div class="about-indetails">
                                         <ul>

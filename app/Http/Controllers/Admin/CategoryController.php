@@ -50,7 +50,7 @@ class CategoryController extends Controller
         // Store uploaded image for header and slider  : Storage/categories & Storage/categories/slider
         $imageUrl = FileHelper::upload(
             $request->file('image'), [0 => 'categories', 1 => 'categories/slider'],
-            [0 => ['width' => 338, 'height' => 245], 1 => ['width' => 1170, 'height' => 400]]
+            [0 => ['width' => 338, 'height' => 245], 1 => ['width' => 1732, 'height' => 680]]
         );
 
         // Prepare category option to store
@@ -106,7 +106,7 @@ class CategoryController extends Controller
         // Store uploaded image for header and slider  : Storage/categories & Storage/categories/slider
         $imageUrl = FileHelper::upload(
             $request->file('image'), [ 0 => 'categories', 1 => 'categories/slider'],
-            [0 => ['width' => 338, 'height' => 245], 1 => ['width' => 1170, 'height' => 400]], $category->image
+            [0 => ['width' => 338, 'height' => 245], 1 => ['width' => 1732, 'height' => 680]], $category->image
         );
 
         // Prepare category option to store
@@ -132,9 +132,14 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
-        // Delete associated category images from dir
-        Storage::disk('public')->delete('categories/'.$category->image);
-        Storage::disk('public')->delete('categories/slider/'.$category->image);
+        if (Storage::disk('public')->exists('categories/'.$category->image)) {
+            // Delete associated category image for header if exists
+            Storage::disk('public')->delete('categories/'.$category->image);
+        }
+        if (Storage::disk('public')->exists('categories/slider/'.$category->image)) {
+            // Delete associated category image for slider if exists
+            Storage::disk('public')->delete('categories/slider/'.$category->image);
+        }
 
         // Delete category from db
         $category->delete();

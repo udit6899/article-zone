@@ -3,7 +3,7 @@
 @extends('layouts.frontend.app')
 
 @section('title')
-    {{ $query }}
+    {{ "$tag->name-Items" }}
 @endsection
 
 <!--========================== include content ==========================-->
@@ -19,8 +19,10 @@
                             <div class="item active">
                                 <div class="slider-content-2 text-center">
                                     <div class="carousel-caption d-none d-md-block">
-                                        <h1 class="display-flex">Searched Item : "{{ $query }}"</h1>
-                                        <p class="lead">{{ $searchedPosts->total() }} posts found !</p>
+                                        <h1 class="display-flex">{{ $tag->name }}</h1>
+                                        <p class="lead">
+                                            <strong>Total Posts: </strong>{{ $tagPosts->total() }}
+                                        </p>
                                     </div>
                                 </div>
                             </div>
@@ -32,6 +34,6 @@
     </section>
     <!--========================== categories-area-start ==========================-->
     <section class="categories-area">
-        @include('common.base.pages.post-list', ['posts' => $searchedPosts])
+        @include('common.base.pages.post-list', ['posts' => $tagPosts])
     </section>
 @endsection

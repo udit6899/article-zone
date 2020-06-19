@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Common;
 
 use App\Helpers\FileHelper;
+use App\Helpers\GuestUserHelper;
 use App\Helpers\NotificationHelper;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\PostRequest;
@@ -35,20 +36,24 @@ class BasePostController extends Controller
 
 
     /**
-     * Show the form for creating a new resource.
+     * Show the form for creating a new post.
      *
      * @return \Illuminate\Http\Response
      */
     public function create()
     {
         // Get all post's categories
-        $categories = Category::all();
+        $allCategories = Category::all();
 
         // Get all post's tags
-        $tags = Tag::all();
+        $allTags = Tag::all();
+
+        // Making view destination for auth user and guest user
+        $view = Auth::check() ? "$this->prefix.post.create" : 'common.pages.post-create';
 
         // Return to add post view
-        return view("$this->prefix.post.create", compact('tags', 'categories'));
+        return view($view, compact('allTags', 'allCategories'));
+
     }
 
     /**
@@ -59,7 +64,8 @@ class BasePostController extends Controller
      */
     public function store(PostRequest $request)
     {
-        $user = Auth::user();
+        // Get the user details
+        $user = GuestUserHelper::getOrcreate($request);
 
         // Store uploaded image : Storage/posts
         $imageUrl = FileHelper::upload(
@@ -75,7 +81,7 @@ class BasePostController extends Controller
             'quote' => $request->quote,
             'body' => $request->body,
             'image' => $imageUrl,
-            'is_published' => $request->is_published ? true : false,
+            'is_published' => Auth::check() ? ($request->is_published ? true : false) : true,
             'is_approved' => $user->is_admin ? true : false,
         ]);
         $post->save();
@@ -87,16 +93,22 @@ class BasePostController extends Controller
         if ($user->is_admin) {
             // If user is admin, Send notification to the all subscribers
             NotificationHelper::notify('subscriber', $post);
+
+            // Create success message for admin
+            Toastr::success('Your Post Successfully Saved !', 'Success');
         } else {
-            // If user is author, Send notification to admin
+            // If user is author or guest, Send notification to admin
             NotificationHelper::notify('admin', $post);
+
+            // Create success message for author and guest
+            Toastr::success('Your Post Successfully Saved ! Wait For Admin Approval.', 'Success');
         }
 
-        // Create success message
-        Toastr::success('Your Post Successfully Saved !', 'Success');
+        // Make route path for authorized user and guest user
+        $routePath = Auth::check() ? "$this->prefix.post.index" : 'post.create';
 
-        // Return to index view
-        return redirect()->route("$this->prefix.post.index");
+        // Return to post view
+        return redirect()->route($routePath);
     }
 
     /**
@@ -169,11 +181,6 @@ class BasePostController extends Controller
         if (Storage::disk('public')->exists('posts/'.$post->image)) {
             // Delete associated post image for header if exists
             Storage::disk('public')->delete('posts/'.$post->image);
-        }
-
-        if (Storage::disk('public')->exists('posts/slider/'.$post->image)) {
-            // Delete associated post image for slider if exists
-            Storage::disk('public')->delete('posts/slider/'.$post->image);
         }
 
         // Remove all categories and tags of the post from pivot table

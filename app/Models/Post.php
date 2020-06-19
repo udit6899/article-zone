@@ -115,4 +115,14 @@ class Post extends Model
     {
         return Comment::where([ 'post_id' => $this->id, 'is_approved' => true ])->latest()->get();
     }
+
+    /**
+     * Get formatted date of a specific post.
+     *
+     * @return string
+     */
+    public function getCreatedDateAttribute()
+    {
+        return $this->created_at->toFormattedDateString();
+    }
 }

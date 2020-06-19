@@ -14,7 +14,7 @@
                     <div class="category-border-content">
                         <div class="category-detail category">
                             <div class="category-img">
-                                <img src="{{ Storage::disk('public')->url('posts/slider/' . $post->image) }}"
+                                <img src="{{ Storage::disk('public')->url('posts/' . $post->image) }}"
                                      alt="{{ $post->title }}">
                                 <div class="category-overlay">
                                 </div>
@@ -33,20 +33,32 @@
                                 </div>
                                 <p>{!! $post->body !!}</p>
                                 <div class="read-more-more clearfix">
-                                    <div class="share-comment-section floatright">
-                                        <div class="share single-page">
-                                            <span>share:</span>
-                                            <a href=""><i class="fa fa-facebook"></i></a>
-                                            <a href=""><i class="fa fa-twitter"></i></a>
-                                            <a href=""><i class="fa fa-pinterest"></i></a>
-                                            <a href=""><i class="fa fa-instagram"></i></a>
-                                        </div>
-                                    </div>
                                     <div class="tag floatleft">
                                         <span>Tags</span>
                                         @foreach($post->tags as $tag)
-                                            <a href="">{{ $tag->name }}</a>
+                                            <a href="{{ route('post.tag.item', $tag->name) }}">
+                                                {{ $tag->name }}
+                                            </a>
                                         @endforeach
+                                    </div>
+                                </div>
+                                <div class="read-more-more clearfix">
+                                    <div class="post-category floatleft">
+                                        <span>Categories</span>
+                                        @foreach($post->categories as $category)
+                                            <a href="{{ route('post.category.item', $category->slug) }}">
+                                                {{ $category->name }}
+                                            </a>
+                                        @endforeach
+                                    </div>
+                                </div>
+                                <div class="share-comment-section ">
+                                    <div class="share single-page">
+                                        <span>share:</span>
+                                        <a href=""><i class="fa fa-facebook"></i></a>
+                                        <a href=""><i class="fa fa-twitter"></i></a>
+                                        <a href=""><i class="fa fa-pinterest"></i></a>
+                                        <a href=""><i class="fa fa-instagram"></i></a>
                                     </div>
                                 </div>
                                 <div class="recent-post-content clearfix">
@@ -63,7 +75,9 @@
                                             <div class="recent-post-text single-page">
                                                 <span>{{ $randomPost->created_at->toFormattedDateString() }}</span>
                                                 <a href="{{ route('post.details', $randomPost->slug) }}">
-                                                    <p>{{ Str::limit($randomPost->title, 15) }}</p>
+                                                    <p style="color: #0D0A0A">
+                                                        {{ Str::limit($randomPost->title, 15) }}
+                                                    </p>
                                                 </a>
                                             </div>
                                         </div>

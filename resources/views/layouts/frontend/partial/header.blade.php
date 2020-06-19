@@ -7,7 +7,7 @@
                 <div class="col-md-6 col-sm-6 col-xs-5">
                     <div class="logo text-left">
                         <a href="{{ route('home') }}">
-                            <img src="{{ asset('assets/frontend/images/logo.png') }}" alt="">
+                            <img src="{{ asset('assets/frontend/images/logo3.png') }}" alt="">
                         </a>
                     </div>
                 </div>
@@ -21,7 +21,8 @@
                             <a href=""><i class="fa fa-google-plus"></i></a>
                             <a href=""><i class="fa fa-rss"></i></a>
                         @else
-                            <a><img src="{{ Storage::disk('public')->url('users/'.Auth::user()->avatar_path) }}">
+                            <a>
+                                <img src="{{ Storage::disk('public')->url('users/'.Auth::user()->avatar_path) }}">
                             </a>
                             <label id="avatar-text">{{ Auth::user()->name }}</label>
                         @endguest
@@ -56,7 +57,12 @@
                             <li class="{{ Request::is('about') ? 'active' : '' }}">
                                 <a href="{{ route('about') }}">About me</a>
                             </li>
-                            <li class="{{ Request::is('article/category') ? 'active' : '' }}">
+                            @guest
+                                <li class="{{ Request::is('post/create') ? 'active' : '' }}">
+                                    <a href="{{ route('post.create') }}">Create Article</a>
+                                </li>
+                            @endguest
+                            <li class="{{ Request::is('post/category') ? 'active' : '' }}">
                                 <a href="{{ route('post.category') }}">Categories</a>
                             </li>
                             <li class="{{ Request::is('contact') ? 'active' : '' }}">
@@ -67,7 +73,7 @@
                                     <a href="{{ route('login') }}">Signup/Login</a>
                                 </li>
                             @else
-                                <li class="{{ Request::is('user/account') ? 'active' : '' }}">
+                                <li class="{{ Request::is('*/dashboard') ? 'active' : '' }}">
                                     <a>Profile</a>
                                     <ul class="sub-menu">
                                         <li>
