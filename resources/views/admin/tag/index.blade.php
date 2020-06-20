@@ -43,7 +43,7 @@
                                             <td>{{ $key + 1 }}</td>
                                             <td>{{ $tag->name }}</td>
                                             <td>
-                                                <a target="_blank" href="{{ route('post.tag.item', $tag->name) }}">
+                                                <a target="_blank" href="{{ $tag->postsLink }}">
                                                     {{ $tag->posts->count() }}
                                                 </a>
                                             </td>

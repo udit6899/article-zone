@@ -71,7 +71,7 @@
             @hasSection('active-author')
                 @yield('active-author')
             @else
-                @include('common.base.post.popular-post')
+                @include('common.base.post.popular-post', ['prefix' => 'author'])
             @endif
         </div>
         <!-- #END# Task Info -->

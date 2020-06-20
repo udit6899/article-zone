@@ -25,26 +25,25 @@
                         <div class="category-border-content">
                             <div class="category-detail">
                                 <div class="category-img">
-                                    <img src="{{ Storage::disk('public')->url("categories/$category->image") }}"
-                                         alt="{{ $category->name }}">
+                                    <img src="{{ $category->imageUrl }}" alt="{{ $category->name }}">
                                     <div class="category-overlay"></div>
                                 </div>
                                 <div class="category-text">
                                     <a class="art">{{ $category->created_at->toFormattedDateString() }}</a>
                                     <h4>
-                                        <a href="{{ route('post.category.item', $category->slug) }}">
+                                        <a href="{{ $category->postsLink }}">
                                             {{ $category->name }}
                                         </a>
                                     </h4>
                                     <p>{{ Str::limit($category->description, 75) }}</p>
                                     <div class="category-link">
-                                        <a href="{{ route('post.category.item', $category->slug) }}">view</a>
+                                        <a href="{{ $category->postsLink }}">view</a>
                                     </div>
                                     <div class="share-comment-section">
                                         <div class="comment">
                                             <small>
                                                 <strong>Total Posts: </strong>
-                                                <span>{{ $category->posts->count() }}</span>
+                                                <span>{{ $category->posts()->published()->count() }}</span>
                                             </small>
                                         </div>
                                         <div class="share">

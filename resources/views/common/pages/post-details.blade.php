@@ -19,9 +19,10 @@
                                 </div>
                             </div>
                             <div class="category-text read-more clearfix">
-                                <a href="{{ route('post.author.profile', $post->user->id) }}"
-                                   class="art"><strong>{{ $post->user->name }}</strong></a>
-                                <h4><a href="{{ route('post.details', $post->slug) }}">{{ $post->title }}</a></h4>
+                                <a href="{{ $post->user->postsLink }}" class="art">
+                                    <strong>{{ $post->user->name }}</strong>
+                                </a>
+                                <h4><a href="{{ $post->viewLink }}">{{ $post->title }}</a></h4>
                                 <span class="art">{{ $post->created_at->toFormattedDateString() }}</span>
                                 <div class="quote">
                                     <p>
@@ -35,7 +36,7 @@
                                     <div class="tag floatleft">
                                         <span>Tags</span>
                                         @foreach($post->tags as $tag)
-                                            <a href="{{ route('post.tag.item', $tag->name) }}">
+                                            <a href="{{ $tag->postsLink }}">
                                                 {{ $tag->name }}
                                             </a>
                                         @endforeach
@@ -45,7 +46,7 @@
                                     <div class="post-category floatleft">
                                         <span>Categories</span>
                                         @foreach($post->categories as $category)
-                                            <a href="{{ route('post.category.item', $category->slug) }}">
+                                            <a href="{{ $category->postsLink }}">
                                                 {{ $category->name }}
                                             </a>
                                         @endforeach
@@ -65,14 +66,14 @@
                                     @foreach($randomPosts as $randomPost)
                                         <div class="recent-post-single single-page">
                                             <div class="recent-post-img single-page">
-                                                <a href="{{ route('post.details', $randomPost->slug) }}">
+                                                <a href="{{ $randomPost->viewLink }}">
                                                     <img src="{{ $randomPost->imageUrl }}"  height="54px"
                                                          alt="{{ $randomPost->title }}" width="54px">
                                                 </a>
                                             </div>
                                             <div class="recent-post-text single-page">
                                                 <span>{{ $randomPost->created_at->toFormattedDateString() }}</span>
-                                                <a href="{{ route('post.details', $randomPost->slug) }}">
+                                                <a href="{{ $randomPost->viewLink }}">
                                                     <p style="color: #0D0A0A">
                                                         {{ Str::limit($randomPost->title, 15) }}
                                                     </p>

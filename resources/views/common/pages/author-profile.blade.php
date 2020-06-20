@@ -40,7 +40,7 @@
                             </div>
                             <div class="about-text-content">
                                 <h4>
-                                    <a href="{{ route('post.author.profile', $author->id) }}">
+                                    <a href="{{ $author->postsLink }}">
                                         Hello, I’m {{ $author->name }}!
                                     </a>
                                 </h4>

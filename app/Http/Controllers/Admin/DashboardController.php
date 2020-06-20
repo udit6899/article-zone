@@ -40,13 +40,13 @@ class DashboardController extends Controller
         $totalTags = Tag::count();
 
         // Get most popular posts
-        $popularPosts = Post::popular(5);
+        $popularPosts = Post::popular(env('POPULAR_POST', 5));
 
         // Get most active authors
         $activeAuthors = User::admin(false)
             ->withCount('posts')->withCount('comments')
             ->orderByDesc('posts_count')->orderByDesc('comments_count')
-            ->take(5)->get();
+            ->take(env('ACTIVE_AUTHOR', 5))->get();
 
         return view('admin.dashboard', compact(
             'totalPosts', 'totalTags', 'totalCategories',

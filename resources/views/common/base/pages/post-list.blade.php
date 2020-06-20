@@ -16,17 +16,17 @@
                             </div>
                             <div class="col-md-6 fix col-sm-6">
                                 <div class="video-content-text">
-                                    <a href="{{ route('post.author.profile', $post->user->id) }}"
+                                    <a href="{{ $post->user->postsLink }}"
                                        class="art">{{ $post->user->name }}</a>
                                     <h4>
-                                        <a href="{{ route('post.details', $post->slug) }}">
+                                        <a href="{{ $post->viewLink }}">
                                             {{ Str::limit($post->title, 50, '') }}
                                         </a>
                                     </h4>
                                     <span class="art">{{ $post->created_date }}</span>
                                     <p>{{ Str::limit($post->quote, 100) }}</p>
                                     <div class="category-link">
-                                        <a href="{{ route('post.details', $post->slug) }}">read more</a>
+                                        <a href="{{ $post->viewLink }}">read more</a>
                                     </div>
                                     <div class="share-comment-section">
                                         <div class="comment">

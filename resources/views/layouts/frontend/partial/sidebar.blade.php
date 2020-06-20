@@ -13,8 +13,9 @@
                                     @foreach($categories as $category)
                                         @if($loop->odd && $loop->index < 10 && substr_count($category->name, ' ') < 1)
                                             <li>
-                                                <a href="{{ route('post.category.item', $category->slug) }}">
-                                                    {{ $category->name. ' (' . $category->posts->count() . ')'}}
+                                                <a href="{{ $category->postsLink }}">
+                                                    {{ $category->name .
+                                                        ' (' . $category->posts()->published()->count() . ')'}}
                                                 </a>
                                             </li>
                                         @endif
@@ -24,8 +25,9 @@
                                     @foreach($categories as $category)
                                         @if($loop->even && $loop->index < 7 && substr_count($category->name, ' ') < 1)
                                             <li>
-                                                <a href="{{ route('post.category.item', $category->slug) }}">
-                                                    {{ $category->name. ' (' . $category->posts->count() . ')'}}
+                                                <a href="{{ $category->postsLink }}">
+                                                    {{ $category->name .
+                                                        ' (' . $category->posts()->published()->count() . ')' }}
                                                 </a>
                                             </li>
                                         @endif
@@ -52,8 +54,10 @@
                                 <ul class="left-portion">
                                     @foreach($tags as $tag)
                                         @if($loop->odd && $loop->index < 10 && substr_count($category->name, ' ') < 1)
-                                            <li><a href="{{ route('post.tag.item', $tag->name) }}">
-                                                    {{ '#'. $tag->name. ' (' . $tag->posts->count() . ')'}}
+                                            <li>
+                                                <a href="{{ $tag->postsLink }}">
+                                                    {{ "#$tag->name" .
+                                                            ' (' . $tag->posts()->published()->count() . ')' }}
                                                 </a>
                                             </li>
                                         @endif
@@ -62,8 +66,10 @@
                                 <ul class="right-portion">
                                     @foreach($tags as $tag)
                                         @if($loop->even && $loop->index < 7 && substr_count($category->name, ' ') < 1)
-                                            <li><a href="{{ route('post.tag.item', $tag->name) }}">
-                                                    {{ '#' . $tag->name. ' (' . $tag->posts->count() . ')'}}
+                                            <li>
+                                                <a href="{{ $tag->postsLink }}">
+                                                    {{ "#$tag->name" .
+                                                            ' (' . $tag->posts()->published()->count() . ')' }}
                                                 </a>
                                             </li>
                                         @endif
@@ -118,9 +124,9 @@
                             <h4>Popular posts</h4>
                         </div>
                         @foreach($popularPosts as $popularPost)
-                            <div class="popular-post-single @if($loop->first) top @elseif($loop->last) bottom @endif">
+                            <div class="popular-post-single top">
                                 <div class="popular-post-single-img">
-                                    <a href="{{ route('post.details', $popularPost->slug) }}">
+                                    <a href="{{ $popularPost->viewLink }}">
                                         <img src="{{ $popularPost->imageUrl }}"
                                              alt="{{ $popularPost->title }}" width="89px" height="100px">
                                     </a>
@@ -128,7 +134,7 @@
                                 <div class="popular-post-single-text">
                                     <span>{{ $popularPost->created_date }}</span>
                                     <p>
-                                        <a href="{{ route('post.details', $popularPost->slug) }}">
+                                        <a href="{{ $popularPost->viewLink }}">
                                             {{ Str::limit($popularPost->title, 18) }}
                                         </a>
                                     </p>

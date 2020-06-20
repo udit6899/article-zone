@@ -120,11 +120,18 @@ class TagController extends Controller
      */
     public function destroy(Tag $tag)
     {
-        // Delete tag from db
-        $tag->delete();
+        if ($tag->posts->count() < 1) {
 
-        // Make success response
-        Toastr::success('Tag Successfully Deleted !', 'Success');
+            // Delete tag from db
+            $tag->delete();
+
+            // Make success response
+            Toastr::success('Tag Successfully Deleted !', 'Success');
+
+        } else {
+            // Make error response
+            Toastr::error("The tag can\'t be delete ! It\'s associated with some posts.", 'Error');
+        }
 
         // Return to index page
         return redirect()->back();

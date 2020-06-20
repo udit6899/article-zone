@@ -21,8 +21,8 @@
                         @csrf
                         <div class="form-group form-float">
                             <div class="form-line {{ $errors->has('name') ? 'focused error' : '' }}">
-                                <input type="text" id="category_name"
-                                       name='name' class="form-control" value="{{ old('name') }}">
+                                <input type="text" id="category_name" name='name'
+                                       class="form-control" value="{{ old('name') }}" required>
                                 <label class="form-label">Category Name</label>
                             </div>
                         </div>
@@ -35,7 +35,8 @@
                         </div>
                         <div class="form-group">
                             <label for="category_image">Category Image :</label>
-                            <input type="file" accept="image/*" id="category_image" name='image' class="form-control">
+                            <input type="file" accept="image/*"
+                                   id="category_image" name='image' class="form-control" required>
                         </div>
                         <a class="btn bg-deep-orange m-t-15 waves-effect" href="{{ route('admin.category.index') }}">
                             BACK

@@ -42,8 +42,7 @@
                                                 <img height="50px" width="50px" src="{{ $author->ImageUrl }}">
                                             </td>
                                             <td>
-                                                <a  target="_blank"
-                                                    href="{{ route('post.author.profile', $author->id) }}">
+                                                <a  target="_blank" href="{{ $author->postsLink }}">
                                                     {{ $author->posts_count }}
                                                 </a>
                                             </td>

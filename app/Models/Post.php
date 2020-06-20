@@ -16,7 +16,8 @@ class Post extends Model
      * @var array
      */
     protected $fillable = [
-        'user_id', 'title', 'slug', 'quote', 'body', 'image', 'is_published', 'is_approved'
+        'user_id', 'title', 'slug', 'quote',
+        'body', 'image', 'is_published', 'is_approved'
     ];
 
     /**
@@ -149,6 +150,16 @@ class Post extends Model
     public function getImageUrlAttribute()
     {
         return Storage::disk('public')->url("posts/$this->image");
+    }
+
+    /**
+     * Get Permalink of the post
+     *
+     * @return string
+     */
+    public function getViewLinkAttribute()
+    {
+        return route('post.details', $this->slug);
     }
 
 }

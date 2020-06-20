@@ -36,14 +36,14 @@
                     @foreach($recentPosts as $recentPost)
                         <div class="recent-post-single">
                             <div class="recent-post-img">
-                                <a href="{{ route('post.details', $recentPost->slug) }}">
+                                <a href="{{ $recentPost->viewLink }}">
                                     <img src="{{ $recentPost->imageUrl }}"
                                          alt="{{ $recentPost->title }}" height="54px" width="54px">
                                 </a>
                             </div>
                             <div class="recent-post-text">
                                 <span>{{ $recentPost->created_date }}</span>
-                                <a href="{{ route('post.details', $recentPost->slug) }}">
+                                <a href="{{ $recentPost->viewLink }}">
                                     <p>{{ Str::limit($recentPost->title, 20) }}</p>
                                 </a>
                             </div>

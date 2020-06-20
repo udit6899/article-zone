@@ -37,21 +37,21 @@
                         <td>{{ $post->view_count }}</td>
                         @if($post->is_published == true)
                             <td><span class="label bg-green">Published</span></td>
-                            <td>
-                                <a target="_blank" class="btn btn-xs bg-info waves-effect"
-                                   title="View" href="{{ route("post.details", $post->slug) }}">
-                                    <i class="material-icons action-icon">visibility</i>
-                                </a>
-                            </td>
                         @else
                             <td><span class="label bg-pink">Pending</span></td>
-                            <td>
-                                <a class="btn btn-xs bg-info waves-effect"
-                                   title="View" href="{{ route("author.post.show", $post->id) }}">
-                                    <i class="material-icons action-icon">visibility</i>
-                                </a>
-                            </td>
                         @endif
+
+                        <td>
+                            <a class="btn btn-xs bg-info waves-effect" title="View"
+
+                                @if($post->is_approved && $post->is_published)
+                                    target="_blank" href="{{ $post->viewLink }}"
+                                @else
+                                    href="{{ route("$prefix.post.show", $post->id) }}"
+                                @endif>
+                                <i class="material-icons action-icon">visibility</i>
+                            </a>
+                        </td>
                     </tr>
                 @endforeach
                 </tbody>

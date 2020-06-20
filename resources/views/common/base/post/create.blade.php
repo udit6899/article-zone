@@ -12,7 +12,8 @@
                 <div class="body">
                     <div class="form-group form-float">
                         <div class="form-line {{ $errors->has('title') ? 'focused error' : '' }}">
-                            <input type="text" id="title" name='title' class="form-control" value="{{ old('title') }}">
+                            <input type="text" id="title"
+                                   name='title' class="form-control" value="{{ old('title') }}" required>
                             <label class="form-label">Post Title</label>
                         </div>
                     </div>
@@ -25,7 +26,8 @@
                     </div>
                     <div class="form-group">
                         <label for="category_image">Featured Image :</label>
-                        <input type="file" accept="image/*" id="post_image" name='image' class="form-control">
+                        <input type="file"
+                               accept="image/*" id="post_image" name='image' class="form-control" required>
                     </div>
                 </div>
             </div>
@@ -42,7 +44,7 @@
                         <div class="form-line {{ $errors->has('categories') ? 'focused error' : '' }}">
                             <label for="tag">Select Category</label>
                             <select id="category" name="categories[]"
-                                    class="form-control show-tick" data-live-search="true" multiple>
+                                    class="form-control show-tick" data-live-search="true" multiple required>
                                 @foreach($allCategories as $category)
                                     <option value="{{ $category->id }}"
                                         @if(
@@ -60,7 +62,7 @@
                         <div class="form-line {{ $errors->has('tags') ? 'focused error' : '' }}">
                             <label for="tag">Select Tag</label>
                             <select id="tag" name="tags[]"
-                                    class="form-control show-tick" data-live-search="true" multiple>
+                                    class="form-control show-tick" data-live-search="true" multiple required>
                                 @foreach($allTags as $tag)
                                     <option value="{{ $tag->id }}"
                                         @if(

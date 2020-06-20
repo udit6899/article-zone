@@ -23,8 +23,8 @@
                         @method('PATCH')
                         <div class="form-group form-float">
                             <div class="form-line {{ $errors->has('name') ? 'focused error' : '' }}">
-                                <input type="text" id="category_name" name='name'
-                                       class="form-control" value="{{ old('name') ? old('name') : $category->name }}">
+                                <input type="text" id="category_name" name='name' class="form-control"
+                                       value="{{ old('name') ? old('name') : $category->name }}" required>
                                 <label class="form-label">Category Name</label>
                             </div>
                         </div>

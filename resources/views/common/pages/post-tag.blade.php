@@ -27,19 +27,19 @@
                                 <div class="category-text">
                                     <a class="art">{{ $tag->created_at->toFormattedDateString() }}</a>
                                     <h4>
-                                        <a href="{{ route('post.tag.item', $tag->name) }}">
+                                        <a href="{{ $tag->postsLink }}">
                                             {{ $tag->name }}
                                         </a>
                                     </h4>
                                     <p>{{ Str::limit($tag->description, 75) }}</p>
                                     <div class="category-link">
-                                        <a href="{{ route('post.tag.item', $tag->name) }}">view</a>
+                                        <a href="{{ $tag->postsLink }}">view</a>
                                     </div>
                                     <div class="share-comment-section">
                                         <div class="comment">
                                             <small>
                                                 <strong>Total Posts: </strong>
-                                                <span>{{ $tag->posts->count() }}</span>
+                                                <span>{{ $tag->posts()->published()->count() }}</span>
                                             </small>
                                         </div>
                                         <div class="share">

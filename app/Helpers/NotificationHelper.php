@@ -89,7 +89,7 @@ class NotificationHelper
                 // Send notification to all subscribers once a post published
                 foreach ($subscribers as $subscriber) {
                     Notification::route('mail', $subscriber->email)
-                                ->notify(new PostPublished($post));
+                                ->notify(new PostPublished($data));
                 }
 
                 break;

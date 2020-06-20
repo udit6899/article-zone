@@ -78,4 +78,14 @@ class User extends Authenticatable
     {
         return Storage::disk('public')->url("users/$this->avatar_path");
     }
+
+    /**
+     * Get posts Permalink of the author
+     *
+     * @return string
+     */
+    public function getPostsLinkAttribute()
+    {
+        return route('post.author.profile', $this->id);
+    }
 }

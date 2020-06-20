@@ -70,7 +70,8 @@ class PagesController extends Controller
         $query = $request->query('query');
 
         // Retrieve the searched post
-        $searchedPosts = Post::where('title', 'Like', "%$query%")->published()->paginate(4);
+        $searchedPosts = Post::where('title', 'Like', "%$query%")
+            ->published()->paginate(env('SEARCHED_POST', 5));
 
         // Return to post search view
         return view('common.pages.post-search', compact('query', 'searchedPosts'));
@@ -87,7 +88,8 @@ class PagesController extends Controller
     {
 
         // Retrieve the author's published posts
-        $authorPosts = Post::where('user_id', $author->id)->published()->paginate(4);
+        $authorPosts = Post::where('user_id', $author->id)
+            ->published()->paginate(env('AUTHOR_POST', 5));
 
         // Return to author-post-profile view
         return view('common.pages.author-profile', compact('author', 'authorPosts'));
@@ -101,7 +103,7 @@ class PagesController extends Controller
     public function postCategories()
     {
         // Retrieve all non-empty categories
-        $nonEmptyCategories = Category::has('posts')->latest()->paginate(9);
+        $nonEmptyCategories = Category::has('posts')->latest()->paginate(env('CATEGORY', 9));
 
         // Return to post category view
         return view('common.pages.post-category', compact('nonEmptyCategories'));
@@ -115,7 +117,7 @@ class PagesController extends Controller
     public function postTags()
     {
         // Retrieve all non-empty tags
-        $nonEmptyTags = Tag::has('posts')->latest()->paginate(9);
+        $nonEmptyTags = Tag::has('posts')->latest()->paginate(env('TAG', 9));
 
         // Return to post tag view
         return view('common.pages.post-tag', compact('nonEmptyTags'));
@@ -133,7 +135,8 @@ class PagesController extends Controller
         $tag = Tag::where('name', $name)->firstOrFail();
 
         // Retrieve all the published posts of the tag
-        $tagPosts = $tag->posts()->published()->latest()->paginate(4);
+        $tagPosts = $tag->posts()->published()
+            ->latest()->paginate(env('TAG_POST', 5));
 
         // Return to post tag-item view
         return view('common.pages.post-tag-items', compact('tag', 'tagPosts'));
@@ -151,10 +154,11 @@ class PagesController extends Controller
         $category = Category::where('slug', $slug)->firstOrFail();
 
         // Retrieve all the published posts of the category
-        $categoryPosts = $category->posts()->published()->latest()->paginate(4);
+        $categoryPosts = $category->posts()->published()
+            ->latest()->paginate(env('CATEGORY_POST', 5));
 
         // Return to post category-item view
         return view('common.pages.post-category-items', compact('category', 'categoryPosts'));
     }
-    
+
 }

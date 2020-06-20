@@ -132,20 +132,27 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
-        if (Storage::disk('public')->exists('categories/'.$category->image)) {
-            // Delete associated category image for header if exists
-            Storage::disk('public')->delete('categories/'.$category->image);
-        }
-        if (Storage::disk('public')->exists('categories/slider/'.$category->image)) {
-            // Delete associated category image for slider if exists
-            Storage::disk('public')->delete('categories/slider/'.$category->image);
-        }
+        if ($category->posts->count() < 1) {
 
-        // Delete category from db
-        $category->delete();
+            if (Storage::disk('public')->exists('categories/'.$category->image)) {
+                // Delete associated category image for header if exists
+                Storage::disk('public')->delete('categories/'.$category->image);
+            }
+            if (Storage::disk('public')->exists('categories/slider/'.$category->image)) {
+                // Delete associated category image for slider if exists
+                Storage::disk('public')->delete('categories/slider/'.$category->image);
+            }
 
-        // Make success response
-        Toastr::success('Category Successfully Deleted !', 'Success');
+            // Delete category from db
+            $category->delete();
+
+            // Make success response
+            Toastr::success('Category Successfully Deleted !', 'Success');
+
+        } else {
+            // Make error response
+            Toastr::error("The category can\'t be delete ! It\'s associated with some posts.", 'Error');
+        }
 
         // Return to index page
         return redirect()->back();

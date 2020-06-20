@@ -52,8 +52,9 @@
                                     <td class="text-left">
                                         <div class="media">
                                             <div class="media-left">
-                                                <a target="_blank"
+                                                <a
                                                     @if($comment->post->is_approved && $comment->post->is_published)
+                                                        target="_blank"
                                                         href="{{ route('post.details', $comment->post->slug) }}"
                                                     @else
                                                         href="{{ route("$prefix.post.show", $comment->post->id) }}"
@@ -64,9 +65,9 @@
                                                 </a>
                                             </div>
                                             <div class="media-body">
-                                                <a target="_blank"
+                                                <a
                                                    @if($comment->post->is_approved && $comment->post->is_published)
-                                                        href="{{ route('post.details', $comment->post->slug) }}"
+                                                        target="_blank" href="{{ $comment->post->viewLink }}"
                                                    @else
                                                         href="{{ route("$prefix.post.show", $comment->post->id) }}"
                                                    @endif>

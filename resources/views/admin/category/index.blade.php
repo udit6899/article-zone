@@ -44,12 +44,10 @@
                                         <td>{{ $key + 1 }}</td>
                                         <td>{{ $category->name }}</td>
                                         <td>
-                                            <img height="50px" width="80px"
-                                             src="{{ Storage::disk('public')->url('categories/'.$category->image) }}">
+                                            <img height="50px" width="80px" src="{{ $category->imageUrl }}">
                                         </td>
                                         <td>
-                                            <a target="_blank"
-                                               href="{{ route('post.category.item', $category->slug) }}">
+                                            <a target="_blank" href="{{ $category->postsLink }}">
                                                 {{ $category->posts->count() }}
                                             </a>
                                         </td>

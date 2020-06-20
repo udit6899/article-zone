@@ -53,7 +53,7 @@
             </div>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-8 col-lg-9">
-            @include('common.base.post.popular-post')
+            @include('common.base.post.popular-post', ['prefix' => 'admin'])
         </div>
     </div>
 @endsection

@@ -17,7 +17,7 @@ class HomeController extends Controller
     public function index()
     {
         // Get all latest post
-        $posts = Post::published()->latest()->paginate(4);
+        $posts = Post::published()->latest()->paginate(env('LATEST_POST', 5));
 
         // Get the admin details
         $admin = User::admin(true)->first();

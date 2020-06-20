@@ -55,7 +55,7 @@
                                     <div>
                                         <label class="form-label text-left">Your Name</label>
                                         <input type="text" id="name" name='name' class="form-control"
-                                               placeholder="Your Full Name" value="{{ old('name') }}">
+                                               placeholder="Your Full Name" value="{{ old('name') }}" required>
                                     </div>
                                 </div>
                             </div>
@@ -63,7 +63,7 @@
                                 <div class="form-group ">
                                     <div>
                                         <label class="form-label text-left">Your Email</label>
-                                        <input type="email" name='email' class="form-control"
+                                        <input type="email" name='email' class="form-control" required
                                                placeholder="Your Email Address" value="{{ old('email') }}">
                                     </div>
                                 </div>

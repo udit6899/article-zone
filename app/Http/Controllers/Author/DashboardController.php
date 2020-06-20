@@ -18,7 +18,7 @@ class DashboardController extends Controller
         $totalPosts = $user->posts->count();
 
         // Get author's popular posts
-        $popularPosts = $user->posts()->popular(4);
+        $popularPosts = $user->posts()->popular(env('POPULAR_POST', 4));
 
         // Get author's total post views
         $totalPostViews = $user->posts()->sum('view_count');
