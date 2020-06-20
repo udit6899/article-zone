@@ -6,22 +6,21 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
-use Illuminate\Support\Facades\Storage;
 
-class PostApproved extends Notification implements ShouldQueue
+class CommentApproved extends Notification implements ShouldQueue
 {
     use Queueable;
 
-    private $post;
+    private $comment;
 
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct($post)
+    public function __construct($comment)
     {
-        $this->post = $post;
+        $this->comment = $comment;
     }
 
     /**
@@ -44,12 +43,13 @@ class PostApproved extends Notification implements ShouldQueue
     public function toMail($notifiable)
     {
         return (new MailMessage)
-            ->subject('Your Post Successfully Approved')
-            ->greeting('Hello, ' . $this->post->user->name . ' !')
-            ->line('Your post has been successfully approved.')
-            ->line('Post Title : <h3>' . $this->post->title . '</h3>')
-            ->line('<img src="' . $this->post->imageUrl . '">')
-            ->action('View', url(route('post.details', $this->post->slug)))
+            ->subject('Your Comment Successfully Approved')
+            ->greeting('Hello, ' . $this->comment->user->name . ' !')
+            ->line('Your comment on <strong>' . $this->comment->post->user->name .
+                '</strong> post, has been successfully approved.')
+            ->line('<h3>' . $this->comment->post->title . '</h3>')
+            ->line('<img src="' . $this->comment->post->imageUrl . '">')
+            ->action('View', url(route('post.details', $this->comment->post->slug)))
             ->line('Thank you for using our application!');
     }
 

@@ -22,7 +22,7 @@
                             <a href=""><i class="fa fa-rss"></i></a>
                         @else
                             <a>
-                                <img src="{{ Storage::disk('public')->url('users/'.Auth::user()->avatar_path) }}">
+                                <img src="{{ Auth::user()->imageUrl }}">
                             </a>
                             <label id="avatar-text">{{ Auth::user()->name }}</label>
                         @endguest

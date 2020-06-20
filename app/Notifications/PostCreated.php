@@ -12,7 +12,7 @@ class PostCreated extends Notification implements ShouldQueue
 {
     use Queueable;
 
-    public $post;
+    private $post;
 
     /**
      * Create a new notification instance.
@@ -48,7 +48,7 @@ class PostCreated extends Notification implements ShouldQueue
                     ->greeting('Hello, Admin !')
                     ->line('New post by <strong>' . $this->post->user->name . '</strong> need to approve.')
                     ->line('Post Title : <h3>' . $this->post->title . '</h3>')
-                    ->line('<img src="' . Storage::disk('public')->url('posts/' . $this->post->image) . '">')
+                    ->line('<img src="' . $this->post->imageUrl . '">')
                     ->line('To approve the post click on view button.')
                     ->action('View', url(route('admin.post.show', $this->post->id)))
                     ->line('Thank you for using our application!');

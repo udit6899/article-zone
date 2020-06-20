@@ -35,8 +35,7 @@
                     <div class="about-area-all-content">
                         <div class="about-area-content">
                             <div class="about-photo-content">
-                                <a><img src="{{ Storage::disk('public')->url("users/$author->avatar_path") }}"
-                                    alt="author-profile-image">
+                                <a><img src="{{ $author->imageUrl }}" alt="author-profile-image">
                                 </a>
                             </div>
                             <div class="about-text-content">

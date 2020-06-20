@@ -12,7 +12,7 @@ class PostPublished extends Notification implements ShouldQueue
 {
     use Queueable;
 
-    public $post;
+    private $post;
 
     /**
      * Create a new notification instance.
@@ -48,7 +48,7 @@ class PostPublished extends Notification implements ShouldQueue
             ->greeting('Hello, Subscriber !')
             ->line('There is a new post. We hope you will like it.')
             ->line('Post Title : <h3>' . $this->post->title . '</h3>')
-            ->line('<img src="' . Storage::disk('public')->url('posts/' . $this->post->image) . '">')
+            ->line('<img src="' . $this->post->imageUrl . '">')
             ->action('View', url(route('post.details', $this->post->slug)))
             ->line('Thank you for using our application!');
     }

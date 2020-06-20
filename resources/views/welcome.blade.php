@@ -54,8 +54,7 @@
                         <div class="about-area-content">
                             <div class="about-photo-content">
                                 <a>
-                                    <img alt="admin-avatar"
-                                         src="{{ asset(Storage::disk('public')->url("users/$admin->avatar_path")) }}">
+                                    <img alt="admin-avatar" src="{{ $admin->imageUrl }}">
                                 </a>
                             </div>
                             <br>

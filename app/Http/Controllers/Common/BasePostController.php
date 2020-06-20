@@ -56,6 +56,7 @@ class BasePostController extends Controller
 
     }
 
+
     /**
      * Store a newly created resource in storage.
      *
@@ -91,14 +92,16 @@ class BasePostController extends Controller
         $post->tags()->attach($request->tags);
 
         if ($user->is_admin) {
+
             // If user is admin, Send notification to the all subscribers
-            NotificationHelper::notify('subscriber', $post);
+            NotificationHelper::notify('subscriber', $post, 'post');
 
             // Create success message for admin
             Toastr::success('Your Post Successfully Saved !', 'Success');
         } else {
+
             // If user is author or guest, Send notification to admin
-            NotificationHelper::notify('admin', $post);
+            NotificationHelper::notify('admin', $post, 'post', 'new');
 
             // Create success message for author and guest
             Toastr::success('Your Post Successfully Saved ! Wait For Admin Approval.', 'Success');
@@ -110,6 +113,7 @@ class BasePostController extends Controller
         // Return to post view
         return redirect()->route($routePath);
     }
+
 
     /**
      * Show the form for editing the specified post.
@@ -130,6 +134,7 @@ class BasePostController extends Controller
 
     }
 
+
     /**
      * Update the specified post in storage.
      *
@@ -140,13 +145,13 @@ class BasePostController extends Controller
     public function update(PostRequest $request, Post $post)
     {
         $slug = Str::slug($request->title);
+        $previousApprovedStatus = $post->is_approved;
 
         // Store uploaded image : Storage/posts
         $imageUrl = FileHelper::upload(
             $request->file('image'), [ 0 => 'posts'],
             [0 => ['width' => 338, 'height' => 245]], $post->image
         );
-
 
         // Prepare post option to update
         $post->update([
@@ -156,14 +161,25 @@ class BasePostController extends Controller
             'body' => $request->body ? $request->body : $post->body,
             'image' => $imageUrl,
             'is_published' => $request->is_published ? true : false,
+            'is_approved' =>  Auth::user()->is_admin ? true : false,
         ]);
 
         // Update post's category and togs
         $post->categories()->sync($request->categories);
         $post->tags()->sync($request->tags);
 
-        // Create success message
-        Toastr::success('Post Successfully Updated !', 'Success');
+
+        if (Auth::user()->is_admin) {
+            // Create success message for admin
+            Toastr::success('Post Successfully Updated !', 'Success');
+        } else {
+            if ($previousApprovedStatus == true) {
+                // If user is author, Send notification to admin for approval
+                NotificationHelper::notify('admin', $post, 'post','update');
+            }
+            // Create success message for author
+            Toastr::success('Your Post Successfully Updated ! Wait For Admin Approval.', 'Success');
+        }
 
         // Return to index view
         return redirect()->route("$this->prefix.post.index");

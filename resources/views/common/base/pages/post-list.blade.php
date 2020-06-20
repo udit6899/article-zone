@@ -8,8 +8,7 @@
                             <div class="col-md-6 col-sm-6">
                                 <div class="video-area-content-detail">
                                     <div class="category-img">
-                                        <img src="{{ Storage::disk('public')->url("posts/$post->image") }}"
-                                             alt="{{ $post->title }}">
+                                        <img src="{{ $post->imageUrl }}" alt="{{ $post->title }}">
                                         <div class="category-overlay">
                                         </div>
                                     </div>
@@ -63,8 +62,7 @@
                                     <div class="recent-post-single single-page">
                                         <div class="recent-post-img single-page">
                                             <a href="{{ route('post.details', $randomPost->slug) }}">
-                                                <img src="{{ Storage::disk('public')
-                                                    ->url("posts/$randomPost->image") }}"  height="54px"
+                                                <img src="{{ $randomPost->imageUrl }}"  height="54px"
                                                      alt="{{ $randomPost->title }}" width="54px">
                                             </a>
                                         </div>

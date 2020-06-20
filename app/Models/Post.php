@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Support\Facades\Storage;
 
 class Post extends Model
 {
@@ -88,11 +89,13 @@ class Post extends Model
      * Scope a query to get all the popular posts.
      *
      * @param \Illuminate\Database\Eloquent\Builder $query
+     * @param int $value
      * @return Illuminate\Database\Eloquent\Collection
      */
-    public static function scopePopular($query) {
+    public static function scopePopular($query, $value) {
 
-        return $query->published()->orderByDesc('view_count')->take(3)->get();
+        return $query->withCount('comments')
+            ->orderByDesc('view_count')->orderByDesc('comments_count')->take($value)->get();
     }
 
     /**
@@ -104,6 +107,18 @@ class Post extends Model
     public function scopeRecent($query) {
 
         return $query->published()->latest()->take(3)->get();
+    }
+
+    /**
+     * Scope a query to get all the approved/pending posts.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @param $condition
+     * @return Illuminate\Database\Eloquent\Collection
+     */
+    public function scopeApproved($query, $condition = true) {
+
+        return $query->where('is_approved', $condition);
     }
 
     /**
@@ -125,4 +140,15 @@ class Post extends Model
     {
         return $this->created_at->toFormattedDateString();
     }
+
+    /**
+     * Get Image url of the post
+     *
+     * @return string
+     */
+    public function getImageUrlAttribute()
+    {
+        return Storage::disk('public')->url("posts/$this->image");
+    }
+
 }

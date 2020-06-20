@@ -53,21 +53,6 @@
     </div>
 @endsection
 
-@section('admin-comment-approve')
-    @if(Request::is('admin/comment/pending'))
-        <button type="button" class="btn btn-xs bg-orange"
-                title="Approve" onclick="approveItem({{ $comment->id }})">
-            <i class="material-icons action-icon">done_outline</i>
-        </button>
-        <form id="{{ 'approval-form-' . $comment->id }}"
-              class="form-hide" method="POST"
-              action="{{ route('admin.comment.approve', $comment->id) }}" >
-            @csrf
-            @method('PATCH')
-        </form>
-    @endif
-@endsection
-
 @section('content')
     @include('common.base.comment.index', ['prefix' => 'admin'])
 @endsection

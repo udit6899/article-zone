@@ -29,11 +29,15 @@
                             <tr>
                                 <th>ID</th>
                                 <th>Title</th>
-                                @if(Request::is("$prefix/post/all"))<th>Author</th>@endif
+                                @if(Request::is("$prefix/post/all"))
+                                    <th>Author</th>
+                                @endif
                                 <th>Is_Approved</th>
                                 <th>Image</th>
                                 <th>Is_Published</th>
-                                <th>Created_At</th>
+                                @if(!Request::is("$prefix/post/all"))
+                                    <th>Created_At</th>
+                                @endif
                                 <th><i class="material-icons">comment</i></th>
                                 <th><i class="material-icons">visibility</i></th>
                                 <th>Action</th>
@@ -56,8 +60,7 @@
                                     </td>
 
                                     <td>
-                                        <img src="{{ Storage::disk('public')->url("posts/$post->image") }}"
-                                             height="50px" width="80px">
+                                        <img src="{{ $post->imageUrl }}" height="50px" width="80px">
                                     </td>
                                     <td>
                                         @if($post->is_published == true)
@@ -67,7 +70,9 @@
                                         @endif
                                     </td>
 
-                                    <td>{{ $post->created_at->toDateString() }}</td>
+                                    @if(!Request::is("$prefix/post/all"))
+                                        <td>{{ $post->created_at->toDateString() }}</td>
+                                    @endif
                                     <td>{{ $post->comments->count() }}</td>
                                     <td>{{ $post->view_count }}</td>
 

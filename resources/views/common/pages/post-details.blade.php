@@ -14,8 +14,7 @@
                     <div class="category-border-content">
                         <div class="category-detail category">
                             <div class="category-img">
-                                <img src="{{ Storage::disk('public')->url('posts/' . $post->image) }}"
-                                     alt="{{ $post->title }}">
+                                <img src="{{ $post->imageUrl }}" alt="{{ $post->title }}">
                                 <div class="category-overlay">
                                 </div>
                             </div>
@@ -67,8 +66,7 @@
                                         <div class="recent-post-single single-page">
                                             <div class="recent-post-img single-page">
                                                 <a href="{{ route('post.details', $randomPost->slug) }}">
-                                                    <img src="{{ Storage::disk('public')
-                                                        ->url('posts/' . $randomPost->image) }}"  height="54px"
+                                                    <img src="{{ $randomPost->imageUrl }}"  height="54px"
                                                          alt="{{ $randomPost->title }}" width="54px">
                                                 </a>
                                             </div>
@@ -92,9 +90,8 @@
                                         <div class="single-user-comment clearfix">
                                             <div class="single-user-img">
                                                 <a>
-                                                    <img src="{{ Storage::disk('public')
-                                                    ->url('users/' . $comment->user->avatar_path) }}" alt="user-image"
-                                                    height="54px" width="54px">
+                                                    <img src="{{ $comment->user->imageUrl }}"
+                                                         alt="user-image" height="54px" width="54px">
                                                 </a>
                                             </div>
                                             <div class="single-user-comment-text">

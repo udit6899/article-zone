@@ -5,8 +5,7 @@
     <!-- User Info -->
     <div class="user-info text-center">
         <div class="image">
-            <img width="48" height="48" alt="User"
-                 src="{{ Storage::disk('public')->url('users/'.Auth::user()->avatar_path) }}"/>
+            <img width="48" height="48" alt="User" src="{{ Auth::user()->imageUrl }}"/>
         </div>
         <div class="info-container">
             <div class="name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

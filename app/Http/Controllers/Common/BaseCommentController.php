@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Common;
 
 use App\Helpers\GuestUserHelper;
+use App\Helpers\NotificationHelper;
 use App\Http\Controllers\Controller;
 use App\Models\Comment;
 use Brian2694\Toastr\Facades\Toastr;
@@ -59,6 +60,8 @@ class BaseCommentController extends Controller
         if ($user->is_admin) {
             Toastr::success('Your Comment Successfully Added !', 'Success');
         } else {
+            // Notify admin to approve the new comment
+            NotificationHelper::notify('admin', $comment, 'comment', 'new');
             Toastr::success('Your Comment Successfully Added ! Wait For Admin Approval.', 'Success');
         }
 
@@ -77,6 +80,7 @@ class BaseCommentController extends Controller
     {
         // Validate the request
         $this->validate($request, ['comment' => 'required|string']);
+        $previousApprovedStatus = $comment->is_approved;
 
         // Update the comment details
         $comment->update([
@@ -88,6 +92,10 @@ class BaseCommentController extends Controller
         if (Auth::user()->is_admin) {
             Toastr::success('Your Comment Successfully Updated !', 'Success');
         } else {
+            if ($previousApprovedStatus == true) {
+                // Notify admin to approve the updated comment
+                NotificationHelper::notify('admin', $comment, 'comment', 'update');
+            }
             Toastr::success('Your Comment Successfully Updated ! Wait For Admin Approval.', 'Success');
         }
 

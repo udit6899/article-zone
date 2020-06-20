@@ -7,8 +7,7 @@
                 <h2>{{ $post->title }}</h2>
                 <div class="address">
                     <a href="{{ route('post.author.profile', $post->user->id) }}">
-                        <img src="{{ Storage::disk('public')->url('users/'.$post->user->avatar_path) }}"
-                             class="img-responsive" align="left">
+                        <img src="{{ $post->user->imageUrl }}" class="img-responsive" align="left">
                         <small>
                             <strong>{{ $post->user->name }}</strong>
                         </small>
@@ -21,8 +20,7 @@
 
             <div class="body">
                 <div class="text-center">
-                    <img  alt="post_image" class="img-responsive" width="100%"
-                          src="{{ Storage::disk('public')->url("posts/$post->image") }}">
+                    <img  alt="post_image" class="img-responsive" width="100%" src="{{ $post->imageUrl }}">
                 </div>
                 <div class="post-text read-more clearfix">
                     <div class="quote">

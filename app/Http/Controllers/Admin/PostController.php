@@ -27,7 +27,7 @@ class PostController extends BasePostController
     public function pending()
     {
         // Get all pending posts
-        $posts = Post::where('is_approved', false)->latest()->get();
+        $posts = Post::approved(false)->latest()->get();
 
         // Return to index view
         return view('admin.post.pending', compact('posts'));
@@ -81,10 +81,10 @@ class PostController extends BasePostController
             $post->update(['is_approved' => true]);
 
             // Send notification to the atuhor
-            NotificationHelper::notify('author', $post);
+            NotificationHelper::notify('author', $post, 'post');
 
             // Send notification to the all subscribers
-            NotificationHelper::notify('subscriber', $post);
+            NotificationHelper::notify('subscriber', $post, 'post');
 
             // Make success response
             Toastr::success('Post Successfully Approved !', 'Success');

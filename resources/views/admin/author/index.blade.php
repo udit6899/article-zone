@@ -39,8 +39,7 @@
                                             <td>{{ $key + 1 }}</td>
                                             <td>{{ $author->name }}</td>
                                             <td>
-                                                <img height="50px" width="50px"
-                                              src="{{ Storage::disk('public')->url('users/'.$author->avatar_path) }}">
+                                                <img height="50px" width="50px" src="{{ $author->ImageUrl }}">
                                             </td>
                                             <td>
                                                 <a  target="_blank"

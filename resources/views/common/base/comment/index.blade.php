@@ -37,8 +37,7 @@
                                         <div class="media">
                                             <div class="media-left">
                                                 <img class="media-object" height="54px" width="54px"
-                                                     src="{{ Storage::disk('public')
-                                                        ->url('users/' . $comment->user->avatar_path) }}">
+                                                     src="{{ $comment->user->imageUrl }}">
                                             </div>
                                             <div class="media-body">
                                                 <h5 class="media-heading">
@@ -54,15 +53,24 @@
                                         <div class="media">
                                             <div class="media-left">
                                                 <a target="_blank"
-                                                   href="{{ route('post.details', $comment->post->slug) }}">
+                                                    @if($comment->post->is_approved && $comment->post->is_published)
+                                                        href="{{ route('post.details', $comment->post->slug) }}"
+                                                    @else
+                                                        href="{{ route("$prefix.post.show", $comment->post->id) }}"
+                                                    @endif>
+
                                                     <img class="media-object" height="54px" width="84px"
-                                                         src="{{ Storage::disk('public')
-                                                                ->url('posts/' . $comment->post->image) }}">
+                                                         src="{{ $comment->post->imageUrl }}">
                                                 </a>
                                             </div>
                                             <div class="media-body">
                                                 <a target="_blank"
-                                                   href="{{ route('post.details', $comment->post->slug) }}">
+                                                   @if($comment->post->is_approved && $comment->post->is_published)
+                                                        href="{{ route('post.details', $comment->post->slug) }}"
+                                                   @else
+                                                        href="{{ route("$prefix.post.show", $comment->post->id) }}"
+                                                   @endif>
+
                                                     <h5 class="media-heading">
                                                         {{ Str::limit($comment->post->title, 20) }}
                                                     </h5>
@@ -81,8 +89,17 @@
                                         @endif
                                     </td>
                                     <td class="text-center">
-                                        @hasSection('admin-comment-approve')
-                                            @yield('admin-comment-approve')
+                                        @if(Request::is('admin/comment/pending'))
+                                            <button type="button" class="btn btn-xs bg-orange"
+                                                    title="Approve" onclick="approveItem({{ $comment->id }})">
+                                                <i class="material-icons action-icon">done_outline</i>
+                                            </button>
+                                            <form id="{{ 'approval-form-' . $comment->id }}"
+                                                  class="form-hide" method="POST"
+                                                  action="{{ route('admin.comment.approve', $comment->id) }}" >
+                                                @csrf
+                                                @method('PATCH')
+                                            </form>
                                         @endif
                                         <button type="button" class="btn btn-xs bg-cyan waves-effect"
                                                 title="Edit" onclick="editComment({{ $comment->toJson() }})">

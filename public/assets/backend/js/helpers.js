@@ -182,3 +182,4 @@ $(function () {
     tinymce.suffix = ".min";
     tinyMCE.baseURL = '/assets/backend/plugins/tinymce';
 });
+

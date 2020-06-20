@@ -37,7 +37,7 @@
                         <div class="recent-post-single">
                             <div class="recent-post-img">
                                 <a href="{{ route('post.details', $recentPost->slug) }}">
-                                    <img src="{{ Storage::disk('public')->url("posts/$recentPost->image") }}"
+                                    <img src="{{ $recentPost->imageUrl }}"
                                          alt="{{ $recentPost->title }}" height="54px" width="54px">
                                 </a>
                             </div>

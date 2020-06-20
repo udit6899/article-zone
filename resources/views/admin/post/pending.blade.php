@@ -71,8 +71,7 @@
                                         </td>
 
                                         <td>
-                                            <img src="{{ Storage::disk('public')->url("posts/$post->image") }}"
-                                                 height="50px" width="80px">
+                                            <img src="{{ $post->imageUrl }}" height="50px" width="80px">
                                         </td>
 
                                         <td>

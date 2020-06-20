@@ -19,7 +19,7 @@ class PostViewCount
         // Get a specific post by slug
         $request->post = Post::published()->where([
             'slug' => $request->route('slug'),
-        ])->first();
+        ])->firstOrFail();
 
         // Count the post view
         $blogKey = 'blog_' . $request->post->id;

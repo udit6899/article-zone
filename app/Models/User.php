@@ -6,6 +6,7 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Storage;
 
 class User extends Authenticatable
 {
@@ -66,5 +67,15 @@ class User extends Authenticatable
     public function scopeAdmin($query, $value) {
 
         return $query->where('is_admin', $value);
+    }
+
+    /**
+     * Get Image url of the user
+     *
+     * @return string
+     */
+    public function getImageUrlAttribute()
+    {
+        return Storage::disk('public')->url("users/$this->avatar_path");
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Helpers\NotificationHelper;
 use App\Http\Controllers\Common\BaseCommentController;
 use App\Models\Comment;
 use Brian2694\Toastr\Facades\Toastr;
@@ -63,6 +64,9 @@ class CommentController extends BaseCommentController
 
             // If comment is not approved, then approve it
             $comment->update(['is_approved' => true]);
+
+            // Notify author to inform that, comment is approved
+            NotificationHelper::notify('author', $comment, 'comment');
 
             // Make success response
             Toastr::success('Comment Successfully Approved !', 'Success');

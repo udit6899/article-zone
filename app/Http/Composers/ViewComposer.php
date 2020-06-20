@@ -36,7 +36,7 @@
             $view->with('tags', Tag::has('posts')->get());
 
             // Bind popular posts to view
-            $view->with('popularPosts', Post::popular());
+            $view->with('popularPosts', Post::published()->popular(3));
 
             // Bind all recent post to view
             $view->with('recentPosts', Post::recent());

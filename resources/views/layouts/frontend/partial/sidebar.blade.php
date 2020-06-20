@@ -121,7 +121,7 @@
                             <div class="popular-post-single @if($loop->first) top @elseif($loop->last) bottom @endif">
                                 <div class="popular-post-single-img">
                                     <a href="{{ route('post.details', $popularPost->slug) }}">
-                                        <img src="{{ Storage::disk('public')->url("posts/$popularPost->image") }}"
+                                        <img src="{{ $popularPost->imageUrl }}"
                                              alt="{{ $popularPost->title }}" width="89px" height="100px">
                                     </a>
                                 </div>
