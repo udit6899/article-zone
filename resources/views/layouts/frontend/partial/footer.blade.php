@@ -23,7 +23,7 @@
             <div class="col-md-3 col-md-offset-1 col-sm-4 col-sm-offset-0">
                 <div class="subscription-input">
                     <h4 class="footer-title">subscription</h4>
-                    <form action="{{ route('post.subscriber.store') }}" method="POST">
+                    <form action="{{ route('subscriber.store') }}" method="POST">
                         @csrf
                         <input type="email" name="email" placeholder="Email" required>
                         <input type="submit" value="Subscribe">
@@ -33,7 +33,7 @@
             <div class="col-md-3 col-md-offset-1 col-sm-4 col-sm-offset-0">
                 <div class="recent-post-content">
                     <h4 class="footer-title">recent post</h4>
-                    @foreach($recentPosts as $recentPost)
+                    @forelse($recentPosts as $recentPost)
                         <div class="recent-post-single">
                             <div class="recent-post-img">
                                 <a href="{{ $recentPost->viewLink }}">
@@ -48,19 +48,26 @@
                                 </a>
                             </div>
                         </div>
-                    @endforeach
+                    @empty
+                        <br>
+                        <p class="text-danger">No recent posts found !</p>
+                    @endforelse
                 </div>
             </div>
             <div class="col-md-2 col-sm-2">
                 <div class="footer-category">
                     <h4 class="footer-title">category</h4>
                     <ul>
-                        @foreach($categories as $category)
+                        @forelse($categories as $category)
                             @if($loop->index < 7 && substr_count($category->name, ' ') < 1)
-                                <li><a href="">{{ $category->name }}</a></li>
+                                <li><a href="{{ $category->postsLink }}">{{ $category->name }}</a></li>
+                            @else
+                                <li><a href="{{ route('post.category') }}">More...</a></li>
+                                @break
                             @endif
-                        @endforeach
-                        <li><a href="{{ route('post.category.item', $category->slug) }}">More...</a></li>
+                        @empty
+                            <li class="text-danger">No categories found !</li>
+                        @endforelse
                     </ul>
                 </div>
             </div>

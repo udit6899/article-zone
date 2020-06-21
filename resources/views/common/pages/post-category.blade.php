@@ -19,7 +19,7 @@
         <div class="container">
             @for($i = 0; $i < 3; $i++)
                 <div class="row">
-                @foreach($nonEmptyCategories as $category)
+                @forelse($nonEmptyCategories as $category)
                     @if($loop->index >= ($i * 3) && $loop->index < ($i + 1) * 3)
                     <div class="col-md-4 col-sm-6">
                         <div class="category-border-content">
@@ -59,7 +59,15 @@
                         </div>
                     </div>
                     @endif
-                @endforeach
+
+                @empty
+                    <div class="category-border-content clearfix bg-warning text-danger">
+                        <div class="single-user-comment">
+                            <p><strong>No Categories Found !</strong></p>
+                        </div>
+                    </div>
+                    @break
+                @endforelse
                 </div>
                 <br><br>
             @endfor

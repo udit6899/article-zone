@@ -18,7 +18,9 @@ class UserSeeder extends Seeder
            'email' => 'admin@articlezone.com',
            'mobile_no' => '7609905449',
            'password' => bcrypt('root@admin'),
-           'is_admin' => true
+           'is_admin' => true,
+           'created_at' => now(),
+           'updated_at' => now()
         ]);
 
         // Insert author details
@@ -27,6 +29,8 @@ class UserSeeder extends Seeder
             'email' => 'author@articlezone.com',
             'mobile_no' => '7609905450',
             'password' => bcrypt('root@author'),
+            'created_at' => now(),
+            'updated_at' => now()
         ]);
     }
 }

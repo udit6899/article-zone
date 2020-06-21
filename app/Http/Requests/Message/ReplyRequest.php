@@ -1,12 +1,11 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Message;
 
+use App\Models\Message;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Validation\Rule;
 
-class ProfileSettingRequest extends FormRequest
+class ReplyRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -26,10 +25,7 @@ class ProfileSettingRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => ['nullable', 'string', 'max:255'],
-            'mobile_no' => ['nullable', 'digits:10'],
-            'about' => ['nullable', 'string', 'max:400'],
-            'image' => ['nullable', 'image', 'max:1024', 'mimes:jpeg,png,jpg'],
+            'reply' => ['required', 'string']
         ];
     }
 }

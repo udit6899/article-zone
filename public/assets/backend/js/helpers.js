@@ -126,6 +126,46 @@ function editComment(commentObj) {
     })
 }
 
+
+// Reply a message
+function replyMessage(messageObj) {
+    const swalWithBootstrapButtons = Swal.mixin({
+        customClass: {
+            confirmButton: 'btn btn-info',
+            cancelButton: 'btn btn-danger'
+        },
+        buttonsStyling: false
+    })
+    swalWithBootstrapButtons.fire({
+        title: 'Send A Reply',
+        input: 'textarea',
+        showCancelButton: true,
+        confirmButtonText: 'Reply',
+        inputPlaceholder: "Write something...",
+        reverseButtons: true
+    }).then((result) => {
+        if (result.value) {
+            document.getElementById('message-' + messageObj.id).value = result.value;
+            document.getElementById('reply-message-' + messageObj.id).submit();
+        } else if (result.value === "") {
+            swalWithBootstrapButtons.fire(
+                'Cancelled',
+                'You need to write something !',
+                'error'
+            )
+        } else if (
+            /* Read more about handling dismissals below */
+            result.dismiss === Swal.DismissReason.cancel
+        ) {
+            swalWithBootstrapButtons.fire(
+                'Cancelled',
+                'The message remain pending !',
+                'error'
+            )
+        }
+    })
+}
+
 // Read category details
 function readCategory(category) {
     Swal.fire({
@@ -157,6 +197,21 @@ function readAuthor(author) {
         imageWidth: 200,
         imageHeight: 200,
         imageAlt: 'Custom image',
+    })
+}
+
+
+
+// Read message details
+function readMessage(message) {
+    Swal.fire({
+        title: message.name,
+        html: '<p>Email Address: ' + message.email + '</p>' +
+                '<br><p class="text-warning">' + (message.message || " ") + '</p><br>' +
+            '<div>' +
+                '<span>On :' + message.created_at + ' </span>' +
+            '</div>',
+        icon: 'info'
     })
 }
 

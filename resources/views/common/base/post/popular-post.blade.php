@@ -5,7 +5,7 @@
     </div>
     <div class="body">
         <div class="table-responsive">
-            <table class="table table-hover dashboard-task-infos">
+            <table class="table table-hover dashboard-task-infos table-striped table-hover dataTable">
                 <thead class="bg-color-black-gray">
                 <tr>
                     <th>Rank</th>
@@ -23,7 +23,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                @foreach($popularPosts as $key => $post)
+                @forelse($popularPosts as $key => $post)
                     <tr>
                         <td>{{ $key + 1 }}</td>
                         <td>{{ Str::limit($post->title, 15) }}</td>
@@ -53,7 +53,11 @@
                             </a>
                         </td>
                     </tr>
-                @endforeach
+                @empty
+                    <tr class="text-danger">
+                        <td colspan="7">No active authors found !</td>
+                    </tr>
+                @endforelse
                 </tbody>
             </table>
         </div>

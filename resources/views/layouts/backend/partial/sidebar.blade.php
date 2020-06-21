@@ -28,6 +28,12 @@
                         <span>Dashboard</span>
                     </a>
                 </li>
+                <li class="{{ Request::is('admin/message*') ? 'active' : '' }}">
+                    <a href="{{ route('admin.message.index') }}">
+                        <i class="material-icons">email</i>
+                        <span>Inbox</span>
+                    </a>
+                </li>
                 <li class="{{ Request::is('admin/tag*') ? 'active' : '' }}">
                     <a href="{{ route('admin.tag.index') }}">
                         <i class="material-icons">label</i>

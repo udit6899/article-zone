@@ -29,14 +29,14 @@ class CategoryRequest extends FormRequest
             return [
                 'name' => ['required', 'string', 'max:255', 'unique:categories'],
                 'description' => ['required', 'string', 'max:255'],
-                'image' => ['required', 'image', 'max:1024', 'mimes:jpeg,png,jpg']
+                'image' => ['required', 'image', 'max:5120', 'mimes:jpeg,png,jpg']
             ];
         } else if ($this->isMethod('patch')) {
             // If request for update operation the return validation rules
             return [
                 'name' => ['required', 'string', 'max:255',
                           Rule::unique('categories')->ignore($this->route('category'))],
-                'image' => ['nullable', 'image', 'max:1024', 'mimes:jpeg,png,jpg'],
+                'image' => ['nullable', 'image', 'max:5120', 'mimes:jpeg,png,jpg'],
                 'description' => ['nullable', 'string', 'max:255'],
             ];
         }

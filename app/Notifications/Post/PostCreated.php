@@ -1,14 +1,13 @@
 <?php
 
-namespace App\Notifications;
+namespace App\Notifications\Post;
 
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
-use Illuminate\Support\Facades\Storage;
 
-class PostApproved extends Notification implements ShouldQueue
+class PostCreated extends Notification implements ShouldQueue
 {
     use Queueable;
 
@@ -44,13 +43,14 @@ class PostApproved extends Notification implements ShouldQueue
     public function toMail($notifiable)
     {
         return (new MailMessage)
-            ->subject('Your Post Successfully Approved')
-            ->greeting('Hello, ' . $this->post->user->name . ' !')
-            ->line('Your post has been successfully approved.')
-            ->line('Post Title : <h3>' . $this->post->title . '</h3>')
-            ->line('<img src="' . $this->post->imageUrl . '">')
-            ->action('View', url(route('post.details', $this->post->slug)))
-            ->line('Thank you for using our application!');
+                    ->subject('New Post Approval Needed')
+                    ->greeting('Hello, Admin !')
+                    ->line('New post by <strong>' . $this->post->user->name . '</strong> need to approve.')
+                    ->line('Post Title : <h3>' . $this->post->title . '</h3>')
+                    ->line('<img src="' . $this->post->imageUrl . '">')
+                    ->line('To approve the post click on view button.')
+                    ->action('View', url(route('admin.post.show', $this->post->id)))
+                    ->line('Thank you for using our application!');
     }
 
     /**

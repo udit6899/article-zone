@@ -38,9 +38,7 @@ class GuestUserHelper
                 // If user doesn't exist, then create new one
                 $user = User::create([
                     'name' => $request->name,
-                    'email' => $request->email,
-                    'mobile_no' => rand(1000000000, 9999999999),
-                    'password' => ''
+                    'email' => $request->email
                 ]);
             }
         }

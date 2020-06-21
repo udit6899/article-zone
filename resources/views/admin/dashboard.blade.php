@@ -65,7 +65,7 @@
         </div>
         <div class="body">
             <div class="table-responsive">
-                <table class="table table-hover dashboard-task-infos">
+                <table class="table table-hover dashboard-task-infos table-striped table-hover dataTable">
                     <thead class="bg-color-black-gray">
                     <tr>
                         <th>Rank</th>
@@ -79,7 +79,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    @foreach($activeAuthors as $key => $author)
+                    @forelse($activeAuthors as $key => $author)
                         <tr>
                             <td>{{ $key + 1 }}</td>
                             <td>{{ $author->name }}</td>
@@ -102,7 +102,11 @@
                                 </a>
                             </td>
                         </tr>
-                    @endforeach
+                    @empty
+                        <tr class="text-danger">
+                            <td colspan="8">No active authors found !</td>
+                        </tr>
+                    @endforelse
                     </tbody>
                 </table>
             </div>

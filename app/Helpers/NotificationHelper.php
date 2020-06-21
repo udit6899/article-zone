@@ -6,13 +6,15 @@ namespace App\Helpers;
 
 use App\Models\Subscriber;
 use App\Models\User;
-use App\Notifications\CommentApproved;
-use App\Notifications\CommentCreated;
-use App\Notifications\CommentUpdated;
-use App\Notifications\PostApproved;
-use App\Notifications\PostCreated;
-use App\Notifications\PostPublished;
-use App\Notifications\PostUpdated;
+use App\Notifications\Comment\CommentApproved;
+use App\Notifications\Comment\CommentCreated;
+use App\Notifications\Comment\CommentUpdated;
+use App\Notifications\Message\MessageCreated;
+use App\Notifications\Message\MessageReplied;
+use App\Notifications\Post\PostApproved;
+use App\Notifications\Post\PostCreated;
+use App\Notifications\Post\PostPublished;
+use App\Notifications\Post\PostUpdated;
 use Illuminate\Support\Facades\Notification;
 
 class NotificationHelper
@@ -48,6 +50,10 @@ class NotificationHelper
 
                         // Send notifcation to all admin once a new comment created
                         Notification::send($admins, new CommentCreated($data));
+                    } else if ($for === 'message') {
+
+                        // Send notifcation to all admin once a new report is submitted
+                        Notification::send($admins, new MessageCreated($data));
                     }
                 } else if ($action === 'update') {
 
@@ -92,6 +98,12 @@ class NotificationHelper
                                 ->notify(new PostPublished($data));
                 }
 
+                break;
+            case 'reporter':
+
+                // Send notification to message reporter once replied by admin
+                Notification::route('mail', $data->email)
+                            ->notify(new MessageReplied($data));
                 break;
             default:
                 return 0;

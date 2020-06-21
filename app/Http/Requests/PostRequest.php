@@ -32,7 +32,7 @@ class PostRequest extends FormRequest
                 'body' => ['required', 'string'],
                 'categories' => ['required', 'array', 'min:1'],
                 'tags' => ['required', 'array', 'min:1'],
-                'image' => ['required', 'image', 'max:1024', 'mimes:jpeg,png,jpg'],
+                'image' => ['required', 'image', 'max:5120', 'mimes:jpeg,png,jpg'],
                 'is_published' => ['nullable', 'boolean','in:1'],
             ];
         } else if ($this->isMethod('patch')) {
@@ -43,7 +43,7 @@ class PostRequest extends FormRequest
                 'body' => ['nullable', 'string'],
                 'categories' => ['required', 'array', 'min:1'],
                 'tags' => ['required', 'array', 'min:1'],
-                'image' => ['nullable', 'image', 'max:1024', 'mimes:jpeg,png,jpg'],
+                'image' => ['nullable', 'image', 'max:5120', 'mimes:jpeg,png,jpg'],
                 'is_published' => ['nullable', 'boolean','in:1'],
             ];
         }

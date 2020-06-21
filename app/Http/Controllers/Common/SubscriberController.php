@@ -7,10 +7,8 @@ use App\Models\Subscriber;
 use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Http\Request;
 
-class BaseSubscriberController extends Controller
+class SubscriberController extends Controller
 {
-
-    protected $prefix;
 
     /**
      * Display a listing of the subscribers.
@@ -23,7 +21,7 @@ class BaseSubscriberController extends Controller
         $subscribers = Subscriber::latest()->get();
 
         // Return to index page
-        return view("$this->prefix.subscriber.index", compact('subscribers'));
+        return view("admin.subscriber.index", compact('subscribers'));
     }
 
     /**

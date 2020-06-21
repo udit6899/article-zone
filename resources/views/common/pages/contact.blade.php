@@ -14,12 +14,12 @@
                     <div class="contact-content-border">
                         <div class="contact-content">
                             <h4>contact</h4>
-                            <form action="mail.php" method="post">
-                                <input type="text" name="username" placeholder="Name">
-                                <input type="email" name="email_address" placeholder="Email">
-                                <div class="web-address"><input
-                                     type="text" name="web_address" class="web-address" placeholder="Website"></div>
-                                <textarea placeholder="Comment" name="messages"></textarea>
+                            <form action="{{ route('message.store') }}" method="post">
+                                @csrf
+                                <input type="text" name="name" placeholder="Full Name" required>
+                                <input type="email" name="email" placeholder="Email Address" required>
+                                <br><br>
+                                <textarea placeholder="Write something..." name="message" required></textarea>
                                 <div class="submit-btn"><input type="submit" name="submit" value="send"></div>
                             </form>
                         </div>

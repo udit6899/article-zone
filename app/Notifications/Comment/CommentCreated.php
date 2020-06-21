@@ -1,27 +1,26 @@
 <?php
 
-namespace App\Notifications;
+namespace App\Notifications\Comment;
 
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
-use Illuminate\Support\Facades\Storage;
 
-class PostPublished extends Notification implements ShouldQueue
+class CommentCreated extends Notification implements ShouldQueue
 {
     use Queueable;
 
-    private $post;
+    private $comment;
 
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct($post)
+    public function __construct($comment)
     {
-        $this->post = $post;
+        $this->comment = $comment;
     }
 
     /**
@@ -44,13 +43,13 @@ class PostPublished extends Notification implements ShouldQueue
     public function toMail($notifiable)
     {
         return (new MailMessage)
-            ->subject('New Post Available')
-            ->greeting('Hello, Subscriber !')
-            ->line('There is a new post. We hope you will like it.')
-            ->line('Post Title : <h3>' . $this->post->title . '</h3>')
-            ->line('<img src="' . $this->post->imageUrl . '">')
-            ->action('View', url(route('post.details', $this->post->slug)))
-            ->line('Thank you for using our application!');
+            ->subject('New Comment Approval Needed')
+            ->markdown('common.base.pages.comment-notification', [
+                'comment' => $this->comment,
+                'message_description' =>
+                    '<strong>' . $this->comment->user->name .
+                    '</strong> commented on a post, need to approve.'
+            ]);
     }
 
     /**

@@ -1,26 +1,26 @@
 <?php
 
-namespace App\Notifications;
+namespace App\Notifications\Message;
 
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class PostUpdated extends Notification implements ShouldQueue
+class MessageReplied extends Notification implements ShouldQueue
 {
     use Queueable;
 
-    private $post;
+    private $message;
 
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct($post)
+    public function __construct($message)
     {
-        $this->post = $post;
+        $this->message = $message;
     }
 
     /**
@@ -43,14 +43,13 @@ class PostUpdated extends Notification implements ShouldQueue
     public function toMail($notifiable)
     {
         return (new MailMessage)
-            ->subject('Modified Post Approval Needed')
-            ->greeting('Hello, Admin !')
-            ->line('A post by <strong>' . $this->post->user->name . '</strong> has been modified, need to approve.')
-            ->line('Post Title : <h3>' . $this->post->title . '</h3>')
-            ->line('<img src="' . $this->post->imageUrl . '">')
-            ->line('To approve the post click on view button.')
-            ->action('View', url(route('admin.post.show', $this->post->id)))
-            ->line('Thank you for using our application!');
+                    ->subject('Reply from ' . env('APP_NAME'))
+                    ->greeting('Hello, ' . $this->message->name)
+                    ->line('A reply from <strong>' . env('APP_NAME') . '</strong> need to see.')
+                    ->line('<p><strong>Reply : </strong>' . $this->message->reply . '</p>')
+                    ->line('To visit our website click on below button.')
+                    ->action('Visit', route('home'))
+                    ->line('Thank you for using our application!');
     }
 
     /**

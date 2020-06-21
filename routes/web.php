@@ -30,8 +30,29 @@ Route::group(['namespace' => 'Common'], function () {
     // GET: route for contact page
     Route::get('/contact', 'PagesController@contact')->name('contact');
 
+    // POST: route to store message
+    Route::resource('message', 'MessageController')->only('store');
 
-    // Routes group for posts
+    // POST: route to store subscriber
+    Route::resource('subscriber', 'SubscriberController')->only('store');
+
+    // Routes for the admin operation
+    Route::group(['prefix' => 'admin', 'as' =>'admin.', 'middleware' => ['auth', 'admin']], function () {
+
+        // Routes for Subscriber operations
+        Route::resource('subscriber', 'SubscriberController')->only(['index', 'destroy']);
+
+        // Routes for message operations
+        Route::resource('message', 'MessageController')->only(['index', 'update', 'destroy']);
+
+        // GET: route for read message
+        Route::get('message/read', 'MessageController@read')->name('message.read');
+
+        // GET: route for unread message
+        Route::get('message/unread', 'MessageController@unread')->name('message.unread');
+    });
+
+    // Routes group for common posts
     Route::group(['prefix' => 'post', 'as' => 'post.'], function () {
 
         // GET: route for create post page
@@ -61,9 +82,6 @@ Route::group(['namespace' => 'Common'], function () {
         // GET: route for post details
         Route::get('details/{slug}', 'PagesController@postDetails'  )->name('details');
 
-        // Routes for Subscriber operations
-        Route::post('subscriber', 'BaseSubscriberController@store')->name('subscriber.store');
-
         // GET: route for author-post-profile view
         Route::get('author/{author}/profile', 'PagesController@authorProfile'  )->name('author.profile');
     });
@@ -87,14 +105,14 @@ Route::group([
     Route::resource('comment', 'CommentController')->only(['index', 'update', 'destroy']);
 
 
-    // Route for settings page
+    // GET: route for settings page
     Route::get('settings', 'SettingController@index')->name('settings.index');
 
-    // Route for update profile
+    // PATCH: route for update profile
     Route::patch('settings/profile-update', 'SettingController@updateProfile')
         ->name('settings.profile.update');
 
-    // Route for update profile
+    // PATCH: route for update profile
     Route::patch('settings/password-update', 'SettingController@updatePassword')
         ->name('settings.password.update');
 });
@@ -115,9 +133,6 @@ Route::group([
 
     // Routes for Category operations
     Route::resource('category', 'CategoryController');
-
-    // Routes for Subscriber operations
-    Route::resource('subscriber', 'SubscriberController')->only(['index', 'destroy']);
 
     // Routes for author operations
     Route::resource('author', 'AuthorController')->only(['index', 'destroy']);
@@ -149,14 +164,14 @@ Route::group([
     Route::resource('comment', 'CommentController')->only(['index', 'update', 'destroy']);
 
 
-    // Route for settings page
+    // GET: route for settings page
     Route::get('settings', 'SettingController@index')->name('settings.index');
 
-    // Route for update profile
+    // PATCH: route for update profile
     Route::patch('settings/profile-update', 'SettingController@updateProfile')
           ->name('settings.profile.update');
 
-    // Route for update profile
+    // PATCH: route for update profile
     Route::patch('settings/password-update', 'SettingController@updatePassword')
         ->name('settings.password.update');
 
