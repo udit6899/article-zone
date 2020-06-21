@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Support\Str;
 
 class Tag extends Model
 {
@@ -31,6 +32,6 @@ class Tag extends Model
      */
     public function getPostsLinkAttribute()
     {
-        return route('post.tag.item', $this->name);
+        return route('post.tag.item', $this->slug);
     }
 }

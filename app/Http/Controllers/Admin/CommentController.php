@@ -59,21 +59,15 @@ class CommentController extends BaseCommentController
      */
     public function approve(Request $request, Comment $comment)
     {
-        // Check the comment is approved or not
-        if ($comment->is_approved == false) {
 
-            // If comment is not approved, then approve it
-            $comment->update(['is_approved' => true]);
+        // Approve the comment details
+        $comment->update(['is_approved' => true]);
 
-            // Notify author to inform that, comment is approved
-            NotificationHelper::notify('author', $comment, 'comment');
+        // Notify author to inform that, comment is approved
+        NotificationHelper::notify('author', $comment, 'comment');
 
-            // Make success response
-            Toastr::success('Comment Successfully Approved !', 'Success');
-        } else {
-            // If comment is already approved, then make info response
-            Toastr::info('This comment is already approved !', 'info');
-        }
+        // Make success response
+        Toastr::success('Comment Successfully Approved !', 'Success');
 
         // Return to back page
         return redirect()->back();

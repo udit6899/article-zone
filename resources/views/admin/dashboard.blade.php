@@ -14,7 +14,7 @@
                 <div class="content">
                     <div class="text">TOTAL TAGS</div>
                     <div class="number count-to"
-                         data-from="0" data-to="{{ $totalTags }}" data-speed="1000" data-fresh-interval="20">
+                         data-from="0" data-to="{{ $allTags->count() }}" data-speed="1000" data-fresh-interval="20">
                     </div>
                 </div>
             </div>
@@ -25,7 +25,7 @@
                 <div class="content">
                     <div class="text">TOTAL CATEGORIES</div>
                     <div class="number count-to" data-from="0"
-                         data-to="{{ $totalCategories }}" data-speed="1000" data-fresh-interval="20">
+                         data-to="{{ $allCategories->count() }}" data-speed="1000" data-fresh-interval="20">
                     </div>
                 </div>
             </div>

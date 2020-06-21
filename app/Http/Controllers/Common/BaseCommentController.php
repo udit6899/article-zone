@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Common;
 use App\Helpers\GuestUserHelper;
 use App\Helpers\NotificationHelper;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Comment\CommentStoreRequest;
+use App\Http\Requests\Comment\CommentUpdateRequest;
 use App\Models\Comment;
 use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Http\Request;
@@ -32,29 +34,18 @@ class BaseCommentController extends Controller
     /**
      * Store a newly created comment in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  CommentStoreRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CommentStoreRequest $request)
     {
         // Get the user details
         $user = GuestUserHelper::getOrcreate($request);
 
-        // Validate the request
-        $this->validate($request, [
-            'post_id' => [ 'required', 'integer'],
-            'comment' => ['required', 'string']
-        ]);
-
         // Store new comment in DB
-        $comment = new Comment([
-            'user_id' => $user->id,
-            'post_id' => $request->post_id,
-            'comment' => $request->comment,
-            'is_approved' => $user->is_admin ? true : false
-        ]);
-
-        $comment->save();
+        $comment = Comment::create(array_merge($request->input(),
+            ['user_id' => $user->id, 'is_approved' => $user->is_admin ? true : false]
+        ));
 
         // Make success response
         if ($user->is_admin) {
@@ -72,27 +63,21 @@ class BaseCommentController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  CommentUpdateRequest  $request
      * @param  \App\Models\Comment  $comment
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Comment $comment)
+    public function update(CommentUpdateRequest $request, Comment $comment)
     {
-        // Validate the request
-        $this->validate($request, ['comment' => 'required|string']);
-        $previousApprovedStatus = $comment->is_approved;
 
         // Update the comment details
-        $comment->update([
-            'comment' => $request->comment,
-            'is_approved' => Auth::user()->is_admin && $comment->is_approved
-        ]);
+        $comment->update();
 
         // Make success response
         if (Auth::user()->is_admin) {
             Toastr::success('Your Comment Successfully Updated !', 'Success');
         } else {
-            if ($previousApprovedStatus == true) {
+            if ($request->previousApprovedStatus == true) {
                 // Notify admin to approve the updated comment
                 NotificationHelper::notify('admin', $comment, 'comment', 'update');
             }

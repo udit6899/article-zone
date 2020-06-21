@@ -3,9 +3,9 @@
 namespace App\Http\Controllers\Common;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Subscriber\SubscriberStoreRequest;
 use App\Models\Subscriber;
 use Brian2694\Toastr\Facades\Toastr;
-use Illuminate\Http\Request;
 
 class SubscriberController extends Controller
 {
@@ -27,22 +27,13 @@ class SubscriberController extends Controller
     /**
      * Store a newly created subscriber in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  SubscriberStoreRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(SubscriberStoreRequest $request)
     {
-        // Validate the request
-        $this->validate($request, [
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:subscribers'],
-        ]);
-
         // Store subscriber details
-        $subscriber = new Subscriber([
-            'email' => $request->email
-        ]);
-
-        $subscriber->save();
+        $subscriber = Subscriber::create($request->input());
 
         // Make success response
         Toastr::success(

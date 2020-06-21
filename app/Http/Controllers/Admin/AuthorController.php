@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Helpers\FileHelper;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Brian2694\Toastr\Facades\Toastr;
@@ -37,7 +38,10 @@ class AuthorController extends Controller
             Toastr::error('Permission Denied !', 'Error');
         } else {
 
-            // Delete author from db
+            // Delete the associated image of user
+            FileHelper::delete("users/$author->avatar_path");
+
+            // Delete author details from db
             $author->delete();
 
             // Make success response

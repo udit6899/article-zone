@@ -18,7 +18,7 @@ class FileHelper {
      * @param string $oldImageName
      * @return string
      */
-    public static function upload($image, $paths, $sizes, $oldImageName = 'default.jpg') {
+    private static function upload($image, $paths, $sizes, $oldImageName = 'default.jpg') {
 
         $storage = Storage::disk('public');
 
@@ -35,13 +35,10 @@ class FileHelper {
                 if (!$storage->exists($path)) {
                     // If dir is not exists, then create new one
                     $storage->makeDirectory($path);
-                } elseif (
-                    $oldImageName !== 'default.jpg' &&
-                    $storage->exists($path . '/', $oldImageName)
-                ) {
-                    // Delete old image from file, if it's exists
-                    $storage->delete($path . '/' . $oldImageName);
                 }
+
+                // Delete old image from file, if it's exists
+                FileHelper::delete($path . '/' . $oldImageName);
 
                 // Resize the uploaded image
                 $resizedImage = Image::make($image)->resize($sizes[$key]['width'], $sizes[$key]['height'])->save();
@@ -58,4 +55,73 @@ class FileHelper {
         // After successful upload, return new imageName
         return $newImageName;
     }
+
+
+    /**
+     * Delete uploaded images from directory
+     *
+     * @param string $imagePath
+     */
+
+    public static function delete(string $imagePath) {
+
+        if (!in_array('default.jpg', explode('/', $imagePath)) &&
+            Storage::disk('public')->exists($imagePath)) {
+
+            // Delete the image, if exists
+            Storage::disk('public')->delete($imagePath);
+        }
+    }
+
+
+    /**
+     * Handle uploaded images to store
+     *
+     * @param array | UploadedFile | UploadedFile[] | null $uploadedResource
+     * @param string $for
+     * @param string $oldImageUrl
+     * @return string
+     */
+
+    public static function manageUpload($uploadedResource, $for, $oldImageUrl = '') {
+
+        switch ($for) {
+
+            case 'user':
+
+                // Store uploaded image for user : Storage/users
+                $imageUrl = FileHelper::upload(
+                    $uploadedResource, [0 => 'users'],
+                    [0 => ['width' => 176, 'height' => 176]], $oldImageUrl
+                );
+
+                break;
+            case 'post':
+
+                // Store uploaded image for post : Storage/posts
+                $imageUrl = FileHelper::upload(
+                    $uploadedResource, [ 0 => 'posts'],
+                    [0 => ['width' => 338, 'height' => 245]], $oldImageUrl
+                );
+
+                break;
+            case 'category':
+
+                // Store uploaded image for category in header and slider
+                //  : Storage/categories & Storage/categories/slider
+                $imageUrl = FileHelper::upload(
+                    $uploadedResource, [ 0 => 'categories', 1 => 'categories/slider'],
+                    [0 => ['width' => 338, 'height' => 245], 1 => ['width' => 1732, 'height' => 680]],
+                    $oldImageUrl
+                );
+
+                break;
+            default:
+                return 0;
+        }
+
+        // Return stored imageUrl
+        return $imageUrl;
+    }
+
 }

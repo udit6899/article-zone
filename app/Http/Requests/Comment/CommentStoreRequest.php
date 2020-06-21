@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Comment;
 
+use App\Helpers\GuestUserHelper;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
 
-class ProfileSettingRequest extends FormRequest
+class CommentStoreRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -18,6 +18,7 @@ class ProfileSettingRequest extends FormRequest
         return true;
     }
 
+
     /**
      * Get the validation rules that apply to the request.
      *
@@ -26,10 +27,8 @@ class ProfileSettingRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => ['nullable', 'string', 'max:255'],
-            'mobile_no' => ['nullable', 'digits:10'],
-            'about' => ['nullable', 'string', 'max:400'],
-            'image' => ['nullable', 'image', 'max:1024', 'mimes:jpeg,png,jpg'],
+            'post_id' => [ 'required', 'integer', Rule::exists('posts')],
+            'comment' => ['required', 'string']
         ];
     }
 }

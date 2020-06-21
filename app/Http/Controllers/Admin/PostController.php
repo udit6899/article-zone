@@ -74,24 +74,18 @@ class PostController extends BasePostController
      */
     public function approve(Request $request, Post $post)
     {
-        // Check the post is approved or not
-        if ($post->is_approved == false) {
 
-            // If post is not approved, then approve the post
-            $post->update(['is_approved' => true]);
+        // Approve the post details
+        $post->update(['is_approved' => true]);
 
-            // Send notification to the atuhor
-            NotificationHelper::notify('author', $post, 'post');
+        // Send notification to the atuhor
+        NotificationHelper::notify('author', $post, 'post');
 
-            // Send notification to the all subscribers
-            NotificationHelper::notify('subscriber', $post, 'post');
+        // Send notification to the all subscribers
+        NotificationHelper::notify('subscriber', $post, 'post');
 
-            // Make success response
-            Toastr::success('Post Successfully Approved !', 'Success');
-        } else {
-            // If post is already approved, then make info response
-            Toastr::info('This post is already approved !', 'info');
-        }
+        // Make success response
+        Toastr::success('Post Successfully Approved !', 'Success');
 
         // Return to back page
         return redirect()->back();

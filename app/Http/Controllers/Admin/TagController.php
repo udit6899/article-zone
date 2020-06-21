@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Http\Requests\Tag\TagStoreRequest;
+use App\Http\Requests\Tag\TagUpdateRequest;
 use App\Models\Tag;
 use App\Http\Controllers\Controller;
 use Brian2694\Toastr\Facades\Toastr;
@@ -38,39 +40,19 @@ class TagController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  TagStoreRequest $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(TagStoreRequest $request)
     {
-        // Validate the request
-        $this->validate($request, [
-            'name' => 'required|string|max:255|unique:tags',
-        ]);
-
-        // Store new tag
-        $tag = new Tag([
-            'name' => $request->name,
-            'slug' => Str::slug($request->name)
-        ]);
-        $tag->save();
+        // Store new tag details
+        Tag::create($request->input());
 
         // Create success message
         Toastr::success('Tag Successfully Saved !', 'Success');
 
         // Return back
         return redirect()->back();
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  Tag $tag
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Tag $tag)
-    {
-        //
     }
 
     /**
@@ -88,22 +70,14 @@ class TagController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  TagUpdateRequest  $request
      * @param  Tag $tag
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Tag $tag)
+    public function update(TagUpdateRequest $request, Tag $tag)
     {
-        // Validate the request
-        $this->validate($request, [
-            'name' => 'required|string|max:255|unique:tags,name,'.$tag->id,
-        ]);
-
         // Update tag details
-        $tag->update([
-           'name' => $request->name,
-           'slug' => Str::slug($request->name)
-        ]);
+        $tag->update();
 
         // Make success response
         Toastr::success('Tag Successfully Updated !', 'Success');

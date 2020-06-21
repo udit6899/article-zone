@@ -33,12 +33,6 @@ class DashboardController extends Controller
         // Get the total authors
         $totalAuthors = User::admin(false)->count();
 
-        // Get the total categories
-        $totalCategories = Category::count();
-
-        // Get the total tags
-        $totalTags = Tag::count();
-
         // Get most popular posts
         $popularPosts = Post::popular(env('POPULAR_POST', 5));
 
@@ -49,8 +43,7 @@ class DashboardController extends Controller
             ->take(env('ACTIVE_AUTHOR', 5))->get();
 
         return view('admin.dashboard', compact(
-            'totalPosts', 'totalTags', 'totalCategories',
-            'totalSubscribers', 'totalPostViews', 'totalPostComments',
+            'totalPosts', 'totalSubscribers', 'totalPostViews', 'totalPostComments',
             'popularPosts', 'activeAuthors', 'totalAuthors', 'totalPendingPosts'
         ));
     }

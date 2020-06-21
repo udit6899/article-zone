@@ -95,8 +95,8 @@ class Post extends Model
      */
     public static function scopePopular($query, $value) {
 
-        return $query->withCount('comments')
-            ->orderByDesc('view_count')->orderByDesc('comments_count')->take($value)->get();
+        return $query->withCount('comments')->orderByDesc('view_count')
+            ->orderByDesc('comments_count')->take($value)->get();
     }
 
     /**

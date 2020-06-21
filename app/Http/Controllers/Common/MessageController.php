@@ -86,8 +86,7 @@ class MessageController extends Controller
     public function update(ReplyRequest $request, Message $message)
     {
         // Update the message details for reply
-        $message->is_replied = true;
-        $message->save();
+        $message->save(['is_replied' => true]);
         $message->reply = $request->reply;
 
         // Send notification to reporter

@@ -6,13 +6,12 @@ use App\Helpers\FileHelper;
 use App\Helpers\GuestUserHelper;
 use App\Helpers\NotificationHelper;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\PostRequest;
-use App\Models\Category;
+use App\Http\Requests\Post\PostStoreRequest;
+use App\Http\Requests\Post\PostUpdateRequest;
 use App\Models\Post;
-use App\Models\Tag;
 use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
 class BasePostController extends Controller
@@ -42,17 +41,12 @@ class BasePostController extends Controller
      */
     public function create()
     {
-        // Get all post's categories
-        $allCategories = Category::all();
-
-        // Get all post's tags
-        $allTags = Tag::all();
 
         // Making view destination for auth user and guest user
         $view = Auth::check() ? "$this->prefix.post.create" : 'common.pages.post-create';
 
         // Return to add post view
-        return view($view, compact('allTags', 'allCategories'));
+        return view($view);
 
     }
 
@@ -60,51 +54,53 @@ class BasePostController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\PostRequest  $request
+     * @param  PostStoreRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(PostRequest $request)
+    public function store(PostStoreRequest $request)
     {
         // Get the user details
         $user = GuestUserHelper::getOrcreate($request);
 
-        // Store uploaded image : Storage/posts
-        $imageUrl = FileHelper::upload(
-            $request->file('image'), [ 0 => 'posts'],
-            [0 => ['width' => 338, 'height' => 245]]
-        );
+        // Store uploaded image for post
+        $imageUrl = FileHelper::manageUpload($request->file('image'), 'post');
 
-        // Prepare post option to store
-        $post = new Post([
-            'user_id' => $user->id,
-            'title' => $request->title,
-            'slug' => Str::slug($request->title),
-            'quote' => $request->quote,
-            'body' => $request->body,
-            'image' => $imageUrl,
-            'is_published' => Auth::check() ? ($request->is_published ? true : false) : true,
-            'is_approved' => $user->is_admin ? true : false,
-        ]);
-        $post->save();
+        DB::beginTransaction();
 
-        // Store post's category and togs
-        $post->categories()->attach($request->categories);
-        $post->tags()->attach($request->tags);
+        try {
 
-        if ($user->is_admin) {
+            // Store a new post in Db
+            $post = Post::create( array_merge($request->input(), [
+                'user_id' => $user->id, 'image' => $imageUrl,
+                'is_approved' => $user->is_admin ? true : false,
+            ]));
 
-            // If user is admin, Send notification to the all subscribers
-            NotificationHelper::notify('subscriber', $post, 'post');
+            // Store post's category and togs
+            $post->categories()->attach($request->categories);
+            $post->tags()->attach($request->tags);
 
-            // Create success message for admin
-            Toastr::success('Your Post Successfully Saved !', 'Success');
-        } else {
+            DB::commit();
 
-            // If user is author or guest, Send notification to admin
-            NotificationHelper::notify('admin', $post, 'post', 'new');
+            if ($user->is_admin) {
 
-            // Create success message for author and guest
-            Toastr::success('Your Post Successfully Saved ! Wait For Admin Approval.', 'Success');
+                // If user is admin, Send notification to the all subscribers
+                NotificationHelper::notify('subscriber', $post, 'post');
+                // Create success message for admin
+                Toastr::success('Your Post Successfully Saved !', 'Success');
+            } else {
+
+                // If user is author or guest, Send notification to admin
+                NotificationHelper::notify('admin', $post, 'post', 'new');
+                // Create success message for author and guest
+                Toastr::success('Your Post Successfully Saved ! Wait For Admin Approval.', 'Success');
+            }
+
+        } catch (\Exception $exception) {
+
+            DB::rollBack();
+
+            // Create error message, If update failed
+            Toastr::error($exception->getMessage(), 'Error');
         }
 
         // Make route path for authorized user and guest user
@@ -123,14 +119,8 @@ class BasePostController extends Controller
      */
     public function edit(Post $post)
     {
-        // Get all post's categories
-        $categories = Category::all();
-
-        // Get all post's tags
-        $tags = Tag::all();
-
         // Return to add post view
-        return view("$this->prefix.post.edit", compact('post', 'tags', 'categories'));
+        return view("$this->prefix.post.edit", compact('post'));
 
     }
 
@@ -138,49 +128,49 @@ class BasePostController extends Controller
     /**
      * Update the specified post in storage.
      *
-     * @param  \App\Http\Requests\PostRequest  $request
+     * @param  PostUpdateRequest  $request
      * @param  \App\Models\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function update(PostRequest $request, Post $post)
+    public function update(PostUpdateRequest $request, Post $post)
     {
-        $slug = Str::slug($request->title);
-        $previousApprovedStatus = $post->is_approved;
 
-        // Store uploaded image : Storage/posts
-        $imageUrl = FileHelper::upload(
-            $request->file('image'), [ 0 => 'posts'],
-            [0 => ['width' => 338, 'height' => 245]], $post->image
-        );
+        // Store uploaded image for post
+        $imageUrl = FileHelper::manageUpload(
+            $request->file('image'), 'post', $post->image);
 
-        // Prepare post option to update
-        $post->update([
-            'title' => $request->title ? $request->title : $post->title,
-            'slug' => $slug ? $slug : $post->slug,
-            'quote' => $request->quote ? $request->quote : $post->quote,
-            'body' => $request->body ? $request->body : $post->body,
-            'image' => $imageUrl,
-            'is_published' => $request->is_published ? true : false,
-            'is_approved' =>  Auth::user()->is_admin ? true : false,
-        ]);
+        DB::beginTransaction();
 
-        // Update post's category and togs
-        $post->categories()->sync($request->categories);
-        $post->tags()->sync($request->tags);
+        try {
 
+            // Prepare post option to update
+            $post->update(['image' => $imageUrl]);
 
-        if (Auth::user()->is_admin) {
-            // Create success message for admin
-            Toastr::success('Post Successfully Updated !', 'Success');
-        } else {
-            if ($previousApprovedStatus == true) {
-                // If user is author, Send notification to admin for approval
-                NotificationHelper::notify('admin', $post, 'post','update');
+            // Update post's category and togs
+            $post->categories()->sync($request->categories);
+            $post->tags()->sync($request->tags);
+
+            DB::commit();
+
+            if (Auth::user()->is_admin) {
+                // Create success message for admin
+                Toastr::success('Post Successfully Updated !', 'Success');
+            } else {
+                if ($request->previousApprovedStatus == true) {
+                    // If user is author, Send notification to admin for approval
+                    NotificationHelper::notify('admin', $post, 'post','update');
+                }
+                // Create success message for author
+                Toastr::success('Your Post Successfully Updated ! Wait For Admin Approval.', 'Success');
             }
-            // Create success message for author
-            Toastr::success('Your Post Successfully Updated ! Wait For Admin Approval.', 'Success');
-        }
 
+        } catch (\Exception $exception) {
+
+            DB::rollBack();
+
+            // Create error message, If update failed
+            Toastr::error($exception->getMessage(), 'Error');
+        }
         // Return to index view
         return redirect()->route("$this->prefix.post.index");
     }
@@ -194,20 +184,33 @@ class BasePostController extends Controller
      */
     public function destroy(Post $post)
     {
-        if (Storage::disk('public')->exists('posts/'.$post->image)) {
-            // Delete associated post image for header if exists
-            Storage::disk('public')->delete('posts/'.$post->image);
+        DB::beginTransaction();
+
+        try {
+
+            // Delete the associated image for post
+            FileHelper::delete("posts/$post->image");
+
+            // Remove all categories and tags of the post from pivot table
+            $post->categories()->detach();
+            $post->tags()->detach();
+
+            // Delete post from db
+            $post->delete();
+
+            DB::commit();
+
+            // Make success response
+            Toastr::success('Post Successfully Deleted !', 'Success');
+
+        } catch (\Exception $exception) {
+
+            DB::rollBack();
+
+            // Create error message, If update failed
+            Toastr::error($exception->getMessage(), 'Error');
         }
 
-        // Remove all categories and tags of the post from pivot table
-        $post->categories()->detach();
-        $post->tags()->detach();
-
-        // Delete post from db
-        $post->delete();
-
-        // Make success response
-        Toastr::success('Post Successfully Deleted !', 'Success');
 
         // Return to index page
         return redirect()->back();

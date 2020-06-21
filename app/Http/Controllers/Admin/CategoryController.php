@@ -4,12 +4,10 @@ namespace App\Http\Controllers\Admin;
 
 use App\Helpers\FileHelper;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\CategoryRequest;
+use App\Http\Requests\Category\CategoryStoreRequest;
+use App\Http\Requests\Category\CategoryUpdateRequest;
 use App\Models\Category;
 use Brian2694\Toastr\Facades\Toastr;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Str;
 
 class CategoryController extends Controller
 {
@@ -42,42 +40,24 @@ class CategoryController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Foundation\Http\FormRequest  $request
+     * @param  CategoryStoreRequest $request
      * @return \Illuminate\Http\Response
      */
-    public function store(CategoryRequest $request)
+    public function store(CategoryStoreRequest $request)
     {
-        // Store uploaded image for header and slider  : Storage/categories & Storage/categories/slider
-        $imageUrl = FileHelper::upload(
-            $request->file('image'), [0 => 'categories', 1 => 'categories/slider'],
-            [0 => ['width' => 338, 'height' => 245], 1 => ['width' => 1732, 'height' => 680]]
+        // Store uploaded category image and append the imageUrl to reqeust
+        $imageUrl = FileHelper::manageUpload(
+            $request->file('image'), 'category'
         );
 
-        // Prepare category option to store
-        $category = new Category([
-            'name' => $request->name,
-            'slug' => Str::slug($request->name),
-            'image' => $imageUrl,
-            'description' => $request->description
-        ]);
-        $category->save();
+        // Store the category details
+        Category::create(array_merge($request->input(), ['image' => $imageUrl]));
 
         // Create success message
         Toastr::success('Category Successfully Saved !', 'Success');
 
         // Return back
         return redirect()->back();
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  Category $category
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Category $category)
-    {
-        //
     }
 
     /**
@@ -95,27 +75,16 @@ class CategoryController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Foundation\Http\FormRequest  $request
+     * @param  CategoryUpdateRequest  $request
      * @param  Category $category
      * @return \Illuminate\Http\Response
      */
-    public function update(CategoryRequest $request, Category $category)
+    public function update(CategoryUpdateRequest $request, Category $category)
     {
-        $slug = Str::slug($request->name);
-
-        // Store uploaded image for header and slider  : Storage/categories & Storage/categories/slider
-        $imageUrl = FileHelper::upload(
-            $request->file('image'), [ 0 => 'categories', 1 => 'categories/slider'],
-            [0 => ['width' => 338, 'height' => 245], 1 => ['width' => 1732, 'height' => 680]], $category->image
-        );
-
-        // Prepare category option to store
-        $category->update([
-            'name' => $request->name,
-            'slug' => $slug ? $slug : $category->slug,
-            'image' => $imageUrl,
-            'description' => $request->description ? $request->description : $category->description
-        ]);
+        // Store uploaded category image and update the details
+        $category->update(['image' => FileHelper::manageUpload(
+                $request->file('image'), 'category', $category->image
+        )]);
 
         // Create success message
         Toastr::success('Category Successfully Updated !', 'Success');
@@ -134,23 +103,18 @@ class CategoryController extends Controller
     {
         if ($category->posts->count() < 1) {
 
-            if (Storage::disk('public')->exists('categories/'.$category->image)) {
-                // Delete associated category image for header if exists
-                Storage::disk('public')->delete('categories/'.$category->image);
-            }
-            if (Storage::disk('public')->exists('categories/slider/'.$category->image)) {
-                // Delete associated category image for slider if exists
-                Storage::disk('public')->delete('categories/slider/'.$category->image);
-            }
+            // Delete the associated images of category for header and slider
+            FileHelper::delete("categories/$category->image");
+            FileHelper::delete("categories/slider/$category->image");
 
-            // Delete category from db
+            // Delete the category, If it doesn't contain post
             $category->delete();
 
             // Make success response
             Toastr::success('Category Successfully Deleted !', 'Success');
 
         } else {
-            // Make error response
+            // Make error response, If it contains post
             Toastr::error("The category can\'t be delete ! It\'s associated with some posts.", 'Error');
         }
 

@@ -4,7 +4,8 @@ namespace App\Http\Controllers\Common;
 
 use App\Helpers\FileHelper;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\ProfileSettingRequest;
+use App\Http\Requests\Setting\ChangePasswordRequest;
+use App\Http\Requests\Setting\ProfileSettingRequest;
 use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -29,27 +30,18 @@ class BaseSettingController extends Controller
     /**
      * Update profile setting of the user
      *
-     * @param \App\Http\Requests\ProfileSettingRequest $request
+     * @param ProfileSettingRequest $request
      * @return \Illuminate\Http\Response
      */
     public function updateProfile(ProfileSettingRequest $request)
     {
-        // Get user's old details
-        $user = Auth::user();
 
-        // Store uploaded image : Storage/users
-        $imageUrl = FileHelper::upload(
-            $request->file('image'), [0 => 'users'],
-            [0 => ['width' => 176, 'height' => 176]], $user->avatar_path
-        );
+        // Store uploaded image for user
+        $imageUrl = FileHelper::manageUpload(
+            $request->file('image'), 'user', $request->oldImageUrl);
 
         // Update user details
-        $user->update([
-            'name' => $request->name ? $request->name : $user->name,
-            'mobile_no' => $request->mobile_no ? $request->mobile_no : $user->mobile_no,
-            'about' => $request->about ? $request->about : $user->about,
-            'avatar_path' => $imageUrl
-        ]);
+        Auth::user()->update(array_merge($request->input(), ['avatar_path' => $imageUrl]));
 
         // Make success response
         Toastr::success('Your Profile Successfully Updated !', 'Success');
@@ -61,22 +53,11 @@ class BaseSettingController extends Controller
     /**
      * Update password of the user
      *
-     * @param \Illuminate\Http\Request $request
+     * @param ChangePasswordRequest $request
      * @return \Illuminate\Http\Response
      */
-    public function updatePassword(Request $request)
+    public function updatePassword(ChangePasswordRequest $request)
     {
-
-        // Validate the request
-        $this->validate($request, [
-            'old_password' => ['required', 'string', function ($attribute, $value, $fail) {
-                if (!Hash::check($value, Auth::user()->password)) {
-                    $fail('Your old password didn\'t matched !');
-                }
-            }],
-            'new_password' => ['required', 'string', 'max:255'],
-            'confirm_password' => ['required', 'string', 'same:new_password'],
-        ]);
 
         // Update new password
         Auth::user()->update([ 'password' => Hash::make($request->new_password) ]);
