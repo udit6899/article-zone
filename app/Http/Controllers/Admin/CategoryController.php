@@ -45,16 +45,22 @@ class CategoryController extends Controller
      */
     public function store(CategoryStoreRequest $request)
     {
-        // Store uploaded category image and append the imageUrl to reqeust
-        $imageUrl = FileHelper::manageUpload(
-            $request->file('image'), 'category'
-        );
+        try {
 
-        // Store the category details
-        Category::create(array_merge($request->input(), ['image' => $imageUrl]));
+            // Store uploaded category image and append the imageUrl to reqeust
+            $imageUrl = FileHelper::manageUpload($request->file('image'), 'category');
 
-        // Create success message
-        Toastr::success('Category Successfully Saved !', 'Success');
+            // Store the category details
+            Category::create(array_merge($request->input(), ['image' => $imageUrl]));
+
+            // Create success message
+            Toastr::success('Category Successfully Saved !', 'Success');
+
+        } catch (\Throwable $throwable) {
+
+            // Create error message
+            Toastr::error($throwable->getMessage(), 'Error');
+        }
 
         // Return back
         return redirect()->back();
@@ -81,13 +87,21 @@ class CategoryController extends Controller
      */
     public function update(CategoryUpdateRequest $request, Category $category)
     {
-        // Store uploaded category image and update the details
-        $category->update(['image' => FileHelper::manageUpload(
-                $request->file('image'), 'category', $category->image
-        )]);
+        try {
 
-        // Create success message
-        Toastr::success('Category Successfully Updated !', 'Success');
+            // Store uploaded category image and update the details
+            $category->update(['image' => FileHelper::manageUpload(
+                $request->file('image'), 'category', $category->image
+            )]);
+
+            // Create success message
+            Toastr::success('Category Successfully Updated !', 'Success');
+
+        } catch (\Throwable $throwable) {
+
+            // Create error message
+            Toastr::error($throwable->getMessage(), 'Error');
+        }
 
         // Return back
         return redirect()->route('admin.category.index');
@@ -103,15 +117,23 @@ class CategoryController extends Controller
     {
         if ($category->posts->count() < 1) {
 
-            // Delete the associated images of category for header and slider
-            FileHelper::delete("categories/$category->image");
-            FileHelper::delete("categories/slider/$category->image");
+            try {
 
-            // Delete the category, If it doesn't contain post
-            $category->delete();
+                // Delete the associated images of category for header and slider
+                FileHelper::delete("categories/$category->image");
+                FileHelper::delete("categories/slider/$category->image");
 
-            // Make success response
-            Toastr::success('Category Successfully Deleted !', 'Success');
+                // Delete the category, If it doesn't contain post
+                $category->delete();
+
+                // Make success response
+                Toastr::success('Category Successfully Deleted !', 'Success');
+
+            } catch (\Throwable $throwable) {
+
+                // Create error message
+                Toastr::error($throwable->getMessage(), 'Error');
+            }
 
         } else {
             // Make error response, If it contains post

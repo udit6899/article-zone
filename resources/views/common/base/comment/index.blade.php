@@ -37,7 +37,7 @@
                                         <div class="media">
                                             <div class="media-left">
                                                 <img class="media-object" height="54px" width="54px"
-                                                     src="{{ $comment->user->imageUrl }}">
+                                                     alt="comment-owner-image" src="{{ $comment->user->imageUrl }}">
                                             </div>
                                             <div class="media-body">
                                                 <h5 class="media-heading">
@@ -61,7 +61,7 @@
                                                     @endif>
 
                                                     <img class="media-object" height="54px" width="84px"
-                                                         src="{{ $comment->post->imageUrl }}">
+                                                         alt="post-image" src="{{ $comment->post->imageUrl }}">
                                                 </a>
                                             </div>
                                             <div class="media-body">

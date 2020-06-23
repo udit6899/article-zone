@@ -33,7 +33,7 @@ class SubscriberController extends Controller
     public function store(SubscriberStoreRequest $request)
     {
         // Store subscriber details
-        $subscriber = Subscriber::create($request->input());
+        Subscriber::create($request->input());
 
         // Make success response
         Toastr::success(

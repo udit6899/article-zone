@@ -7,7 +7,8 @@
                 <h2>{{ $post->title }}</h2>
                 <div class="address">
                     <a href="{{ route('post.author.profile', $post->user->id) }}">
-                        <img src="{{ $post->user->imageUrl }}" class="img-responsive" align="left">
+                        <img src="{{ $post->user->imageUrl }}"
+                             alt="post-owner-image" class="img-responsive" align="left">
                         <small>
                             <strong>{{ $post->user->name }}</strong>
                         </small>

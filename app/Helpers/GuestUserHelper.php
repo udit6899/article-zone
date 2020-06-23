@@ -15,7 +15,7 @@ class GuestUserHelper
      * @param \Illuminate\Http\Request $request
      * @param \App\Models\User
      */
-    public static function getOrcreate(Request $request) {
+    public static function getOrCreate(Request $request) {
 
         // Check the user is authenticated or not
         if (Auth::check()) {
@@ -24,7 +24,7 @@ class GuestUserHelper
             $user = Auth::user();
         } else {
 
-            /// Validate the request
+            // Validate the request
             $request->validate([
                 'name' => ['required', 'string'],
                 'email' => ['required', 'email'],
@@ -45,5 +45,27 @@ class GuestUserHelper
 
         // Return the user details
         return $user;
+    }
+
+
+    /*
+     * Get authentication redirect path for users
+     *
+     * @return string
+     */
+    public static function getRedirectUrl() {
+
+        if (Auth::check() && Auth::user()->is_admin) {
+
+            // If user is authenticated and role is admin, then set admin dashboard path
+            $redirectTo = route('admin.dashboard');
+        } else {
+
+            // If user authenticated and role is author, then set author dashboard path
+            $redirectTo = route('author.dashboard');
+        }
+
+        // Return redirectTo path
+        return $redirectTo;
     }
 }

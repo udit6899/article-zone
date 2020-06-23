@@ -6,7 +6,7 @@
 
 @section('admin-activity')
     <div class="row clearfix">
-        <div class="col-xs-12 col-sm-12 col-md-4 col-lg-3">
+        <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
             <div class="info-box bg-pink hover-expand-effect">
                 <div class="icon">
                     <i class="material-icons">label</i>
@@ -52,7 +52,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-xs-12 col-sm-12 col-md-8 col-lg-9">
+        <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9">
             @include('common.base.post.popular-post', ['prefix' => 'admin'])
         </div>
     </div>
@@ -84,7 +84,8 @@
                             <td>{{ $key + 1 }}</td>
                             <td>{{ $author->name }}</td>
                             <td>
-                                <img height="30px" width="30px" src="{{ $author->imageUrl  }}">
+                                <img height="30px"
+                                     alt="author-image" width="30px" src="{{ $author->imageUrl  }}">
                             </td>
                             <td>{{ $author->email }}</td>
                             <td>
@@ -120,12 +121,5 @@
 @endsection
 
 @push('js')
-    <!-- Jquery CountTo Plugin Js -->
-    <script src="{{ asset('assets/backend/plugins/jquery-countto/jquery.countTo.js') }}"></script>
 
-    <!-- Sparkline Chart Plugin Js -->
-    <script src="{{ asset('assets/backend/plugins/jquery-sparkline/jquery.sparkline.js') }}"></script>
-
-    <!-- Custom Js -->
-    <script src="{{ asset('assets/backend/js/pages/index.js') }}"></script>
 @endpush

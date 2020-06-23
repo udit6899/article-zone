@@ -33,7 +33,8 @@ class ViewServiceProvider extends ServiceProvider
                 'common.pages.post-search','common.pages.post-details', 'common.pages.post-category',
                 'common.pages.contact', 'welcome', 'common.pages.about', 'auth.login', 'auth.register',
                 'common.pages.author-profile', 'common.pages.post-tag', 'common.pages.post-create',
-                'common.pages.post-tag-items', 'common.pages.post-category-items'
+                'common.pages.post-tag-items', 'common.pages.post-category-items', 'auth.passwords.email',
+                'auth.passwords.reset'
             ],
             'App\Http\Composers\ViewComposer'
         );
@@ -51,7 +52,7 @@ class ViewServiceProvider extends ServiceProvider
 
         View::composer([
             'admin.dashboard', 'admin.post.create', 'admin.post.edit',
-            'author.post.create', 'author.post.edit'
+            'author.post.create', 'author.post.edit', 'common.pages.post-create'
 
         ], function ($view) {
 

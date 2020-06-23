@@ -40,7 +40,7 @@ class BaseCommentController extends Controller
     public function store(CommentStoreRequest $request)
     {
         // Get the user details
-        $user = GuestUserHelper::getOrcreate($request);
+        $user = GuestUserHelper::getOrCreate($request);
 
         // Store new comment in DB
         $comment = Comment::create(array_merge($request->input(),
@@ -49,8 +49,10 @@ class BaseCommentController extends Controller
 
         // Make success response
         if ($user->is_admin) {
+
             Toastr::success('Your Comment Successfully Added !', 'Success');
         } else {
+
             // Notify admin to approve the new comment
             NotificationHelper::notify('admin', $comment, 'comment', 'new');
             Toastr::success('Your Comment Successfully Added ! Wait For Admin Approval.', 'Success');
@@ -75,9 +77,12 @@ class BaseCommentController extends Controller
 
         // Make success response
         if (Auth::user()->is_admin) {
+
             Toastr::success('Your Comment Successfully Updated !', 'Success');
         } else {
-            if ($request->previousApprovedStatus == true) {
+
+            if ($request->previousApprovedStatus) {
+
                 // Notify admin to approve the updated comment
                 NotificationHelper::notify('admin', $comment, 'comment', 'update');
             }

@@ -44,7 +44,8 @@
                                         <td>{{ $key + 1 }}</td>
                                         <td>{{ $category->name }}</td>
                                         <td>
-                                            <img height="50px" width="80px" src="{{ $category->imageUrl }}">
+                                            <img height="50px" width="80px"
+                                                 alt="category-image" src="{{ $category->imageUrl }}">
                                         </td>
                                         <td>
                                             <a target="_blank" href="{{ $category->postsLink }}">

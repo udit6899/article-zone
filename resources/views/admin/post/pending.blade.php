@@ -71,7 +71,8 @@
                                         </td>
 
                                         <td>
-                                            <img src="{{ $post->imageUrl }}" height="50px" width="80px">
+                                            <img src="{{ $post->imageUrl }}"
+                                                 alt="post-image" height="50px" width="80px">
                                         </td>
 
                                         <td>

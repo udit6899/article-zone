@@ -9,6 +9,17 @@ use Brian2694\Toastr\Facades\Toastr;
 
 class AuthorController extends Controller
 {
+
+    /**
+     * Apply the confirm-password middleware to delete author
+     *
+     */
+    public function __construct()
+    {
+        $this->middleware('password.confirm')->only('destroy');
+    }
+
+
     /**
      * Display a listing of the authors.
      *

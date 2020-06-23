@@ -11,9 +11,9 @@
         <title>@yield('title')</title>
 
         <!--========================== Bootstrap css ==========================-->
-        <link href="{{ asset('assets/frontend/css/bootstrap.min.css') }}" rel="stylesheet">
+        <link href="{{ asset('assets/plugins/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
         <!--========================== font-awesome css ==========================-->
-        <link href="{{ asset('assets/frontend/css/font-awesome.min.css') }}" rel="stylesheet">
+        <link href="{{ asset('assets/plugins/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet">
         <!--========================== google-font css ==========================-->
         <link rel='stylesheet'
               href="{{ asset('assets/frontend/fonts/material-icon/css/material-design-iconic-font.min.css') }}">
@@ -48,26 +48,30 @@
         @include('layouts.frontend.partial.footer')
 
         <!--========================== Main jQuery ==========================-->
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+        <script src="{{ asset('assets/plugins/jquery/jquery.min.js') }}"></script>
         <!--============================== Bootstrap js ================================-->
-        <script src="{{ asset('assets/frontend/js/bootstrap.min.js') }}"></script>
+        <script src="{{ asset('assets/plugins/bootstrap/js/bootstrap.min.js')  }}"></script>
         <!--============================== Custom js ================================-->
-        <script src="{{ asset('assets/frontend/js/jquery.sticky.js') }}"></script>
-        <script src="{{ asset('assets/frontend/js/instafeed.min.js') }}"></script>
+        <script src="{{ asset('assets/plugins/jquery-sticky/jquery.sticky.js') }}"></script>
+        <script src="{{ asset('assets/plugins/instafeed/instafeed.min.js') }}"></script>
         <script src="{{ asset('assets/frontend/js/custom.js') }}"></script>
-        <!--============================== Active js ================================-->
-        <script src="{{ asset('assets/frontend/js/active.js') }}"></script>
 
         <script src="https://cdn.bootcss.com/toastr.js/latest/js/toastr.min.js"></script>
         {!! Toastr::message() !!}
 
         <!-- Error message -->
         <script>
+
             @if($errors->any())
                 @foreach($errors->all() as $error)
                     toastr.error('{{ $error }}', 'Error', { closeButton: true, progressBar: true });
                 @endforeach
             @endif
+
+            @if (session('status'))
+                toastr.success('{{ session('status') }}', 'Success', { closeButton: true, progressBar: true });
+            @endif
+
         </script>
 
         @stack('js')

@@ -91,7 +91,7 @@
 .container-login {
     border: 1px solid #e5e3e3;
     width: 900px;
-    background: #fff;
+    background-color: #eaead1;
     margin: 0 auto;
     box-shadow: 0px 15px 16.83px 0.17px rgba(0, 0, 0, 0.05);
     -moz-box-shadow: 0px 15px 16.83px 0.17px rgba(0, 0, 0, 0.05);
@@ -160,7 +160,7 @@
 
 .container-login .form-submit {
     display: inline-block;
-    background: #6dabe4;
+    background: #5a6268;
     color: #fff;
     border-bottom: none;
     width: auto;
@@ -168,7 +168,7 @@
     margin-top: 25px;
     cursor: pointer; }
 .container-login .form-submit:hover {
-    background: #4292dc; }
+    background: #f0ad4e; }
 
 .container-login #signin {
     margin-top: 16px; }
@@ -192,7 +192,8 @@
     padding-left: 34px; }
 
 .container-login .register-form {
-    width: 100%; }
+    width: 100%;
+}
 
 .container-login .form-group {
     position: relative;
@@ -205,6 +206,7 @@
     width: 100%;
     display: block;
     border: none;
+    background-color: #ffffff;
     border-bottom: 1px solid #999;
     padding: 6px 30px;
     font-family: Poppins;
@@ -233,7 +235,8 @@
     margin: 0;
     padding: 0;
     font-size: 1em;
-    display: none; }
+    display: none;
+}
 
 .container-login input[type=checkbox]:not(old) + label {
     display: inline-block;
@@ -328,7 +331,10 @@
     -ms-transform: translateY(0); }
 
 .container-login .material-icons-name {
-    font-size: 18px; }
+    font-size: 18px;
+    background-color: #ffffff;
+    padding-left: 5px;
+}
 
 .container-login .signin-content {
     padding-top: 67px;

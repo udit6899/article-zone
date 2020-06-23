@@ -1,3 +1,8 @@
+@push('css')
+    <!-- Bootstrap Select Css -->
+    <link href="{{ asset('assets/plugins/bootstrap-select/css/bootstrap-select.css') }}" rel="stylesheet" />
+@endpush
+
 <!-- Base post-create form -->
 <form action="{{ route("$prefix.post.store") }}" method="post" enctype="multipart/form-data">
     @csrf
@@ -109,3 +114,13 @@
     </div>
 </form>
 
+@push('js')
+    <!-- Custom js for editor -->
+    <script src="{{ asset('assets/frontend/js/editor.js') }}"></script>
+
+    <!-- Select Plugin Js -->
+    <script src="{{ asset('assets/plugins/bootstrap-select/js/bootstrap-select.js') }}"></script>
+
+    <!-- TinyMCE -->
+    <script src="{{ asset('assets/plugins/tinymce/tinymce.js') }}"></script>
+@endpush

@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Helpers\GuestUserHelper;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
 use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
@@ -41,13 +41,8 @@ class RegisterController extends Controller
      */
     public function __construct()
     {
-        if (Auth::check() && Auth::user()->is_admin) {
-            // If user is admin and authenticated, then set admin dashboard path
-            $this->redirectTo = route('admin.dashboard');
-        } else {
-            // If user is author and authenticated, then set author dashboard path
-            $this->redirectTo = route('author.dashboard');
-        }
+        // Get redirectTo path for user
+        $this->redirectTo = GuestUserHelper::getRedirectUrl();
 
         $this->middleware('guest');
     }

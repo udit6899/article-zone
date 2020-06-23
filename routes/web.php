@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 
 
 // Rotes for user auth
-Auth::routes();
+Auth::routes(['verify' => true]);
 
 // GET: routes for index page
 Route::get('/', 'HomeController@index')->name('home');

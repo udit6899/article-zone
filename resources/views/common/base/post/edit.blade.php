@@ -1,3 +1,8 @@
+@push('css')
+    <!-- Bootstrap Select Css -->
+    <link href="{{ asset('assets/plugins/bootstrap-select/css/bootstrap-select.css') }}" rel="stylesheet" />
+@endpush
+
 <!-- Base-post-edit form -->
 <form action="{{ route("$prefix.post.update", $post) }}" method="POST" enctype="multipart/form-data">
     @method('PATCH')
@@ -45,7 +50,7 @@
                             <label for="tag">Select Category</label>
                             <select id="category" name="categories[]"
                                     class="form-control show-tick" data-live-search="true" multiple>
-                                @foreach($categories as $category)
+                                @foreach($allCategories as $category)
                                     <option value="{{ $category->id }}"
                                         @if(
                                             !is_null(old('categories')) &&
@@ -67,7 +72,7 @@
                             <label for="tag">Select Tag</label>
                             <select id="tag" name="tags[]"
                                     class="form-control show-tick" data-live-search="true" multiple>
-                                @foreach($tags as $tag)
+                                @foreach($allTags as $tag)
                                     <option value="{{ $tag->id }}"
                                         @if(
                                             !is_null(old('tags')) &&
@@ -123,3 +128,14 @@
         </div>
     </div>
 </form>
+
+@push('js')
+    <!-- Custom js for editor -->
+    <script src="{{ asset('assets/frontend/js/editor.js') }}"></script>
+
+    <!-- Select Plugin Js -->
+    <script src="{{ asset('assets/plugins/bootstrap-select/js/bootstrap-select.js') }}"></script>
+
+    <!-- TinyMCE -->
+    <script src="{{ asset('assets/plugins/tinymce/tinymce.js') }}"></script>
+@endpush

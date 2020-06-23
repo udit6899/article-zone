@@ -44,13 +44,13 @@ class PostCreated extends Notification implements ShouldQueue
     {
         return (new MailMessage)
                     ->subject('New Post Approval Needed')
-                    ->greeting('Hello, Admin !')
-                    ->line('New post by <strong>' . $this->post->user->name . '</strong> need to approve.')
-                    ->line('Post Title : <h3>' . $this->post->title . '</h3>')
-                    ->line('<img src="' . $this->post->imageUrl . '">')
-                    ->line('To approve the post click on view button.')
-                    ->action('View', url(route('admin.post.show', $this->post->id)))
-                    ->line('Thank you for using our application!');
+                    ->markdown('common.base.pages.post-notification', [
+                        'post' => $this->post,
+                        'message_description' =>
+                            '<p>New post by <strong>' .
+                            $this->post->user->name .
+                            '</strong> need to approve.</p>'
+                    ]);
     }
 
     /**

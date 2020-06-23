@@ -1041,7 +1041,7 @@ iframe {
 .section-padding {
   margin-bottom: 60px;
 }
-.index-one .slider-content, .index-one .slider-content-2, .index-two .slider-content, .index-two .slider-content-2{
+.index-one .slider-content, .index-one .slider-content-2{
 	background-size: cover;
 }
 .index-one .video-content-text{
@@ -1060,36 +1060,7 @@ iframe {
 .index-one .video-area-border-content {
   padding: 15px;
 }
-.index-two .footer-bottom-text {
-    margin-bottom: 35px;
-    margin-top: 30px;
-}
-.index-two .footer-bottom-text > p {
-    color: #aeadad;
-    font-size: 13px;
-    line-height: 20px;
-}
-.index-two .footer-bottom-text span a{
-    color: #3e3e3e;
-}
-.index-two .left.slide-control, .index-two .right.slide-control{
-  right: 110px;
-}
-.index-two .instagram-image-single > img {
-  width: 100%;
-}
-.index-two .video-content-text {
-  height: auto;
-  padding-bottom: 20px;
-  padding-top: 25px;
-}
-.index-two .follow-me-section {
-  margin-left: 0px;
-  margin-right: 0px;
-}
-.index-two .share-comment-section {
-  padding-top: 47px;
-}
+
 /*================================== read more page css ==================================*/
 .category-detail.category{
   box-shadow: 0 0 22px 0 rgba(0, 0, 0, 0.1);
@@ -1306,6 +1277,7 @@ iframe {
 .contact-content {
   border: 1px solid #e5e3e3;
   padding: 0px 90px;
+  background-color: #eaead1;
 }
 .contact-content-border {
   border: 1px solid #e5e3e3;
@@ -1317,7 +1289,7 @@ iframe {
     border: 1px solid #e5e3e3;
     overflow: hidden;
     padding: 60px 0 60px 50px;
-    background: #fff none repeat scroll 0 0;
+    background-color: #eaead1;
     box-shadow: 0 0 22px 0 rgba(0, 0, 0, 0.1);
 }
 .about-information-area-border {
@@ -1366,7 +1338,7 @@ iframe {
   top: 0;
 }
 .about-indetails > ul {
-  border: 1px solid #e5e3e3;
+  border: 1px solid #99a4ac;
   margin-top: 79px;
   padding: 100px 15px 40px;
 }

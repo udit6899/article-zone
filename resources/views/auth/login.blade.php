@@ -17,7 +17,7 @@
             <div class="signin-content">
                 <div class="signin-image">
                     <figure>
-                        <img src="{{ asset('assets/frontend/images/signin-image.jpg') }}" alt="sing up image">
+                        <img src="{{ asset('assets/frontend/images/signin.png') }}" alt="sing up image">
                     </figure>
                     <a href="{{ route('register') }}" class="signup-image-link">Create an account</a>
                 </div>
@@ -29,30 +29,17 @@
                         @csrf
                         <div class="form-group">
                             <label for="your_email"><i class="zmdi zmdi-account material-icons-name"></i></label>
-                            <input id="email" type="email" class="@error('email') is-invalid @enderror"
-                                   name="email" placeholder="E-mail Address" value="{{ old('email') }}"
-                                   required autocomplete="email" autofocus>
-
-                            @error('email')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
+                            <input id="email" type="email" placeholder="E-mail Address" value="{{ old('email') }}"
+                                   name="email" required autocomplete="email" autofocus>
                         </div>
                         <div class="form-group">
-                            <label for="your_pass"><i class="zmdi zmdi-lock"></i></label>
-                            <input type="password" name="password" id="your_pass" placeholder="Password"
-                                   class="@error('password') is-invalid @enderror"
-                                   required autocomplete="current-password"/>
-                            @error('password')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
+                            <label for="your_pass"><i class="zmdi zmdi-lock material-icons-name"></i></label>
+                            <input type="password" name="password" id="your_pass"
+                                   placeholder="Password" required autocomplete="current-password"/>
                         </div>
                         <div class="form-group">
-                            <input type="checkbox" name="remember" id="remember-me"
-                                   class="agree-term" {{ old('remember') ? 'checked' : '' }}/>
+                            <input type="checkbox" name="remember" id="remember-me" class="agree-term"
+                                {{ old('remember') || Auth::viaRemember() ? 'checked' : '' }}/>
                             <label for="remember-me" class="label-agree-term">
                                 <span><span></span></span>Remember me
                             </label>

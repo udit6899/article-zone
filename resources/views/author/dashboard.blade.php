@@ -12,12 +12,5 @@
 @endsection
 
 @push('js')
-    <!-- Jquery CountTo Plugin Js -->
-    <script src="{{ asset('assets/backend/plugins/jquery-countto/jquery.countTo.js') }}"></script>
 
-    <!-- Sparkline Chart Plugin Js -->
-    <script src="{{ asset('assets/backend/plugins/jquery-sparkline/jquery.sparkline.js') }}"></script>
-
-    <!-- Custom Js -->
-    <script src="{{ asset('assets/backend/js/pages/index.js') }}"></script>
 @endpush

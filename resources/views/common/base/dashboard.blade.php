@@ -1,3 +1,8 @@
+
+@push('css')
+
+@endpush
+
 <!-- Base dashboard page -->
 <div class="container-fluid">
     <div class="block-header">
@@ -77,3 +82,11 @@
         <!-- #END# Task Info -->
     </div>
 </div>
+
+@push('js')
+    <!-- Jquery CountTo Plugin Js -->
+    <script src="{{ asset('assets/plugins/jquery-countto/jquery.countTo.js') }}"></script>
+
+    <!-- Sparkline Chart Plugin Js -->
+    <script src="{{ asset('assets/plugins/jquery-sparkline/jquery.sparkline.js') }}"></script>
+@endpush

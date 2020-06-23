@@ -39,7 +39,8 @@
                                             <td>{{ $key + 1 }}</td>
                                             <td>{{ $author->name }}</td>
                                             <td>
-                                                <img height="50px" width="50px" src="{{ $author->ImageUrl }}">
+                                                <img height="50px" width="50px"
+                                                     alt="author-image" src="{{ $author->ImageUrl }}">
                                             </td>
                                             <td>
                                                 <a  target="_blank" href="{{ $author->postsLink }}">
