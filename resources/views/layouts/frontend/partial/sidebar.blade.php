@@ -18,8 +18,6 @@
                                                         ' (' . $category->posts()->published()->count() . ')'}}
                                                 </a>
                                             </li>
-                                        @else
-                                            @break
                                         @endif
                                     @endforeach
                                 </ul>
@@ -32,11 +30,9 @@
                                                         ' (' . $category->posts()->published()->count() . ')' }}
                                                 </a>
                                             </li>
-                                        @else
-                                            <li><a href="{{ route('post.category') }}">More...</a></li>
-                                            @break
                                         @endif
                                     @endforeach
+                                    <li><a href="{{ route('post.category') }}">More...</a></li>
                                 </ul>
                             </div>
                             @if($categories->count() < 1)
@@ -69,8 +65,6 @@
                                                             ' (' . $tag->posts()->published()->count() . ')' }}
                                                 </a>
                                             </li>
-                                        @else
-                                            @break
                                         @endif
                                     @endforeach
                                 </ul>
@@ -83,11 +77,9 @@
                                                             ' (' . $tag->posts()->published()->count() . ')' }}
                                                 </a>
                                             </li>
-                                        @else
-                                            <li><a href="{{ route('post.tag') }}">More...</a></li>
-                                            @break
                                         @endif
                                     @endforeach
+                                    <li><a href="{{ route('post.tag') }}">More...</a></li>
                                 </ul>
                             </div>
                             @if($tags->count() < 1)

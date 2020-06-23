@@ -27,7 +27,7 @@ class CommentStoreRequest extends FormRequest
     public function rules()
     {
         return [
-            'post_id' => [ 'required', 'integer', Rule::exists('posts')],
+            'post_id' => [ 'required', 'integer', Rule::exists('posts', 'id')],
             'comment' => ['required', 'string']
         ];
     }
