@@ -61,10 +61,13 @@
                                         <a href=""><i class="fa fa-instagram"></i></a>
                                     </div>
                                 </div>
-                                <div class="recent-post-content clearfix text-center">
-                                    <h4>You May Also Like</h4>
-                                    @include('common.base.pages.random-post')
-                                </div>
+
+                                <!-- Include random-posts list -->
+
+                                @include('common.base.pages.random-post')
+                                
+                                <!-- End random post -->
+
                                 <div class="user-comments">
                                     <p>
                                         <i class="fa fa-comments-o"></i>

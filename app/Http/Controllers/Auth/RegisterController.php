@@ -9,6 +9,7 @@ use App\Models\User;
 use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
@@ -82,7 +83,10 @@ class RegisterController extends Controller
     // Modify the response after user registered successfully
     protected function registered(Request $request, $user)
     {
-        Toastr::success('Wecome, '. $user->name .' ! You Are Successfully Registered.', 'success');
+        Auth::logout();
+
+        Toastr::success('Wecome, '. $user->name .' ! You Are Successfully Registered. ' .
+                                    'Please check your email to verify your account.', 'success');
         return redirect('/');
     }
 }

@@ -56,10 +56,7 @@
                         </div>
                     </div>
                     @if(!Request::is('/'))
-                        <div class="recent-post-content clearfix text-center">
-                            <h4>You May Also Like</h4>
-                            @include('common.base.pages.random-post')
-                        </div>
+                        @include('common.base.pages.random-post')
                     @endif
                 </div>
             @endforelse

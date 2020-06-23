@@ -108,7 +108,7 @@
                     <div class="category-widget-single">
                         <div class="category-widget-single-ad">
                             <a href="">
-                                <img src="{{ asset('assets/frontend/images/slider-demo1.gif') }}" alt="">
+                                <img src="{{ asset('assets/frontend/images/slider-action.gif') }}" alt="blog-action">
                             </a>
                         </div>
                     </div>

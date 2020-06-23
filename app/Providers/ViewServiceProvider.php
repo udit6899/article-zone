@@ -46,8 +46,14 @@ class ViewServiceProvider extends ServiceProvider
             'common.pages.post-category-items'
         ], function ($view) {
 
+            $randomPosts = Post::published()->get();
+
+            // If collection is not empty then get 3 posts
+            if (!$randomPosts->isEmpty()) {
+                $randomPosts = $randomPosts->random(3);
+            }
             // Bind random posts to view
-            $view->with('randomPosts', Post::published()->get()->random(3));
+            $view->with('randomPosts', $randomPosts );
         });
 
         View::composer([

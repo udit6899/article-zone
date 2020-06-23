@@ -58,6 +58,7 @@ class LoginController extends Controller
 
             // If user is verified, then redirect to dashboard
             return redirect($this->redirectTo);
+
         } else {
 
             Auth::logout();
