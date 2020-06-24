@@ -2,7 +2,7 @@
      * Utilities
      */
 
-    createClass = function (/* [baseclass, [mixin, ...]], definition */) {
+    var createClass = function (/* [baseclass, [mixin, ...]], definition */) {
         var Class, args;
         Class = function () {
             this.init.apply(this, arguments);
@@ -88,7 +88,7 @@
         return new SPFormat(format, fclass);
     };
 
-    clipval = function (val, min, max) {
+    var clipval = function (val, min, max) {
         if (val < min) {
             return min;
         }
@@ -98,7 +98,7 @@
         return val;
     };
 
-    quartile = function (values, q) {
+    var quartile = function (values, q) {
         var vl;
         if (q === 2) {
             vl = Math.floor(values.length / 2);
@@ -115,7 +115,7 @@
         }
     };
 
-    normalizeValue = function (val) {
+    var normalizeValue = function (val) {
         var nf;
         switch (val) {
             case 'undefined':
@@ -139,7 +139,7 @@
         return val;
     };
 
-    normalizeValues = function (vals) {
+    var normalizeValues = function (vals) {
         var i, result = [];
         for (i = vals.length; i--;) {
             result[i] = normalizeValue(vals[i]);
@@ -147,7 +147,7 @@
         return result;
     };
 
-    remove = function (vals, filter) {
+    var remove = function (vals, filter) {
         var i, vl, result = [];
         for (i = 0, vl = vals.length; i < vl; i++) {
             if (vals[i] !== filter) {
@@ -157,11 +157,11 @@
         return result;
     };
 
-    isNumber = function (num) {
+    var isNumber = function (num) {
         return !isNaN(parseFloat(num)) && isFinite(num);
     };
 
-    formatNumber = function (num, prec, groupsize, groupsep, decsep) {
+    var formatNumber = function (num, prec, groupsize, groupsep, decsep) {
         var p, i;
         num = (prec === false ? parseFloat(num).toString() : num.toFixed(prec)).split('');
         p = (p = $.inArray('.', num)) < 0 ? num.length : p;
@@ -176,7 +176,7 @@
 
     // determine if all values of an array match a value
     // returns true if the array is empty
-    all = function (val, arr, ignoreNull) {
+    var all = function (val, arr, ignoreNull) {
         var i;
         for (i = arr.length; i--; ) {
             if (ignoreNull && arr[i] === null) continue;
@@ -188,7 +188,7 @@
     };
 
     // sums the numeric values in an array, ignoring other values
-    sum = function (vals) {
+    var sum = function (vals) {
         var total = 0, i;
         for (i = vals.length; i--;) {
             total += typeof vals[i] === 'number' ? vals[i] : 0;
@@ -201,7 +201,7 @@
     };
 
     // http://paulirish.com/2008/bookmarklet-inject-new-css-rules/
-    addCSS = function(css) {
+    var addCSS = function(css) {
         var tag, iefail;
         if (document.createStyleSheet) {
             try {

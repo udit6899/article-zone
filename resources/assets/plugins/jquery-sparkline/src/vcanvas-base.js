@@ -1,7 +1,7 @@
     // Setup a very simple "virtual canvas" to make drawing the few shapes we need easier
     // This is accessible as $(foo).simpledraw()
 
-    VShape = createClass({
+   var VShape = createClass({
         init: function (target, id, type, args) {
             this.target = target;
             this.id = id;
@@ -14,7 +14,7 @@
         }
     });
 
-    VCanvas_base = createClass({
+    var VCanvas_base = createClass({
         _pxregex: /(\d+)(px)?\s*$/i,
 
         init: function (width, height, target) {

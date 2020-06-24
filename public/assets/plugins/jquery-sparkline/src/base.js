@@ -1,4 +1,4 @@
-    initStyles = function() {
+    var initStyles = function() {
         addCSS(defaultStyles);
     };
 
@@ -360,7 +360,7 @@
 
     });
 
-    barHighlightMixin = {
+    var barHighlightMixin = {
         changeHighlight: function (highlight) {
             var currentRegion = this.currentRegion,
                 target = this.target,

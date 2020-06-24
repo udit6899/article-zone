@@ -46,7 +46,7 @@ class ProfileSettingRequest extends FormRequest
         return [
             'name' => ['nullable', 'string', 'max:255'],
             'mobile_no' => ['nullable', 'digits:10'],
-            'about' => ['nullable', 'string', 'max:400'],
+            'about' => ['nullable', 'string', 'max:255'],
             'image' => ['nullable', 'image', 'max:1024', 'mimes:jpeg,png,jpg'],
         ];
     }

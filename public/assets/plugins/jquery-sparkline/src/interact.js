@@ -1,4 +1,4 @@
-    MouseHandler = createClass({
+    var MouseHandler = createClass({
         init: function (el, options) {
             var $el = $(el);
             this.$el = $el;
@@ -135,7 +135,7 @@
     });
 
 
-    Tooltip = createClass({
+    var Tooltip = createClass({
         sizeStyle: 'position: static !important;' +
             'display: block !important;' +
             'visibility: hidden !important;' +

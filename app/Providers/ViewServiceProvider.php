@@ -47,7 +47,7 @@ class ViewServiceProvider extends ServiceProvider
         });
 
         View::composer([
-            '*.dashboard', '*.post.create', '*.post.edit',
+            '*.dashboard', 'common.pages.post-create', '*.post.create', '*.post.edit',
         ], function ($view) {
 
             // Bind all tags to view

@@ -20,7 +20,7 @@
                                    class="art">{{ $post->user->name }}</a>
                                 <h4>
                                     <a href="{{ $post->viewLink }}">
-                                        {{ Str::limit($post->title, 50, '') }}
+                                        {{ Str::limit($post->title, 20, '') }}
                                     </a>
                                 </h4>
                                 <span class="art">{{ $post->created_date }}</span>

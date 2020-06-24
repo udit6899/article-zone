@@ -47,11 +47,20 @@
                                 <p>{{ $author->about }}</p>
                                 <div>
                                     <span>
+                                        <strong>Since:</strong>
+                                        {{ $author->created_at->toFormattedDateString() }} |
+                                    </span>
+                                    <span>
                                         <strong>Total Posts:</strong> {{ $authorPosts->total() }}
                                     </span>
                                     <span class="pull-right">
-                                        <strong>Author Since:</strong>
-                                        {{ $author->created_at->toFormattedDateString() }}
+                                          <div class="share">
+                                            <span>share:</span>
+                                            <a href=""><i class="fa fa-facebook"></i></a>
+                                            <a href=""><i class="fa fa-twitter"></i></a>
+                                            <a href=""><i class="fa fa-pinterest"></i></a>
+                                            <a href=""><i class="fa fa-instagram"></i></a>
+                                        </div>
                                     </span>
                                 </div>
                             </div>

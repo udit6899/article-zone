@@ -6665,7 +6665,7 @@ fieldset[disabled] .form-control {
     white-space: nowrap;
     position: relative;
     border-bottom: 1px solid #e9e9e9;
-    background: url("../../frontend/images/user-img-background.jpg") no-repeat no-repeat;
+    background: url("../../../../public/assets/frontend/images/user-img-background.jpg") no-repeat no-repeat;
     height: 135px; }
     .sidebar .user-info .image {
       display: inline-block; }
@@ -6687,7 +6687,6 @@ fieldset[disabled] .form-control {
         text-overflow: ellipsis;
         overflow: hidden;
         font-size: 14px;
-        alignment: center;
         color: #fff; }
       .sidebar .user-info .info-container .email {
         white-space: nowrap;
@@ -6696,7 +6695,6 @@ fieldset[disabled] .form-control {
         text-overflow: ellipsis;
         overflow: hidden;
         font-size: 12px;
-        alignment: center;
         color: #fff; }
   .sidebar .menu {
     position: relative;

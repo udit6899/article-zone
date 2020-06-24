@@ -11,4 +11,17 @@ const mix = require('laravel-mix');
  |
  */
 
-mix.copyDirectory('resources/assets', 'public/assets');
+// For frontend layout
+mix.js('resources/assets/frontend/js/custom.js', 'public/assets/frontend/js/custom.js');
+mix.js('resources/assets/frontend/js/editor.js', 'public/assets/frontend/js/editor.js');
+
+// For backend layout
+mix.js('resources/assets/backend/js/admin.js', 'public/assets/backend/js/admin.js');
+mix.js('resources/assets/backend/js/helpers.js', 'public/assets/backend/js/helpers.js');
+
+mix.copyDirectory('resources/assets/plugins', 'public/assets/plugins');
+mix.copyDirectory('resources/assets/frontend/css', 'public/assets/frontend/css');
+mix.copyDirectory('resources/assets/backend/css', 'public/assets/backend/css');
+mix.copyDirectory('resources/assets/frontend/fonts', 'public/assets/frontend/fonts');
+
+

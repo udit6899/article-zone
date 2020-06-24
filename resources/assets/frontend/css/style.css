@@ -8,7 +8,7 @@
     width: 100%;
     height: 100%;
     overflow: visible;
-    background: #fff url('../images/preloader.gif') no-repeat center center;
+    background: #fff url('../../../../public/assets/frontend/images/preloader.gif') no-repeat center center;
 }
 /*=====================================  preloader css end =====================================*/
 
@@ -35,7 +35,7 @@ input:focus, textarea:focus{
 }
 body
 {
-    background: url(../images/bg-img.png) scroll repeat;
+    background: url(../../../../public/assets/frontend/images/bg-img.png) scroll repeat;
     height: 100%;
     font-family: 'Droid Sans', sans-serif;
 }
@@ -250,16 +250,16 @@ z-index:1;
     height: 420px;
 }
 #slider-item-1 {
-    background: url(../images/slider1.jpg) no-repeat scroll center center;
+    background: url(../../../../public/assets/frontend/images/slider1.jpg) no-repeat scroll center center;
 }
 #slider-item-2 {
-    background: url(../images/slider2.jpg) no-repeat scroll center center;
+    background: url(../../../../public/assets/frontend/images/slider2.jpg) no-repeat scroll center center;
 }
 #slider-item-3 {
-    background: url(../images/slider3.png) no-repeat scroll center center;
+    background: url(../../../../public/assets/frontend/images/slider3.png) no-repeat scroll center center;
 }
 .slider-content-2{
-    background: url(../images/search.jpg) no-repeat scroll center center;
+    background: url(../../../../public/assets/frontend/images/search.jpg) no-repeat scroll center center;
     height: 400px;
 	background-size: cover;
 }
@@ -581,7 +581,7 @@ z-index:1;
     padding-top: 0px;
 }
 .category-title,  .popular-post-title {
-    background: url("../images/widget-img.png");
+    background: url("../../../../public/assets/frontend/images/widget-img.png");
     background-position: center bottom;
     background-repeat: no-repeat;
     background-size: auto auto;
@@ -621,13 +621,11 @@ z-index:1;
 }
 .category-widget-single {
     border: 1px solid #e5e3e3;
+    margin-bottom: 50px;
     padding: 13px;
 }
 .category-widget-single-ad > a img {
     width: 100%;
-}
-.category-widget-single {
-  margin-bottom: 50px;
 }
 .category-widget-single-ad {
     position: relative;
@@ -758,10 +756,6 @@ z-index:1;
 .vbox-close {
     text-indent: 0px;
 }
-iframe {
-    width: 100%;
-    frameborder: "0";
-}
 /*==============================  feature-posts-area css start =======================================*/
 
 .popular-post-title > h4 {
@@ -844,7 +838,6 @@ iframe {
 }
 iframe {
   width: 100%;
-  frameborder:"0"
 }
 /*================================ asked-section-area css start ===================================*/
 .asked-section-area {

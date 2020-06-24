@@ -1,7 +1,7 @@
     /**
      * Default configuration settings
      */
-    getDefaults = function () {
+    var getDefaults = function () {
         return {
             // Settings common to most/all chart types
             common: {
@@ -130,7 +130,7 @@
     };
 
     // You can have tooltips use a css class other than jqstooltip by specifying tooltipClassname
-    defaultStyles = '.jqstooltip { ' +
+    var defaultStyles = '.jqstooltip { ' +
             'position: absolute;' +
             'left: 0px;' +
             'top: 0px;' +

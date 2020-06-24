@@ -621,13 +621,11 @@ z-index:1;
 }
 .category-widget-single {
     border: 1px solid #e5e3e3;
+    margin-bottom: 50px;
     padding: 13px;
 }
 .category-widget-single-ad > a img {
     width: 100%;
-}
-.category-widget-single {
-  margin-bottom: 50px;
 }
 .category-widget-single-ad {
     position: relative;
@@ -758,10 +756,6 @@ z-index:1;
 .vbox-close {
     text-indent: 0px;
 }
-iframe {
-    width: 100%;
-    frameborder: "0";
-}
 /*==============================  feature-posts-area css start =======================================*/
 
 .popular-post-title > h4 {
@@ -844,7 +838,6 @@ iframe {
 }
 iframe {
   width: 100%;
-  frameborder:"0"
 }
 /*================================ asked-section-area css start ===================================*/
 .asked-section-area {

@@ -6687,7 +6687,6 @@ fieldset[disabled] .form-control {
         text-overflow: ellipsis;
         overflow: hidden;
         font-size: 14px;
-        alignment: center;
         color: #fff; }
       .sidebar .user-info .info-container .email {
         white-space: nowrap;
@@ -6696,7 +6695,6 @@ fieldset[disabled] .form-control {
         text-overflow: ellipsis;
         overflow: hidden;
         font-size: 12px;
-        alignment: center;
         color: #fff; }
   .sidebar .menu {
     position: relative;
