@@ -59,7 +59,7 @@
                     <h4 class="footer-title">category</h4>
                     <ul>
                         @forelse($categories as $category)
-                            @if($loop->index < 7 && substr_count($category->name, ' ') < 1)
+                            @if($loop->index < 7)
                                 <li><a href="{{ $category->postsLink }}">{{ $category->name }}</a></li>
                             @else
                                 <li><a href="{{ route('post.category') }}">More...</a></li>

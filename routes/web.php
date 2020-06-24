@@ -37,7 +37,7 @@ Route::group(['namespace' => 'Common'], function () {
     Route::resource('subscriber', 'SubscriberController')->only('store');
 
     // Routes for the admin operation
-    Route::group(['prefix' => 'admin', 'as' =>'admin.', 'middleware' => ['auth', 'admin']], function () {
+    Route::group(['prefix' => 'admin', 'as' =>'admin.', 'middleware' => ['auth', 'admin', 'verified']], function () {
 
         // Routes for Subscriber operations
         Route::resource('subscriber', 'SubscriberController')->only(['index', 'destroy']);
@@ -92,7 +92,7 @@ Route::group(['namespace' => 'Common'], function () {
 // Routes for the authors
 Route::group([
     'prefix' => 'author', 'as' =>'author.',
-    'namespace' => 'Author', 'middleware' => ['auth', 'author']
+    'namespace' => 'Author', 'middleware' => ['auth', 'author', 'verified']
 ], function () {
 
     // GET: routes for dashboard page
@@ -121,7 +121,7 @@ Route::group([
 // Routes for the admin
 Route::group([
     'prefix' => 'admin', 'as' =>'admin.',
-    'namespace' => 'Admin', 'middleware' => ['auth', 'admin']
+    'namespace' => 'Admin', 'middleware' => ['auth', 'admin', 'verified']
 ], function () {
 
     // GET: routes for dashboard page

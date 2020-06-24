@@ -28,6 +28,7 @@
                                         <th>Image</th>
                                         <th>Posts</th>
                                         <th>Comments</th>
+                                        <th>Status</th>
                                         <th>Created At</th>
                                         <th>Updated At</th>
                                         <th>Action</th>
@@ -39,7 +40,7 @@
                                             <td>{{ $key + 1 }}</td>
                                             <td>{{ $author->name }}</td>
                                             <td>
-                                                <img height="50px" width="50px"
+                                                <img height="30px" width="30px"
                                                      alt="author-image" src="{{ $author->ImageUrl }}">
                                             </td>
                                             <td>
@@ -48,6 +49,13 @@
                                                 </a>
                                             </td>
                                             <td>{{ $author->comments_count }}</td>
+                                            <td>
+                                                @if($author->email_verified_at)
+                                                    <span class="badge bg-light-green">verified</span>
+                                                @else
+                                                    <span class="badge bg-pink">pending</span>
+                                                @endif
+                                            </td>
                                             <td>{{ $author->created_at }}</td>
                                             <td>{{ $author->created_at }}</td>
                                             <td class="text-center">

@@ -11,7 +11,7 @@
                             <div class="category-list">
                                 <ul class="left-portion">
                                     @foreach($categories as $category)
-                                        @if($loop->odd && $loop->index < 10 && substr_count($category->name, ' ') < 1)
+                                        @if($loop->odd)
                                             <li>
                                                 <a href="{{ $category->postsLink }}">
                                                     {{ $category->name .
@@ -19,6 +19,7 @@
                                                 </a>
                                             </li>
                                         @endif
+                                        @break($loop->index > 7)
                                     @endforeach
                                 </ul>
                                 <ul class="right-portion">
@@ -30,9 +31,11 @@
                                                         ' (' . $category->posts()->published()->count() . ')' }}
                                                 </a>
                                             </li>
+                                        @elseif ($loop->index > 7)
+                                            <li><a href="{{ route('post.category') }}">More...</a></li>
+                                            @break
                                         @endif
                                     @endforeach
-                                    <li><a href="{{ route('post.category') }}">More...</a></li>
                                 </ul>
                             </div>
                             @if($categories->count() < 1)
@@ -58,7 +61,7 @@
                             <div class="category-list">
                                 <ul class="left-portion">
                                     @foreach($tags as $tag)
-                                        @if($loop->odd && $loop->index < 10 && substr_count($category->name, ' ') < 1)
+                                        @if($loop->odd)
                                             <li>
                                                 <a href="{{ $tag->postsLink }}">
                                                     {{ "#$tag->name" .
@@ -66,20 +69,23 @@
                                                 </a>
                                             </li>
                                         @endif
+                                        @break($loop->index > 7)
                                     @endforeach
                                 </ul>
                                 <ul class="right-portion">
                                     @foreach($tags as $tag)
-                                        @if($loop->even && $loop->index < 7 && substr_count($category->name, ' ') < 1)
+                                        @if($loop->even)
                                             <li>
                                                 <a href="{{ $tag->postsLink }}">
                                                     {{ "#$tag->name" .
                                                             ' (' . $tag->posts()->published()->count() . ')' }}
                                                 </a>
                                             </li>
+                                        @elseif($loop->index > 7)
+                                            <li><a href="{{ route('post.tag') }}">More...</a></li>
+                                            @break
                                         @endif
                                     @endforeach
-                                    <li><a href="{{ route('post.tag') }}">More...</a></li>
                                 </ul>
                             </div>
                             @if($tags->count() < 1)

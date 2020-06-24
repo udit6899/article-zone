@@ -4,7 +4,6 @@
 
 @section('content')
 <div class="container">
-    <!--============================== contact-area-start ================================-->
     <section class="contact-area">
         <div class="container">
             <div class="row">

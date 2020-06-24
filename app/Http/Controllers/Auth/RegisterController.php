@@ -83,10 +83,8 @@ class RegisterController extends Controller
     // Modify the response after user registered successfully
     protected function registered(Request $request, $user)
     {
-        Auth::logout();
+        Toastr::success("Wecome, $user->name ! You Are Successfully Registered.", 'success');
 
-        Toastr::success('Wecome, '. $user->name .' ! You Are Successfully Registered. ' .
-                                    'Please check your email to verify your account.', 'success');
-        return redirect('/');
+        return redirect()->route('verification.notice');
     }
 }
