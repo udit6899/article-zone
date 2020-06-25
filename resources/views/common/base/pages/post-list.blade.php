@@ -1,5 +1,5 @@
 <!-- Base post-list area -->
-<div class="container">
+<div class="container" xmlns="http://www.w3.org/1999/html">
     <div class="row">
         <div class="col-md-8">
             @forelse($posts as $post)
@@ -38,10 +38,7 @@
                                     </div>
                                     <div class="share">
                                         <span>share:</span>
-                                        <a href=""><i class="fa fa-facebook"></i></a>
-                                        <a href=""><i class="fa fa-twitter"></i></a>
-                                        <a href=""><i class="fa fa-pinterest"></i></a>
-                                        <a href=""><i class="fa fa-instagram"></i></a>
+                                        @include('common.base.pages.share', ['data' => $post])
                                     </div>
                                 </div>
                             </div>

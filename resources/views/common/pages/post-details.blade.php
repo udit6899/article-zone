@@ -3,6 +3,44 @@
 
 @section('title', $post->title)
 
+<!--====== author's details content ======-->
+@section('author-details')
+    <div class="sidebar-widget">
+        <div class="row">
+            <div class="col-md-12 col-sm-12">
+                <div class="popular-post-border-content">
+                    <div class="popular-post-content text-center" id="author-details">
+                        <div class="popular-post-title">
+                            <h4>Author's Details</h4>
+                        </div>
+                        <div class="author-image">
+                            <img src="{{ $post->user->imageUrl }}" alt="post-author-image">
+                        </div>
+                        <div class="author-name">
+                            <a href="{{ $post->user->postsLink }}">
+                                {{ $post->user->name }}
+                            </a>
+                        </div>
+                        <div class="sub">
+                            <small>
+                                <strong>Total Posts:</strong>
+                                {{ $post->user->posts()->published()->count() }} |
+                                <strong>Since: </strong>
+                                {{ $post->user->created_at->toFormattedDateString() }}
+                            </small>
+                        </div>
+                        <div class="author-profile-link">
+                            @include('common.base.pages.share', ['data' => $post->user])
+                        </div>
+                        <div class="author-about">
+                           <p>{{ Str::limit($post->user->about, '100') }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+@endsection
 
 <!--========================== include content ==========================-->
 @section('content')
@@ -14,7 +52,8 @@
                     <div class="category-border-content">
                         <div class="category-detail category">
                             <div class="category-img">
-                                <img src="{{ $post->imageUrl }}" alt="{{ $post->title }}">
+                                <img alt="{{ $post->title }}"
+                                     src="{{ Storage::disk('public')->url("posts/slider/$post->image") }}">
                                 <div class="category-overlay">
                                 </div>
                             </div>
@@ -37,7 +76,7 @@
                                         <span>Tags</span>
                                         @foreach($post->tags as $tag)
                                             <a href="{{ $tag->postsLink }}">
-                                                {{ $tag->name }}
+                                                <i class="fa fa-tag"></i> {{ $tag->name }}
                                             </a>
                                         @endforeach
                                     </div>
@@ -47,7 +86,7 @@
                                         <span>Categories</span>
                                         @foreach($post->categories as $category)
                                             <a href="{{ $category->postsLink }}">
-                                                {{ $category->name }}
+                                                <i class="fa fa-cube"></i> {{ $category->name }}
                                             </a>
                                         @endforeach
                                     </div>
@@ -55,17 +94,14 @@
                                 <div class="share-comment-section ">
                                     <div class="share single-page">
                                         <span>share:</span>
-                                        <a href=""><i class="fa fa-facebook"></i></a>
-                                        <a href=""><i class="fa fa-twitter"></i></a>
-                                        <a href=""><i class="fa fa-pinterest"></i></a>
-                                        <a href=""><i class="fa fa-instagram"></i></a>
+                                        @include('common.base.pages.share', ['data' => $post])
                                     </div>
                                 </div>
 
                                 <!-- Include random-posts list -->
 
                                 @include('common.base.pages.random-post')
-                                
+
                                 <!-- End random post -->
 
                                 <div class="user-comments">

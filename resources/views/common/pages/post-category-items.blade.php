@@ -53,12 +53,9 @@
                                         <strong>Total Posts:</strong> {{ $categoryPosts->total() }}
                                     </span>
                                     <span class="pull-right">
-                                          <div class="share">
+                                        <div class="share">
                                             <span>share:</span>
-                                            <a href=""><i class="fa fa-facebook"></i></a>
-                                            <a href=""><i class="fa fa-twitter"></i></a>
-                                            <a href=""><i class="fa fa-pinterest"></i></a>
-                                            <a href=""><i class="fa fa-instagram"></i></a>
+                                            @include('common.base.pages.share', ['data' => $category])
                                         </div>
                                     </span>
                                 </div>

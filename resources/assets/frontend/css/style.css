@@ -1418,3 +1418,62 @@ iframe {
     background: #eaead1;
     padding: 40px 25px 40px 25px;
 }
+
+/* Edit profile page css start */
+
+#profile-container {
+    padding: 30px 20px 30px 20px;
+}
+
+#avatar-input {
+    display: none;
+}
+
+#edit {
+    padding-top: 30px;
+}
+
+#name-head {
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+#post-create {
+    background: #eaead1;
+    padding: 40px 25px 40px 25px;
+}
+
+/* Author details */
+#author-details {
+    padding: 0px 20px 0px 20px;
+}
+
+#author-details .author-image img {
+    padding: 10px;
+}
+
+#author-details .author-name a {
+    margin-top: 20px;
+    font-weight: bold;
+    color: #eaeaea;
+    font-size: 20px;
+}
+
+#author-details a:hover {
+    color: #f4b85c;
+}
+
+#author-details .author-about {
+    padding: 10px 10px 0px 10px;
+    color: #c9c6c6;
+    margin-bottom: 30px;
+}
+
+#author-details .sub {
+    color: #cccccc;
+    margin-bottom: 10px;
+}
+
+#author-detail .author-profile-link {
+    padding: 20px;
+}

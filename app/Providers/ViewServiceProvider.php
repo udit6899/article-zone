@@ -46,6 +46,7 @@ class ViewServiceProvider extends ServiceProvider
             $view->with('randomPosts', $randomPosts );
         });
 
+        // Pass tags and categories to view
         View::composer([
             '*.dashboard', 'common.pages.post-create', '*.post.create', '*.post.edit',
         ], function ($view) {

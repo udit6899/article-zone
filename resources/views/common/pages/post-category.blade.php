@@ -47,11 +47,10 @@
                                             </small>
                                         </div>
                                         <div class="share">
-                                            <span>share:</span>
-                                            <a href=""><i class="fa fa-facebook"></i></a>
-                                            <a href=""><i class="fa fa-twitter"></i></a>
-                                            <a href=""><i class="fa fa-pinterest"></i></a>
-                                            <a href=""><i class="fa fa-instagram"></i></a>
+                                            <div class="share">
+                                                <span>share:</span>
+                                                @include('common.base.pages.share', ['data' => $category])
+                                            </div>
                                         </div>
                                     </div>
                                 </div>

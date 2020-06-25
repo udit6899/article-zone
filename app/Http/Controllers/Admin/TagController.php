@@ -13,7 +13,7 @@ use Illuminate\Support\Str;
 class TagController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Display a listing of the tag.
      *
      * @return \Illuminate\Http\Response
      */
@@ -27,7 +27,7 @@ class TagController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Show the form for creating a new tag.
      *
      * @return \Illuminate\Http\Response
      */
@@ -38,7 +38,7 @@ class TagController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Store a newly created tag in storage.
      *
      * @param  TagStoreRequest $request
      * @return \Illuminate\Http\Response
@@ -56,7 +56,7 @@ class TagController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Show the form for editing the specified tag.
      *
      * @param  Tag $tag
      * @return \Illuminate\Http\Response
@@ -68,7 +68,7 @@ class TagController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * Update the specified tag in storage.
      *
      * @param  TagUpdateRequest  $request
      * @param  Tag $tag
@@ -87,7 +87,7 @@ class TagController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Remove the specified tag from storage.
      *
      * @param  Tag $tag
      * @return \Illuminate\Http\Response

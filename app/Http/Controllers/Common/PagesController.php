@@ -13,7 +13,7 @@ class PagesController extends Controller
 {
 
     /**
-     * Add post viewcount middleware
+     * Add post view's count middleware
      */
     public function __construct()
     {

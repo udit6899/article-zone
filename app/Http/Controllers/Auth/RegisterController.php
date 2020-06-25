@@ -36,7 +36,7 @@ class RegisterController extends Controller
     protected $redirectTo;
 
     /**
-     * Create a new controller instance.
+     * Apply the redirecting url
      *
      * @return void
      */
@@ -80,7 +80,9 @@ class RegisterController extends Controller
         ]);
     }
 
-    // Modify the response after user registered successfully
+    /*
+     * Modify the response after user registration
+     */
     protected function registered(Request $request, $user)
     {
         Toastr::success("Wecome, $user->name ! You Are Successfully Registered.", 'success');

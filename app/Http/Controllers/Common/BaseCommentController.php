@@ -9,7 +9,6 @@ use App\Http\Requests\Comment\CommentStoreRequest;
 use App\Http\Requests\Comment\CommentUpdateRequest;
 use App\Models\Comment;
 use Brian2694\Toastr\Facades\Toastr;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class BaseCommentController extends Controller
@@ -63,7 +62,7 @@ class BaseCommentController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * Update the specified comment in storage.
      *
      * @param  CommentUpdateRequest  $request
      * @param  \App\Models\Comment  $comment

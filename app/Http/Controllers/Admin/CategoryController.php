@@ -13,7 +13,7 @@ class CategoryController extends Controller
 {
 
     /**
-     * Display a listing of the resource.
+     * Display a listing of the category details.
      *
      * @return \Illuminate\Http\Response
      */
@@ -27,7 +27,7 @@ class CategoryController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Show the form for creating a new category.
      *
      * @return \Illuminate\Http\Response
      */
@@ -38,7 +38,7 @@ class CategoryController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Store a newly created category in storage.
      *
      * @param  CategoryStoreRequest $request
      * @return \Illuminate\Http\Response
@@ -67,7 +67,7 @@ class CategoryController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Show the form for editing the specified category.
      *
      * @param  Category $category
      * @return \Illuminate\Http\Response
@@ -79,7 +79,7 @@ class CategoryController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * Update the specified category in storage.
      *
      * @param  CategoryUpdateRequest  $request
      * @param  Category $category
@@ -108,7 +108,7 @@ class CategoryController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Remove the specified category from storage.
      *
      * @param  Category $category
      * @return \Illuminate\Http\Response

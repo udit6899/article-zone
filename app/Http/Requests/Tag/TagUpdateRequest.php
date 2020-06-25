@@ -19,7 +19,7 @@ class TagUpdateRequest extends FormRequest
     }
 
     /**
-     * Prepare the updated tag details
+     * Prepare the tag details for update
      *
      */
     protected function prepareForValidation()
@@ -33,7 +33,7 @@ class TagUpdateRequest extends FormRequest
     }
 
     /**
-     * Get the validation rules that apply to the request.
+     * Get the validation rules that apply to the tag update request.
      *
      * @return array
      */

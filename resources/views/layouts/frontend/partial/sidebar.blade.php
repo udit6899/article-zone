@@ -1,4 +1,10 @@
 <div class="col-md-4">
+
+    @hasSection('author-details')
+        @yield('author-details')
+        <br><br>
+    @endif
+
     <div class="sidebar-widget">
         <div class="row">
             <div class="col-md-12 col-sm-12">
@@ -14,6 +20,7 @@
                                         @if($loop->odd)
                                             <li>
                                                 <a href="{{ $category->postsLink }}">
+                                                    <i class="fa fa-cube"></i>
                                                     {{ $category->name .
                                                         ' (' . $category->posts()->published()->count() . ')'}}
                                                 </a>
@@ -27,12 +34,17 @@
                                         @if($loop->even && $loop->index < 7 && substr_count($category->name, ' ') < 1)
                                             <li>
                                                 <a href="{{ $category->postsLink }}">
+                                                    <i class="fa fa-cube"></i>
                                                     {{ $category->name .
                                                         ' (' . $category->posts()->published()->count() . ')' }}
                                                 </a>
                                             </li>
                                         @elseif ($loop->index > 7)
-                                            <li><a href="{{ route('post.category') }}">More...</a></li>
+                                            <li>
+                                                <a href="{{ route('post.category') }}">
+                                                    <i class="fa fa-reorder"></i>More...
+                                                </a>
+                                            </li>
                                             @break
                                         @endif
                                     @endforeach
@@ -64,7 +76,8 @@
                                         @if($loop->odd)
                                             <li>
                                                 <a href="{{ $tag->postsLink }}">
-                                                    {{ "#$tag->name" .
+                                                    <i class="fa fa-tag"></i>
+                                                    {{ "$tag->name" .
                                                             ' (' . $tag->posts()->published()->count() . ')' }}
                                                 </a>
                                             </li>
@@ -77,12 +90,17 @@
                                         @if($loop->even)
                                             <li>
                                                 <a href="{{ $tag->postsLink }}">
-                                                    {{ "#$tag->name" .
+                                                    <i class="fa fa-tag"></i>
+                                                    {{ "$tag->name" .
                                                             ' (' . $tag->posts()->published()->count() . ')' }}
                                                 </a>
                                             </li>
                                         @elseif($loop->index > 7)
-                                            <li><a href="{{ route('post.tag') }}">More...</a></li>
+                                            <li>
+                                                <a href="{{ route('post.tag') }}">
+                                                    <i class="fa fa-reorder"></i> More...
+                                                </a>
+                                            </li>
                                             @break
                                         @endif
                                     @endforeach

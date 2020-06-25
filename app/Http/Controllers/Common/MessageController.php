@@ -56,7 +56,7 @@ class MessageController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Store a newly created message in storage.
      *
      * @param  \App\Http\Requests\Message\MessageRequest  $request
      * @return \Illuminate\Http\Response

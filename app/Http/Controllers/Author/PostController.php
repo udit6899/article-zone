@@ -18,7 +18,7 @@ class PostController extends BasePostController
     }
 
     /**
-     * Display the specified resource.
+     * Display the specified post.
      *
      * @param  \App\Models\Post  $post
      * @return \Illuminate\Http\Response

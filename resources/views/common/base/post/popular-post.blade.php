@@ -23,7 +23,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                @forelse($popularPosts as $key => $post)
+                @forelse($data['popularPosts'] as $key => $post)
                     <tr>
                         <td>{{ $key + 1 }}</td>
                         <td>{{ Str::limit($post->title, 15) }}</td>

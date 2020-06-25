@@ -8,30 +8,33 @@ use Illuminate\Support\Facades\Auth;
 
 class DashboardController extends Controller
 {
-    // show dashboard of author
+    /*
+     * Show dashboard of author
+     */
     public function index() {
 
         // Get the author details
         $user = Auth::user();
 
-        // Get author's total posts
-        $totalPosts = $user->posts->count();
+        $data = array(
 
-        // Get author's popular posts
-        $popularPosts = $user->posts()->popular(env('POPULAR_POST', 4));
+            // Get author's total posts
+            'totalPosts' => $user->posts->count(),
 
-        // Get author's total post views
-        $totalPostViews = $user->posts()->sum('view_count');
+            // Get author's popular posts
+            'popularPosts' => $user->posts()->popular(env('POPULAR_POST', 4)),
 
-        // Get author's total pending posts
-        $totalPendingPosts = $user->posts()->approved(false)->count();
+            // Get author's total post views
+            'totalPostViews' => $user->posts()->sum('view_count'),
 
-        // Get author's post total comments
-        $totalPostComments = $user->posts()->withCount('comments')->get()->sum('comments_count');
+            // Get author's total pending posts
+            'totalPendingPosts' => $user->posts()->approved(false)->count(),
 
-        return view('author.dashboard', compact(
-                'totalPosts', 'totalPendingPosts',
-                'popularPosts', 'totalPostComments', 'totalPostViews'
-        ));
+            // Get author's post total comments
+            'totalPostComments' => $user->posts()->withCount('comments')->get()->sum('comments_count')
+        );
+
+        // Return to author dashboard
+        return view('author.dashboard', compact('data'));
     }
 }

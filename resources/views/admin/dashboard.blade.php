@@ -36,7 +36,7 @@
                 <div class="content">
                     <div class="text">TOTAL AUTHORS</div>
                     <div class="number count-to" data-from="0"
-                         data-to="{{ $totalAuthors }}" data-speed="1000" data-fresh-interval="20">
+                         data-to="{{ $data['totalAuthors'] }}" data-speed="1000" data-fresh-interval="20">
                     </div>
                 </div>
             </div>
@@ -47,7 +47,7 @@
                 <div class="content">
                     <div class="text">TOTAL SUBSCRIBERS</div>
                     <div class="number count-to" data-from="0"
-                         data-to="{{ $totalSubscribers }}" data-speed="1000" data-fresh-interval="20">
+                         data-to="{{ $data['totalSubscribers'] }}" data-speed="1000" data-fresh-interval="20">
                     </div>
                 </div>
             </div>
@@ -79,7 +79,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    @forelse($activeAuthors as $key => $author)
+                    @forelse($data['activeAuthors'] as $key => $author)
                         <tr>
                             <td>{{ $key + 1 }}</td>
                             <td>{{ $author->name }}</td>

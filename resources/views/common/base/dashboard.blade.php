@@ -19,7 +19,7 @@
                 <div class="content">
                     <div class="text">TOTAL POSTS</div>
                     <div class="number count-to"
-                         data-from="0" data-to="{{ $totalPosts }}" data-speed="1000" data-fresh-interval="20">
+                         data-from="0" data-to="{{ $data['totalPosts'] }}" data-speed="1000" data-fresh-interval="20">
                     </div>
                 </div>
             </div>
@@ -32,7 +32,7 @@
                 <div class="content">
                     <div class="text">PENDING POSTS</div>
                     <div class="number count-to" data-from="0"
-                         data-to="{{ $totalPendingPosts }}" data-speed="1000" data-fresh-interval="20">
+                         data-to="{{ $data['totalPendingPosts'] }}" data-speed="1000" data-fresh-interval="20">
                     </div>
                 </div>
             </div>
@@ -45,7 +45,7 @@
                 <div class="content">
                     <div class="text">TOTAL COMMENTS</div>
                     <div class="number count-to" data-from="0"
-                         data-to="{{ $totalPostComments }}" data-speed="1000" data-fresh-interval="20">
+                         data-to="{{ $data['totalPostComments'] }}" data-speed="1000" data-fresh-interval="20">
                     </div>
                 </div>
             </div>
@@ -58,7 +58,7 @@
                 <div class="content">
                     <div class="text">TOTAL VIEWS</div>
                     <div class="number count-to" data-from="0"
-                         data-to="{{ $totalPostViews }}" data-speed="1000" data-fresh-interval="20">
+                         data-to="{{ $data['totalPostViews'] }}" data-speed="1000" data-fresh-interval="20">
                     </div>
                 </div>
             </div>

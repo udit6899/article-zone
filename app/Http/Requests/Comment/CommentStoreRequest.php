@@ -20,7 +20,7 @@ class CommentStoreRequest extends FormRequest
 
 
     /**
-     * Get the validation rules that apply to the request.
+     * Get the validation rules that apply to the comment store request.
      *
      * @return array
      */

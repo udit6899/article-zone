@@ -18,7 +18,7 @@ class TagStoreRequest extends FormRequest
     }
 
     /**
-     * Store tag slug in request
+     * Store tag slug in the request
      *
      */
     protected function prepareForValidation()
@@ -27,7 +27,7 @@ class TagStoreRequest extends FormRequest
     }
 
     /**
-     * Get the validation rules that apply to the request.
+     * Get the validation rules that apply to the tag store request.
      *
      * @return array
      */

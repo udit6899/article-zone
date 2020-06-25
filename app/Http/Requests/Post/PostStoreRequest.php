@@ -19,7 +19,7 @@ class PostStoreRequest extends FormRequest
     }
 
     /**
-     * Prepare post details to store
+     * Prepare the post details to store
      *
      */
     protected function prepareForValidation()
@@ -32,7 +32,7 @@ class PostStoreRequest extends FormRequest
     }
 
     /**
-     * Get the validation rules that apply to the request.
+     * Get the validation rules that apply to the post store request.
      *
      * @return array
      */

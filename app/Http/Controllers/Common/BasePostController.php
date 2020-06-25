@@ -51,7 +51,7 @@ class BasePostController extends Controller
 
 
     /**
-     * Store a newly created resource in storage.
+     * Store a newly created post in storage.
      *
      * @param  PostStoreRequest  $request
      * @return \Illuminate\Http\Response
@@ -133,7 +133,6 @@ class BasePostController extends Controller
      */
     public function update(PostUpdateRequest $request, Post $post)
     {
-
         // Store uploaded image for post
         $imageUrl = FileHelper::manageUpload(
             $request->file('image'), 'post', $post->image);
@@ -189,6 +188,7 @@ class BasePostController extends Controller
 
             // Delete the associated image for post
             FileHelper::delete("posts/$post->image");
+            FileHelper::delete("posts/slider/$post->image");
 
             // Remove all categories and tags of the post from pivot table
             $post->categories()->detach();

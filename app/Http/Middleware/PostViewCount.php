@@ -8,7 +8,7 @@ use Closure;
 class PostViewCount
 {
     /**
-     * Handle an incoming request.
+     * Handle an incoming request to count the post's views.
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \Closure  $next

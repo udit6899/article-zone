@@ -19,7 +19,7 @@ class CategoryUpdateRequest extends FormRequest
     }
 
     /**
-     * Prepare the updated category details
+     * Prepare the category details for update
      *
      */
     protected function prepareForValidation()
@@ -34,7 +34,7 @@ class CategoryUpdateRequest extends FormRequest
     }
 
     /**
-     * Get the validation rules that apply to the request.
+     * Get the validation rules that apply to the category update request.
      *
      * @return array
      */

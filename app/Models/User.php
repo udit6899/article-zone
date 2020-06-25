@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Storage;
+use ImLiam\ShareableLink;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
@@ -87,5 +88,20 @@ class User extends Authenticatable implements MustVerifyEmail
     public function getPostsLinkAttribute()
     {
         return route('post.author.profile', $this->id);
+    }
+
+    /**
+     * Get sharable link for author's posts
+     *
+     * @return string
+     */
+    public function getShareUrlAttribute() {
+
+        // Get author profile page link
+        $url = route('post.author.profile', $this->id);
+
+        // Return sharable link of the author's post profile
+        return new ShareableLink($url,
+            env('APP_NAME') . ": Read the aticles by $this->name");
     }
 }

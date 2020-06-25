@@ -20,7 +20,7 @@ class PostUpdateRequest extends FormRequest
     }
 
     /**
-     * Prepare the updated post details
+     * Prepare the post details for update
      *
      */
     protected function prepareForValidation()
@@ -40,7 +40,7 @@ class PostUpdateRequest extends FormRequest
 
 
     /**
-     * Get the validation rules that apply to the request.
+     * Get the validation rules that apply to the post update request.
      *
      * @return array
      */

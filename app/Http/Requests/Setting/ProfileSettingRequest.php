@@ -37,7 +37,7 @@ class ProfileSettingRequest extends FormRequest
     }
 
     /**
-     * Get the validation rules that apply to the request.
+     * Get the validation rules that apply to the profile setting request.
      *
      * @return array
      */

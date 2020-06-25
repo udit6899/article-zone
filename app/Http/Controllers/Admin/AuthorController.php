@@ -21,7 +21,7 @@ class AuthorController extends Controller
 
 
     /**
-     * Display a listing of the authors.
+     * Display a listing of the authors details.
      *
      * @return \Illuminate\Http\Response
      */

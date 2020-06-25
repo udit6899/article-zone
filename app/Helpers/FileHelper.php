@@ -100,8 +100,9 @@ class FileHelper {
 
                 // Store uploaded image for post : Storage/posts
                 $imageUrl = FileHelper::upload(
-                    $uploadedResource, [ 0 => 'posts'],
-                    [0 => ['width' => 338, 'height' => 245]], $oldImageUrl
+                    $uploadedResource, [ 0 => 'posts', 1 => 'posts/slider'],
+                    [0 => ['width' => 338, 'height' => 237], 1 => ['width' => 880, 'height' => 520]],
+                    $oldImageUrl
                 );
 
                 break;
