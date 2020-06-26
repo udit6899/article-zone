@@ -1477,3 +1477,25 @@ iframe {
 #author-detail .author-profile-link {
     padding: 20px;
 }
+
+/* Favourite post css */
+.favourite a:hover{
+    cursor: pointer;
+}
+
+#add-to-favourite-form,
+#remove-from-favourite-form {
+    display: none;
+}
+
+.favourite #add, .favourite #remove:hover {
+    color: rgba(186, 183, 183, 0.93);
+}
+
+.favourite #add:hover, .favourite #remove, #favourite-icon {
+    color: #c1160a;
+}
+
+#favourite-icon span {
+    color: #333;
+}

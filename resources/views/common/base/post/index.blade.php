@@ -38,8 +38,9 @@
                                 @if(!Request::is("$prefix/post/all"))
                                     <th>Created_At</th>
                                 @endif
-                                <th><i class="material-icons">comment</i></th>
                                 <th><i class="material-icons">visibility</i></th>
+                                <th><i class="material-icons">favorite</i></th>
+                                <th><i class="material-icons">comment</i></th>
                                 <th>Action</th>
                             </tr>
                             </thead>
@@ -73,8 +74,9 @@
                                     @if(!Request::is("$prefix/post/all"))
                                         <td>{{ $post->created_at->toDateString() }}</td>
                                     @endif
-                                    <td>{{ $post->comments->count() }}</td>
                                     <td>{{ $post->view_count }}</td>
+                                    <td>{{ $post->favouriteToUsers()->count() }}</td>
+                                    <td>{{ $post->comments->count() }}</td>
 
                                     <td class="text-center">
                                         <a class="btn btn-xs bg-blue-grey waves-effect"

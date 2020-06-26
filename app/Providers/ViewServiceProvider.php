@@ -5,6 +5,7 @@ namespace App\Providers;
 use App\Models\Category;
 use App\Models\Post;
 use App\Models\Tag;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 
@@ -58,5 +59,16 @@ class ViewServiceProvider extends ServiceProvider
             $view->with('allCategories', Category::all());
 
         });
+
+        // Pass favourite posts to view
+        View::composer(['*.dashboard', '*.favourite.index'], function ($view) {
+
+            // Bind all favourite posts of authenticated user to view
+            $view->with('favouritePosts',
+                Auth::user()->favouritePosts()->published()->latest()->get());
+
+        });
+
+
     }
 }

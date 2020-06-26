@@ -27,3 +27,13 @@ jQuery(document).ready(function($) {
         $('#preloader').fadeOut('slow',function(){$(this).remove();});
     });
 });
+
+// Allow user to add the post to favourite list
+function addToFavourite() {
+    document.getElementById('add-to-favourite-form').submit();
+}
+
+// Remove post from favourite list
+function removeFromFavourite() {
+    document.getElementById('remove-from-favourite-form').submit();
+}

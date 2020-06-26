@@ -30,11 +30,17 @@
                                 </div>
                                 <div class="share-comment-section">
                                     <div class="comment">
-                                        <i class="fa fa-heart-o"><span>25</span></i>
-                                        <i class="fa fa-comment-o">
+                                        @if(Auth::check() && Auth::user()->hasFavouritePost($post->id))
+                                            <i id="favourite-icon" title="Added to favourite" class="fa fa-heart">
+                                        @else
+                                            <i class="fa fa-heart-o" title="Favourites" >
+                                        @endif
+                                            <span>{{ $post->favouriteToUsers->count() }}</span>
+                                        </i>
+                                        <i class="fa fa-comment-o" title="Comments">
                                             <span>{{ $post->approved_comments->count() }}</span>
                                         </i>
-                                        <i class="fa fa-eye"><span>{{ $post->view_count }}</span></i>
+                                        <i class="fa fa-eye" title="Views"><span>{{ $post->view_count }}</span></i>
                                     </div>
                                     <div class="share">
                                         <span>share:</span>

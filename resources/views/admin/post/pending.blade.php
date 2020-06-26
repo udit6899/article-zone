@@ -47,10 +47,12 @@
                                         <th>ID</th>
                                         <th>Title</th>
                                         <th>Author</th>
-                                        <th>Is_Approved</th>
                                         <th>Image</th>
-                                        <th>Is_Published</th>
                                         <th>Created_At</th>
+                                        <th>Status</th>
+                                        <th><i class="material-icons">visibility</i></th>
+                                        <th><i class="material-icons">favorite</i></th>
+                                        <th><i class="material-icons">comment</i></th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -63,17 +65,11 @@
                                         <td>{{ $post->user->name }}</td>
 
                                         <td>
-                                            @if($post->is_approved == true)
-                                                <span class="badge bg-light-green ">approved</span>
-                                            @else
-                                                <span class="badge bg-pink">pending</span>
-                                            @endif
-                                        </td>
-
-                                        <td>
                                             <img src="{{ $post->imageUrl }}"
                                                  alt="post-image" height="50px" width="80px">
                                         </td>
+
+                                        <td>{{ $post->updated_at->diffForHumans() }}</td>
 
                                         <td>
                                             @if($post->is_published == true)
@@ -83,7 +79,9 @@
                                             @endif
                                         </td>
 
-                                        <td>{{ $post->created_at }}</td>
+                                        <td>{{ $post->view_count }}</td>
+                                        <td>{{ $post->favouriteToUsers()->count() }}</td>
+                                        <td>{{ $post->comments->count() }}</td>
 
                                         <td class="text-center">
                                             <a class="btn btn-xs bg-blue-grey waves-effect"

@@ -71,7 +71,7 @@ class PagesController extends Controller
 
         // Retrieve the searched post
         $searchedPosts = Post::where('title', 'Like', "%$query%")
-            ->published()->paginate(env('SEARCHED_POST', 5));
+            ->published()->popular()->paginate(env('SEARCHED_POST', 5));
 
         // Return to post search view
         return view('common.pages.post-search', compact('query', 'searchedPosts'));
@@ -89,7 +89,7 @@ class PagesController extends Controller
 
         // Retrieve the author's published posts
         $authorPosts = Post::where('user_id', $author->id)
-            ->published()->paginate(env('AUTHOR_POST', 5));
+            ->published()->popular()->paginate(env('AUTHOR_POST', 5));
 
         // Return to author-post-profile view
         return view('common.pages.author-profile', compact('author', 'authorPosts'));
@@ -136,7 +136,7 @@ class PagesController extends Controller
 
         // Retrieve all the published posts of the tag
         $tagPosts = $tag->posts()->published()
-            ->latest()->paginate(env('TAG_POST', 5));
+            ->popular()->paginate(env('TAG_POST', 5));
 
         // Return to post tag-item view
         return view('common.pages.post-tag-items', compact('tag', 'tagPosts'));
@@ -155,7 +155,7 @@ class PagesController extends Controller
 
         // Retrieve all the published posts of the category
         $categoryPosts = $category->posts()->published()
-            ->latest()->paginate(env('CATEGORY_POST', 5));
+            ->popular()->paginate(env('CATEGORY_POST', 5));
 
         // Return to post category-item view
         return view('common.pages.post-category-items', compact('category', 'categoryPosts'));

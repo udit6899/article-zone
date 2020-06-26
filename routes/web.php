@@ -104,6 +104,8 @@ Route::group([
     // Routes for the comment operations
     Route::resource('comment', 'CommentController')->only(['index', 'update', 'destroy']);
 
+    // Routes for favourite post operations
+    Route::resource('favourite-post', 'FavouritePostController')->only(['index', 'store', 'destroy']);
 
     // GET: route for settings page
     Route::get('settings', 'SettingController@index')->name('settings.index');
@@ -137,6 +139,8 @@ Route::group([
     // Routes for author operations
     Route::resource('author', 'AuthorController')->only(['index', 'destroy']);
 
+    // Routes for favourite post operations
+    Route::resource('favourite-post', 'FavouritePostController')->only(['index', 'store', 'destroy']);
 
     // GET: route for pending post
     Route::get('post/pending', 'PostController@pending')->name('post.pending');

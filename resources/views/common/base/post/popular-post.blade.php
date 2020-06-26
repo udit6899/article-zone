@@ -16,8 +16,9 @@
                         <th>Created_At</th>
                         <th>Updated_At</th>
                     @endif
-                    <th>Comments</th>
-                    <th>Views</th>
+                    <th><i class="material-icons">visibility</i></th>
+                    <th><i class="material-icons">favorite</i></th>
+                    <th><i class="material-icons">comment</i></th>
                     <th>Status</th>
                     <th>Action</th>
                 </tr>
@@ -33,8 +34,9 @@
                             <td>{{ $post->created_date }}</td>
                             <td>{{ $post->updated_at->toFormattedDateString() }}</td>
                         @endif
-                        <td>{{ $post->comments_count }}</td>
                         <td>{{ $post->view_count }}</td>
+                        <td>{{ $post->favourite_to_users_count }}</td>
+                        <td>{{ $post->comments_count }}</td>
                         @if($post->is_published == true)
                             <td><span class="label bg-green">Published</span></td>
                         @else

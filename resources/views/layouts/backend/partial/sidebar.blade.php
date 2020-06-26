@@ -58,13 +58,19 @@
                         <span>Author</span>
                     </a>
                 </li>
+                <li class="{{ Request::is('admin/favourite-post*') ? 'active' : '' }}">
+                    <a href="{{ route('admin.favourite-post.index') }}">
+                        <i class="material-icons">favorite</i>
+                        <span>Favourite</span>
+                    </a>
+                </li>
                 <li class="{{ Request::is('admin/subscriber*') ? 'active' : '' }}">
                     <a href="{{ route('admin.subscriber.index') }}">
                         <i class="material-icons">subscriptions</i>
                         <span>Subscriber</span>
                     </a>
                 </li>
-                <li class="{{ Request::is('comment*') ? 'active' : '' }}">
+                <li class="{{ Request::is('admin/comment*') ? 'active' : '' }}">
                     <a href="{{ route('admin.comment.all') }}">
                         <i class="material-icons">comment</i>
                         <span>Comment</span>
@@ -110,7 +116,13 @@
                         <span>Post</span>
                     </a>
                 </li>
-                <li class="{{ Request::is('comment*') ? 'active' : '' }}">
+                <li class="{{ Request::is('author/favourite-post*') ? 'active' : '' }}">
+                    <a href="{{ route('author.favourite-post.index') }}">
+                        <i class="material-icons">favorite</i>
+                        <span>Favourite</span>
+                    </a>
+                </li>
+                <li class="{{ Request::is('author/comment*') ? 'active' : '' }}">
                     <a href="{{ route('author.comment.index') }}">
                         <i class="material-icons">comment</i>
                         <span>Comment</span>

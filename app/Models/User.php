@@ -50,6 +50,13 @@ class User extends Authenticatable implements MustVerifyEmail
     }
 
     /**
+     * Get the favourite posts of the user
+     */
+    public function favouritePosts() {
+        return $this->belongsToMany('App\Models\Post')->withTimestamps();
+    }
+
+    /**
      * Get the comments of the user.
      * @return HasMany
      */
@@ -68,6 +75,25 @@ class User extends Authenticatable implements MustVerifyEmail
     public function scopeAdmin($query, $value) {
 
         return $query->where('is_admin', $value);
+    }
+
+    /**
+     * Check favorite post is exists or not.
+     *
+     * @param int $post
+     * @return boolean
+     */
+    public function hasFavouritePost($post) {
+
+        $status = false;
+
+        if ($this->favouritePosts()->where('post_id', $post)->count() > 0) {
+
+            // If post is added as favourite
+            $status = true;
+        }
+
+        return $status;
     }
 
     /**

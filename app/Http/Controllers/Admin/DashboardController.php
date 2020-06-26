@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Category;
+use App\Models\Message;
 use App\Models\Post;
 use App\Models\Subscriber;
 use App\Models\Tag;
@@ -22,9 +23,6 @@ class DashboardController extends Controller
             // Get the total posts
             'totalPosts' => Post::count(),
 
-            // Get total pending posts
-            'totalPendingPosts' => Post::approved(false)->count(),
-
             // Get total post's views
             'totalPostViews' => Post::sum('view_count'),
 
@@ -32,13 +30,13 @@ class DashboardController extends Controller
             'totalPostComments' => Post::withCount('comments')->get()->sum('comments_count'),
 
             // Get the total subscribers
-            'totalSubscribers' => Subscriber::count(),
+            'totalMessages' => Message::count(),
 
             // Get the total authors
             'totalAuthors' => User::admin(false)->count(),
 
             // Get most popular posts
-            'popularPosts' => Post::popular(env('POPULAR_POST', 5)),
+            'popularPosts' => Post::popular()->take(env('POPULAR_POST', 5))->get(),
 
             // Get most active authors
             'activeAuthors' => User::admin(false)

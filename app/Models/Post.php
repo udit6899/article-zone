@@ -45,6 +45,13 @@ class Post extends Model
     }
 
     /**
+     * Get the users, those added to this post as favourite
+     */
+    public function favouriteToUsers() {
+        return $this->belongsToMany('App\Models\User')->withTimestamps();
+    }
+
+    /**
      * Get the comments of the post.
      * @return HasMany
      */
@@ -91,13 +98,13 @@ class Post extends Model
      * Scope a query to get all the popular posts.
      *
      * @param \Illuminate\Database\Eloquent\Builder $query
-     * @param int $value
      * @return Illuminate\Database\Eloquent\Collection
      */
-    public static function scopePopular($query, $value) {
+    public static function scopePopular($query) {
 
-        return $query->withCount('comments')->orderByDesc('view_count')
-            ->orderByDesc('comments_count')->take($value)->get();
+        return $query->withCount('comments')->withCount('favouriteToUsers')
+            ->orderByDesc('view_count')->orderByDesc('favourite_to_users_count')
+            ->orderByDesc('comments_count');
     }
 
     /**

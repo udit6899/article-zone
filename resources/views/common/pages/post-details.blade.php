@@ -63,6 +63,37 @@
                                 </a>
                                 <h4><a href="{{ $post->viewLink }}">{{ $post->title }}</a></h4>
                                 <span class="art">{{ $post->created_at->toFormattedDateString() }}</span>
+
+                                @auth
+                                    <div class="favourite" >
+                                        @if(Auth::user()->hasFavouritePost($post->id))
+                                            <a onclick="removeFromFavourite()">
+                                                <h1 title="Remove from favourite">
+                                                    <i id="remove" class="fa fa-heart"></i>
+                                                </h1>
+                                            </a>
+                                            <form id="remove-from-favourite-form" method="POST" action="{{
+                                                      route(Auth::user()->is_admin ? 'admin.favourite-post.destroy' :
+                                                      'author.favourite-post.destroy', $post) }}">
+                                                @csrf
+                                                @method('DELETE')
+                                            </form>
+                                        @else
+                                            <a onclick="addToFavourite()">
+                                                <h1 title="Add to favourite">
+                                                    <i id="add" class="fa fa-heart"></i>
+                                                </h1>
+                                            </a>
+                                            <form id="add-to-favourite-form" method="POST"
+                                                  action="{{ route(Auth::user()->is_admin ?
+                                                  'admin.favourite-post.store': 'author.favourite-post.store') }}">
+                                                @csrf
+                                                <input type="hidden" name="post_id" value="{{ $post->id }}">
+                                            </form>
+                                        @endif
+                                    </div>
+                                @endauth
+
                                 <div class="quote">
                                     <p>
                                         <i class="fa fa-quote-left"></i>

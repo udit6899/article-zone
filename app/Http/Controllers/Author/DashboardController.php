@@ -22,16 +22,15 @@ class DashboardController extends Controller
             'totalPosts' => $user->posts->count(),
 
             // Get author's popular posts
-            'popularPosts' => $user->posts()->popular(env('POPULAR_POST', 4)),
+            'popularPosts' => $user->posts()->popular()
+                ->take(env('POPULAR_POST', 4))->get(),
 
             // Get author's total post views
             'totalPostViews' => $user->posts()->sum('view_count'),
 
-            // Get author's total pending posts
-            'totalPendingPosts' => $user->posts()->approved(false)->count(),
-
             // Get author's post total comments
-            'totalPostComments' => $user->posts()->withCount('comments')->get()->sum('comments_count')
+            'totalPostComments' => $user->posts()
+                ->withCount('comments')->get()->sum('comments_count')
         );
 
         // Return to author dashboard

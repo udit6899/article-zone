@@ -35,8 +35,12 @@
             // Bind all categories to view
             $view->with('tags', Tag::has('posts')->get());
 
+            // Get popular posts
+            $popularPosts = Post::published()->popular()
+                ->take(env('POPULAR_POST', 5))->get();
+
             // Bind popular posts to view
-            $view->with('popularPosts', Post::published()->popular(env('POPULAR_POST', 5)));
+            $view->with('popularPosts', $popularPosts);
 
             // Bind all recent post to view
             $view->with('recentPosts', Post::recent());
