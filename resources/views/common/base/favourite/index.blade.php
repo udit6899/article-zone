@@ -49,11 +49,11 @@
                                             <i class="material-icons action-icon">visibility</i>
                                         </a>
                                         <button type="button" class="btn btn-xs bg-deep-orange waves-effect"
-                                                title="Delete" onclick="deleteItem({{ $post->id }})">
+                                                title="Delete" onclick="deleteItem('{{ $post->slug }}')">
                                             <i class="material-icons action-icon">delete</i>
                                         </button>
-                                        <form id="delete-form-{{ $post->id }}" class="form-hide"  method="POST"
-                                              action="{{ route("$prefix.favourite-post.destroy", $post->id) }}">
+                                        <form id="delete-form-{{ $post->slug }}" class="form-hide"  method="POST"
+                                              action="{{ route("$prefix.favourite-post.destroy", $post->slug) }}">
                                             @csrf
                                             @method('DELETE')
                                         </form>

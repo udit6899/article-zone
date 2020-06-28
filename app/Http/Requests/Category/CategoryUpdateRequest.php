@@ -29,7 +29,7 @@ class CategoryUpdateRequest extends FormRequest
 
         // Manage the category details
         $category->name = $this->name ?? $category->name;
-        $category->slug = Str::slug($this->name) ?? $category->slug;
+        $this->slug = Str::slug($this->name) ?? $category->slug;
         $category->description = $this->description ?? $category->description;
     }
 

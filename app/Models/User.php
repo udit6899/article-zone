@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Contracts\Encryption\DecryptException;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -97,6 +98,34 @@ class User extends Authenticatable implements MustVerifyEmail
     }
 
     /**
+     * Get encrypted ID of the user
+     *
+     * @return string
+     */
+    public function getEncryptIdAttribute()
+    {
+        return encrypt($this->attributes['id']);
+    }
+
+    /**
+     * Decrypt the Id and retrieve the model
+     *
+     * @param  mixed  $value
+     * @param  string|null  $field
+     * @return \Illuminate\Database\Eloquent\Model|null
+     */
+    public function resolveRouteBinding($value, $field = null)
+    {
+        try {
+            return $this->where('id', decrypt($value))->firstOrFail();
+
+        } catch (DecryptException $exception) {
+            // If decryption is failed, abort the operation
+            abort(401, $exception->getMessage());
+        }
+    }
+
+    /**
      * Get Image url of the user
      *
      * @return string
@@ -113,7 +142,7 @@ class User extends Authenticatable implements MustVerifyEmail
      */
     public function getPostsLinkAttribute()
     {
-        return route('post.author.profile', $this->id);
+        return route('post.author.profile', $this->encryptId);
     }
 
     /**
@@ -124,7 +153,7 @@ class User extends Authenticatable implements MustVerifyEmail
     public function getShareUrlAttribute() {
 
         // Get author profile page link
-        $url = route('post.author.profile', $this->id);
+        $url = route('post.author.profile', $this->encryptId);
 
         // Return sharable link of the author's post profile
         return new ShareableLink($url,

@@ -7,7 +7,7 @@
         <img src="{{ $post->imageUrl }}" alt="post-image">
         <p>To approve the post click on view button.</p>
     </div>
-@component('mail::button', ['url' => url(route('admin.post.show', $post->id)) ])
+@component('mail::button', ['url' => url(route('admin.post.show', $post->slug)) ])
 View
 @endcomponent
 

@@ -89,8 +89,7 @@
                             </td>
                             <td>{{ $author->email }}</td>
                             <td>
-                                <a  target="_blank"
-                                    href="{{ route('post.author.profile', $author->id) }}">
+                                <a  target="_blank" href="{{ $author->postsLink }}">
                                     {{ $author->posts_count }}
                                 </a>
                             </td>
@@ -98,7 +97,7 @@
                             <td>{{ $author->created_at->toFormattedDateString() }}</td>
                             <td class="text-center">
                                 <a class="btn btn-xs bg-info waves-effect"
-                                        title="View" onclick="readAuthor({{ $author->toJson() }})">
+                                        title="View" onclick="readAuthor({{ $author->replicate()->toJson() }})">
                                     <i class="material-icons action-icon">visibility</i>
                                 </a>
                             </td>

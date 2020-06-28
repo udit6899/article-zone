@@ -49,7 +49,7 @@ class CommentApproved extends Notification implements ShouldQueue
                 '</strong> post, has been successfully approved.')
             ->line('<h3>' . $this->comment->post->title . '</h3>')
             ->line('<img src="' . $this->comment->post->imageUrl . '">')
-            ->action('View', url(route('post.details', $this->comment->post->slug)))
+            ->action('View', url($this->comment->post->viewLink))
             ->line('Thank you for using our application!');
     }
 

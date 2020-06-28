@@ -77,7 +77,7 @@ class TagController extends Controller
     public function update(TagUpdateRequest $request, Tag $tag)
     {
         // Update tag details
-        $tag->update();
+        $tag->update(['slug' => $request->slug]);
 
         // Make success response
         Toastr::success('Tag Successfully Updated !', 'Success');

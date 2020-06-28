@@ -54,10 +54,9 @@
                                             <div class="media-left">
                                                 <a
                                                     @if($comment->post->is_approved && $comment->post->is_published)
-                                                        target="_blank"
-                                                        href="{{ route('post.details', $comment->post->slug) }}"
+                                                        target="_blank" href="{{  $comment->post->viewLink }}"
                                                     @else
-                                                        href="{{ route("$prefix.post.show", $comment->post->id) }}"
+                                                        href="{{ route("$prefix.post.show", $comment->post->slug) }}"
                                                     @endif>
 
                                                     <img class="media-object" height="54px" width="84px"
@@ -69,7 +68,7 @@
                                                    @if($comment->post->is_approved && $comment->post->is_published)
                                                         target="_blank" href="{{ $comment->post->viewLink }}"
                                                    @else
-                                                        href="{{ route("$prefix.post.show", $comment->post->id) }}"
+                                                        href="{{ route("$prefix.post.show", $comment->post->slug) }}"
                                                    @endif>
 
                                                     <h5 class="media-heading">

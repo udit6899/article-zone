@@ -53,7 +53,7 @@ function initSparkline() {
 }
 
 // Delete items operation
-function deleteItem(id) {
+function deleteItem(key) {
 
     const swalWithBootstrapButtons = Swal.mixin({
         customClass: {
@@ -74,7 +74,7 @@ function deleteItem(id) {
     }).then((result) => {
         if (result.value) {
             event.preventDefault();
-            document.getElementById('delete-form-' + id).submit();
+            document.getElementById('delete-form-' + key).submit();
         } else if (
             /* Read more about handling dismissals below */
             result.dismiss === Swal.DismissReason.cancel
@@ -89,7 +89,7 @@ function deleteItem(id) {
 }
 
 // Approve post operation
-function approveItem(id) {
+function approveItem(key) {
 
     const swalWithBootstrapButtons = Swal.mixin({
         customClass: {
@@ -110,7 +110,7 @@ function approveItem(id) {
     }).then((result) => {
         if (result.value) {
             event.preventDefault();
-            document.getElementById('approval-form-' + id).submit();
+            document.getElementById('approval-form-' + key).submit();
         } else if (
             /* Read more about handling dismissals below */
             result.dismiss === Swal.DismissReason.cancel
@@ -221,16 +221,16 @@ function readAuthor(author) {
     Swal.fire({
         title: author.name,
         html: '<p>Email Address: ' + author.email + '</p>' +
-              '<p> Mobile Number: ' + author.mobile_no + '</p>' +
-              '<br><p class="text-warning">' + (author.about || " ") + '</p><br>' +
-          '<div>' +
-            '<i class="material-icons text-primary">library_books</i>' +
-            '<span> ' + author.posts_count + '</span>' +
-            '<i class="material-icons text-danger">favorite</i>' +
-            '<span> ' + author.posts_count + '</span>' +
-            '<i class="material-icons text-primary">comment</i>' +
-            '<span> ' + author.comments_count + '</span>' +
-        '</div>',
+            '<p> Mobile Number: ' + author.mobile_no + '</p>' +
+            '<br><p class="text-warning">' + (author.about || " ") + '</p><br>' +
+            '<div>' +
+                '<i class="material-icons text-primary">library_books</i>' +
+                '<span> ' + author.posts_count + '</span>' +
+                ' <i class="material-icons text-danger">favorite</i>' +
+                '<span> ' + author.favourite_posts_count + '</span>' +
+                ' <i class="material-icons text-primary">comment</i>' +
+                '<span> ' + author.comments_count + '</span>' +
+            '</div>',
         imageUrl: '/storage/users/' + author.avatar_path,
         imageWidth: 200,
         imageHeight: 200,

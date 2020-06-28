@@ -142,7 +142,7 @@ class BasePostController extends Controller
         try {
 
             // Prepare post option to update
-            $post->update(['image' => $imageUrl]);
+            $post->update(['image' => $imageUrl, 'slug' => $request->slug]);
 
             // Update post's category and togs
             $post->categories()->sync($request->categories);

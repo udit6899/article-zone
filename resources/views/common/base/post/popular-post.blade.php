@@ -49,7 +49,7 @@
                                 @if($post->is_approved && $post->is_published)
                                     target="_blank" href="{{ $post->viewLink }}"
                                 @else
-                                    href="{{ route("$prefix.post.show", $post->id) }}"
+                                    href="{{ route("$prefix.post.show", $post->slug) }}"
                                 @endif>
                                 <i class="material-icons action-icon">visibility</i>
                             </a>

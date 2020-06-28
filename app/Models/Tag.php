@@ -18,6 +18,16 @@ class Tag extends Model
         'name', 'slug'
     ];
 
+    /*
+    * Change route binding key
+    *
+    * @return string
+    */
+    public function getRouteKeyName()
+    {
+        return 'slug';
+    }
+
     /**
      * Get the posts that belong to the tag.
      * @return BelongsToMany posts

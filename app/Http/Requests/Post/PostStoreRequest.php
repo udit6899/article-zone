@@ -5,6 +5,7 @@ namespace App\Http\Requests\Post;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
+use Illuminate\Validation\Rule;
 
 class PostStoreRequest extends FormRequest
 {
@@ -45,7 +46,7 @@ class PostStoreRequest extends FormRequest
             'categories' => ['required', 'array', 'min:1'],
             'tags' => ['required', 'array', 'min:1'],
             'image' => ['required', 'image', 'max:5120', 'mimes:jpeg,png,jpg'],
-            'is_published' => ['nullable', 'boolean','in:1'],
+            'is_published' => ['nullable', 'boolean', Rule::in([true, false])],
         ];
     }
 }

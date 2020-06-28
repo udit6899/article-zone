@@ -71,16 +71,16 @@ Route::group(['namespace' => 'Common'], function () {
         Route::get('tag', 'PagesController@postTags'  )->name('tag');
 
         // GET: route for post tag-item page
-        Route::get('tag/{name}/item', 'PagesController@postTagItems'  )->name('tag.item');
+        Route::get('tag/{tag}/item', 'PagesController@postTagItems'  )->name('tag.item');
 
         // GET: route for post category-item page
-        Route::get('category/{slug}/item', 'PagesController@postCategoryItems'  )->name('category.item');
+        Route::get('category/{category}/item', 'PagesController@postCategoryItems'  )->name('category.item');
 
         // Routes for the comment operations
         Route::post('comment', 'BaseCommentController@store')->name('comment.store');
 
         // GET: route for post details
-        Route::get('details/{slug}', 'PagesController@postDetails'  )->name('details');
+        Route::get('details/{post}', 'PagesController@postDetails'  )->name('details');
 
         // GET: route for author-post-profile view
         Route::get('author/{author}/profile', 'PagesController@authorProfile'  )->name('author.profile');

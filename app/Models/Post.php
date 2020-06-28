@@ -21,6 +21,16 @@ class Post extends Model
         'body', 'image', 'is_published', 'is_approved'
     ];
 
+    /*
+    * Change route binding key
+    *
+    * @return string
+    */
+    public function getRouteKeyName()
+    {
+        return 'slug';
+    }
+
     /**
      * Get the user that owns the post.
      * @return BelongsTo user

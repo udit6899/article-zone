@@ -40,10 +40,9 @@ class DashboardController extends Controller
 
             // Get most active authors
             'activeAuthors' => User::admin(false)
-                ->withCount('posts')->withCount('comments')
-                ->orderByDesc('posts_count')->orderByDesc('comments_count')
-                ->take(env('ACTIVE_AUTHOR', 5))->get()
-
+                ->withCount('posts')->withCount('comments')->withCount('favouritePosts')
+                ->orderByDesc('posts_count')->orderByDesc('favourite_posts_count')
+                ->orderByDesc('comments_count')->take(env('ACTIVE_AUTHOR', 5))->get()
         );
 
         // Return to admin dashboard

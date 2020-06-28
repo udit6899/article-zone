@@ -6,7 +6,7 @@
             <div class="header" id="post-header">
                 <h2>{{ $post->title }}</h2>
                 <div class="address">
-                    <a target="_blank" href="{{ route('post.author.profile', $post->user->id) }}">
+                    <a target="_blank" href="{{ $post->user->postsLink }}">
                         <img src="{{ $post->user->imageUrl }}"
                              alt="post-owner-image" class="img-responsive" align="left">
                         <small>
@@ -50,7 +50,9 @@
                 </div>
                 <div class="body">
                     <img src="{{ $post->user->imageUrl }}" alt="post-author-image">
-                    <h4>{{ $post->user->name }}</h4>
+                    <a target="_blank" href="{{ $post->user->postsLink }}">
+                        <h4>{{ $post->user->name }}</h4>
+                    </a>
                     <div>
                         <small>
                             <strong>Total Posts: </strong>

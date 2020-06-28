@@ -90,9 +90,8 @@ class CategoryController extends Controller
         try {
 
             // Store uploaded category image and update the details
-            $category->update(['image' => FileHelper::manageUpload(
-                $request->file('image'), 'category', $category->image
-            )]);
+            $category->update(['slug' => $request->slug, 'image' => FileHelper::manageUpload(
+                    $request->file('image'), 'category', $category->image)]);
 
             // Create success message
             Toastr::success('Category Successfully Updated !', 'Success');

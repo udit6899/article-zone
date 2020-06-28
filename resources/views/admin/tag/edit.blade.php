@@ -17,7 +17,7 @@
                 </h2>
             </div>
             <div class="body">
-                <form action="{{ route('admin.tag.update', $tag->id) }}" method="POST">
+                <form action="{{ route('admin.tag.update', $tag->slug) }}" method="POST">
                     @csrf
                     @method('PATCH')
                     <div class="form-group form-float">

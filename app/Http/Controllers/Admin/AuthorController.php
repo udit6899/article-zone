@@ -28,7 +28,8 @@ class AuthorController extends Controller
     public function index()
     {
         // Get all the author lists
-        $authors = User::admin(false)->withCount('posts')->withCount('comments')->get();
+        $authors = User::admin(false)->withCount('posts')
+            ->withCount('comments')->withCount('favouritePosts')->get();
 
         // Return to index page
         return view('admin.author.index', compact('authors'));

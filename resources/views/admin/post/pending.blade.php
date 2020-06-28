@@ -85,28 +85,28 @@
 
                                         <td class="text-center">
                                             <a class="btn btn-xs bg-blue-grey waves-effect"
-                                               title="Show" href="{{ route('admin.post.show', $post->id) }}">
+                                               title="Show" href="{{ route('admin.post.show', $post->slug) }}">
                                                 <i class="material-icons action-icon">visibility</i>
                                             </a>
                                             <button type="button" class="btn btn-xs bg-orange"
-                                                    title="Approve" onclick="approveItem({{ $post->id }})">
+                                                    title="Approve" onclick="approveItem('{{ $post->slug }}')">
                                                 <i class="material-icons action-icon">done_outline</i>
                                             </button>
-                                            <form id="{{ 'approval-form-' . $post->id }}" class="form-hide"
-                                                  action="{{ route('admin.post.approve', $post->id) }}" method="POST">
+                                            <form id="{{ 'approval-form-' . $post->slug }}" class="form-hide"
+                                                  action="{{ route('admin.post.approve', $post->slug) }}" method="POST">
                                                 @csrf
                                                 @method('PATCH')
                                             </form>
                                             <a class="btn btn-xs btn-info waves-effect"
-                                               title="Edit" href="{{ route('admin.post.edit', $post->id) }}">
+                                               title="Edit" href="{{ route('admin.post.edit', $post->slug) }}">
                                                 <i class="material-icons action-icon">edit</i>
                                             </a>
                                             <button type="button" class="btn btn-xs bg-deep-orange waves-effect"
-                                                    title="Delete" onclick="deleteItem({{ $post->id }})">
+                                                    title="Delete" onclick="deleteItem('{{ $post->slug }}')">
                                                 <i class="material-icons action-icon">delete</i>
                                             </button>
-                                            <form id="delete-form-{{ $post->id }}" class="form-hide"
-                                                  action="{{ route('admin.post.destroy', $post->id) }}" method="POST">
+                                            <form id="delete-form-{{ $post->slug }}" class="form-hide"
+                                                  action="{{ route('admin.post.destroy', $post->slug) }}" method="POST">
                                                 @csrf
                                                 @method('DELETE')
                                             </form>

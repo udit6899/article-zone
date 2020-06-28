@@ -30,7 +30,7 @@ class PostUpdateRequest extends FormRequest
 
         // Manage the post details
         $this->previousApprovedStatus = $post->is_approved;
-        $post->slug = Str::slug($this->title) ?? $post->slug;
+        $this->slug = Str::slug($this->title) ?? $post->slug;
         $post->title = $this->title ?? $post->title;
         $post->quote = $this->quote ?? $post->quote;
         $post->body = $this->body ?? $post->body;

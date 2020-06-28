@@ -57,18 +57,20 @@
                                                 @endif
                                             </td>
                                             <td>{{ $author->created_at }}</td>
-                                            <td>{{ $author->created_at }}</td>
+                                            <td>{{ $author->updated_at }}</td>
                                             <td class="text-center">
-                                                <button type="button" class="btn btn-xs bg-blue-grey waves-effect"
-                                                        title="View" onclick="readAuthor({{ $author->toJson() }})">
+                                                <button type="button"
+                                                        class="btn btn-xs bg-blue-grey waves-effect" title="View"
+                                                        onclick="readAuthor({{ $author->replicate()->toJson() }})">
                                                     <i class="material-icons action-icon">visibility</i>
                                                 </button>
-                                                <button type="button" class="btn btn-xs bg-deep-orange waves-effect"
-                                                        title="Delete" onclick="deleteItem({{ $author->id }})">
+                                                <button type="button"
+                                                        class="btn btn-xs bg-deep-orange waves-effect" title="Delete"
+                                                        onclick="deleteItem('{{ $key = $author->encryptId }}')">
                                                     <i class="material-icons action-icon">delete</i>
                                                 </button>
-                                                <form id="delete-form-{{ $author->id }}" class="form-hide"
-                                                      action="{{ route('admin.author.destroy', $author->id) }}"
+                                                <form id="{{ "delete-form-$key" }}" class="form-hide"
+                                                      action="{{ route('admin.author.destroy', $author->encryptId) }}"
                                                       method="POST">
                                                     @csrf
                                                     @method('DELETE')

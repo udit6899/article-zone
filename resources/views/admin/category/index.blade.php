@@ -55,20 +55,22 @@
                                         <td>{{ Str::limit($category->description, 20, '...   ') }}</td>
                                         <td>{{ $category->created_at }}</td>
                                         <td class="text-center">
-                                            <button type="button" class="btn btn-xs bg-blue-grey waves-effect"
-                                                    title="View" onclick="readCategory({{ $category->toJson() }})">
-                                                <i class="material-icons action-icon">visibility</i>
+                                            <button type="button"
+                                                    class="btn btn-xs bg-blue-grey waves-effect"
+                                                title="View"
+                                                onclick="readCategory({{ $category->replicate()->toJson() }})">
+                                              <i class="material-icons action-icon">visibility</i>
                                             </button>
                                             <a class="btn btn-xs btn-info waves-effect"
-                                               title="Edit" href="{{ route('admin.category.edit', $category->id) }}">
+                                               title="Edit" href="{{ route('admin.category.edit', $category->slug) }}">
                                                 <i class="material-icons action-icon">edit</i>
                                             </a>
                                             <button type="button" class="btn btn-xs bg-deep-orange waves-effect"
-                                                    title="Delete" onclick="deleteItem({{ $category->id }})">
+                                                    title="Delete" onclick="deleteItem('{{ $category->slug }}')">
                                                 <i class="material-icons action-icon">delete</i>
                                             </button>
-                                            <form id="delete-form-{{ $category->id }}" class="form-hide" method="POST"
-                                                  action="{{ route('admin.category.destroy', $category->id) }}">
+                                            <form id="delete-form-{{ $category->slug }}" class="form-hide" method="POST"
+                                                  action="{{ route('admin.category.destroy', $category->slug) }}">
                                                 @csrf
                                                 @method('DELETE')
                                             </form>

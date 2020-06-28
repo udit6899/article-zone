@@ -17,16 +17,14 @@ class PostViewCount
     public function handle($request, Closure $next)
     {
         // Get a specific post by slug
-        $request->post = Post::published()->where([
-            'slug' => $request->route('slug'),
-        ])->firstOrFail();
+        $post = $request->route('post')->published()->firstOrFail();
 
         // Count the post view
-        $blogKey = 'blog_' . $request->post->id;
+        $blogKey = 'blog_' . $post->id;
 
         // If the key is not present in session, then increment the count
         if (!session()->has($blogKey)) {
-            $request->post->increment('view_count');
+            $post->increment('view_count');
             session()->put($blogKey, 1);
         }
 

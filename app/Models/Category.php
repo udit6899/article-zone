@@ -18,6 +18,16 @@ class Category extends Model
         'name', 'slug', 'image', 'description'
     ];
 
+    /*
+     * Change route binding key
+     *
+     * @return string
+     */
+    public function getRouteKeyName()
+    {
+        return 'slug';
+    }
+
     /**
      * The posts that belong to the category.
      * @return BelongsToMany posts

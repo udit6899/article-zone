@@ -45,15 +45,12 @@ class PagesController extends Controller
     /**
      * Show the application post detail page
      *
-     * @param  string $slug
+     * @param  \App\Models\Post $post
      * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function postDetails(Request $request, $slug)
+    public function postDetails(Request $request, Post $post)
     {
-        // Get a specific post by slug
-        $post = $request->post;
-
         // Return to post details view
         return view('common.pages.post-details', compact('post'));
     }
@@ -126,14 +123,11 @@ class PagesController extends Controller
     /**
      * Show the post tag-items page
      *
-     * @param $name
+     * @param \App\Models\Tag $tag
      * @return \Illuminate\Http\Response
      */
-    public function postTagItems($name)
+    public function postTagItems(Tag $tag)
     {
-        // Get the tag details
-        $tag = Tag::where('name', $name)->firstOrFail();
-
         // Retrieve all the published posts of the tag
         $tagPosts = $tag->posts()->published()
             ->popular()->paginate(env('TAG_POST', 5));
@@ -145,13 +139,11 @@ class PagesController extends Controller
     /**
      * Show the post category-items page
      *
-     * @param string $slug
+     * @param \App\Models\Category $category
      * @return \Illuminate\Http\Response
      */
-    public function postCategoryItems($slug)
+    public function postCategoryItems(Category $category)
     {
-        // Get the category details
-        $category = Category::where('slug', $slug)->firstOrFail();
 
         // Retrieve all the published posts of the category
         $categoryPosts = $category->posts()->published()

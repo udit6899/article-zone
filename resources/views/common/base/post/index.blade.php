@@ -80,19 +80,19 @@
 
                                     <td class="text-center">
                                         <a class="btn btn-xs bg-blue-grey waves-effect"
-                                           title="Show" href="{{ route("$prefix.post.show", $post->id) }}">
+                                           title="Show" href="{{ route("$prefix.post.show", $post->slug) }}">
                                             <i class="material-icons action-icon">visibility</i>
                                         </a>
                                         <a class="btn btn-xs btn-info waves-effect"
-                                           title="Edit" href="{{ route("$prefix.post.edit", $post->id) }}">
+                                           title="Edit" href="{{ route("$prefix.post.edit", $post->slug) }}">
                                             <i class="material-icons action-icon">edit</i>
                                         </a>
                                         <button type="button" class="btn btn-xs bg-deep-orange waves-effect"
-                                                title="Delete" onclick="deleteItem({{ $post->id }})">
+                                                title="Delete" onclick="deleteItem('{{ $post->slug }}')">
                                             <i class="material-icons action-icon">delete</i>
                                         </button>
-                                        <form id="delete-form-{{ $post->id }}" class="form-hide"
-                                              action="{{ route("$prefix.post.destroy", $post->id) }}" method="POST">
+                                        <form id="delete-form-{{ $post->slug }}" class="form-hide"
+                                              action="{{ route("$prefix.post.destroy", $post->slug) }}" method="POST">
                                             @csrf
                                             @method('DELETE')
                                         </form>
