@@ -44,6 +44,9 @@ class RegisterController extends Controller
         $this->redirectTo = GuestUserHelper::getRedirectUrl();
 
         $this->middleware('guest');
+
+        // Check user is a contributor or not
+        $this->middleware('contributor')->only('register');
     }
 
     /**
@@ -58,7 +61,7 @@ class RegisterController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'mobile_no' => ['required', 'digits:10'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'password' => ['required', 'string', 'min:8', 'max:255', 'confirmed'],
         ]);
     }
 

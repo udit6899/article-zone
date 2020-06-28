@@ -66,5 +66,6 @@ class Kernel extends HttpKernel
         'admin' => \App\Http\Middleware\AdminMiddleware::class,
         'author' => \App\Http\Middleware\AuthorMiddleware::class,
         'viewCount' => \App\Http\Middleware\PostViewCount::class,
+        'contributor' => \App\Http\Middleware\CheckContributor::class,
     ];
 }

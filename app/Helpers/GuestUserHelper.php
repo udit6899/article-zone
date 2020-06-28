@@ -38,7 +38,8 @@ class GuestUserHelper
                 // If user doesn't exist, then create new one
                 $user = User::create([
                     'name' => $request->name,
-                    'email' => $request->email
+                    'email' => $request->email,
+                    'email_verified_at' => now()
                 ]);
             }
         }
