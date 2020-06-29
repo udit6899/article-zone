@@ -17,19 +17,19 @@
                                 <div class="personal-information">
                                     <div class="about-content">
                                         <a>
-                                            <img src="{{ asset('assets/frontend/images/admin-logo.jpg') }}"
+                                            <img src="{{ $admin->imageUrl }}"
                                                 alt="admin-user-logo">
                                         </a>
                                     </div>
                                     <div class="about-indetails">
                                         <ul>
-                                            <li>Name: <span>Fahima Zerin</span></li>
-                                            <li>Birth Date: <span>1st January</span></li>
-                                            <li>Gender: <span>Female</span></li>
-                                            <li>Lives In: <span>Bangladesh</span></li>
-                                            <li>Mobile: <span>0122-356-48</span></li>
-                                            <li>E-mail: <span>Speekloud@email.com</span></li>
-                                            <li>Website: <span>www.abcd.com</span></li>
+                                            <li>Name: <span>{{ $admin->name }}</span></li>
+                                            <li>Birth Date: <span>6th August</span></li>
+                                            <li>Gender: <span>Male</span></li>
+                                            <li>Lives In: <span>India</span></li>
+                                            <li>Mobile: <span>{{ $admin->mobile_no }}</span></li>
+                                            <li>E-mail: <span>{{ $admin->email }}</span></li>
+                                            <li>Website: <span>{{ url('/') }}</span></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -46,11 +46,26 @@
                         </div>
                         <div class="col-md-9 col-sm-8">
                             <div class="about-personal-information-text-content">
-                                <h4><a href="{{ route('about') }}">Hello, I’m Fahima!</a></h4>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum do retpariatur. Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 4up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the.</p>
-                                <p>"de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.”</p>
-                                <p>"de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32. </p>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum do retpariatur. Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 4up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the.</p>
+                                <h4><a href="{{ route('about') }}">Hello, I’m {{ $admin->name }} !</a></h4>
+                                <p>
+                                    I started the website to provide the people to read blogs and current affairs.
+                                    We are glad that you are here and thank you for supporting us.
+                                    We stand out from the crowd in the sense that usually we break news stories – yes,
+                                    we mainly bring you stuff that you’ll not find anywhere in the mainstream media.
+                                    Its a free blogging site which allow authors to maintain their account easily.
+                                    It provides various awesome features like article create, edit, delete
+                                    and add favourite article etc. Most of our authors gives good feedback
+                                    and they tells, "They like it".
+                                </p>
+                                <p>"{{ $admin->about }}”</p>
+                                <p>
+                                    It is started in 2020, has been a popular blogging website.
+                                    We stand with you to encourage and appreciate to start your journey to become a
+                                    good writer. We dreams to be the worlds no. 1 blogging site. We maintain your
+                                    article to be secure, provide a platform to reach out your thoughts to the people.
+                                    "We are here to help you and we are happy to see here".
+                                </p>
+                                <p>Thank You.</p>
                             </div>
                         </div>
                     </div>

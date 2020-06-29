@@ -27,8 +27,11 @@ class PagesController extends Controller
      */
     public function about()
     {
+        // Get admin details
+        $admin = User::admin(true)->first();
+
         // Return to about page
-        return view('common.pages.about');
+        return view('common.pages.about', compact('admin'));
     }
 
     /**

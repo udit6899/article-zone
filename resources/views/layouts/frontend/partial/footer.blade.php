@@ -23,7 +23,7 @@
             <div class="col-md-3 col-md-offset-1 col-sm-4 col-sm-offset-0">
                 <div class="subscription-input">
                     <h4 class="footer-title">subscription</h4>
-                    <form action="{{ route('subscriber.store') }}" method="POST">
+                    <form class="text-center" action="{{ route('subscriber.store') }}" method="POST">
                         @csrf
                         <input type="email" name="email" placeholder="Email" required>
                         <input type="submit" value="Subscribe">
@@ -34,7 +34,7 @@
                 <div class="recent-post-content">
                     <h4 class="footer-title">recent post</h4>
                     @forelse($recentPosts as $recentPost)
-                        <div class="recent-post-single">
+                        <div class="recent-post-single" id="latest">
                             <div class="recent-post-img">
                                 <a href="{{ $recentPost->viewLink }}">
                                     <img src="{{ $recentPost->imageUrl }}"

@@ -37,7 +37,7 @@
                                     <td>{{ Str::limit($post->title, 10, '...   ') }}</td>
                                     <td>{{ $post->user->name }}</td>
                                     <td>
-                                        <img src="{{ $post->imageUrl }}" height="50px" width="80px">
+                                        <img src="{{ $post->imageUrl }}" alt="post-image" height="50px" width="80px">
                                     </td>
                                     <td>{{ $post->created_at->toDateString() }}</td>
                                     <td>{{ $post->view_count }}</td>

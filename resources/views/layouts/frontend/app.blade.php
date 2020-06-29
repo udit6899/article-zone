@@ -53,7 +53,6 @@
         <script src="{{ asset('assets/plugins/bootstrap/js/bootstrap.min.js')  }}"></script>
         <!--============================== Custom js ================================-->
         <script src="{{ asset('assets/plugins/jquery-sticky/jquery.sticky.js') }}"></script>
-        <script src="{{ asset('assets/plugins/instafeed/instafeed.min.js') }}"></script>
         <script src="{{ asset('assets/frontend/js/custom.js') }}"></script>
 
         <script src="https://cdn.bootcss.com/toastr.js/latest/js/toastr.min.js"></script>

@@ -1065,13 +1065,12 @@ iframe {
 }
 .tag.floatleft {
   float: left;
-  padding-top: 85px;
+  padding-top: 25px;
 }
 
 .post-category.floatleft {
     float: left;
-    padding-top: 25px;
-    padding-bottom: 40px;
+    padding-bottom: 25px;
 }
 
 .tag.floatleft span, .post-category.floatleft span{
@@ -1082,18 +1081,21 @@ iframe {
 .tag.floatleft > a {
   border: 1px solid #016a32;
   color: #016a32;
-  margin-left: 6px;
-  padding: 6px 10px;
+  margin: 6px;;
   font-size: 14px;
   font-family: 'PT Sans', sans-serif;
 }
 .post-category.floatleft > a {
     border: 1px solid #820031;
     color: #820031;
-    margin-left: 6px;
-    padding: 6px 10px;
+    margin: 6px;;
     font-size: 14px;
     font-family: 'PT Sans', sans-serif;
+}
+
+.post-category.floatleft > a:hover,
+.tag.floatleft >a:hover {
+    text-decoration: none;
 }
 
 .recent-post-content.clearfix {
@@ -1394,29 +1396,9 @@ iframe {
     margin-top: 70px;
 }
 
-
-/* Edit profile page css start */
-
-#profile-container {
-    padding: 30px 20px 30px 20px;
-}
-
-#avatar-input {
-    display: none;
-}
-
-#edit {
-    padding-top: 30px;
-}
-
-#name-head {
-    margin-top: 20px;
-    margin-bottom: 10px;
-}
-
 #post-create {
     background: #eaead1;
-    padding: 40px 25px 40px 25px;
+    padding: 40px 20px 40px 20px;
 }
 
 /* Edit profile page css start */
@@ -1436,11 +1418,6 @@ iframe {
 #name-head {
     margin-top: 20px;
     margin-bottom: 10px;
-}
-
-#post-create {
-    background: #eaead1;
-    padding: 40px 25px 40px 25px;
 }
 
 /* Author details */

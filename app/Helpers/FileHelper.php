@@ -112,7 +112,7 @@ class FileHelper {
                 //  : Storage/categories & Storage/categories/slider
                 $imageUrl = FileHelper::upload(
                     $uploadedResource, [ 0 => 'categories', 1 => 'categories/slider'],
-                    [0 => ['width' => 338, 'height' => 245], 1 => ['width' => 1732, 'height' => 680]],
+                    [0 => ['width' => 338, 'height' => 245], 1 => ['width' => 1360, 'height' => 680]],
                     $oldImageUrl
                 );
 

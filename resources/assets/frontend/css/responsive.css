@@ -190,7 +190,6 @@
   background: #999 none repeat scroll 0 0;
 }
 .main-menu {
-  display: inline-block;
   text-align: center;
 }
 .navbar-nav li > a {
@@ -420,6 +419,9 @@
 .recent-post-text.single-page {
     margin: 0;
     text-align: center;
+}
+#latest {
+    margin-left: 10vw;
 }
 .about-information-area-content {
   padding: 35px 0 30px;

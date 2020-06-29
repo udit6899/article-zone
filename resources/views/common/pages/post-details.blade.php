@@ -62,7 +62,7 @@
                                     <strong>{{ $post->user->name }}</strong>
                                 </a>
                                 <h4><a href="{{ $post->viewLink }}">{{ $post->title }}</a></h4>
-                                <span class="art">{{ $post->created_at->toFormattedDateString() }}</span>
+                                <span class="art">{{ $post->created_date }}</span>
 
                                 @auth
                                     <div class="favourite" >
@@ -95,7 +95,7 @@
                                 @endauth
 
                                 <div class="quote">
-                                    <p>
+                                    <p id="quote-text">
                                         <i class="fa fa-quote-left"></i>
                                             {{ $post->quote }}
                                         <i class="fa fa-quote-right"></i>
@@ -106,7 +106,7 @@
                                     <div class="tag floatleft">
                                         <span>Tags</span>
                                         @foreach($post->tags as $tag)
-                                            <a href="{{ $tag->postsLink }}">
+                                            <a class="btn btn-link" href="{{ $tag->postsLink }}">
                                                 <i class="fa fa-tag"></i> {{ $tag->name }}
                                             </a>
                                         @endforeach
@@ -116,7 +116,7 @@
                                     <div class="post-category floatleft">
                                         <span>Categories</span>
                                         @foreach($post->categories as $category)
-                                            <a href="{{ $category->postsLink }}">
+                                            <a class="btn btn-link" href="{{ $category->postsLink }}">
                                                 <i class="fa fa-cube"></i> {{ $category->name }}
                                             </a>
                                         @endforeach
