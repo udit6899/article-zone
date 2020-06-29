@@ -15,6 +15,9 @@ class PostController extends BasePostController
     public function __construct()
     {
         $this->prefix = 'author';
+
+        // Apply policy action ability for author
+        $this->authorizeResource(Post::class, 'post');
     }
 
     /**

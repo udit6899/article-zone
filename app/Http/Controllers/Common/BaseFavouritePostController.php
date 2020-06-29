@@ -31,21 +31,12 @@ class BaseFavouritePostController extends Controller
      */
     public function store(FavouritePostStoreRequest $request)
     {
-        // Get authenticated user details
-        $user = Auth::user();
 
-        if (!$user->hasFavouritePost($request->post_id)) {
+        // Add the post to authenticated user's favourite list
+        Auth::user()->favouritePosts()->attach($request->post_id);
 
-            // Add if user is not added the post to his favourite list
-            $user->favouritePosts()->attach($request->post_id);
-
-            // Make success respose
-            Toastr::success('The article added to your favourite list.', 'Success');
-        } else {
-
-            // Make info response, if already added
-            Toastr::info('The article already exists in your favourite list.', 'Exists');
-        }
+        // Make success respose
+        Toastr::success('The article added to your favourite list.', 'Success');
 
         // Return to back
         return redirect()->back();
@@ -60,7 +51,7 @@ class BaseFavouritePostController extends Controller
      */
     public function destroy(Post $favourite_post)
     {
-        // Remove the post from favourite list
+        // Remove the post from authenticated user's favourite list
         Auth::user()->favouritePosts()->detach($favourite_post->id);
 
         // Make success response

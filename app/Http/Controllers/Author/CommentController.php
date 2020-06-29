@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Author;
 
 use App\Http\Controllers\Common\BaseCommentController;
+use App\Models\Comment;
 
 class CommentController extends BaseCommentController
 {
@@ -13,6 +14,9 @@ class CommentController extends BaseCommentController
     public function __construct()
     {
         $this->prefix = 'author';
+
+        // Apply policy action ability for author
+        $this->authorizeResource(Comment::class, 'comment');
     }
 
 }

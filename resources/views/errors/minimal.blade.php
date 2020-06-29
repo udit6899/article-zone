@@ -23,7 +23,7 @@
                 </div>
                 <h1>oops!</h1>
                 <h2>Error @yield('code') : @yield('message')</h2>
-                <a href="{{ url()->previous() }}">go back</a>
+                <a href="{{ url('/') }}">go to home</a>
             </div>
         </div>
     </body>
