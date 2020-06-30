@@ -13,7 +13,7 @@
         <!--========================== Bootstrap css ==========================-->
         <link href="{{ secure_asset('assets/plugins/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
         <!--========================== font-awesome css ==========================-->
-        <link href="{{ secure_asset('assets/plugins/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet">
+        <link href="{{ asset('assets/plugins/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet">
         <!--========================== google-font css ==========================-->
         <link rel='stylesheet'
               href="{{ asset('assets/frontend/fonts/material-icon/css/material-design-iconic-font.min.css') }}">

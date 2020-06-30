@@ -14,7 +14,7 @@
         <link rel="shortcut icon" type="image/png" href="{{ secure_asset('assets/frontend/images/fev-icon.ico') }}">
 
         <!-- Google Fonts -->
-        <link href="{{ secure_asset('assets/plugins/font-awesome/css/font-awesome.min.css') }}">
+        <link href="{{ asset('assets/plugins/font-awesome/css/font-awesome.min.css') }}">
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" type="text/css">
         <link type="text/css"
               href="https://fonts.googleapis.com/css?family=Roboto:400,700&subset=latin,cyrillic-ext" rel="stylesheet">
