@@ -450,6 +450,10 @@
 .nav.navbar-nav li {
   margin-right: 0px;
 }
+
+.fa .fa-search {
+    margin-bottom: 25%;
+}
 }
 
 /*For large mobile*/
@@ -458,10 +462,10 @@
 
 .search-btn input {
   float: left;
-  width: 80%;
+  width: 100%;
 }
 .fa.fa-search {
-  right: 25%;
+  right: 7%;
 }
 .video-area-content-detail > img {
   width: 100%;
