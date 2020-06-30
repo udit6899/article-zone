@@ -42,7 +42,7 @@
 
         <!-- JQuery DataTable Css -->
         <link rel="stylesheet"
-              href="{{ secure_asset('assets/plugins/jquery-datatable/skin/bootstrap/css/dataTables.bootstrap.css') }}">
+              href="{{ asset('assets/plugins/jquery-datatable/skin/bootstrap/css/dataTables.bootstrap.css') }}">
 
         @stack('css')
 
