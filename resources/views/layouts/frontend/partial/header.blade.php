@@ -1,4 +1,3 @@
-
 <!--========================== top-area-start ==========================-->
 <section class="top-area">
     <div class="container">
@@ -54,6 +53,23 @@
                             <li>
                                 <a href="{{ route('home') }}">Home</a>
                             </li>
+                            @auth
+                                <li class="{{ Request::is('*/dashboard') ? 'active' : '' }}">
+                                    <a>Profile</a>
+                                    <ul class="sub-menu">
+                                        <li>
+                                            <a id="dashboard" href="{{ route('admin.dashboard') }}">Dashboard</a>
+                                        </li>
+                                        <li>
+                                            <a href="{{ route('logout') }}"  onclick="event.preventDefault();
+                                                 document.getElementById('logout-form').submit();">Logout</a>
+                                            <form id="logout-form" action="{{ route('logout') }}" method="POST">
+                                                @csrf
+                                            </form>
+                                        </li>
+                                    </ul>
+                                </li>
+                            @endauth
                             <li class="{{ Request::is('about') ? 'active' : '' }}">
                                 <a href="{{ route('about') }}">About me</a>
                             </li>
@@ -71,20 +87,6 @@
                             @guest
                                 <li class="{{ (Request::is('login') || Request::is('register')) ? 'active' : '' }}">
                                     <a href="{{ route('login') }}">Signup/Login</a>
-                                </li>
-                            @else
-                                <li class="{{ Request::is('*/dashboard') ? 'active' : '' }}">
-                                    <a>Profile</a>
-                                    <ul class="sub-menu">
-                                        <li>
-                                            <a href="{{ route('logout') }}"  onclick="event.preventDefault();
-                                                 document.getElementById('logout-form').submit();">Logout</a>
-                                            <form id="logout-form" action="{{ route('logout') }}" method="POST">
-                                                @csrf
-                                            </form>
-                                        </li>
-                                        <li><a href="{{ route('admin.dashboard') }}">My Dashboard</a></li>
-                                    </ul>
                                 </li>
                             @endguest
                         </ul>
