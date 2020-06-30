@@ -11,21 +11,21 @@
         <title>@yield('title')</title>
 
         <!--========================== Bootstrap css ==========================-->
-        <link href="{{ asset('assets/plugins/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+        <link href="{{ secure_asset('assets/plugins/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
         <!--========================== font-awesome css ==========================-->
-        <link href="{{ asset('assets/plugins/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet">
+        <link href="{{ secure_asset('assets/plugins/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet">
         <!--========================== google-font css ==========================-->
         <link rel='stylesheet'
-              href="{{ asset('assets/frontend/fonts/material-icon/css/material-design-iconic-font.min.css') }}">
+              href="{{ secure_asset('assets/frontend/fonts/material-icon/css/material-design-iconic-font.min.css') }}">
         <link href='https://fonts.googleapis.com/css?family=Droid+Sans:400,700' rel='stylesheet' type='text/css'>
         <link href='https://fonts.googleapis.com/css?family=Roboto:400,100,300' rel='stylesheet' type='text/css'>
         <link href='https://fonts.googleapis.com/css?family=PT+Sans:400,700' rel='stylesheet' type='text/css'>
         <!--========================== style css ==========================-->
-        <link href="{{ asset('assets/frontend/css/style.css') }}" rel="stylesheet">
+        <link href="{{ secure_asset('assets/frontend/css/style.css') }}" rel="stylesheet">
         <!--============================ fevicon ===============================-->
-        <link rel="shortcut icon" type="image/png" href="{{ asset('assets/frontend/images/fev-icon.ico') }}">
+        <link rel="shortcut icon" type="image/png" href="{{ secure_asset('assets/frontend/images/fev-icon.ico') }}">
         <!--========================== responsive css ==========================-->
-        <link href="{{ asset('assets/frontend/css/responsive.css') }}" rel="stylesheet">
+        <link href="{{ secure_asset('assets/frontend/css/responsive.css') }}" rel="stylesheet">
 
         <link rel="stylesheet" href="https://cdn.bootcss.com/toastr.js/latest/css/toastr.min.css">
 
@@ -48,12 +48,12 @@
         @include('layouts.frontend.partial.footer')
 
         <!--========================== Main jQuery ==========================-->
-        <script src="{{ asset('assets/plugins/jquery/jquery.min.js') }}"></script>
+        <script src="{{ secure_asset('assets/plugins/jquery/jquery.min.js') }}"></script>
         <!--============================== Bootstrap js ================================-->
-        <script src="{{ asset('assets/plugins/bootstrap/js/bootstrap.min.js')  }}"></script>
+        <script src="{{ secure_asset('assets/plugins/bootstrap/js/bootstrap.min.js')  }}"></script>
         <!--============================== Custom js ================================-->
-        <script src="{{ asset('assets/plugins/jquery-sticky/jquery.sticky.js') }}"></script>
-        <script src="{{ asset('assets/frontend/js/custom.js') }}"></script>
+        <script src="{{ secure_asset('assets/plugins/jquery-sticky/jquery.sticky.js') }}"></script>
+        <script src="{{ secure_asset('assets/frontend/js/custom.js') }}"></script>
 
         <script src="https://cdn.bootcss.com/toastr.js/latest/js/toastr.min.js"></script>
         {!! Toastr::message() !!}

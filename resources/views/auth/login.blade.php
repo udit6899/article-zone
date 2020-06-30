@@ -5,7 +5,7 @@
 @section('title', 'Login')
 
 @push('css')
-    <link href="{{ asset('assets/frontend/css/auth/style.css') }}" rel="stylesheet">
+    <link href="{{ secure_asset('assets/frontend/css/auth/style.css') }}" rel="stylesheet">
 @endpush
 
 <!--========================== include content ==========================-->

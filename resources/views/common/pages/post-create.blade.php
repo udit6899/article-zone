@@ -5,7 +5,7 @@
 
 @push('css')
     <!-- Bootstrap Select Css -->
-    <link href="{{ asset('assets/plugins/bootstrap-select/css/bootstrap-select.css') }}" rel="stylesheet" />
+    <link href="{{ secure_asset('assets/plugins/bootstrap-select/css/bootstrap-select.css') }}" rel="stylesheet" />
 @endpush
 
 <!--========================== include content ==========================-->
@@ -159,11 +159,11 @@
 
 @push('js')
     <!-- Custom js for editor -->
-    <script src="{{ asset('assets/frontend/js/editor.js') }}"></script>
+    <script src="{{ secure_asset('assets/frontend/js/editor.js') }}"></script>
 
     <!-- Select Plugin Js -->
-    <script src="{{ asset('assets/plugins/bootstrap-select/js/bootstrap-select.js') }}"></script>
+    <script src="{{ secure_asset('assets/plugins/bootstrap-select/js/bootstrap-select.js') }}"></script>
 
     <!-- TinyMCE -->
-    <script src="{{ asset('assets/plugins/tinymce/tinymce.js') }}"></script>
+    <script src="{{ secure_asset('assets/plugins/tinymce/tinymce.js') }}"></script>
 @endpush

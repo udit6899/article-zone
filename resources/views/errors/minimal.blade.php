@@ -9,8 +9,10 @@
         <!-- Google font -->
         <link href="https://fonts.googleapis.com/css?family=Quicksand:700" rel="stylesheet">
 
+        <link rel="shortcut icon" type="image/png" href="{{ secure_asset('assets/frontend/images/fev-icon.ico') }}">
+
         <!-- Custom css -->
-        <link href="{{ asset('assets/frontend/css/error/style.css') }}" rel="stylesheet">
+        <link href="{{ secure_asset('assets/frontend/css/error/style.css') }}" rel="stylesheet">
 
     </head>
     <body>

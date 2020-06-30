@@ -11,38 +11,38 @@
         <title>@yield('title')</title>
 
         <!-- Favicon-->
-        <link rel="shortcut icon" type="image/png" href="{{ asset('assets/frontend/images/fev-icon.ico') }}">
+        <link rel="shortcut icon" type="image/png" href="{{ secure_asset('assets/frontend/images/fev-icon.ico') }}">
 
         <!-- Google Fonts -->
-        <link href="{{ asset('assets/plugins/font-awesome/css/font-awesome.min.css') }}">
+        <link href="{{ secure_asset('assets/plugins/font-awesome/css/font-awesome.min.css') }}">
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" type="text/css">
         <link type="text/css"
               href="https://fonts.googleapis.com/css?family=Roboto:400,700&subset=latin,cyrillic-ext" rel="stylesheet">
 
         <!-- Bootstrap Core Css -->
-        <link href="{{ asset('assets/plugins/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+        <link href="{{ secure_asset('assets/plugins/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
 
         <!-- Waves Effect Css -->
-        <link href="{{ asset('assets/plugins/node-waves/waves.css') }}" rel="stylesheet" />
+        <link href="{{ secure_asset('assets/plugins/node-waves/waves.css') }}" rel="stylesheet" />
 
         <!-- Animation Css -->
-        <link href="{{ asset('assets/plugins/animate-css/animate.css') }}" rel="stylesheet" />
+        <link href="{{ secure_asset('assets/plugins/animate-css/animate.css') }}" rel="stylesheet" />
 
         <!-- Morris Chart Css-->
-        <link href="{{ asset('assets/plugins/morrisjs/morris.css') }}" rel="stylesheet" />
+        <link href="{{ secure_asset('assets/plugins/morrisjs/morris.css') }}" rel="stylesheet" />
 
         <!-- Custom Css -->
-        <link href="{{ asset('assets/backend/css/style.css') }}" rel="stylesheet">
+        <link href="{{ secure_asset('assets/backend/css/style.css') }}" rel="stylesheet">
 
         <!-- AdminBSB Themes. You can choose a theme from css/themes instead of get all themes -->
-        <link href="{{ asset('assets/backend/css/theme-black.min.css') }}" rel="stylesheet" />
+        <link href="{{ secure_asset('assets/backend/css/theme-black.min.css') }}" rel="stylesheet" />
 
         <!-- Css for toastr -->
         <link rel="stylesheet" href="https://cdn.bootcss.com/toastr.js/latest/css/toastr.min.css">
 
         <!-- JQuery DataTable Css -->
         <link rel="stylesheet"
-              href="{{ asset('assets/plugins/jquery-datatable/skin/bootstrap/css/dataTables.bootstrap.css') }}">
+              href="{{ secure_asset('assets/plugins/jquery-datatable/skin/bootstrap/css/dataTables.bootstrap.css') }}">
 
         @stack('css')
 
@@ -85,47 +85,47 @@
         <!-- #END# Content area -->
 
         <!-- Jquery Core Js -->
-        <script src="{{ asset('assets/plugins/jquery/jquery.min.js') }}"></script>
+        <script src="{{ secure_asset('assets/plugins/jquery/jquery.min.js') }}"></script>
 
         <!-- Bootstrap Core Js -->
-        <script src="{{ asset('assets/plugins/bootstrap/js/bootstrap.min.js')  }}"></script>
+        <script src="{{ secure_asset('assets/plugins/bootstrap/js/bootstrap.min.js')  }}"></script>
 
         <!-- Slimscroll Plugin Js -->
-        <script src="{{ asset('assets/plugins/jquery-slimscroll/jquery.slimscroll.js') }}"></script>
+        <script src="{{ secure_asset('assets/plugins/jquery-slimscroll/jquery.slimscroll.js') }}"></script>
 
         <!-- Waves Effect Plugin Js -->
-        <script src="{{ asset('assets/plugins/node-waves/waves.js') }}"></script>
+        <script src="{{ secure_asset('assets/plugins/node-waves/waves.js') }}"></script>
 
         @stack('js')
 
         <!-- Jquery DataTable Plugin Js -->
-        <script src="{{ asset('assets/plugins/jquery-datatable/jquery.dataTables.js') }}"></script>
-        <script src="{{ asset('assets/plugins/jquery-datatable/extensions/export/vfs_fonts.js') }}"></script>
-        <script src="{{ asset('assets/plugins/jquery-datatable/extensions/export/pdfmake.min.js') }}"></script>
+        <script src="{{ secure_asset('assets/plugins/jquery-datatable/jquery.dataTables.js') }}"></script>
+        <script src="{{ secure_asset('assets/plugins/jquery-datatable/extensions/export/vfs_fonts.js') }}"></script>
+        <script src="{{ secure_asset('assets/plugins/jquery-datatable/extensions/export/pdfmake.min.js') }}"></script>
         <script
-            src="{{ asset('assets/plugins/jquery-datatable/skin/bootstrap/js/dataTables.bootstrap.js') }}">
+            src="{{ secure_asset('assets/plugins/jquery-datatable/skin/bootstrap/js/dataTables.bootstrap.js') }}">
         </script>
         <script
-            src="{{ asset('assets/plugins/jquery-datatable/extensions/export/dataTables.buttons.min.js') }}">
+            src="{{ secure_asset('assets/plugins/jquery-datatable/extensions/export/dataTables.buttons.min.js') }}">
         </script>
         <script
-            src="{{ asset('assets/plugins/jquery-datatable/extensions/export/buttons.flash.min.js') }}">
+            src="{{ secure_asset('assets/plugins/jquery-datatable/extensions/export/buttons.flash.min.js') }}">
         </script>
         <script
-            src="{{ asset('assets/plugins/jquery-datatable/extensions/export/jszip.min.js') }}">
+            src="{{ secure_asset('assets/plugins/jquery-datatable/extensions/export/jszip.min.js') }}">
         </script>
         <script
-            src="{{ asset('assets/plugins/jquery-datatable/extensions/export/buttons.html5.min.js') }}">
+            src="{{ secure_asset('assets/plugins/jquery-datatable/extensions/export/buttons.html5.min.js') }}">
         </script>
         <script
-            src="{{ asset('assets/plugins/jquery-datatable/extensions/export/buttons.print.min.js') }}">
+            src="{{ secure_asset('assets/plugins/jquery-datatable/extensions/export/buttons.print.min.js') }}">
         </script>
 
         <!-- Custom Js -->
-        <script src="{{ asset('assets/backend/js/admin.js') }}"></script>
+        <script src="{{ secure_asset('assets/backend/js/admin.js') }}"></script>
 
         <!-- FileHelper Js -->
-        <script src="{{ asset('assets/backend/js/helpers.js') }}"></script>
+        <script src="{{ secure_asset('assets/backend/js/helpers.js') }}"></script>
 
         <!-- Sweete alert -->
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
