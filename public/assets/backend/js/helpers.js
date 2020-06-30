@@ -277,11 +277,11 @@ function replyMessage(messageObj) {
 }
 
 // Read category details
-function readCategory(category) {
+function readCategory(category, imageUrl) {
     Swal.fire({
         title: category.name,
         text: category.description,
-        imageUrl: '/storage/categories/' + category.image,
+        imageUrl: imageUrl,
         imageWidth: 400,
         imageHeight: 200,
         imageAlt: 'Custom image'
@@ -289,11 +289,11 @@ function readCategory(category) {
 }
 
 // Read author details
-function readAuthor(author) {
+function readAuthor(author, imageUrl) {
     Swal.fire({
         title: author.name,
         html: '<p>Email Address: ' + author.email + '</p>' + '<p> Mobile Number: ' + author.mobile_no + '</p>' + '<br><p class="text-warning">' + (author.about || " ") + '</p><br>' + '<div>' + '<i class="material-icons text-primary">library_books</i>' + '<span> ' + author.posts_count + '</span>' + ' <i class="material-icons text-danger">favorite</i>' + '<span> ' + author.favourite_posts_count + '</span>' + ' <i class="material-icons text-primary">comment</i>' + '<span> ' + author.comments_count + '</span>' + '</div>',
-        imageUrl: '/storage/users/' + author.avatar_path,
+        imageUrl: imageUrl,
         imageWidth: 200,
         imageHeight: 200,
         imageAlt: 'Custom image'

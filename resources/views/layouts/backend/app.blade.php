@@ -23,26 +23,26 @@
         <link href="{{ asset('assets/plugins/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
 
         <!-- Waves Effect Css -->
-        <link href="{{ secure_asset('assets/plugins/node-waves/waves.css') }}" rel="stylesheet" />
+        <link href="{{ asset('assets/plugins/node-waves/waves.css') }}" rel="stylesheet" />
 
         <!-- Animation Css -->
-        <link href="{{ secure_asset('assets/plugins/animate-css/animate.css') }}" rel="stylesheet" />
+        <link href="{{ asset('assets/plugins/animate-css/animate.css') }}" rel="stylesheet" />
 
         <!-- Morris Chart Css-->
-        <link href="{{ secure_asset('assets/plugins/morrisjs/morris.css') }}" rel="stylesheet" />
+        <link href="{{ asset('assets/plugins/morrisjs/morris.css') }}" rel="stylesheet" />
 
         <!-- Custom Css -->
-        <link href="{{ secure_asset('assets/backend/css/style.css') }}" rel="stylesheet">
+        <link href="{{ asset('assets/backend/css/style.css') }}" rel="stylesheet">
 
         <!-- AdminBSB Themes. You can choose a theme from css/themes instead of get all themes -->
-        <link href="{{ secure_asset('assets/backend/css/theme-black.min.css') }}" rel="stylesheet" />
+        <link href="{{ asset('assets/backend/css/theme-black.min.css') }}" rel="stylesheet" />
 
         <!-- Css for toastr -->
         <link rel="stylesheet" href="https://cdn.bootcss.com/toastr.js/latest/css/toastr.min.css">
 
         <!-- JQuery DataTable Css -->
         <link rel="stylesheet"
-              href="{{ secure_asset('assets/plugins/jquery-datatable/skin/bootstrap/css/dataTables.bootstrap.css') }}">
+              href="{{ asset('assets/plugins/jquery-datatable/skin/bootstrap/css/dataTables.bootstrap.css') }}">
 
         @stack('css')
 
@@ -85,47 +85,47 @@
         <!-- #END# Content area -->
 
         <!-- Jquery Core Js -->
-        <script src="{{ secure_asset('assets/plugins/jquery/jquery.min.js') }}"></script>
+        <script src="{{ asset('assets/plugins/jquery/jquery.min.js') }}"></script>
 
         <!-- Bootstrap Core Js -->
-        <script src="{{ secure_asset('assets/plugins/bootstrap/js/bootstrap.min.js')  }}"></script>
+        <script src="{{ asset('assets/plugins/bootstrap/js/bootstrap.min.js')  }}"></script>
 
         <!-- Slimscroll Plugin Js -->
-        <script src="{{ secure_asset('assets/plugins/jquery-slimscroll/jquery.slimscroll.js') }}"></script>
+        <script src="{{ asset('assets/plugins/jquery-slimscroll/jquery.slimscroll.js') }}"></script>
 
         <!-- Waves Effect Plugin Js -->
-        <script src="{{ secure_asset('assets/plugins/node-waves/waves.js') }}"></script>
+        <script src="{{ asset('assets/plugins/node-waves/waves.js') }}"></script>
 
         @stack('js')
 
         <!-- Jquery DataTable Plugin Js -->
-        <script src="{{ secure_asset('assets/plugins/jquery-datatable/jquery.dataTables.js') }}"></script>
-        <script src="{{ secure_asset('assets/plugins/jquery-datatable/extensions/export/vfs_fonts.js') }}"></script>
-        <script src="{{ secure_asset('assets/plugins/jquery-datatable/extensions/export/pdfmake.min.js') }}"></script>
+        <script src="{{ asset('assets/plugins/jquery-datatable/jquery.dataTables.js') }}"></script>
+        <script src="{{ asset('assets/plugins/jquery-datatable/extensions/export/vfs_fonts.js') }}"></script>
+        <script src="{{ asset('assets/plugins/jquery-datatable/extensions/export/pdfmake.min.js') }}"></script>
         <script
-            src="{{ secure_asset('assets/plugins/jquery-datatable/skin/bootstrap/js/dataTables.bootstrap.js') }}">
+            src="{{ asset('assets/plugins/jquery-datatable/skin/bootstrap/js/dataTables.bootstrap.js') }}">
         </script>
         <script
-            src="{{ secure_asset('assets/plugins/jquery-datatable/extensions/export/dataTables.buttons.min.js') }}">
+            src="{{ asset('assets/plugins/jquery-datatable/extensions/export/dataTables.buttons.min.js') }}">
         </script>
         <script
-            src="{{ secure_asset('assets/plugins/jquery-datatable/extensions/export/buttons.flash.min.js') }}">
+            src="{{ asset('assets/plugins/jquery-datatable/extensions/export/buttons.flash.min.js') }}">
         </script>
         <script
-            src="{{ secure_asset('assets/plugins/jquery-datatable/extensions/export/jszip.min.js') }}">
+            src="{{ asset('assets/plugins/jquery-datatable/extensions/export/jszip.min.js') }}">
         </script>
         <script
-            src="{{ secure_asset('assets/plugins/jquery-datatable/extensions/export/buttons.html5.min.js') }}">
+            src="{{ asset('assets/plugins/jquery-datatable/extensions/export/buttons.html5.min.js') }}">
         </script>
         <script
-            src="{{ secure_asset('assets/plugins/jquery-datatable/extensions/export/buttons.print.min.js') }}">
+            src="{{ asset('assets/plugins/jquery-datatable/extensions/export/buttons.print.min.js') }}">
         </script>
 
         <!-- Custom Js -->
-        <script src="{{ secure_asset('assets/backend/js/admin.js') }}"></script>
+        <script src="{{ asset('assets/backend/js/admin.js') }}"></script>
 
         <!-- FileHelper Js -->
-        <script src="{{ secure_asset('assets/backend/js/helpers.js') }}"></script>
+        <script src="{{ asset('assets/backend/js/helpers.js') }}"></script>
 
         <!-- Sweete alert -->
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>

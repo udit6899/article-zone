@@ -9,7 +9,7 @@
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <link rel="shortcut icon" type="image/png" href="{{ asset('assets/frontend/images/fev-icon.ico') }}">
+    <link rel="shortcut icon" type="image/png" href="{{ secure_asset('assets/frontend/images/fev-icon.ico') }}">
 
     <script src="{{ asset('assets/plugins/jquery/jquery.min.js') }}"></script>
     <link href="{{ asset('assets/plugins/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css">

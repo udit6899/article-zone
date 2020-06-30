@@ -96,8 +96,8 @@
                             <td>{{ $author->comments_count }}</td>
                             <td>{{ $author->created_at->toFormattedDateString() }}</td>
                             <td class="text-center">
-                                <a class="btn btn-xs bg-info waves-effect"
-                                        title="View" onclick="readAuthor({{ $author->replicate()->toJson() }})">
+                                <a class="btn btn-xs bg-info waves-effect" title="View"
+                                   onclick="readAuthor({{ $author->replicate()->toJson() }}, '{{ $author->imageUrl }}')">
                                     <i class="material-icons action-icon">visibility</i>
                                 </a>
                             </td>

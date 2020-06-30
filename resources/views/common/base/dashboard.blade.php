@@ -85,8 +85,8 @@
 
 @push('js')
     <!-- Jquery CountTo Plugin Js -->
-    <script src="{{ secure_asset('assets/plugins/jquery-countto/jquery.countTo.js') }}"></script>
+    <script src="{{ asset('assets/plugins/jquery-countto/jquery.countTo.js') }}"></script>
 
     <!-- Sparkline Chart Plugin Js -->
-    <script src="{{ secure_asset('assets/plugins/jquery-sparkline/jquery.sparkline.js') }}"></script>
+    <script src="{{ asset('assets/plugins/jquery-sparkline/jquery.sparkline.js') }}"></script>
 @endpush

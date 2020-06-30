@@ -1,6 +1,6 @@
 @push('css')
     <!-- Bootstrap Select Css -->
-    <link href="{{ secure_asset('assets/plugins/bootstrap-select/css/bootstrap-select.css') }}" rel="stylesheet" />
+    <link href="{{ asset('assets/plugins/bootstrap-select/css/bootstrap-select.css') }}" rel="stylesheet" />
 @endpush
 
 <!-- Base post-create form -->
@@ -116,11 +116,11 @@
 
 @push('js')
     <!-- Custom js for editor -->
-    <script src="{{ secure_asset('assets/frontend/js/editor.js') }}"></script>
+    <script src="{{ asset('assets/frontend/js/editor.js') }}"></script>
 
     <!-- Select Plugin Js -->
-    <script src="{{ secure_asset('assets/plugins/bootstrap-select/js/bootstrap-select.js') }}"></script>
+    <script src="{{ asset('assets/plugins/bootstrap-select/js/bootstrap-select.js') }}"></script>
 
     <!-- TinyMCE -->
-    <script src="{{ secure_asset('assets/plugins/tinymce/tinymce.js') }}"></script>
+    <script src="{{ asset('assets/plugins/tinymce/tinymce.js') }}"></script>
 @endpush

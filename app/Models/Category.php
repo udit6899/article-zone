@@ -43,7 +43,7 @@ class Category extends Model
      */
     public function getImageUrlAttribute()
     {
-        return Storage::disk('public')->url("categories/$this->image");
+        return Storage::disk('s3')->url("categories/$this->image");
     }
 
     /**
