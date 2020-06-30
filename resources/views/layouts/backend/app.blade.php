@@ -20,7 +20,7 @@
               href="https://fonts.googleapis.com/css?family=Roboto:400,700&subset=latin,cyrillic-ext" rel="stylesheet">
 
         <!-- Bootstrap Core Css -->
-        <link href="{{ secure_asset('assets/plugins/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+        <link href="{{ asset('assets/plugins/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
 
         <!-- Waves Effect Css -->
         <link href="{{ secure_asset('assets/plugins/node-waves/waves.css') }}" rel="stylesheet" />
@@ -42,7 +42,7 @@
 
         <!-- JQuery DataTable Css -->
         <link rel="stylesheet"
-              href="{{ asset('assets/plugins/jquery-datatable/skin/bootstrap/css/dataTables.bootstrap.css') }}">
+              href="{{ secure_asset('assets/plugins/jquery-datatable/skin/bootstrap/css/dataTables.bootstrap.css') }}">
 
         @stack('css')
 
@@ -99,11 +99,11 @@
         @stack('js')
 
         <!-- Jquery DataTable Plugin Js -->
-        <script src="{{ asset('assets/plugins/jquery-datatable/jquery.dataTables.js') }}"></script>
+        <script src="{{ secure_asset('assets/plugins/jquery-datatable/jquery.dataTables.js') }}"></script>
         <script src="{{ secure_asset('assets/plugins/jquery-datatable/extensions/export/vfs_fonts.js') }}"></script>
         <script src="{{ secure_asset('assets/plugins/jquery-datatable/extensions/export/pdfmake.min.js') }}"></script>
         <script
-            src="{{ asset('assets/plugins/jquery-datatable/skin/bootstrap/js/dataTables.bootstrap.js') }}">
+            src="{{ secure_asset('assets/plugins/jquery-datatable/skin/bootstrap/js/dataTables.bootstrap.js') }}">
         </script>
         <script
             src="{{ secure_asset('assets/plugins/jquery-datatable/extensions/export/dataTables.buttons.min.js') }}">
