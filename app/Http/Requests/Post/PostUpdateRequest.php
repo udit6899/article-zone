@@ -35,7 +35,7 @@ class PostUpdateRequest extends FormRequest
         $post->quote = $this->quote ?? $post->quote;
         $post->body = $this->body ?? $post->body;
         $post->is_published = $this->is_published ? true : false;
-        $post->is_approved =  Auth::user()->is_admin ? true : false;
+        $post->is_approved = Auth::user()->is_admin && $this->previousApprovedStatus;
     }
 
 
