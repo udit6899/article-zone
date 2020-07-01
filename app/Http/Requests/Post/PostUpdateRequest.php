@@ -20,7 +20,7 @@ class PostUpdateRequest extends FormRequest
     }
 
     /**
-     * Prepare the updated post details
+     * Prepare the post details for update
      *
      */
     protected function prepareForValidation()
@@ -30,17 +30,17 @@ class PostUpdateRequest extends FormRequest
 
         // Manage the post details
         $this->previousApprovedStatus = $post->is_approved;
-        $post->slug = Str::slug($this->title) ?? $post->slug;
+        $this->slug = Str::slug($this->title) ?? $post->slug;
         $post->title = $this->title ?? $post->title;
         $post->quote = $this->quote ?? $post->quote;
         $post->body = $this->body ?? $post->body;
         $post->is_published = $this->is_published ? true : false;
-        $post->is_approved =  Auth::user()->is_admin ? true : false;
+        $post->is_approved = Auth::user()->is_admin && $this->previousApprovedStatus;
     }
 
 
     /**
-     * Get the validation rules that apply to the request.
+     * Get the validation rules that apply to the post update request.
      *
      * @return array
      */

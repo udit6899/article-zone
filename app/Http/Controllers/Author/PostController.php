@@ -15,10 +15,13 @@ class PostController extends BasePostController
     public function __construct()
     {
         $this->prefix = 'author';
+
+        // Apply policy action ability for author
+        $this->authorizeResource(Post::class, 'post');
     }
 
     /**
-     * Display the specified resource.
+     * Display the specified post.
      *
      * @param  \App\Models\Post  $post
      * @return \Illuminate\Http\Response

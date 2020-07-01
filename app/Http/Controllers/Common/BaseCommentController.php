@@ -9,7 +9,6 @@ use App\Http\Requests\Comment\CommentStoreRequest;
 use App\Http\Requests\Comment\CommentUpdateRequest;
 use App\Models\Comment;
 use Brian2694\Toastr\Facades\Toastr;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class BaseCommentController extends Controller
@@ -40,7 +39,7 @@ class BaseCommentController extends Controller
     public function store(CommentStoreRequest $request)
     {
         // Get the user details
-        $user = GuestUserHelper::getOrcreate($request);
+        $user = GuestUserHelper::getOrCreate($request);
 
         // Store new comment in DB
         $comment = Comment::create(array_merge($request->input(),
@@ -49,8 +48,10 @@ class BaseCommentController extends Controller
 
         // Make success response
         if ($user->is_admin) {
+
             Toastr::success('Your Comment Successfully Added !', 'Success');
         } else {
+
             // Notify admin to approve the new comment
             NotificationHelper::notify('admin', $comment, 'comment', 'new');
             Toastr::success('Your Comment Successfully Added ! Wait For Admin Approval.', 'Success');
@@ -61,7 +62,7 @@ class BaseCommentController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * Update the specified comment in storage.
      *
      * @param  CommentUpdateRequest  $request
      * @param  \App\Models\Comment  $comment
@@ -75,9 +76,12 @@ class BaseCommentController extends Controller
 
         // Make success response
         if (Auth::user()->is_admin) {
+
             Toastr::success('Your Comment Successfully Updated !', 'Success');
         } else {
-            if ($request->previousApprovedStatus == true) {
+
+            if ($request->previousApprovedStatus) {
+
                 // Notify admin to approve the updated comment
                 NotificationHelper::notify('admin', $comment, 'comment', 'update');
             }

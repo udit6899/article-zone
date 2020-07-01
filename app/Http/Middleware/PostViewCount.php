@@ -8,7 +8,7 @@ use Closure;
 class PostViewCount
 {
     /**
-     * Handle an incoming request.
+     * Handle an incoming request to count the post's views.
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \Closure  $next
@@ -17,19 +17,25 @@ class PostViewCount
     public function handle($request, Closure $next)
     {
         // Get a specific post by slug
-        $request->post = Post::published()->where([
-            'slug' => $request->route('slug'),
-        ])->firstOrFail();
+        $post = $request->route('post');
 
-        // Count the post view
-        $blogKey = 'blog_' . $request->post->id;
+        if ($post->is_approved && $post->is_published) {
 
-        // If the key is not present in session, then increment the count
-        if (!session()->has($blogKey)) {
-            $request->post->increment('view_count');
-            session()->put($blogKey, 1);
+            // Count the post view
+            $blogKey = 'blog_' . $post->id;
+
+            // If the key is not present in session, then increment the count
+            if (!session()->has($blogKey)) {
+                $post->increment('view_count');
+                session()->put($blogKey, 1);
+            }
+
+            return $next($request);
+
+        } else {
+
+            // Return not found
+            abort(404);
         }
-
-        return $next($request);
     }
 }

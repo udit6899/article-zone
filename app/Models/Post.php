@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Facades\Storage;
+use ImLiam\ShareableLink;
 
 class Post extends Model
 {
@@ -20,6 +21,16 @@ class Post extends Model
         'body', 'image', 'is_published', 'is_approved'
     ];
 
+    /*
+    * Change route binding key
+    *
+    * @return string
+    */
+    public function getRouteKeyName()
+    {
+        return 'slug';
+    }
+
     /**
      * Get the user that owns the post.
      * @return BelongsTo user
@@ -29,7 +40,7 @@ class Post extends Model
     }
 
     /**
-     * The categories that belong to the post.
+     * Get the categories that belong to the post.
      * @return BelongsToMany categories
      */
     public function categories() {
@@ -37,10 +48,17 @@ class Post extends Model
     }
 
     /**
-     * The tags that belong to the post.
+     * Get the tags that belong to the post.
      */
     public function tags() {
         return $this->belongsToMany('App\Models\Tag')->withTimestamps();
+    }
+
+    /**
+     * Get the users, those added to this post as favourite
+     */
+    public function favouriteToUsers() {
+        return $this->belongsToMany('App\Models\User')->withTimestamps();
     }
 
     /**
@@ -90,13 +108,13 @@ class Post extends Model
      * Scope a query to get all the popular posts.
      *
      * @param \Illuminate\Database\Eloquent\Builder $query
-     * @param int $value
      * @return Illuminate\Database\Eloquent\Collection
      */
-    public static function scopePopular($query, $value) {
+    public static function scopePopular($query) {
 
-        return $query->withCount('comments')->orderByDesc('view_count')
-            ->orderByDesc('comments_count')->take($value)->get();
+        return $query->withCount('comments')->withCount('favouriteToUsers')
+            ->orderByDesc('view_count')->orderByDesc('favourite_to_users_count')
+            ->orderByDesc('comments_count');
     }
 
     /**
@@ -127,8 +145,8 @@ class Post extends Model
      *
      * @return Illuminate\Database\Eloquent\Collection
      */
-    public function getApprovedCommentsAttribute()
-    {
+    public function getApprovedCommentsAttribute() {
+
         return Comment::where([ 'post_id' => $this->id, 'is_approved' => true ])->latest()->get();
     }
 
@@ -137,8 +155,8 @@ class Post extends Model
      *
      * @return string
      */
-    public function getCreatedDateAttribute()
-    {
+    public function getCreatedDateAttribute() {
+
         return $this->created_at->toFormattedDateString();
     }
 
@@ -147,9 +165,9 @@ class Post extends Model
      *
      * @return string
      */
-    public function getImageUrlAttribute()
-    {
-        return Storage::disk('public')->url("posts/$this->image");
+    public function getImageUrlAttribute() {
+
+        return Storage::disk('s3')->url("posts/$this->image");
     }
 
     /**
@@ -157,9 +175,22 @@ class Post extends Model
      *
      * @return string
      */
-    public function getViewLinkAttribute()
-    {
+    public function getViewLinkAttribute() {
+
         return route('post.details', $this->slug);
     }
 
+    /**
+     * Get sharable link for post details
+     *
+     * @return string
+     */
+    public function getShareUrlAttribute() {
+
+        // Get post-details page link
+        $url = route('post.details', $this->slug);
+
+        // Return sharable link of the post
+        return new ShareableLink($url, $this->title);
+    }
 }

@@ -20,7 +20,7 @@ class FileHelper {
      */
     private static function upload($image, $paths, $sizes, $oldImageName = 'default.jpg') {
 
-        $storage = Storage::disk('public');
+        $storage = Storage::disk('s3');
 
        // Check if the image is valid or not
         if (isset($image)) {
@@ -45,6 +45,9 @@ class FileHelper {
 
                 // Store resized image in destination dir
                 $storage->put($path . '/' . $newImageName, $resizedImage);
+
+                // Set visibility access to the uploaded image
+                $storage->setVisibility($path . '/' . $newImageName, 'public');
             }
 
         } else {
@@ -66,10 +69,10 @@ class FileHelper {
     public static function delete(string $imagePath) {
 
         if (!in_array('default.jpg', explode('/', $imagePath)) &&
-            Storage::disk('public')->exists($imagePath)) {
+            Storage::disk('s3')->exists($imagePath)) {
 
             // Delete the image, if exists
-            Storage::disk('public')->delete($imagePath);
+            Storage::disk('s3')->delete($imagePath);
         }
     }
 
@@ -100,8 +103,9 @@ class FileHelper {
 
                 // Store uploaded image for post : Storage/posts
                 $imageUrl = FileHelper::upload(
-                    $uploadedResource, [ 0 => 'posts'],
-                    [0 => ['width' => 338, 'height' => 245]], $oldImageUrl
+                    $uploadedResource, [ 0 => 'posts', 1 => 'posts/slider'],
+                    [0 => ['width' => 338, 'height' => 237], 1 => ['width' => 880, 'height' => 520]],
+                    $oldImageUrl
                 );
 
                 break;
@@ -111,7 +115,7 @@ class FileHelper {
                 //  : Storage/categories & Storage/categories/slider
                 $imageUrl = FileHelper::upload(
                     $uploadedResource, [ 0 => 'categories', 1 => 'categories/slider'],
-                    [0 => ['width' => 338, 'height' => 245], 1 => ['width' => 1732, 'height' => 680]],
+                    [0 => ['width' => 338, 'height' => 245], 1 => ['width' => 1360, 'height' => 680]],
                     $oldImageUrl
                 );
 

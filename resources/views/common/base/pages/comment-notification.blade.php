@@ -6,7 +6,7 @@
         <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
             <div class="media">
                 <div class="media-left float-left">
-                    <img class="media-object" src="{{ $comment->post->imageUrl }}">
+                    <img class="media-object" alt="post-image" src="{{ $comment->post->imageUrl }}">
                 </div>
                 <div class="media-body float-right">
                     <h5 class="media-heading">{{ $comment->post->title }}</h5>
@@ -17,7 +17,8 @@
         <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
             <div class="media">
                 <div class="media-left float-left">
-                    <img class="media-object" height="54px" width="54px" src="{{ $comment->user->imageUrl }}">
+                    <img class="media-object" height="54px"
+                         alt="comment-owner-image" width="54px" src="{{ $comment->user->imageUrl }}">
                 </div>
                 <div class="media-body pull-right">
                     <h5 class="media-heading">

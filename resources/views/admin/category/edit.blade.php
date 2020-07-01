@@ -18,7 +18,7 @@
                 </div>
                 <div class="body">
                     <form method="POST"
-                          action="{{ route('admin.category.update', $category->id) }}"  enctype="multipart/form-data">
+                          action="{{ route('admin.category.update', $category->slug) }}"  enctype="multipart/form-data">
                         @csrf
                         @method('PATCH')
                         <div class="form-group form-float">

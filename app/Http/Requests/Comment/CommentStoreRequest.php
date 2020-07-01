@@ -20,14 +20,14 @@ class CommentStoreRequest extends FormRequest
 
 
     /**
-     * Get the validation rules that apply to the request.
+     * Get the validation rules that apply to the comment store request.
      *
      * @return array
      */
     public function rules()
     {
         return [
-            'post_id' => [ 'required', 'integer', Rule::exists('posts')],
+            'post_id' => [ 'required', 'integer', Rule::exists('posts', 'id')],
             'comment' => ['required', 'string']
         ];
     }

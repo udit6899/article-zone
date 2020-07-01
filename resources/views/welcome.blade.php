@@ -1,4 +1,3 @@
-
 <!--========================== extend-master-blade ==========================-->
 @extends('layouts.frontend.app')
 

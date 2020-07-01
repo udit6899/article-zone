@@ -3,6 +3,44 @@
 
 @section('title', $post->title)
 
+<!--====== author's details content ======-->
+@section('author-details')
+    <div class="sidebar-widget">
+        <div class="row">
+            <div class="col-md-12 col-sm-12">
+                <div class="popular-post-border-content">
+                    <div class="popular-post-content text-center" id="author-details">
+                        <div class="popular-post-title">
+                            <h4>Author's Details</h4>
+                        </div>
+                        <div class="author-image">
+                            <img src="{{ $post->user->imageUrl }}" alt="post-author-image">
+                        </div>
+                        <div class="author-name">
+                            <a href="{{ $post->user->postsLink }}">
+                                {{ $post->user->name }}
+                            </a>
+                        </div>
+                        <div class="sub">
+                            <small>
+                                <strong>Total Posts:</strong>
+                                {{ $post->user->posts()->published()->count() }} |
+                                <strong>Since: </strong>
+                                {{ $post->user->created_at->toFormattedDateString() }}
+                            </small>
+                        </div>
+                        <div class="author-profile-link">
+                            @include('common.base.pages.share', ['data' => $post->user])
+                        </div>
+                        <div class="author-about">
+                           <p>{{ Str::limit($post->user->about, '100') }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+@endsection
 
 <!--========================== include content ==========================-->
 @section('content')
@@ -14,7 +52,8 @@
                     <div class="category-border-content">
                         <div class="category-detail category">
                             <div class="category-img">
-                                <img src="{{ $post->imageUrl }}" alt="{{ $post->title }}">
+                                <img alt="{{ $post->title }}"
+                                     src="{{ Storage::disk('s3')->url("posts/slider/$post->image") }}">
                                 <div class="category-overlay">
                                 </div>
                             </div>
@@ -23,9 +62,40 @@
                                     <strong>{{ $post->user->name }}</strong>
                                 </a>
                                 <h4><a href="{{ $post->viewLink }}">{{ $post->title }}</a></h4>
-                                <span class="art">{{ $post->created_at->toFormattedDateString() }}</span>
+                                <span class="art">{{ $post->created_date }}</span>
+
+                                @auth
+                                    <div class="favourite" >
+                                        @if(Auth::user()->hasFavouritePost($post->id))
+                                            <a onclick="removeFromFavourite()">
+                                                <h1 title="Remove from favourite">
+                                                    <i id="remove" class="fa fa-heart"></i>
+                                                </h1>
+                                            </a>
+                                            <form id="remove-from-favourite-form" method="POST" action="{{
+                                                      route(Auth::user()->is_admin ? 'admin.favourite-post.destroy' :
+                                                      'author.favourite-post.destroy', $post) }}">
+                                                @csrf
+                                                @method('DELETE')
+                                            </form>
+                                        @else
+                                            <a onclick="addToFavourite()">
+                                                <h1 title="Add to favourite">
+                                                    <i id="add" class="fa fa-heart"></i>
+                                                </h1>
+                                            </a>
+                                            <form id="add-to-favourite-form" method="POST"
+                                                  action="{{ route(Auth::user()->is_admin ?
+                                                  'admin.favourite-post.store': 'author.favourite-post.store') }}">
+                                                @csrf
+                                                <input type="hidden" name="post_id" value="{{ $post->id }}">
+                                            </form>
+                                        @endif
+                                    </div>
+                                @endauth
+
                                 <div class="quote">
-                                    <p>
+                                    <p id="quote-text">
                                         <i class="fa fa-quote-left"></i>
                                             {{ $post->quote }}
                                         <i class="fa fa-quote-right"></i>
@@ -36,8 +106,8 @@
                                     <div class="tag floatleft">
                                         <span>Tags</span>
                                         @foreach($post->tags as $tag)
-                                            <a href="{{ $tag->postsLink }}">
-                                                {{ $tag->name }}
+                                            <a class="btn btn-link" href="{{ $tag->postsLink }}">
+                                                <i class="fa fa-tag"></i> {{ $tag->name }}
                                             </a>
                                         @endforeach
                                     </div>
@@ -46,8 +116,8 @@
                                     <div class="post-category floatleft">
                                         <span>Categories</span>
                                         @foreach($post->categories as $category)
-                                            <a href="{{ $category->postsLink }}">
-                                                {{ $category->name }}
+                                            <a class="btn btn-link" href="{{ $category->postsLink }}">
+                                                <i class="fa fa-cube"></i> {{ $category->name }}
                                             </a>
                                         @endforeach
                                     </div>
@@ -55,16 +125,16 @@
                                 <div class="share-comment-section ">
                                     <div class="share single-page">
                                         <span>share:</span>
-                                        <a href=""><i class="fa fa-facebook"></i></a>
-                                        <a href=""><i class="fa fa-twitter"></i></a>
-                                        <a href=""><i class="fa fa-pinterest"></i></a>
-                                        <a href=""><i class="fa fa-instagram"></i></a>
+                                        @include('common.base.pages.share', ['data' => $post])
                                     </div>
                                 </div>
-                                <div class="recent-post-content clearfix text-center">
-                                    <h4>You May Also Like</h4>
-                                    @include('common.base.pages.random-post')
-                                </div>
+
+                                <!-- Include random-posts list -->
+
+                                @include('common.base.pages.random-post')
+
+                                <!-- End random post -->
+
                                 <div class="user-comments">
                                     <p>
                                         <i class="fa fa-comments-o"></i>

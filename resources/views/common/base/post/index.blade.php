@@ -38,8 +38,9 @@
                                 @if(!Request::is("$prefix/post/all"))
                                     <th>Created_At</th>
                                 @endif
-                                <th><i class="material-icons">comment</i></th>
                                 <th><i class="material-icons">visibility</i></th>
+                                <th><i class="material-icons">favorite</i></th>
+                                <th><i class="material-icons">comment</i></th>
                                 <th>Action</th>
                             </tr>
                             </thead>
@@ -73,24 +74,25 @@
                                     @if(!Request::is("$prefix/post/all"))
                                         <td>{{ $post->created_at->toDateString() }}</td>
                                     @endif
-                                    <td>{{ $post->comments->count() }}</td>
                                     <td>{{ $post->view_count }}</td>
+                                    <td>{{ $post->favouriteToUsers()->count() }}</td>
+                                    <td>{{ $post->comments->count() }}</td>
 
                                     <td class="text-center">
                                         <a class="btn btn-xs bg-blue-grey waves-effect"
-                                           title="Show" href="{{ route("$prefix.post.show", $post->id) }}">
+                                           title="Show" href="{{ route("$prefix.post.show", $post->slug) }}">
                                             <i class="material-icons action-icon">visibility</i>
                                         </a>
                                         <a class="btn btn-xs btn-info waves-effect"
-                                           title="Edit" href="{{ route("$prefix.post.edit", $post->id) }}">
+                                           title="Edit" href="{{ route("$prefix.post.edit", $post->slug) }}">
                                             <i class="material-icons action-icon">edit</i>
                                         </a>
                                         <button type="button" class="btn btn-xs bg-deep-orange waves-effect"
-                                                title="Delete" onclick="deleteItem({{ $post->id }})">
+                                                title="Delete" onclick="deleteItem('{{ $post->slug }}')">
                                             <i class="material-icons action-icon">delete</i>
                                         </button>
-                                        <form id="delete-form-{{ $post->id }}" class="form-hide"
-                                              action="{{ route("$prefix.post.destroy", $post->id) }}" method="POST">
+                                        <form id="delete-form-{{ $post->slug }}" class="form-hide"
+                                              action="{{ route("$prefix.post.destroy", $post->slug) }}" method="POST">
                                             @csrf
                                             @method('DELETE')
                                         </form>

@@ -2,13 +2,12 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Helpers\GuestUserHelper;
 use App\Http\Controllers\Controller;
-use App\Providers\RouteServiceProvider;
 use App\Models\User;
 use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
@@ -35,21 +34,19 @@ class RegisterController extends Controller
     protected $redirectTo;
 
     /**
-     * Create a new controller instance.
+     * Apply the redirecting url
      *
      * @return void
      */
     public function __construct()
     {
-        if (Auth::check() && Auth::user()->is_admin) {
-            // If user is admin and authenticated, then set admin dashboard path
-            $this->redirectTo = route('admin.dashboard');
-        } else {
-            // If user is author and authenticated, then set author dashboard path
-            $this->redirectTo = route('author.dashboard');
-        }
+        // Get redirectTo path for user
+        $this->redirectTo = GuestUserHelper::getRedirectUrl();
 
         $this->middleware('guest');
+
+        // Check user is a contributor or not
+        $this->middleware('contributor')->only('register');
     }
 
     /**
@@ -64,7 +61,7 @@ class RegisterController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'mobile_no' => ['required', 'digits:10'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'password' => ['required', 'string', 'min:8', 'max:255', 'confirmed'],
         ]);
     }
 
@@ -84,10 +81,13 @@ class RegisterController extends Controller
         ]);
     }
 
-    // Modify the response after user registered successfully
+    /*
+     * Modify the response after user registration
+     */
     protected function registered(Request $request, $user)
     {
-        Toastr::success('Wecome, '. $user->name .' ! You Are Successfully Registered.', 'success');
-        return redirect('/');
+        Toastr::success("Wecome, $user->name ! You Are Successfully Registered.", 'success');
+
+        return redirect()->route('verification.notice');
     }
 }

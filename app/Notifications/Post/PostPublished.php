@@ -48,7 +48,7 @@ class PostPublished extends Notification implements ShouldQueue
             ->line('There is a new post. We hope you will like it.')
             ->line('Post Title : <h3>' . $this->post->title . '</h3>')
             ->line('<img src="' . $this->post->imageUrl . '">')
-            ->action('View', url(route('post.details', $this->post->slug)))
+            ->action('View', url($this->post->viewLink))
             ->line('Thank you for using our application!');
     }
 

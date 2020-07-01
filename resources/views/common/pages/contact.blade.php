@@ -16,10 +16,13 @@
                             <h4>contact</h4>
                             <form action="{{ route('message.store') }}" method="post">
                                 @csrf
-                                <input type="text" name="name" placeholder="Full Name" required>
-                                <input type="email" name="email" placeholder="Email Address" required>
+                                <input type="text"
+                                       name="name" value="{{ old('name') }}" placeholder="Full Name" required>
+                                <input type="email"
+                                       name="email" value="{{ old('email') }}" placeholder="Email Address" required>
                                 <br><br>
-                                <textarea placeholder="Write something..." name="message" required></textarea>
+                                <textarea placeholder="Write something..."
+                                          name="message" required>{{ old('message') }}</textarea>
                                 <div class="submit-btn"><input type="submit" name="submit" value="send"></div>
                             </form>
                         </div>

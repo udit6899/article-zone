@@ -14,35 +14,35 @@
         <link rel="shortcut icon" type="image/png" href="{{ asset('assets/frontend/images/fev-icon.ico') }}">
 
         <!-- Google Fonts -->
-        <link href="{{ asset('assets/backend/plugins/font-awesome/css/font-awesome.css') }}">
+        <link href="{{ asset('assets/plugins/font-awesome/css/font-awesome.min.css') }}">
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" type="text/css">
         <link type="text/css"
               href="https://fonts.googleapis.com/css?family=Roboto:400,700&subset=latin,cyrillic-ext" rel="stylesheet">
 
         <!-- Bootstrap Core Css -->
-        <link href="{{ asset('assets/backend/plugins/bootstrap/css/bootstrap.css') }}" rel="stylesheet">
+        <link href="{{ asset('assets/plugins/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
 
         <!-- Waves Effect Css -->
-        <link href="{{ asset('assets/backend/plugins/node-waves/waves.css') }}" rel="stylesheet" />
+        <link href="{{ asset('assets/plugins/node-waves/waves.css') }}" rel="stylesheet" />
 
         <!-- Animation Css -->
-        <link href="{{ asset('assets/backend/plugins/animate-css/animate.css') }}" rel="stylesheet" />
+        <link href="{{ asset('assets/plugins/animate-css/animate.css') }}" rel="stylesheet" />
 
         <!-- Morris Chart Css-->
-        <link href="{{ asset('assets/backend/plugins/morrisjs/morris.css') }}" rel="stylesheet" />
+        <link href="{{ asset('assets/plugins/morrisjs/morris.css') }}" rel="stylesheet" />
 
         <!-- Custom Css -->
         <link href="{{ asset('assets/backend/css/style.css') }}" rel="stylesheet">
 
         <!-- AdminBSB Themes. You can choose a theme from css/themes instead of get all themes -->
-        <link href="{{ asset('assets/backend/css/themes/all-themes.css') }}" rel="stylesheet" />
+        <link href="{{ asset('assets/backend/css/theme-black.min.css') }}" rel="stylesheet" />
 
         <!-- Css for toastr -->
         <link rel="stylesheet" href="https://cdn.bootcss.com/toastr.js/latest/css/toastr.min.css">
 
         <!-- JQuery DataTable Css -->
         <link rel="stylesheet"
-              href="{{ asset('assets/backend/plugins/jquery-datatable/skin/bootstrap/css/dataTables.bootstrap.css') }}">
+              href="{{ asset('assets/plugins/jquery-datatable/skin/bootstrap/css/dataTables.bootstrap.css') }}">
 
         @stack('css')
 
@@ -70,25 +70,13 @@
         <div class="overlay"></div>
         <!-- #END# Overlay For Sidebars -->
 
-        <!-- Search Bar -->
-        <div class="search-bar">
-            <div class="search-icon">
-                <i class="material-icons">search</i>
-            </div>
-            <input type="text" placeholder="START TYPING...">
-            <div class="close-search">
-                <i class="material-icons">close</i>
-            </div>
-        </div>
-        <!-- #END# Search Bar -->
+       <!-- Top Bar -->
+       @include('layouts.backend.partial.topbar')
+       <!-- #Top Bar -->
 
-        <!-- Top Bar -->
-        @include('layouts.backend.partial.topbar')
-        <!-- #Top Bar -->
-
-        <!-- Left Sidebar -->
-        @include('layouts.backend.partial.sidebar')
-        <!-- #END# Left Sidebar -->
+       <!-- Left Sidebar -->
+       @include('layouts.backend.partial.sidebar')
+       <!-- #END# Left Sidebar -->
 
         <!-- Content area -->
         <section class="content">
@@ -97,50 +85,44 @@
         <!-- #END# Content area -->
 
         <!-- Jquery Core Js -->
-        <script src="{{ asset('assets/backend/plugins/jquery/jquery.min.js') }}"></script>
+        <script src="{{ asset('assets/plugins/jquery/jquery.min.js') }}"></script>
 
         <!-- Bootstrap Core Js -->
-        <script src="{{ asset('assets/backend/plugins/bootstrap/js/bootstrap.js')  }}"></script>
+        <script src="{{ asset('assets/plugins/bootstrap/js/bootstrap.min.js')  }}"></script>
 
         <!-- Slimscroll Plugin Js -->
-        <script src="{{ asset('assets/backend/plugins/jquery-slimscroll/jquery.slimscroll.js') }}"></script>
+        <script src="{{ asset('assets/plugins/jquery-slimscroll/jquery.slimscroll.js') }}"></script>
 
         <!-- Waves Effect Plugin Js -->
-        <script src="{{ asset('assets/backend/plugins/node-waves/waves.js') }}"></script>
+        <script src="{{ asset('assets/plugins/node-waves/waves.js') }}"></script>
 
         @stack('js')
 
         <!-- Jquery DataTable Plugin Js -->
-        <script src="{{ asset('assets/backend/plugins/jquery-datatable/jquery.dataTables.js') }}"></script>
-        <script src="{{ asset('assets/backend/plugins/jquery-datatable/extensions/export/vfs_fonts.js') }}"></script>
-        <script src="{{ asset('assets/backend/plugins/jquery-datatable/extensions/export/pdfmake.min.js') }}"></script>
+        <script src="{{ asset('assets/plugins/jquery-datatable/jquery.dataTables.js') }}"></script>
+        <script src="{{ asset('assets/plugins/jquery-datatable/extensions/export/vfs_fonts.js') }}"></script>
+        <script src="{{ asset('assets/plugins/jquery-datatable/extensions/export/pdfmake.min.js') }}"></script>
         <script
-            src="{{ asset('assets/backend/plugins/jquery-datatable/skin/bootstrap/js/dataTables.bootstrap.js') }}">
+            src="{{ asset('assets/plugins/jquery-datatable/skin/bootstrap/js/dataTables.bootstrap.js') }}">
         </script>
         <script
-            src="{{ asset('assets/backend/plugins/jquery-datatable/extensions/export/dataTables.buttons.min.js') }}">
+            src="{{ asset('assets/plugins/jquery-datatable/extensions/export/dataTables.buttons.min.js') }}">
         </script>
         <script
-            src="{{ asset('assets/backend/plugins/jquery-datatable/extensions/export/buttons.flash.min.js') }}">
+            src="{{ asset('assets/plugins/jquery-datatable/extensions/export/buttons.flash.min.js') }}">
         </script>
         <script
-            src="{{ asset('assets/backend/plugins/jquery-datatable/extensions/export/jszip.min.js') }}">
+            src="{{ asset('assets/plugins/jquery-datatable/extensions/export/jszip.min.js') }}">
         </script>
         <script
-            src="{{ asset('assets/backend/plugins/jquery-datatable/extensions/export/buttons.html5.min.js') }}">
+            src="{{ asset('assets/plugins/jquery-datatable/extensions/export/buttons.html5.min.js') }}">
         </script>
         <script
-            src="{{ asset('assets/backend/plugins/jquery-datatable/extensions/export/buttons.print.min.js') }}">
+            src="{{ asset('assets/plugins/jquery-datatable/extensions/export/buttons.print.min.js') }}">
         </script>
-
-        <!-- Custom Js -->
-        <script src="{{ asset('assets/backend/js/pages/tables/jquery-datatable.js') }}"></script>
 
         <!-- Custom Js -->
         <script src="{{ asset('assets/backend/js/admin.js') }}"></script>
-
-        <!-- Demo Js -->
-        <script src="{{ asset('assets/backend/js/demo.js') }}"></script>
 
         <!-- FileHelper Js -->
         <script src="{{ asset('assets/backend/js/helpers.js') }}"></script>
@@ -154,13 +136,18 @@
 
         <!-- Error message -->
         <script>
+
             @if($errors->any())
                 @foreach($errors->all() as $error)
                     toastr.error('{{ $error }}', 'Error', { closeButton: true, progressBar: true });
                 @endforeach
             @endif
-        </script>
 
+            @if (session('status'))
+                toastr.success('{{ session('status') }}', 'Success', { closeButton: true, progressBar: true });
+            @endif
+
+        </script>
 
     </body>
 </html>

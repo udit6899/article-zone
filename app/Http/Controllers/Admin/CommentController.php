@@ -17,6 +17,9 @@ class CommentController extends BaseCommentController
     public function __construct()
     {
         $this->prefix = 'admin';
+
+        // Apply policy action ability for admin
+        $this->authorizeResource(Comment::class, 'comment');
     }
 
 

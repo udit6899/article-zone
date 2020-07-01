@@ -1,4 +1,10 @@
 <div class="col-md-4">
+
+    @hasSection('author-details')
+        @yield('author-details')
+        <br><br>
+    @endif
+
     <div class="sidebar-widget">
         <div class="row">
             <div class="col-md-12 col-sm-12">
@@ -11,29 +17,34 @@
                             <div class="category-list">
                                 <ul class="left-portion">
                                     @foreach($categories as $category)
-                                        @if($loop->odd && $loop->index < 10 && substr_count($category->name, ' ') < 1)
+                                        @if($loop->odd)
                                             <li>
                                                 <a href="{{ $category->postsLink }}">
+                                                    <i class="fa fa-cube"></i>
                                                     {{ $category->name .
                                                         ' (' . $category->posts()->published()->count() . ')'}}
                                                 </a>
                                             </li>
-                                        @else
-                                            @break
                                         @endif
+                                        @break($loop->index > 7)
                                     @endforeach
                                 </ul>
                                 <ul class="right-portion">
                                     @foreach($categories as $category)
-                                        @if($loop->even && $loop->index < 7 && substr_count($category->name, ' ') < 1)
+                                        @if($loop->even)
                                             <li>
                                                 <a href="{{ $category->postsLink }}">
+                                                    <i class="fa fa-cube"></i>
                                                     {{ $category->name .
                                                         ' (' . $category->posts()->published()->count() . ')' }}
                                                 </a>
                                             </li>
-                                        @else
-                                            <li><a href="{{ route('post.category') }}">More...</a></li>
+                                        @elseif ($loop->index > 7)
+                                            <li>
+                                                <a href="{{ route('post.category') }}">
+                                                    <i class="fa fa-reorder"></i>More...
+                                                </a>
+                                            </li>
                                             @break
                                         @endif
                                     @endforeach
@@ -62,29 +73,34 @@
                             <div class="category-list">
                                 <ul class="left-portion">
                                     @foreach($tags as $tag)
-                                        @if($loop->odd && $loop->index < 10 && substr_count($category->name, ' ') < 1)
+                                        @if($loop->odd)
                                             <li>
                                                 <a href="{{ $tag->postsLink }}">
-                                                    {{ "#$tag->name" .
+                                                    <i class="fa fa-tag"></i>
+                                                    {{ "$tag->name" .
                                                             ' (' . $tag->posts()->published()->count() . ')' }}
                                                 </a>
                                             </li>
-                                        @else
-                                            @break
                                         @endif
+                                        @break($loop->index > 7)
                                     @endforeach
                                 </ul>
                                 <ul class="right-portion">
                                     @foreach($tags as $tag)
-                                        @if($loop->even && $loop->index < 7 && substr_count($category->name, ' ') < 1)
+                                        @if($loop->even)
                                             <li>
                                                 <a href="{{ $tag->postsLink }}">
-                                                    {{ "#$tag->name" .
+                                                    <i class="fa fa-tag"></i>
+                                                    {{ "$tag->name" .
                                                             ' (' . $tag->posts()->published()->count() . ')' }}
                                                 </a>
                                             </li>
-                                        @else
-                                            <li><a href="{{ route('post.tag') }}">More...</a></li>
+                                        @elseif($loop->index > 7)
+                                            <li>
+                                                <a href="{{ route('post.tag') }}">
+                                                    <i class="fa fa-reorder"></i> More...
+                                                </a>
+                                            </li>
                                             @break
                                         @endif
                                     @endforeach
@@ -108,7 +124,7 @@
                     <div class="category-widget-single">
                         <div class="category-widget-single-ad">
                             <a href="">
-                                <img src="{{ asset('assets/frontend/images/slider-demo1.gif') }}" alt="">
+                                <img src="{{ asset('assets/frontend/images/slider-action.gif') }}" alt="blog-action">
                             </a>
                         </div>
                     </div>

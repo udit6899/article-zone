@@ -56,7 +56,7 @@ class MessageController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Store a newly created message in storage.
      *
      * @param  \App\Http\Requests\Message\MessageRequest  $request
      * @return \Illuminate\Http\Response
@@ -86,7 +86,8 @@ class MessageController extends Controller
     public function update(ReplyRequest $request, Message $message)
     {
         // Update the message details for reply
-        $message->save(['is_replied' => true]);
+        $message->is_replied = true;
+        $message->update();
         $message->reply = $request->reply;
 
         // Send notification to reporter

@@ -13,7 +13,7 @@ class PagesController extends Controller
 {
 
     /**
-     * Add post viewcount middleware
+     * Add post view's count middleware
      */
     public function __construct()
     {
@@ -27,8 +27,11 @@ class PagesController extends Controller
      */
     public function about()
     {
+        // Get admin details
+        $admin = User::admin(true)->first();
+
         // Return to about page
-        return view('common.pages.about');
+        return view('common.pages.about', compact('admin'));
     }
 
     /**
@@ -45,15 +48,12 @@ class PagesController extends Controller
     /**
      * Show the application post detail page
      *
-     * @param  string $slug
+     * @param  \App\Models\Post $post
      * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function postDetails(Request $request, $slug)
+    public function postDetails(Request $request, Post $post)
     {
-        // Get a specific post by slug
-        $post = $request->post;
-
         // Return to post details view
         return view('common.pages.post-details', compact('post'));
     }
@@ -71,7 +71,7 @@ class PagesController extends Controller
 
         // Retrieve the searched post
         $searchedPosts = Post::where('title', 'Like', "%$query%")
-            ->published()->paginate(env('SEARCHED_POST', 5));
+            ->published()->popular()->paginate(env('SEARCHED_POST', 5));
 
         // Return to post search view
         return view('common.pages.post-search', compact('query', 'searchedPosts'));
@@ -89,7 +89,7 @@ class PagesController extends Controller
 
         // Retrieve the author's published posts
         $authorPosts = Post::where('user_id', $author->id)
-            ->published()->paginate(env('AUTHOR_POST', 5));
+            ->published()->popular()->paginate(env('AUTHOR_POST', 5));
 
         // Return to author-post-profile view
         return view('common.pages.author-profile', compact('author', 'authorPosts'));
@@ -126,17 +126,14 @@ class PagesController extends Controller
     /**
      * Show the post tag-items page
      *
-     * @param $name
+     * @param \App\Models\Tag $tag
      * @return \Illuminate\Http\Response
      */
-    public function postTagItems($name)
+    public function postTagItems(Tag $tag)
     {
-        // Get the tag details
-        $tag = Tag::where('name', $name)->firstOrFail();
-
         // Retrieve all the published posts of the tag
         $tagPosts = $tag->posts()->published()
-            ->latest()->paginate(env('TAG_POST', 5));
+            ->popular()->paginate(env('TAG_POST', 5));
 
         // Return to post tag-item view
         return view('common.pages.post-tag-items', compact('tag', 'tagPosts'));
@@ -145,17 +142,15 @@ class PagesController extends Controller
     /**
      * Show the post category-items page
      *
-     * @param string $slug
+     * @param \App\Models\Category $category
      * @return \Illuminate\Http\Response
      */
-    public function postCategoryItems($slug)
+    public function postCategoryItems(Category $category)
     {
-        // Get the category details
-        $category = Category::where('slug', $slug)->firstOrFail();
 
         // Retrieve all the published posts of the category
         $categoryPosts = $category->posts()->published()
-            ->latest()->paginate(env('CATEGORY_POST', 5));
+            ->popular()->paginate(env('CATEGORY_POST', 5));
 
         // Return to post category-item view
         return view('common.pages.post-category-items', compact('category', 'categoryPosts'));

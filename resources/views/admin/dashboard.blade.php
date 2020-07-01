@@ -6,10 +6,21 @@
 
 @section('admin-activity')
     <div class="row clearfix">
-        <div class="col-xs-12 col-sm-12 col-md-4 col-lg-3">
+        <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+            <div class="info-box bg-grey hover-expand-effect">
+                <div class="icon">
+                    <i class="material-icons">mail_outline</i>
+                </div>
+                <div class="content">
+                    <div class="text">TOTAL MESSAGES</div>
+                    <div class="number count-to" data-from="0"
+                         data-to="{{ $data['totalMessages'] }}" data-speed="1000" data-fresh-interval="20">
+                    </div>
+                </div>
+            </div>
             <div class="info-box bg-pink hover-expand-effect">
                 <div class="icon">
-                    <i class="material-icons">label</i>
+                    <i class="material-icons">label_outline</i>
                 </div>
                 <div class="content">
                     <div class="text">TOTAL TAGS</div>
@@ -36,23 +47,12 @@
                 <div class="content">
                     <div class="text">TOTAL AUTHORS</div>
                     <div class="number count-to" data-from="0"
-                         data-to="{{ $totalAuthors }}" data-speed="1000" data-fresh-interval="20">
-                    </div>
-                </div>
-            </div>
-            <div class="info-box bg-grey hover-expand-effect">
-                <div class="icon">
-                    <i class="material-icons">subscriptions</i>
-                </div>
-                <div class="content">
-                    <div class="text">TOTAL SUBSCRIBERS</div>
-                    <div class="number count-to" data-from="0"
-                         data-to="{{ $totalSubscribers }}" data-speed="1000" data-fresh-interval="20">
+                         data-to="{{ $data['totalAuthors'] }}" data-speed="1000" data-fresh-interval="20">
                     </div>
                 </div>
             </div>
         </div>
-        <div class="col-xs-12 col-sm-12 col-md-8 col-lg-9">
+        <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9">
             @include('common.base.post.popular-post', ['prefix' => 'admin'])
         </div>
     </div>
@@ -79,26 +79,25 @@
                     </tr>
                     </thead>
                     <tbody>
-                    @forelse($activeAuthors as $key => $author)
+                    @forelse($data['activeAuthors'] as $key => $author)
                         <tr>
                             <td>{{ $key + 1 }}</td>
                             <td>{{ $author->name }}</td>
                             <td>
-                                <img height="30px" width="30px" src="{{ $author->imageUrl  }}">
+                                <img height="30px"
+                                     alt="author-image" width="30px" src="{{ $author->imageUrl  }}">
                             </td>
                             <td>{{ $author->email }}</td>
                             <td>
-                                <a  target="_blank"
-                                    href="{{ route('post.author.profile', $author->id) }}">
+                                <a  target="_blank" href="{{ $author->postsLink }}">
                                     {{ $author->posts_count }}
                                 </a>
                             </td>
                             <td>{{ $author->comments_count }}</td>
                             <td>{{ $author->created_at->toFormattedDateString() }}</td>
                             <td class="text-center">
-                                <a class="btn btn-xs bg-info waves-effect"
-                                        title="View" onclick="readAuthor({{ $author->toJson() }})">
-                                    <i class="material-icons action-icon">visibility</i>
+                                <a class="btn btn-xs bg-info waves-effect" title="View"
+                                  onclick="readAuthor({{ $author->replicate()->toJson() }}, '{{ $author->imageUrl }}')">                                    <i class="material-icons action-icon">visibility</i>
                                 </a>
                             </td>
                         </tr>
@@ -120,12 +119,5 @@
 @endsection
 
 @push('js')
-    <!-- Jquery CountTo Plugin Js -->
-    <script src="{{ asset('assets/backend/plugins/jquery-countto/jquery.countTo.js') }}"></script>
 
-    <!-- Sparkline Chart Plugin Js -->
-    <script src="{{ asset('assets/backend/plugins/jquery-sparkline/jquery.sparkline.js') }}"></script>
-
-    <!-- Custom Js -->
-    <script src="{{ asset('assets/backend/js/pages/index.js') }}"></script>
 @endpush

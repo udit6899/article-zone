@@ -5,6 +5,7 @@ namespace App\Providers;
 use App\Models\Category;
 use App\Models\Post;
 use App\Models\Tag;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 
@@ -28,31 +29,27 @@ class ViewServiceProvider extends ServiceProvider
     public function boot()
     {
         // Allowing composer to bind data to views
-        View::composer(
-            [
-                'common.pages.post-search','common.pages.post-details', 'common.pages.post-category',
-                'common.pages.contact', 'welcome', 'common.pages.about', 'auth.login', 'auth.register',
-                'common.pages.author-profile', 'common.pages.post-tag', 'common.pages.post-create',
-                'common.pages.post-tag-items', 'common.pages.post-category-items'
-            ],
+        View::composer(['common.pages.*', 'welcome', 'auth.*'],
+
             'App\Http\Composers\ViewComposer'
         );
 
         // Pass random post to view
-        View::composer([
-            'common.pages.post-details', 'common.pages.post-search',
-            'common.pages.author-profile', 'common.pages.post-tag-items',
-            'common.pages.post-category-items'
-        ], function ($view) {
+        View::composer(['common.pages.*'], function ($view) {
 
+            $randomPosts = Post::published()->get();
+
+            // If collection is not empty then get 3 posts
+            if (!$randomPosts->isEmpty()) {
+                $randomPosts = $randomPosts->random(3);
+            }
             // Bind random posts to view
-            $view->with('randomPosts', Post::published()->get()->random(3));
+            $view->with('randomPosts', $randomPosts );
         });
 
+        // Pass tags and categories to view
         View::composer([
-            'admin.dashboard', 'admin.post.create', 'admin.post.edit',
-            'author.post.create', 'author.post.edit'
-
+            '*.dashboard', 'common.pages.post-create', '*.post.create', '*.post.edit',
         ], function ($view) {
 
             // Bind all tags to view
@@ -62,5 +59,16 @@ class ViewServiceProvider extends ServiceProvider
             $view->with('allCategories', Category::all());
 
         });
+
+        // Pass favourite posts to view
+        View::composer(['*.dashboard', '*.favourite.index'], function ($view) {
+
+            // Bind all favourite posts of authenticated user to view
+            $view->with('favouritePosts',
+                Auth::user()->favouritePosts()->published()->latest()->get());
+
+        });
+
+
     }
 }

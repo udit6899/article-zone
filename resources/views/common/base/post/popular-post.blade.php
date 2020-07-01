@@ -16,14 +16,15 @@
                         <th>Created_At</th>
                         <th>Updated_At</th>
                     @endif
-                    <th>Comments</th>
-                    <th>Views</th>
+                    <th><i class="material-icons">visibility</i></th>
+                    <th><i class="material-icons">favorite</i></th>
+                    <th><i class="material-icons">comment</i></th>
                     <th>Status</th>
                     <th>Action</th>
                 </tr>
                 </thead>
                 <tbody>
-                @forelse($popularPosts as $key => $post)
+                @forelse($data['popularPosts'] as $key => $post)
                     <tr>
                         <td>{{ $key + 1 }}</td>
                         <td>{{ Str::limit($post->title, 15) }}</td>
@@ -33,8 +34,9 @@
                             <td>{{ $post->created_date }}</td>
                             <td>{{ $post->updated_at->toFormattedDateString() }}</td>
                         @endif
-                        <td>{{ $post->comments_count }}</td>
                         <td>{{ $post->view_count }}</td>
+                        <td>{{ $post->favourite_to_users_count }}</td>
+                        <td>{{ $post->comments_count }}</td>
                         @if($post->is_published == true)
                             <td><span class="label bg-green">Published</span></td>
                         @else
@@ -47,7 +49,7 @@
                                 @if($post->is_approved && $post->is_published)
                                     target="_blank" href="{{ $post->viewLink }}"
                                 @else
-                                    href="{{ route("$prefix.post.show", $post->id) }}"
+                                    href="{{ route("$prefix.post.show", $post->slug) }}"
                                 @endif>
                                 <i class="material-icons action-icon">visibility</i>
                             </a>

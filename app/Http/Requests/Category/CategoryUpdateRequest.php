@@ -19,7 +19,7 @@ class CategoryUpdateRequest extends FormRequest
     }
 
     /**
-     * Prepare the updated category details
+     * Prepare the category details for update
      *
      */
     protected function prepareForValidation()
@@ -29,12 +29,12 @@ class CategoryUpdateRequest extends FormRequest
 
         // Manage the category details
         $category->name = $this->name ?? $category->name;
-        $category->slug = Str::slug($this->name) ?? $category->slug;
+        $this->slug = Str::slug($this->name) ?? $category->slug;
         $category->description = $this->description ?? $category->description;
     }
 
     /**
-     * Get the validation rules that apply to the request.
+     * Get the validation rules that apply to the category update request.
      *
      * @return array
      */

@@ -18,7 +18,7 @@ class CommentUpdateRequest extends FormRequest
     }
 
     /**
-     * Prepare the updated comment details
+     * Prepare the comment details for update
      *
      */
     protected function prepareForValidation()
@@ -33,7 +33,7 @@ class CommentUpdateRequest extends FormRequest
     }
 
     /**
-     * Get the validation rules that apply to the request.
+     * Get the validation rules that apply to the comment update request.
      *
      * @return array
      */

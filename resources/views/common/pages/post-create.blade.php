@@ -1,4 +1,3 @@
-
 <!--========================== extend-master-blade ==========================-->
 @extends('layouts.frontend.app')
 
@@ -6,7 +5,7 @@
 
 @push('css')
     <!-- Bootstrap Select Css -->
-    <link href="{{ asset('assets/backend/plugins/bootstrap-select/css/bootstrap-select.css') }}" rel="stylesheet" />
+    <link href="{{ asset('assets/plugins/bootstrap-select/css/bootstrap-select.css') }}" rel="stylesheet" />
 @endpush
 
 <!--========================== include content ==========================-->
@@ -93,7 +92,7 @@
                         </div>
                         <div class="row clearfix">
                             <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                                <div class="form-group ">
+                                <div class="form-group">
                                     <div>
                                         <label for="tag">Select Category</label>
                                         <select id="category" name="categories[]" required
@@ -159,9 +158,12 @@
 @endsection
 
 @push('js')
+    <!-- Custom js for editor -->
+    <script src="{{ asset('assets/frontend/js/editor.js') }}"></script>
+
     <!-- Select Plugin Js -->
-    <script src="{{ asset('assets/backend/plugins/bootstrap-select/js/bootstrap-select.js') }}"></script>
+    <script src="{{ asset('assets/plugins/bootstrap-select/js/bootstrap-select.js') }}"></script>
 
     <!-- TinyMCE -->
-    <script src="{{ asset('assets/backend/plugins/tinymce/tinymce.js') }}"></script>
+    <script src="{{ asset('assets/plugins/tinymce/tinymce.js') }}"></script>
 @endpush

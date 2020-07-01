@@ -10,5 +10,5 @@
 @endsection
 
 @push('js')
-    <script src="{{ asset('assets/backend/js/pages/examples/profile.js') }}"></script>
+
 @endpush

@@ -7,12 +7,12 @@
 @endpush
 
 @section('admin-post-approve')
-    <button type="button" class="btn bg-cyan" onclick="approveItem({{ $post->id }})">
+    <button type="button" class="btn bg-cyan" onclick="approveItem('{{ $post->slug }}')">
         <i class="material-icons">donut_large</i>
         <span><strong>Approve</strong></span>
     </button>
-    <form id="{{ 'approval-form-' . $post->id }}" class="form-hide"
-          action="{{ route('admin.post.approve', $post->id) }}" method="POST">
+    <form id="{{ 'approval-form-' . $post->slug }}" class="form-hide"
+          action="{{ route('admin.post.approve', $post->slug) }}" method="POST">
         @csrf
         @method('PATCH')
     </form>

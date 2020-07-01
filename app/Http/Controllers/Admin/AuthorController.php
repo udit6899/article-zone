@@ -9,15 +9,27 @@ use Brian2694\Toastr\Facades\Toastr;
 
 class AuthorController extends Controller
 {
+
     /**
-     * Display a listing of the authors.
+     * Apply the confirm-password middleware to delete author
+     *
+     */
+    public function __construct()
+    {
+        $this->middleware('password.confirm')->only('destroy');
+    }
+
+
+    /**
+     * Display a listing of the authors details.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
         // Get all the author lists
-        $authors = User::admin(false)->withCount('posts')->withCount('comments')->get();
+        $authors = User::admin(false)->withCount('posts')
+            ->withCount('comments')->withCount('favouritePosts')->get();
 
         // Return to index page
         return view('admin.author.index', compact('authors'));

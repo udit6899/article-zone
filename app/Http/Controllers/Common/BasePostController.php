@@ -12,7 +12,6 @@ use App\Models\Post;
 use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Str;
 
 class BasePostController extends Controller
 {
@@ -52,7 +51,7 @@ class BasePostController extends Controller
 
 
     /**
-     * Store a newly created resource in storage.
+     * Store a newly created post in storage.
      *
      * @param  PostStoreRequest  $request
      * @return \Illuminate\Http\Response
@@ -60,7 +59,7 @@ class BasePostController extends Controller
     public function store(PostStoreRequest $request)
     {
         // Get the user details
-        $user = GuestUserHelper::getOrcreate($request);
+        $user = GuestUserHelper::getOrCreate($request);
 
         // Store uploaded image for post
         $imageUrl = FileHelper::manageUpload($request->file('image'), 'post');
@@ -95,12 +94,12 @@ class BasePostController extends Controller
                 Toastr::success('Your Post Successfully Saved ! Wait For Admin Approval.', 'Success');
             }
 
-        } catch (\Exception $exception) {
+        } catch (\Throwable $throwable) {
 
             DB::rollBack();
 
             // Create error message, If update failed
-            Toastr::error($exception->getMessage(), 'Error');
+            Toastr::error($throwable->getMessage(), 'Error');
         }
 
         // Make route path for authorized user and guest user
@@ -134,7 +133,6 @@ class BasePostController extends Controller
      */
     public function update(PostUpdateRequest $request, Post $post)
     {
-
         // Store uploaded image for post
         $imageUrl = FileHelper::manageUpload(
             $request->file('image'), 'post', $post->image);
@@ -144,7 +142,7 @@ class BasePostController extends Controller
         try {
 
             // Prepare post option to update
-            $post->update(['image' => $imageUrl]);
+            $post->update(['image' => $imageUrl, 'slug' => $request->slug]);
 
             // Update post's category and togs
             $post->categories()->sync($request->categories);
@@ -156,7 +154,7 @@ class BasePostController extends Controller
                 // Create success message for admin
                 Toastr::success('Post Successfully Updated !', 'Success');
             } else {
-                if ($request->previousApprovedStatus == true) {
+                if ($request->previousApprovedStatus) {
                     // If user is author, Send notification to admin for approval
                     NotificationHelper::notify('admin', $post, 'post','update');
                 }
@@ -164,12 +162,12 @@ class BasePostController extends Controller
                 Toastr::success('Your Post Successfully Updated ! Wait For Admin Approval.', 'Success');
             }
 
-        } catch (\Exception $exception) {
+        } catch (\Throwable $throwable) {
 
             DB::rollBack();
 
             // Create error message, If update failed
-            Toastr::error($exception->getMessage(), 'Error');
+            Toastr::error($throwable->getMessage(), 'Error');
         }
         // Return to index view
         return redirect()->route("$this->prefix.post.index");
@@ -190,6 +188,7 @@ class BasePostController extends Controller
 
             // Delete the associated image for post
             FileHelper::delete("posts/$post->image");
+            FileHelper::delete("posts/slider/$post->image");
 
             // Remove all categories and tags of the post from pivot table
             $post->categories()->detach();
@@ -203,12 +202,12 @@ class BasePostController extends Controller
             // Make success response
             Toastr::success('Post Successfully Deleted !', 'Success');
 
-        } catch (\Exception $exception) {
+        } catch (\Throwable $throwable) {
 
             DB::rollBack();
 
             // Create error message, If update failed
-            Toastr::error($exception->getMessage(), 'Error');
+            Toastr::error($throwable->getMessage(), 'Error');
         }
 
 

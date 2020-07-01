@@ -15,11 +15,11 @@ class TagUpdateRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
-     * Prepare the updated tag details
+     * Prepare the tag details for update
      *
      */
     protected function prepareForValidation()
@@ -29,18 +29,18 @@ class TagUpdateRequest extends FormRequest
 
         // Manage the tag details
         $tag->name = $this->name ?? $tag->name;
-        $tag->slug = Str::slug($this->name) ?? $tag->slug;
+        $this->slug = Str::slug($this->name) ?? $tag->slug;
     }
 
     /**
-     * Get the validation rules that apply to the request.
+     * Get the validation rules that apply to the tag update request.
      *
      * @return array
      */
     public function rules()
     {
         return ['name' => ['required', 'string', 'max:255',
-                Rule::unique('tags')->ignore($this->route('tag'))],
+                Rule::unique('tags')->ignore( $this->route('tag'))],
         ];
     }
 }

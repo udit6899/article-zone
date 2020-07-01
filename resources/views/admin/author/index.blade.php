@@ -28,6 +28,7 @@
                                         <th>Image</th>
                                         <th>Posts</th>
                                         <th>Comments</th>
+                                        <th>Status</th>
                                         <th>Created At</th>
                                         <th>Updated At</th>
                                         <th>Action</th>
@@ -39,7 +40,8 @@
                                             <td>{{ $key + 1 }}</td>
                                             <td>{{ $author->name }}</td>
                                             <td>
-                                                <img height="50px" width="50px" src="{{ $author->ImageUrl }}">
+                                                <img height="30px" width="30px"
+                                                     alt="author-image" src="{{ $author->ImageUrl }}">
                                             </td>
                                             <td>
                                                 <a  target="_blank" href="{{ $author->postsLink }}">
@@ -47,19 +49,28 @@
                                                 </a>
                                             </td>
                                             <td>{{ $author->comments_count }}</td>
+                                            <td>
+                                                @if($author->email_verified_at)
+                                                    <span class="badge bg-light-green">verified</span>
+                                                @else
+                                                    <span class="badge bg-pink">pending</span>
+                                                @endif
+                                            </td>
                                             <td>{{ $author->created_at }}</td>
-                                            <td>{{ $author->created_at }}</td>
+                                            <td>{{ $author->updated_at }}</td>
                                             <td class="text-center">
                                                 <button type="button" class="btn btn-xs bg-blue-grey waves-effect"
-                                                        title="View" onclick="readAuthor({{ $author->toJson() }})">
+                                                        onclick="readAuthor({{ $author->replicate()->toJson() }},
+                                                        '{{ $author->imageUrl }}')" title="View">
                                                     <i class="material-icons action-icon">visibility</i>
                                                 </button>
-                                                <button type="button" class="btn btn-xs bg-deep-orange waves-effect"
-                                                        title="Delete" onclick="deleteItem({{ $author->id }})">
+                                                <button type="button"
+                                                        class="btn btn-xs bg-deep-orange waves-effect" title="Delete"
+                                                        onclick="deleteItem('{{ $key = $author->encryptId }}')">
                                                     <i class="material-icons action-icon">delete</i>
                                                 </button>
-                                                <form id="delete-form-{{ $author->id }}" class="form-hide"
-                                                      action="{{ route('admin.author.destroy', $author->id) }}"
+                                                <form id="{{ "delete-form-$key" }}" class="form-hide"
+                                                      action="{{ route('admin.author.destroy', $author->encryptId) }}"
                                                       method="POST">
                                                     @csrf
                                                     @method('DELETE')

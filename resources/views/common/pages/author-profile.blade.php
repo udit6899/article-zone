@@ -47,11 +47,17 @@
                                 <p>{{ $author->about }}</p>
                                 <div>
                                     <span>
+                                        <strong>Since:</strong>
+                                        {{ $author->created_at->toFormattedDateString() }} |
+                                    </span>
+                                    <span>
                                         <strong>Total Posts:</strong> {{ $authorPosts->total() }}
                                     </span>
                                     <span class="pull-right">
-                                        <strong>Author Since:</strong>
-                                        {{ $author->created_at->toFormattedDateString() }}
+                                        <div class="share">
+                                            <span>share:</span>
+                                            @include('common.base.pages.share', ['data' => $author])
+                                        </div>
                                     </span>
                                 </div>
                             </div>

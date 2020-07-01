@@ -35,16 +35,23 @@ class BaseSettingController extends Controller
      */
     public function updateProfile(ProfileSettingRequest $request)
     {
+        try {
 
-        // Store uploaded image for user
-        $imageUrl = FileHelper::manageUpload(
-            $request->file('image'), 'user', $request->oldImageUrl);
+            // Store uploaded image for user
+            $imageUrl = FileHelper::manageUpload(
+                $request->file('image'), 'user', $request->oldImageUrl);
 
-        // Update user details
-        Auth::user()->update(array_merge($request->input(), ['avatar_path' => $imageUrl]));
+            // Update user details
+            Auth::user()->update(array_merge($request->input(), ['avatar_path' => $imageUrl]));
 
-        // Make success response
-        Toastr::success('Your Profile Successfully Updated !', 'Success');
+            // Make success response
+            Toastr::success('Your Profile Successfully Updated !', 'Success');
+
+        } catch (\Throwable $throwable) {
+
+            // Create error message
+            Toastr::error($throwable->getMessage(), 'Error');
+        }
 
         // Redirect to index page
         return redirect()->back();

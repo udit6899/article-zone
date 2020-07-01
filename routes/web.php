@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 
 
 // Rotes for user auth
-Auth::routes();
+Auth::routes(['verify' => true]);
 
 // GET: routes for index page
 Route::get('/', 'HomeController@index')->name('home');
@@ -37,7 +37,7 @@ Route::group(['namespace' => 'Common'], function () {
     Route::resource('subscriber', 'SubscriberController')->only('store');
 
     // Routes for the admin operation
-    Route::group(['prefix' => 'admin', 'as' =>'admin.', 'middleware' => ['auth', 'admin']], function () {
+    Route::group(['prefix' => 'admin', 'as' =>'admin.', 'middleware' => ['auth', 'admin', 'verified']], function () {
 
         // Routes for Subscriber operations
         Route::resource('subscriber', 'SubscriberController')->only(['index', 'destroy']);
@@ -71,16 +71,16 @@ Route::group(['namespace' => 'Common'], function () {
         Route::get('tag', 'PagesController@postTags'  )->name('tag');
 
         // GET: route for post tag-item page
-        Route::get('tag/{name}/item', 'PagesController@postTagItems'  )->name('tag.item');
+        Route::get('tag/{tag}/item', 'PagesController@postTagItems'  )->name('tag.item');
 
         // GET: route for post category-item page
-        Route::get('category/{slug}/item', 'PagesController@postCategoryItems'  )->name('category.item');
+        Route::get('category/{category}/item', 'PagesController@postCategoryItems'  )->name('category.item');
 
         // Routes for the comment operations
         Route::post('comment', 'BaseCommentController@store')->name('comment.store');
 
         // GET: route for post details
-        Route::get('details/{slug}', 'PagesController@postDetails'  )->name('details');
+        Route::get('details/{post}', 'PagesController@postDetails'  )->name('details');
 
         // GET: route for author-post-profile view
         Route::get('author/{author}/profile', 'PagesController@authorProfile'  )->name('author.profile');
@@ -92,7 +92,7 @@ Route::group(['namespace' => 'Common'], function () {
 // Routes for the authors
 Route::group([
     'prefix' => 'author', 'as' =>'author.',
-    'namespace' => 'Author', 'middleware' => ['auth', 'author']
+    'namespace' => 'Author', 'middleware' => ['auth', 'author', 'verified']
 ], function () {
 
     // GET: routes for dashboard page
@@ -104,6 +104,8 @@ Route::group([
     // Routes for the comment operations
     Route::resource('comment', 'CommentController')->only(['index', 'update', 'destroy']);
 
+    // Routes for favourite post operations
+    Route::resource('favourite-post', 'FavouritePostController')->only(['index', 'store', 'destroy']);
 
     // GET: route for settings page
     Route::get('settings', 'SettingController@index')->name('settings.index');
@@ -121,7 +123,7 @@ Route::group([
 // Routes for the admin
 Route::group([
     'prefix' => 'admin', 'as' =>'admin.',
-    'namespace' => 'Admin', 'middleware' => ['auth', 'admin']
+    'namespace' => 'Admin', 'middleware' => ['auth', 'admin', 'verified']
 ], function () {
 
     // GET: routes for dashboard page
@@ -137,6 +139,8 @@ Route::group([
     // Routes for author operations
     Route::resource('author', 'AuthorController')->only(['index', 'destroy']);
 
+    // Routes for favourite post operations
+    Route::resource('favourite-post', 'FavouritePostController')->only(['index', 'store', 'destroy']);
 
     // GET: route for pending post
     Route::get('post/pending', 'PostController@pending')->name('post.pending');
