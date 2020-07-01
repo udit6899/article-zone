@@ -23,5 +23,7 @@ mix.copyDirectory('resources/assets/plugins', 'public/assets/plugins');
 mix.copyDirectory('resources/assets/frontend/css', 'public/assets/frontend/css');
 mix.copyDirectory('resources/assets/backend/css', 'public/assets/backend/css');
 mix.copyDirectory('resources/assets/frontend/fonts', 'public/assets/frontend/fonts');
+mix.copyDirectory('resources/assets/frontend/images', 'public/assets/frontend/images');
+
 
 
