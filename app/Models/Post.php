@@ -167,7 +167,7 @@ class Post extends Model
      */
     public function getImageUrlAttribute() {
 
-        return Storage::disk('public')->url("posts/$this->image");
+        return Storage::disk('s3')->url("posts/$this->image");
     }
 
     /**

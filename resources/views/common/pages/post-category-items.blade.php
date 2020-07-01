@@ -18,7 +18,7 @@
                         <div class="carousel-inner" role="listbox">
                             <div class="item active">
                                 <div class="slider-content-2 text-center"
-                                    style="background: url({{ Storage::disk('public')
+                                    style="background: url({{ Storage::disk('s3')
                                     ->url("categories/slider/$category->image") }}) no-repeat scroll center center;">
                                     <div class="carousel-caption d-none d-md-block">
                                         <h1 class="display-flex">{{ $category->name }}</h1>

@@ -20,7 +20,7 @@ class FileHelper {
      */
     private static function upload($image, $paths, $sizes, $oldImageName = 'default.jpg') {
 
-        $storage = Storage::disk('public');
+        $storage = Storage::disk('s3');
 
        // Check if the image is valid or not
         if (isset($image)) {
@@ -45,6 +45,9 @@ class FileHelper {
 
                 // Store resized image in destination dir
                 $storage->put($path . '/' . $newImageName, $resizedImage);
+
+                // Set visibility access to the uploaded image
+                $storage->setVisibility($path . '/' . $newImageName, 'public');
             }
 
         } else {
@@ -66,10 +69,10 @@ class FileHelper {
     public static function delete(string $imagePath) {
 
         if (!in_array('default.jpg', explode('/', $imagePath)) &&
-            Storage::disk('public')->exists($imagePath)) {
+            Storage::disk('s3')->exists($imagePath)) {
 
             // Delete the image, if exists
-            Storage::disk('public')->delete($imagePath);
+            Storage::disk('s3')->delete($imagePath);
         }
     }
 

@@ -53,7 +53,7 @@
                         <div class="category-detail category">
                             <div class="category-img">
                                 <img alt="{{ $post->title }}"
-                                     src="{{ Storage::disk('public')->url("posts/slider/$post->image") }}">
+                                     src="{{ Storage::disk('s3')->url("posts/slider/$post->image") }}">
                                 <div class="category-overlay">
                                 </div>
                             </div>

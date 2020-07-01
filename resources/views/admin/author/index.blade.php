@@ -59,9 +59,9 @@
                                             <td>{{ $author->created_at }}</td>
                                             <td>{{ $author->updated_at }}</td>
                                             <td class="text-center">
-                                                <button type="button"
-                                                        class="btn btn-xs bg-blue-grey waves-effect" title="View"
-                                                        onclick="readAuthor({{ $author->replicate()->toJson() }})">
+                                                <button type="button" class="btn btn-xs bg-blue-grey waves-effect"
+                                                        onclick="readAuthor({{ $author->replicate()->toJson() }},
+                                                        '{{ $author->imageUrl }}')" title="View">
                                                     <i class="material-icons action-icon">visibility</i>
                                                 </button>
                                                 <button type="button"

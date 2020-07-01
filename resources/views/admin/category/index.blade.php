@@ -55,10 +55,9 @@
                                         <td>{{ Str::limit($category->description, 20, '...   ') }}</td>
                                         <td>{{ $category->created_at }}</td>
                                         <td class="text-center">
-                                            <button type="button"
-                                                    class="btn btn-xs bg-blue-grey waves-effect"
-                                                title="View"
-                                                onclick="readCategory({{ $category->replicate()->toJson() }})">
+                                            <button type="button" class="btn btn-xs bg-blue-grey waves-effect"
+                                                title="View" onclick="readCategory(
+                                                {{ $category->replicate()->toJson() }}, '{{ $category->imageUrl }}')">
                                               <i class="material-icons action-icon">visibility</i>
                                             </button>
                                             <a class="btn btn-xs btn-info waves-effect"
