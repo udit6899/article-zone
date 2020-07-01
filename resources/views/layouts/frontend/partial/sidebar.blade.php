@@ -31,7 +31,7 @@
                                 </ul>
                                 <ul class="right-portion">
                                     @foreach($categories as $category)
-                                        @if($loop->even && $loop->index < 7 && substr_count($category->name, ' ') < 1)
+                                        @if($loop->even)
                                             <li>
                                                 <a href="{{ $category->postsLink }}">
                                                     <i class="fa fa-cube"></i>
